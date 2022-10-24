@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Hexo 文档分类 图片存储</title>
+      <link href="/2022/10/23/Hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/"/>
+      <url>/2022/10/23/Hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/</url>
+      
+        <content type="html"><![CDATA[<p><strong>建立分类</strong></p><ol><li>输入 hexo new page ‘categories’</li></ol><h6 id=""><a href="#" class="headerlink" title=""></a></h6><ol start="2"><li>在顶层工程目录的 source 目录中會看到 categories 文件夹</li></ol><h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><ol start="3"><li>修改 categories 中的 index.md 开头，增加一些东西使得变成如下内容</li></ol><h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2022-10-23 13:30:15</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure><h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><ol start="4"><li>若要把 “_post” 內的其中一份文档添加到 “Hexo-Usage” categories 里面，在这个文档头部插入 categories: Hexo-Usage</li></ol><h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 基本美化</span><br><span class="line">date: 2022-10-23 16:08:56</span><br><span class="line">categories: Hexo-Usage</span><br><span class="line">---</span><br></pre></td></tr></table></figure><h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><ol start="5"><li>重新生成静态网页，可以看到导航栏多了一个分类选项</li></ol><p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.19.31.09.png"></p><h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><p><strong>建立标签</strong></p><p>和建立分类一样，只不过内容改变一点</p><h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><ol><li>输入 hexo new page ‘tags’</li></ol><h6 id="-8"><a href="#-8" class="headerlink" title=""></a></h6><ol start="2"><li>在顶层工程目录的 source 目录中會看到 tags 文件夹</li></ol><h6 id="-9"><a href="#-9" class="headerlink" title=""></a></h6><ol start="3"><li>修改 tags 中的 index.md 开头，增加一些东西使得变成如下内容</li></ol><h6 id="-10"><a href="#-10" class="headerlink" title=""></a></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2022-10-23 13:35:49</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure><h6 id="-11"><a href="#-11" class="headerlink" title=""></a></h6><ol start="4"><li>若要把 “_post” 內的其中一份文档添加到 “Hexo” tag 里面，在这个文档头部插入 tags: Hexo</li></ol><h6 id="-12"><a href="#-12" class="headerlink" title=""></a></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 文档分类 图片存储</span><br><span class="line">date: 2022-10-23 19:16:39</span><br><span class="line">categories: Hexo-Usage</span><br><span class="line">tags: Hexo</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure><h6 id="-13"><a href="#-13" class="headerlink" title=""></a></h6><ol start="5"><li>插入多个 tags ，记得 tab 缩进</li></ol><h6 id="-14"><a href="#-14" class="headerlink" title=""></a></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 文档分类 图片存储</span><br><span class="line">date: 2022-10-23 19:16:39</span><br><span class="line">categories: Hexo-Usage</span><br><span class="line">tags:</span><br><span class="line">- Hexo</span><br><span class="line">- Github</span><br><span class="line">---</span><br></pre></td></tr></table></figure><h6 id="-15"><a href="#-15" class="headerlink" title=""></a></h6><ol start="6"><li>重新生成静态网页，可以看到导航栏多了一个标签选项</li></ol><h6 id="-16"><a href="#-16" class="headerlink" title=""></a></h6><p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.19.50.12.png"></p><p><strong>文档里面插入图片</strong></p><p>使用Hexo创建文件搭建博客时，会遇到图片插图，以及插入的图片无法显示的问题</p><h6 id="-17"><a href="#-17" class="headerlink" title=""></a></h6><ol><li>在 Hexo 的目录（也就是顶层工程目录） source 中创建一个图片文件夹，例如 pictures</li></ol><p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.19.55.54.png"></p><h6 id="-18"><a href="#-18" class="headerlink" title=""></a></h6><ol start="2"><li>把要插入的图片文件放到该目录下面，在文档中正常使用 markdown 的语法插入图片即可，例如</li></ol><h6 id="-19"><a href="#-19" class="headerlink" title=""></a></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](ictures/xxx.png)</span><br></pre></td></tr></table></figure><h6 id="-20"><a href="#-20" class="headerlink" title=""></a></h6><ol start="3"><li>当然，你还可以在 pictures 再创建目录以区分不同文章的图片</li></ol><p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.20.00.11.png"></p><p>这个时候在文章里面引用的方式就是</p><h6 id="-21"><a href="#-21" class="headerlink" title=""></a></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](ictures/hexo-文档分类-图片存储/xxx.png)</span><br></pre></td></tr></table></figure><h6 id="-22"><a href="#-22" class="headerlink" title=""></a></h6><p>记住在 “pictures” 前面有一个 “&#x2F;“ ，表示根目录的意思，因为对于 hexo 来说它的资源文件的根目录就是 source ，当然也可以修改 “_config.yml” 改变这个配置，下图是 hexo 框架文件夹描述</p><p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/20191220164252492.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo-Usage </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo 基本美化</title>
+      <link href="/2022/10/23/Hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/"/>
+      <url>/2022/10/23/Hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/</url>
+      
+        <content type="html"><![CDATA[<p><strong>首先是顶部背景</strong>，下面是原背景</p><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.14.49.png"></p><p>在 blogs 文件夹（顶层工程文件目录）里面搜索 banner.jpg</p><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.17.17.png"></p><p>把这两个 banner.jpg 替换成自己图片，替换之后名字还得是 banner.jpg</p><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.19.21.png"></p><h6 id=""><a href="#" class="headerlink" title=""></a></h6><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.22.22.png"></p><h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><p><strong>定义自己的信息</strong>，定义在顶层工程目录的 “_config.yml” 里面</p><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.25.30.png"></p><h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.27.38.png"></p><h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><p><strong>美化代码块</strong>，原本的代码块没有 margin-left 和 margin-right ，不好看<br><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.29.42.png"></p><p>在顶层工程文件目录里面，搜索 highlight.styl</p><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.32.39.png"></p><h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.33.18.png"></p><p>这两个 css 文件是一样的，要修改的地方也一样</p><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.35.28.png"></p><p>注释掉原来的 margin ，换成 “margin:1px” 就可以</p><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.36.27.png"></p><p>效果很 nice</p><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.38.27.png"></p><h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><p><strong>最终效果</strong></p><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.41.32.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo-Usage </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Github Pages + Hexo</title>
+      <link href="/2022/10/23/Github-Pages+Hexo/"/>
+      <url>/2022/10/23/Github-Pages+Hexo/</url>
+      
+        <content type="html"><![CDATA[<p><strong>Github Pages 可以为个人博客提供支持，Hexo 可以让 Github Pages 更加美观和提供本地预览，而不需要上传到 Github Pages 之后再看到效果</strong></p><h6 id=""><a href="#" class="headerlink" title=""></a></h6><p><strong>安装准备</strong>（本地）：</p><ul><li>git</li><li>npm</li></ul><h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><p><strong>配置 Git</strong></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;github 用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;github 注册邮箱&quot;</span></span><br></pre></td></tr></table></figure><p>Github 已经不支持密码登录，需要复杂一点的步骤去验证</p><h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><ol><li>到个人中心-设置-setting</li><li><img src="/pictures/github-pages-hexo/75e96721a3344ed5b397ec8adfeedb98.png"></li><li><img src="/pictures/github-pages-hexo/4eb29e6a9b2c4bf6b2b5db9299b1a393.png"><br><img src="/pictures/github-pages-hexo/3def5390d66a40eab1305013f28383d1.png"></li><li>选 classic 的 token 而不是 beta 的，因为 classic 可以永久</li><li><img src="/pictures/github-pages-hexo/de366346ddf443fba27a2cda84d9593f.png"><br><img src="/pictures/github-pages-hexo/852ef46dcc3d4018bc79fdac2ed8c917.png"></li><li>点击 generate token按钮</li></ol><h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><p>然后 生成了token 一定要复制，不然刷新浏览器就没了</p><h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><p>拿到token以后再去git push&#x2F;clone ，password就是输入刚才复制的token</p><h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><p><strong>Hexo 安装（本地全局）</strong></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-cli -g</span><br></pre></td></tr></table></figure><p>新建一个文件夹（我的是blogs）用于存放你的博客，然后进入该文件夹，并用如下命令进行初始化并安装必备组件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init </span><br><span class="line">hexo init .</span><br></pre></td></tr></table></figure><p>初始化后，目录结构如下</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line"> ├── _config.yml # 网站配置信息</span><br><span class="line"> ├── package.json # 应用程序信息</span><br><span class="line"> ├── scaffolds# 模板文件夹</span><br><span class="line"> ├── source # 存放用户资源</span><br><span class="line"> |   ├── _drafts</span><br><span class="line"> |   └── _posts# 存放个人博客</span><br><span class="line"> └── themes # 主题文件夹</span><br></pre></td></tr></table></figure><p>然后输入如下命令，然后在浏览器中打开 <a href="http://localhost:4000/">http://localhost:4000</a> ，就可以预览原始网站</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;博客名&quot; # 新建博客</span><br><span class="line">hexo g # 生成静态网页</span><br><span class="line">hexo s # 打开本地服务器</span><br></pre></td></tr></table></figure><p>然后就可以看到如下的界面<br><img src="/pictures/github-pages-hexo/2022.10.23.14.48.30.png"></p><h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><p><strong>发布到 Github Pages 上面</strong></p><h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><p>注册 Github 帐号，有帐号了不用注册</p><h6 id="-8"><a href="#-8" class="headerlink" title=""></a></h6><p>新建一个空仓库，暂时不要创建 README.md ，而且得确保你的仓库是 public 同时，仓库名一定要是 <strong>用户名.github.io</strong></p><h6 id="-9"><a href="#-9" class="headerlink" title=""></a></h6><p>在上文提到的 blogs 文件夹下面安装 hexo-deployer-git</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure><h6 id="-10"><a href="#-10" class="headerlink" title=""></a></h6><p>在刚才的博客根目录中的站点配置文件 “_config.yml” ，设置为你的个人仓库名，branch 与你的 git 主分支对应<br><img src="/pictures/github-pages-hexo/v2-376b7a40b8e6a310cc31bd3522ea9a7a_r.jpg"><br><img src="/pictures/github-pages-hexo/v2-d15b384267cf4fa326c2e2febb1b2b62_r.png"></p><h6 id="-11"><a href="#-11" class="headerlink" title=""></a></h6><p>开始推送内容到 Github 上去</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo clean # 清理缓存</span><br><span class="line">hexo g     # 将 md 生成 html</span><br><span class="line">git add -A # 添加到 git 缓冲区</span><br><span class="line">git commit -m &quot;first time&quot;# 提交所有更改</span><br><span class="line">hexo d     # 推送到远程</span><br></pre></td></tr></table></figure><p>稍等片刻，就可以访问 https:&#x2F;&#x2F;用户名.github.io 了</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo-Usage </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> Github </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>The First Blog</title>
+      <link href="/2022/10/22/The-First-Blog/"/>
+      <url>/2022/10/22/The-First-Blog/</url>
+      
+        <content type="html"><![CDATA[<p>“开始记录进步与欢乐！”</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
