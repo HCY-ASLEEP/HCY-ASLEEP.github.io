@@ -144,6 +144,159 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/26/%E5%88%9D%E8%AF%86MARO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/26/%E5%88%9D%E8%AF%86MARO/" class="post-title-link" itemprop="url">初识MARO</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-10-26 10:20:02 / Modified: 10:34:51" itemprop="dateCreated datePublished" datetime="2022-10-26T10:20:02+08:00">2022-10-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="MARO-”Multi-Agent-Resource-Optimization”-中文是“多代理资源优化”，使用强化学习来解决资源调度的一个平台。"><a href="#MARO-”Multi-Agent-Resource-Optimization”-中文是“多代理资源优化”，使用强化学习来解决资源调度的一个平台。" class="headerlink" title="MARO,”Multi-Agent-Resource Optimization”,中文是“多代理资源优化”，使用强化学习来解决资源调度的一个平台。"></a>MARO,”Multi-Agent-Resource Optimization”,中文是“多代理资源优化”，使用强化学习来解决资源调度的一个平台。</h3><h6 id=""><a href="#" class="headerlink" title=""></a></h6><h4 id="可以应用-MARO-的实际例子："><a href="#可以应用-MARO-的实际例子：" class="headerlink" title="可以应用 MARO 的实际例子："></a>可以应用 MARO 的实际例子：</h4><ul>
+<li><h5 id="CIM-”Container-Inventory-Management”-中文是“集装箱库存管理”。全球贸易里面会有很多港口，但是每个港口需要的空集装箱都不一样，有的港口可能空集装箱是剩余的（比如进口向港口），有的港口可能空集装箱不够（比如出口向港口）"><a href="#CIM-”Container-Inventory-Management”-中文是“集装箱库存管理”。全球贸易里面会有很多港口，但是每个港口需要的空集装箱都不一样，有的港口可能空集装箱是剩余的（比如进口向港口），有的港口可能空集装箱不够（比如出口向港口）" class="headerlink" title="CIM,”Container Inventory Management”,中文是“集装箱库存管理”。全球贸易里面会有很多港口，但是每个港口需要的空集装箱都不一样，有的港口可能空集装箱是剩余的（比如进口向港口），有的港口可能空集装箱不够（比如出口向港口）"></a>CIM,”Container Inventory Management”,中文是“集装箱库存管理”。全球贸易里面会有很多港口，但是每个港口需要的空集装箱都不一样，有的港口可能空集装箱是剩余的（比如进口向港口），有的港口可能空集装箱不够（比如出口向港口）</h5><ul>
+<li>而使用 MARO 可以解决这个问题，使得每个港口尽可能分配到恰当的空集装箱资源，不多不少。</li>
+<li>在这个场景里面，空集装箱是中心资源，导致资源数量改变的事件有两个：<ul>
+<li>第一个是 Order ，即订单，订单会导致货物从 source port 运到 destination port ， 这个时候 source port 出货，empty container 会减少，destination port 进货，empty container 会增加</li>
+<li>第二个是 repositioning，使用 MARO 重定位空集装箱，平衡全球空集装箱分布。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><p><img src="/pictures/%E5%88%9D%E8%AF%86MARO/cim.container_flow.svg"></p>
+<ul>
+<li><h5 id="对上面这个流程图的解释"><a href="#对上面这个流程图的解释" class="headerlink" title="对上面这个流程图的解释"></a>对上面这个流程图的解释</h5><ul>
+<li>托运人（shipper）生成订单（send order）后，相应源端口（source port）的空容器将被释放（release empty）给托运人（shipper）</li>
+<li>托运人（shipper）将用货物装满集装箱，将其变成满载货物，然后在将满载货物的集装箱运回到（return laden）源港口（source port）</li>
+<li>船（vessel）到港口（source port）之后被装载满载货物的集装箱（load laden）</li>
+<li>船航行到进口港（source port），卸货（discharge laden）</li>
+<li>满载货物将被释放（release laden）给收货人（consignee），收货人将取出其中的货物，集装箱再次变空返回港口（return empty）</li>
+</ul>
+</li>
+</ul>
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><ul>
+<li><h5 id="这个时候我们发现，整个过程我们还有五个部分没有提到，分别是-agent-，operate-empty-，load-x2F-discharge-empty"><a href="#这个时候我们发现，整个过程我们还有五个部分没有提到，分别是-agent-，operate-empty-，load-x2F-discharge-empty" class="headerlink" title="这个时候我们发现，整个过程我们还有五个部分没有提到，分别是 agent ，operate empty ，load&#x2F;discharge empty"></a>这个时候我们发现，整个过程我们还有五个部分没有提到，分别是 agent ，operate empty ，load&#x2F;discharge empty</h5><ul>
+<li>为了为了重新平衡集装箱分布，每个港口（port）的代理商（agent）将决定每次船舶（vessel）到达港口时如何重新分配（repostioning）空集装箱<ul>
+<li>船只（vessel）到达港口时，是往船上装载空集装箱（load empty），还是消费船上原有的空集装箱（discharge empty）</li>
+<li>分配 load&#x2F;discharge empty 的数量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><ul>
+<li><h5 id="MARO-就是帮助-agent-调整-load-x2F-discharge-empty-的数量，决策目标不仅要考虑自身未来的供需情况，还要考虑上下游港口的需求和情况"><a href="#MARO-就是帮助-agent-调整-load-x2F-discharge-empty-的数量，决策目标不仅要考虑自身未来的供需情况，还要考虑上下游港口的需求和情况" class="headerlink" title="MARO 就是帮助 agent 调整 load&#x2F;discharge empty 的数量，决策目标不仅要考虑自身未来的供需情况，还要考虑上下游港口的需求和情况"></a>MARO 就是帮助 agent 调整 load&#x2F;discharge empty 的数量，决策目标不仅要考虑自身未来的供需情况，还要考虑上下游港口的需求和情况</h5><ul>
+<li>出口导向型港口（例如中国的港口）显示出明显的高需求特征，通常需要额外的空集装箱供应，这些港口将倾向于从船上卸载空集装箱</li>
+<li>虽然以进口为导向的港口具有显著的盈余特征，但通常从收货人那里收到许多空集装箱，因此，如果存在空闲容量，面向进口的港口将倾向于将多余的空集装箱装入船舶</li>
+</ul>
+</li>
+</ul>
+<h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><ul>
+<li><h4 id="简单拓扑结构"><a href="#简单拓扑结构" class="headerlink" title="简单拓扑结构"></a>简单拓扑结构</h4><img src="/pictures/%E5%88%9D%E8%AF%86MARO/cim.toys.svg"></li>
+<li><h5 id="这里要特别注意上面这个图里面，这里的-S-和-D-并不是-source-和-destination，而是-empty-containers-的-supplier-和-demander，这里-order-也并不是货物订单，而是-empty-containers-的订单"><a href="#这里要特别注意上面这个图里面，这里的-S-和-D-并不是-source-和-destination，而是-empty-containers-的-supplier-和-demander，这里-order-也并不是货物订单，而是-empty-containers-的订单" class="headerlink" title="这里要特别注意上面这个图里面，这里的 S 和 D 并不是 source 和 destination，而是 empty containers 的 supplier 和 demander，这里 order 也并不是货物订单，而是 empty containers 的订单"></a>这里要特别注意上面这个图里面，这里的 S 和 D 并不是 source 和 destination，而是 empty containers 的 supplier 和 demander，这里 order 也并不是货物订单，而是 empty containers 的订单</h5></li>
+<li><h5 id="上图实线表示货物流向，虚线表示订单流向，S-与-D-由订单（Order）决定，订单发起方为-D，订单收到方为-S"><a href="#上图实线表示货物流向，虚线表示订单流向，S-与-D-由订单（Order）决定，订单发起方为-D，订单收到方为-S" class="headerlink" title="上图实线表示货物流向，虚线表示订单流向，S 与 D 由订单（Order）决定，订单发起方为 D，订单收到方为 S"></a>上图实线表示货物流向，虚线表示订单流向，S 与 D 由订单（Order）决定，订单发起方为 D，订单收到方为 S</h5><ul>
+<li><strong>拓扑（1）</strong> 有四个 port ，D1 和 D2 是简单的需求者（需要额外 empty container 的端口），而 S2 是简单的供应商（具有剩余空容器的端口），尽管 S1 是一个简单的目标端口，但它位于两个服务路由的交点，这使其成为此拓扑中的特殊端口，为了实现全局最优，S1 必须学会区分服务路由并执行特定于服务路由的重新定位操作</li>
+<li><strong>拓扑（2）</strong> 中有五个端口，根据订单，D1 和 D2 是简单的需求者，而 S1 和 S2 是简单的供应商，作为服务航线交汇处的港口，T1港口虽然可以达到自平衡状态，但仍对全局最优起着重要作用，T1 的最佳重新定位策略是将多余的空容器从左侧服务路由转移到右侧服务路由，此外，D1 和 D2 应该学会只卸载它们需要的 empty 数量，并将多余的 empty 留给其他端口</li>
+<li><strong>拓扑（3）</strong> 中有六个端口，简单的需求者 D1 和 D2 ，简单的供应商 S1 和 S2 ，以及自平衡端口 T1 和 T2 ，比拓扑（2）更困难的是，应该采取更多的转移来将多余的空集装箱从最左边的服务路线重新定位到最右边的航线，这意味着需要一个涉及更多港口的多步骤解决方案</li>
+</ul>
+</li>
+</ul>
+<h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><p><img src="/pictures/%E5%88%9D%E8%AF%86MARO/cim.global_trade.svg"></p>
+<ul>
+<li>这是基于真实世界数据设计的拓扑,大多数港口不再具有简单的供需功能。港口之间的合作要复杂得多，很难手动找到有效的重新定位策略</li>
+</ul>
+<h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><ul>
+<li><h4 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h4></li>
+<li><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymaro</span><br></pre></td></tr></table></figure></li>
+<li><h5 id="MARO-算法有两个关键步骤"><a href="#MARO-算法有两个关键步骤" class="headerlink" title="MARO 算法有两个关键步骤"></a>MARO 算法有两个关键步骤</h5></li>
+<li><h6 id="算法决策事件-DecisionEventDecisionEvent"><a href="#算法决策事件-DecisionEventDecisionEvent" class="headerlink" title="算法决策事件 DecisionEventDecisionEvent"></a>算法决策事件 DecisionEventDecisionEvent</h6><ul>
+<li>tick (int)：相应的刻度</li>
+<li>port_idx（int）：需要响应环境的端口&#x2F;代理的 ID</li>
+<li>vessel_idx（int）：港口&#x2F;代理人的船舶&#x2F;操作对象的 ID</li>
+<li>action_scope（操作范围）：操作范围有两个属性，load表示可以从船舶港口装载的最大数量，discharge表示从船舶到港口可以卸货的最大数量</li>
+<li>early_discharge（int）：当船上的可用容量不足以装载满载物时，船上的一些空容器将被提前卸货以释放空间，由于满载而提前卸货的空容器数量记录在该字段中</li>
+</ul>
+</li>
+<li><h6 id="行动-Action"><a href="#行动-Action" class="headerlink" title="行动 Action"></a>行动 Action</h6><ul>
+<li>none，这意味着什么都不做</li>
+<li>a valid instance，有效实例：</li>
+<li>vessel_idx（int）：港口&#x2F;代理人的船舶&#x2F;操作对象的 ID</li>
+<li>port_idx（int）：执行此操作的端口&#x2F;代理的 ID</li>
+<li>action_type（操作类型）：在此操作中是装载还是卸载空容器</li>
+<li>数量（int）：要装载&#x2F;卸载的空容器的（非负）数量</li>
+</ul>
+</li>
+</ul>
+<h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><p><img src="/pictures/%E5%88%9D%E8%AF%86MARO/maro_overview.svg"></p>
+<ul>
+<li><h4 id="上图是-MARO-框架图"><a href="#上图是-MARO-框架图" class="headerlink" title="上图是 MARO 框架图"></a>上图是 MARO 框架图</h4><ul>
+<li>Simulation toolkit：它提供了一些预定义的场景，以及用于构建新场景的可重用轮子</li>
+<li>RL toolkit：它为 RL 提供了全栈抽象，例如代理管理器、代理、RL 算法、学习器、参与者和各种塑造者</li>
+<li>Distributed toolkit：提供分布式通信组件、消息自动处理、集群配置、作业编排等用户定义功能的接口</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/Hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -415,7 +568,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-24 10:30:07" itemprop="dateModified" datetime="2022-10-24T10:30:07+08:00">2022-10-24</time>
+      <time title="Modified: 2022-10-26 10:37:06" itemprop="dateModified" datetime="2022-10-26T10:37:06+08:00">2022-10-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -463,7 +616,7 @@
 <p>初始化后，目录结构如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line"> ├── _config.yml 	# 网站配置信息</span><br><span class="line"> ├── package.json 	# 应用程序信息</span><br><span class="line"> ├── scaffolds		# 模板文件夹</span><br><span class="line"> ├── source 		# 存放用户资源</span><br><span class="line"> |   ├── _drafts</span><br><span class="line"> |   └── _posts		# 存放个人博客</span><br><span class="line"> └── themes 		# 主题文件夹</span><br></pre></td></tr></table></figure>
 <p>然后输入如下命令，然后在浏览器中打开 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> ，就可以预览原始网站</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;博客名&quot; 		# 新建博客</span><br><span class="line">hexo g 				# 生成静态网页</span><br><span class="line">hexo s 				# 打开本地服务器</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new &#x27;博客名&#x27; 		# 新建博客</span><br><span class="line">hexo g 				# 生成静态网页</span><br><span class="line">hexo s 				# 打开本地服务器</span><br></pre></td></tr></table></figure>
 <p>然后就可以看到如下的界面<br><img src="/pictures/github-pages-hexo/2022.10.23.14.48.30.png"></p>
 <h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><p><strong>发布到 Github Pages 上面</strong></p>
 <h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><p>注册 Github 帐号，有帐号了不用注册</p>
