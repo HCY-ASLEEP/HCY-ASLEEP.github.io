@@ -144,6 +144,92 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/27/MARO-VM-%E8%B0%83%E5%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/27/MARO-VM-%E8%B0%83%E5%BA%A6/" class="post-title-link" itemprop="url">MARO VM 调度</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-10-27 11:01:57 / Modified: 16:38:04" itemprop="dateCreated datePublished" datetime="2022-10-27T11:01:57+08:00">2022-10-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
+<li>在云服务期间，用户请求具有一定数量资源的 <strong>虚拟机（VM）</strong>，例如中央处理器、内存等</li>
+<li>假设一个特定的时间，VM 请求的数量和到达模式是固定的，给定一个物理资源有限的 <strong>物理机（PM）</strong> 集群</li>
+<li>不同的 VM 分配策略导致数据中心的成功完成量不同，运营成本也不同</li>
+<li>对于云提供商，一个好的 VM 分配策略可以最大限度地提高资源利用率，从而可以通过向用户提供更多的 VM 来增加利润</li>
+<li>对于云用户，良好的 VM 分配策略可以最大程度地缩短 VM 响应时间，并提供更好的使用体验</li>
+</ul>
+<h3 id="资源供需"><a href="#资源供需" class="headerlink" title="资源供需"></a>资源供需</h3><ul>
+<li><p>每个 <strong>PM</strong> 中的物理资源是中心资源，包括 <strong>物理内核</strong> 和 <strong>内存</strong></p>
+<ul>
+<li>VM 请求需要一定数量的 <strong>物理资源</strong> ，资源要求因不同的 VM 请求而异 </li>
+<li>只要指定的 PM 的剩余资源足够，就会将 VM 分配到指定 PM </li>
+<li>VM 的资源利用率动态变化，PM 的实时能耗将在 Runtime-Simulation 中被模拟出来</li>
+<li>VM 执行一段时间后完成其任务。模拟器将释放分配给此 VM 的资源，并从 PM 中解除分配此 VM ，最后，资源是免费的，可以处理下一个 VM 请求</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/26/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -172,9 +258,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-10-26 14:11:21 / Modified: 15:18:04" itemprop="dateCreated datePublished" datetime="2022-10-26T14:11:21+08:00">2022-10-26</time>
+      <time title="Created: 2022-10-26 14:11:21" itemprop="dateCreated datePublished" datetime="2022-10-26T14:11:21+08:00">2022-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-27 16:38:32" itemprop="dateModified" datetime="2022-10-27T16:38:32+08:00">2022-10-27</time>
     </span>
 
   
@@ -214,7 +306,7 @@
 <li>简历内容（项目过程里面遇到什么问题，如何解决)</li>
 <li>影响数据库查询速率的因素</li>
 </ul>
-<h4 id="腾讯游戏技术运行一面-实习-2022-10-25"><a href="#腾讯游戏技术运行一面-实习-2022-10-25" class="headerlink" title="腾讯游戏技术运行一面(实习) 2022.10.25"></a>腾讯游戏技术运行一面(实习) 2022.10.25</h4><ul>
+<h4 id="腾讯游戏技术运营一面-实习-2022-10-25"><a href="#腾讯游戏技术运营一面-实习-2022-10-25" class="headerlink" title="腾讯游戏技术运营一面(实习) 2022.10.25"></a>腾讯游戏技术运营一面(实习) 2022.10.25</h4><ul>
 <li><p>腾讯会议面试，要求录屏</p>
 </li>
 <li><p>先来做几条题目，很简单，主要看思路，但是基本语法不能错误，任意语言</p>
