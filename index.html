@@ -144,6 +144,107 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/29/VIM-%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/29/VIM-%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">VIM 配置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-10-29 14:31:55 / Modified: 15:19:56" itemprop="dateCreated datePublished" datetime="2022-10-29T14:31:55+08:00">2022-10-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="VIM-配置说明"><a href="#VIM-配置说明" class="headerlink" title="VIM 配置说明"></a>VIM 配置说明</h3><ol>
+<li><p>安装 neovim 可以直接从 github 下载 appimage</p>
+</li>
+<li><p>配置 neovim 首次启动使用 :checkhealth 查看配置的路径等信息</p>
+</li>
+<li><p>coc.nvim 的 LSP 服务需要 npm （ node.js ）提供支持，npm 安装的时候可以从官方网站那里下载然后安装到指定 path，之后的 -g 安装 npm 包的时候包会安装在安装 npm 的目录下面</p>
+</li>
+<li><p>注意这个 coc-setting.json 这个在安装了 coc.nvim 之后可以 :CocConfig 来进行编辑，json 里面这一句话一定要加上，解决了初次 tab 选中的问题</p>
+</li>
+<li><p>配置文件 init.vim 位于 &#x2F;home&#x2F;asleep&#x2F;.config&#x2F;nvim 下，coc-settings.json 也是在这个路径下面</p>
+</li>
+<li><p>vimplug 管理插件，这里有点特殊，这里我将其他插件安装在与 vimplug 的 plug.vim 同一个目录下面，即  &#x2F;home&#x2F;asleep&#x2F;.local&#x2F;share&#x2F;nvim&#x2F;site&#x2F;autoload</p>
+</li>
+<li><p>安装各种插件之前，应该要了解各个插件的依赖</p>
+</li>
+<li><p>至于 vimplug 的安装，只需要把 github 上面的那个 plug.vim 文件弄下来放在上面说的那个 path 下面就可以调用 :PlugInstall，不用整个仓库弄下来</p>
+</li>
+<li><p>至于 coc 的插件，coc.nvim 是一个插件管理器，coc.nvim 管理的插件在 &#x2F;home&#x2F;asleep&#x2F;.config&#x2F;coc&#x2F;extensions 下面</p>
+</li>
+<li><p>综上所述，如果要迁移 nvim 及其配置，只需要复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/home/asleep/.config/coc/extensions   “coc-extensions”</span><br><span class="line"></span><br><span class="line">/home/asleep/.config/nvim   “coc-settings.json”  “init.vim“</span><br><span class="line"></span><br><span class="line">/home/asleep/.local/share/nvim/site/autoload   “plug.vim” “vim-plug extensions”</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这三个路径下的文件就可以完成迁移 </p>
+</li>
+<li><p>每次修改 init.vim 之后，都要 :so % 即 :source init.vim 生效</p>
+</li>
+</ol>
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6><h3 id="coc-setting-json"><a href="#coc-setting-json" class="headerlink" title="coc-setting.json"></a>coc-setting.json</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;suggest.noselect&quot;: true,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><h3 id="init-vim-已启用的配置"><a href="#init-vim-已启用的配置" class="headerlink" title="init.vim 已启用的配置"></a>init.vim 已启用的配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line">&quot; -------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot; ---------------------------------------------common-start----------------------------------------------------</span><br><span class="line">&quot; -------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">set number</span><br><span class="line">set mouse=c</span><br><span class="line">set tabstop=4</span><br><span class="line">set autoindent</span><br><span class="line">set backspace=indent,eol,start</span><br><span class="line">set hlsearch</span><br><span class="line">set clipboard+=unnamedplus</span><br><span class="line">set foldmethod=syntax</span><br><span class="line">set nofoldenable</span><br><span class="line">&quot; 自动同步</span><br><span class="line">set autoread</span><br><span class="line">set fillchars=eob:\ </span><br><span class="line"></span><br><span class="line">&quot; Vim jump to the last position when reopening a file</span><br><span class="line">if has(&quot;autocmd&quot;)</span><br><span class="line">  au BufReadPost * if line(&quot;&#x27;\&quot;&quot;) &gt; 1 &amp;&amp; line(&quot;&#x27;\&quot;&quot;) &lt;= line(&quot;$&quot;) | exe &quot;normal! g&#x27;\&quot;&quot; | endif</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function! ESC_IMAP()</span><br><span class="line">    let l:frontChar = getline(&#x27;.&#x27;)[col(&#x27;.&#x27;) - 2]</span><br><span class="line">    if l:frontChar == &quot;;&quot; </span><br><span class="line">        call feedkeys(&quot;\&lt;BS&gt;\&lt;BS&gt;\&lt;ESC&gt;&quot;, &#x27;n&#x27;)</span><br><span class="line">    else</span><br><span class="line">        call feedkeys(&quot;\&lt;BS&gt;\;&quot;, &#x27;n&#x27;)</span><br><span class="line">    endif</span><br><span class="line">endfunction</span><br><span class="line">inoremap &lt;expr&gt; ; ESC_IMAP()</span><br><span class="line"></span><br><span class="line">set timeoutlen=200</span><br><span class="line"></span><br><span class="line">nnoremap ;; &lt;ESC&gt;</span><br><span class="line">vnoremap ;; &lt;ESC&gt;</span><br><span class="line">snoremap ;; &lt;ESC&gt;</span><br><span class="line">xnoremap ;; &lt;ESC&gt;</span><br><span class="line">cnoremap ;; &lt;ESC&gt;</span><br><span class="line">onoremap ;; &lt;ESC&gt;</span><br><span class="line"></span><br><span class="line">&quot; exit windows</span><br><span class="line">tnoremap ;; &lt;C-\&gt;&lt;C-n&gt;</span><br><span class="line"></span><br><span class="line">&quot; switch windows</span><br><span class="line">nnoremap &lt;TAB&gt; &lt;C-w&gt;w</span><br><span class="line">nnoremap vv &lt;C-v&gt;</span><br><span class="line"></span><br><span class="line">echo expand(&quot;%:p:h&quot;)</span><br><span class="line"></span><br><span class="line">cnoreabbrev fd echo expand(&quot;%:p:h&quot;)</span><br><span class="line">cnoreabbrev vst vs&lt;ENTER&gt;:term</span><br><span class="line">cnoreabbrev spt sp&lt;ENTER&gt;:term</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot; -------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;-----------------------------------------------common-end----------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;</span><br><span class="line">&quot;</span><br><span class="line">&quot;</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;--------------------------------------------vim-plug-start---------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">call plug#begin(&#x27;/home/asleep/.local/share/nvim/site/autoload&#x27;)</span><br><span class="line">Plug &#x27;itchyny/lightline.vim&#x27;</span><br><span class="line">Plug &#x27;joshdick/onedark.vim&#x27;</span><br><span class="line">Plug &#x27;neoclide/coc.nvim&#x27;, &#123;&#x27;branch&#x27;: &#x27;release&#x27;&#125;</span><br><span class="line">Plug &#x27;jiangmiao/auto-pairs&#x27;</span><br><span class="line">Plug &#x27;ms-jpq/chadtree&#x27;, &#123;&#x27;branch&#x27;: &#x27;chad&#x27;, &#x27;do&#x27;: &#x27;python3 -m chadtree deps&#x27;&#125;</span><br><span class="line">Plug &#x27;sheerun/vim-polyglot&#x27;</span><br><span class="line">Plug &#x27;Yggdroot/LeaderF&#x27;, &#123; &#x27;do&#x27;: &#x27;:LeaderfInstallCExtension&#x27; &#125;</span><br><span class="line">Plug &#x27;tpope/vim-fugitive&#x27;</span><br><span class="line">Plug &#x27;sbdchd/neoformat&#x27;</span><br><span class="line">Plug &#x27;iamcco/markdown-preview.nvim&#x27;, &#123; &#x27;do&#x27;: &#x27;cd app &amp;&amp; yarn install&#x27; &#125;</span><br><span class="line">call plug#end()</span><br><span class="line"></span><br><span class="line">&quot;有些插件需要安装 nerd fonts！</span><br><span class="line">&quot;nerd fonts 包括了 powerline fonts！</span><br><span class="line">&quot;建议安装 DejaVuSansMonoNerd！</span><br><span class="line"></span><br><span class="line">&quot;这个是 LeaderF 的设置</span><br><span class="line">let g:Lf_WindowPosition = &#x27;popup&#x27;</span><br><span class="line">cnoreabbrev ff LeaderfFile</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cnoreabbrev fm Neoformat</span><br><span class="line"></span><br><span class="line">cnoreabbrev mt MarkdownPreviewToggle</span><br><span class="line">let g:mkdp_theme = &quot;light&quot;</span><br><span class="line"></span><br><span class="line">&quot;这个是 chadtree 的设置</span><br><span class="line">&quot;明确指定绑定的键之后，就不会使用默认的键</span><br><span class="line">let g:chadtree_settings = &#123;</span><br><span class="line">  \ &#x27;keymap.change_focus_up&#x27;: [&quot;..&quot;],</span><br><span class="line">  \ &#x27;keymap.secondary&#x27;: [&quot;&lt;2-leftmouse&gt;&quot;]</span><br><span class="line">\&#125;</span><br><span class="line"></span><br><span class="line">nnoremap &lt;F2&gt; :CHADopen&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">let g:onedark_terminal_italics=1</span><br><span class="line">autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE </span><br><span class="line">colorscheme onedark</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let g:lightline = &#123;</span><br><span class="line">      \&#x27;colorscheme&#x27; : &#x27;onedark&#x27;,</span><br><span class="line">      \ &#x27;separator&#x27;: &#123; &#x27;left&#x27;: &#x27;&#x27;, &#x27;right&#x27;: &#x27;&#x27; &#125;,</span><br><span class="line">      \ &#x27;subseparator&#x27;: &#123; &#x27;left&#x27;: &#x27;&#x27;, &#x27;right&#x27;: &#x27;&#x27; &#125;,</span><br><span class="line">      \ &#x27;component&#x27;: &#123;</span><br><span class="line">            \ &#x27;lineinfo&#x27;: &#x27; %3l / %L : %-2v&#x27;,</span><br><span class="line">            \ &#125;, </span><br><span class="line">      \ &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;-----------------------------------------------vim-plug-end--------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;------------------------------------------------coc-start----------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">inoremap &lt;silent&gt;&lt;expr&gt; &lt;TAB&gt; coc#pum#visible() ? coc#pum#next(1) :&quot;\&lt;Tab&gt;&quot; </span><br><span class="line"></span><br><span class="line">nnoremap gd &lt;Plug&gt;(coc-definition)</span><br><span class="line">nnoremap gt &lt;Plug&gt;(coc-type-definition)</span><br><span class="line">nnoremap gi &lt;Plug&gt;(coc-implementation)</span><br><span class="line">nnoremap gr &lt;Plug&gt;(coc-references)</span><br><span class="line"></span><br><span class="line">&quot; Use K to show documentation in preview window.</span><br><span class="line">function! ShowDocumentation()</span><br><span class="line">  if CocAction(&#x27;hasProvider&#x27;, &#x27;hover&#x27;)</span><br><span class="line">    call CocActionAsync(&#x27;doHover&#x27;)</span><br><span class="line">  else</span><br><span class="line">    call feedkeys(&#x27;K&#x27;, &#x27;in&#x27;)</span><br><span class="line">  endif</span><br><span class="line">endfunction</span><br><span class="line">nnoremap &lt;silent&gt; K :call ShowDocumentation()&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">&quot; Highlight the symbol and its references when holding the cursor.</span><br><span class="line">autocmd CursorHold * silent call CocActionAsync(&#x27;highlight&#x27;)</span><br><span class="line"></span><br><span class="line">&quot; Symbol renaming.</span><br><span class="line">nnoremap &lt;space&gt;r &lt;Plug&gt;(coc-rename)</span><br><span class="line"></span><br><span class="line">&quot; Show all diagnostics.</span><br><span class="line">nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;a  :&lt;C-u&gt;CocList diagnostics&lt;cr&gt;</span><br><span class="line"></span><br><span class="line">&quot; Manage extensions.</span><br><span class="line">nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;e  :&lt;C-u&gt;CocList extensions&lt;cr&gt;</span><br><span class="line"></span><br><span class="line">&quot; Find symbol of current document.</span><br><span class="line">nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;o  :&lt;C-u&gt;CocList outline&lt;cr&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------coc-end-----------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><h3 id="init-vim-未启用的配置"><a href="#init-vim-未启用的配置" class="headerlink" title="init.vim 未启用的配置"></a>init.vim 未启用的配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;&quot;----------------------------------------------netrw_start----------------------------------------------------</span><br><span class="line">&quot;&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;let g:netrw_banner = 0</span><br><span class="line">&quot;&quot;let g:netrw_liststyle = 3</span><br><span class="line">&quot;&quot;let g:netrw_browse_split = 4</span><br><span class="line">&quot;&quot;let g:netrw_altv = 1</span><br><span class="line">&quot;&quot;let g:netrw_winsize = 15</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;set autochdir</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;&quot; Toggle Vexplore with &lt;F2&gt;</span><br><span class="line">&quot;&quot;function! ToggleVExplorer()</span><br><span class="line">&quot;&quot;    if exists(&quot;t:expl_buf_num&quot;)</span><br><span class="line">&quot;&quot;        let expl_win_num = bufwinnr(t:expl_buf_num)</span><br><span class="line">&quot;&quot;        let cur_win_num = winnr()</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;        if expl_win_num != -1</span><br><span class="line">&quot;&quot;            while expl_win_num != cur_win_num</span><br><span class="line">&quot;&quot;                exec &quot;wincmd w&quot;</span><br><span class="line">&quot;&quot;                let cur_win_num = winnr()</span><br><span class="line">&quot;&quot;            endwhile</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;            close</span><br><span class="line">&quot;&quot;        endif</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;        unlet t:expl_buf_num</span><br><span class="line">&quot;&quot;    else</span><br><span class="line">&quot;&quot;         Vexplore</span><br><span class="line">&quot;&quot;         let t:expl_buf_num = bufnr(&quot;%&quot;)</span><br><span class="line">&quot;&quot;    endif</span><br><span class="line">&quot;&quot;endfunction</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;map &lt;F2&gt; :call ToggleVExplorer()&lt;CR&gt;</span><br><span class="line">&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;&quot; 状态栏无插件设置</span><br><span class="line">&quot;&quot;hi VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE</span><br><span class="line">&quot;&quot;set fillchars=vert:\ </span><br><span class="line">&quot;&quot;&quot;&quot;set fillchars=vert:\│</span><br><span class="line">&quot;&quot;set statusline=%*\ %.50F\               &quot;显示文件名和文件路径</span><br><span class="line">&quot;&quot;set statusline+=%=%y%m%r%h%w\ %*        &quot;显示文件类型及文件状态</span><br><span class="line">&quot;&quot;set statusline+=%&#123;&amp;ff&#125;\[%&#123;&amp;fenc&#125;]\ %*   &quot;显示文件编码类型</span><br><span class="line">&quot;&quot;set statusline+=%l/%L,%c\ %*            &quot;显示光标所在行和列</span><br><span class="line">&quot;&quot;set statusline+=%3p%%                   &quot;显示光标前文本所占总文本的比例</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;hi Statusline ctermfg=NONE ctermbg=NONE cterm=bold </span><br><span class="line">&quot;&quot;hi StatuslineNC ctermfg=NONE ctermbg=NONE cterm=NONE</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;&quot;-----------------------------------------------netrw-end-----------------------------------------------------</span><br><span class="line">&quot;&quot;-------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/27/MARO-VM-%E8%B0%83%E5%BA%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1169,7 +1270,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/22/The-First-Blog/">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/debian-fcitx-%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1187,7 +1288,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/22/The-First-Blog/" class="post-title-link" itemprop="url">The First Blog</a>
+          <a href="/2022/10/23/debian-fcitx-%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95/" class="post-title-link" itemprop="url">Debian Fcitx 中文输入法</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1197,9 +1298,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-10-22 21:16:22 / Modified: 21:16:58" itemprop="dateCreated datePublished" datetime="2022-10-22T21:16:22+08:00">2022-10-22</time>
+      <time title="Created: 2022-10-23 13:25:51" itemprop="dateCreated datePublished" datetime="2022-10-23T13:25:51+08:00">2022-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-29 15:41:06" itemprop="dateModified" datetime="2022-10-29T15:41:06+08:00">2022-10-29</time>
     </span>
 
   
@@ -1212,7 +1319,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>“开始记录进步与欢乐！”</p>
+          <p>不是中文环境需要进行切换中文环境,可以通过以下命令切换:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg-reconfigure locales</span><br></pre></td></tr></table></figure>
+
+<p>至少选择zh_CN.UTF-8</p>
+<p>更新</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update </span><br></pre></td></tr></table></figure>
+
+<p>安装 fcitx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install fcitx</span><br></pre></td></tr></table></figure>
+
+<p>安装 google-pinyin</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install fcitx-googlepinyin</span><br></pre></td></tr></table></figure>
+
+<p>重启</p>
+<p>命令行输入 im-config 选中fcitx</p>
 
       
     </div>
@@ -1231,6 +1352,86 @@
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/debian-gnome-default-browser/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/23/debian-gnome-default-browser/" class="post-title-link" itemprop="url">Debian Gnome 默认浏览器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-23 13:25:51" itemprop="dateCreated datePublished" datetime="2022-10-23T13:25:51+08:00">2022-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-29 15:41:30" itemprop="dateModified" datetime="2022-10-29T15:41:30+08:00">2022-10-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>可以参考里面的指引来设置默认浏览器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://wiki.debian.org/DefaultWebBrowser</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 </div>
   </main>
