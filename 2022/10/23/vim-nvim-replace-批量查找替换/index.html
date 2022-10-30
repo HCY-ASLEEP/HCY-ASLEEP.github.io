@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hcy-asleep.github.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"remove","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="123456789101112131415当前行进行替换:s&#x2F;XXX&#x2F;YYY&#x2F;gXXX是需要替换的字符串,YYY是替换后的字符串全局替换:% s&#x2F;XXX&#x2F;YYY&#x2F;g对指定部分进行替换用V进入visual模式,再进行:s&#x2F;XXX&#x2F;YYY&#x2F;g或指定行范围 替换:100,102s&#x2F;XXX&#x2F;YYY&#x2F;g">
+    <meta name="description" content="12345678910111213141516171819# 当前行进行替换:s&#x2F;XXX&#x2F;YYY&#x2F;g# XXX是需要替换的字符串,YYY是替换后的字符串# 全局替换:% s&#x2F;XXX&#x2F;YYY&#x2F;g# 对指定部分进行替换用V进入visual模式,再进行:s&#x2F;XXX&#x2F;YYY&#x2F;g# 或指定行范围 替换:100,102s&#x2F;XXX&#x2F;YYY&#x2F;g# 模糊查找不区分大小写，在要查找的内容后面加上 \c 就行:&#x2F;xxx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VIM 批量查找替换">
 <meta property="og:url" content="https://hcy-asleep.github.com/2022/10/23/vim-nvim-replace-%E6%89%B9%E9%87%8F%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2/index.html">
 <meta property="og:site_name" content="A Coder&#39;s Pocket">
-<meta property="og:description" content="123456789101112131415当前行进行替换:s&#x2F;XXX&#x2F;YYY&#x2F;gXXX是需要替换的字符串,YYY是替换后的字符串全局替换:% s&#x2F;XXX&#x2F;YYY&#x2F;g对指定部分进行替换用V进入visual模式,再进行:s&#x2F;XXX&#x2F;YYY&#x2F;g或指定行范围 替换:100,102s&#x2F;XXX&#x2F;YYY&#x2F;g">
+<meta property="og:description" content="12345678910111213141516171819# 当前行进行替换:s&#x2F;XXX&#x2F;YYY&#x2F;g# XXX是需要替换的字符串,YYY是替换后的字符串# 全局替换:% s&#x2F;XXX&#x2F;YYY&#x2F;g# 对指定部分进行替换用V进入visual模式,再进行:s&#x2F;XXX&#x2F;YYY&#x2F;g# 或指定行范围 替换:100,102s&#x2F;XXX&#x2F;YYY&#x2F;g# 模糊查找不区分大小写，在要查找的内容后面加上 \c 就行:&#x2F;xxx">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-10-23T05:25:51.000Z">
-<meta property="article:modified_time" content="2022-10-29T07:49:30.468Z">
+<meta property="article:modified_time" content="2022-10-30T03:07:21.148Z">
 <meta property="article:author" content="HCY">
 <meta property="article:tag" content="VIM">
 <meta name="twitter:card" content="summary">
@@ -184,7 +184,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-29 15:49:30" itemprop="dateModified" datetime="2022-10-29T15:49:30+08:00">2022-10-29</time>
+      <time title="Modified: 2022-10-30 11:07:21" itemprop="dateModified" datetime="2022-10-30T11:07:21+08:00">2022-10-30</time>
     </span>
 
   
@@ -197,7 +197,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">当前行进行替换</span><br><span class="line">:s/XXX/YYY/g</span><br><span class="line">XXX是需要替换的字符串,YYY是替换后的字符串</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">全局替换</span><br><span class="line">:% s/XXX/YYY/g</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">对指定部分进行替换用V进入<span class="keyword">visual</span>模式,再进行</span><br><span class="line">:s/XXX/YYY/g</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或指定行范围 替换</span><br><span class="line">:<span class="number">100</span>,<span class="number">102</span>s/XXX/YYY/g</span><br></pre></td></tr></table></figure>
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 当前行进行替换</span><br><span class="line">:s/XXX/YYY/g</span><br><span class="line"># XXX是需要替换的字符串,YYY是替换后的字符串</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 全局替换</span><br><span class="line">:% s/XXX/YYY/g</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 对指定部分进行替换用V进入visual模式,再进行</span><br><span class="line">:s/XXX/YYY/g</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 或指定行范围 替换</span><br><span class="line">:100,102s/XXX/YYY/g</span><br><span class="line"></span><br><span class="line"># 模糊查找不区分大小写，在要查找的内容后面加上 \c 就行</span><br><span class="line">:/xxx\c</span><br><span class="line">:s/XXX\c/YYY/g</span><br></pre></td></tr></table></figure>
 
     </div>
 
