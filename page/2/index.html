@@ -144,7 +144,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/debian-gnome-default-browser/">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/26/%E5%88%9D%E8%AF%86-MARO/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -162,7 +162,395 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/23/debian-gnome-default-browser/" class="post-title-link" itemprop="url">Debian Gnome 默认浏览器</a>
+          <a href="/2022/10/26/%E5%88%9D%E8%AF%86-MARO/" class="post-title-link" itemprop="url">初识 MARO</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-10-26 10:20:02 / Modified: 15:35:56" itemprop="dateCreated datePublished" datetime="2022-10-26T10:20:02+08:00">2022-10-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="MARO-，“Multi-Agent-Resource-Optimization”-，中文是“多代理资源优化”-，使用强化学习来解决资源调度的一个平台"><a href="#MARO-，“Multi-Agent-Resource-Optimization”-，中文是“多代理资源优化”-，使用强化学习来解决资源调度的一个平台" class="headerlink" title="MARO ，“Multi-Agent-Resource Optimization” ，中文是“多代理资源优化” ，使用强化学习来解决资源调度的一个平台"></a><a target="_blank" rel="noopener" href="https://github.com/microsoft/maro">MARO ，“Multi-Agent-Resource Optimization” </a>，中文是“多代理资源优化” ，使用强化学习来解决资源调度的一个平台</h3><h6 id=""><a href="#" class="headerlink" title=""></a></h6><h4 id="可以应用-MARO-的实际例子："><a href="#可以应用-MARO-的实际例子：" class="headerlink" title="可以应用 MARO 的实际例子："></a>可以应用 MARO 的实际例子：</h4><ul>
+<li><h5 id="CIM-”Container-Inventory-Management”-中文是“集装箱库存管理”。全球贸易里面会有很多港口，但是每个港口需要的空集装箱都不一样，有的港口可能空集装箱是剩余的（比如进口向港口），有的港口可能空集装箱不够（比如出口向港口）"><a href="#CIM-”Container-Inventory-Management”-中文是“集装箱库存管理”。全球贸易里面会有很多港口，但是每个港口需要的空集装箱都不一样，有的港口可能空集装箱是剩余的（比如进口向港口），有的港口可能空集装箱不够（比如出口向港口）" class="headerlink" title="CIM,”Container Inventory Management”,中文是“集装箱库存管理”。全球贸易里面会有很多港口，但是每个港口需要的空集装箱都不一样，有的港口可能空集装箱是剩余的（比如进口向港口），有的港口可能空集装箱不够（比如出口向港口）"></a>CIM,”Container Inventory Management”,中文是“集装箱库存管理”。全球贸易里面会有很多港口，但是每个港口需要的空集装箱都不一样，有的港口可能空集装箱是剩余的（比如进口向港口），有的港口可能空集装箱不够（比如出口向港口）</h5><ul>
+<li>而使用 MARO 可以解决这个问题，使得每个港口尽可能分配到恰当的空集装箱资源，不多不少。</li>
+<li>在这个场景里面，空集装箱是中心资源，导致资源数量改变的事件有两个：<ul>
+<li>第一个是 Order ，即订单，订单会导致货物从 source port 运到 destination port ， 这个时候 source port 出货，empty container 会减少，destination port 进货，empty container 会增加</li>
+<li>第二个是 repositioning，使用 MARO 重定位空集装箱，平衡全球空集装箱分布。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><p><img src="/pictures/%E5%88%9D%E8%AF%86MARO/cim.container_flow.svg"></p>
+<ul>
+<li><h5 id="对上面这个流程图的解释"><a href="#对上面这个流程图的解释" class="headerlink" title="对上面这个流程图的解释"></a>对上面这个流程图的解释</h5><ul>
+<li>托运人（shipper）生成订单（send order）后，相应源端口（source port）的空容器将被释放（release empty）给托运人（shipper）</li>
+<li>托运人（shipper）将用货物装满集装箱，将其变成满载货物，然后在将满载货物的集装箱运回到（return laden）源港口（source port）</li>
+<li>船（vessel）到港口（source port）之后被装载满载货物的集装箱（load laden）</li>
+<li>船航行到进口港（source port），卸货（discharge laden）</li>
+<li>满载货物将被释放（release laden）给收货人（consignee），收货人将取出其中的货物，集装箱再次变空返回港口（return empty）</li>
+</ul>
+</li>
+</ul>
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><ul>
+<li><h5 id="这个时候我们发现，整个过程我们还有五个部分没有提到，分别是-agent-，operate-empty-，load-x2F-discharge-empty"><a href="#这个时候我们发现，整个过程我们还有五个部分没有提到，分别是-agent-，operate-empty-，load-x2F-discharge-empty" class="headerlink" title="这个时候我们发现，整个过程我们还有五个部分没有提到，分别是 agent ，operate empty ，load&#x2F;discharge empty"></a>这个时候我们发现，整个过程我们还有五个部分没有提到，分别是 agent ，operate empty ，load&#x2F;discharge empty</h5><ul>
+<li>为了为了重新平衡集装箱分布，每个港口（port）的代理商（agent）将决定每次船舶（vessel）到达港口时如何重新分配（repostioning）空集装箱<ul>
+<li>船只（vessel）到达港口时，是往船上装载空集装箱（load empty），还是消费船上原有的空集装箱（discharge empty）</li>
+<li>分配 load&#x2F;discharge empty 的数量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><ul>
+<li><h5 id="MARO-就是帮助-agent-调整-load-x2F-discharge-empty-的数量，决策目标不仅要考虑自身未来的供需情况，还要考虑上下游港口的需求和情况"><a href="#MARO-就是帮助-agent-调整-load-x2F-discharge-empty-的数量，决策目标不仅要考虑自身未来的供需情况，还要考虑上下游港口的需求和情况" class="headerlink" title="MARO 就是帮助 agent 调整 load&#x2F;discharge empty 的数量，决策目标不仅要考虑自身未来的供需情况，还要考虑上下游港口的需求和情况"></a>MARO 就是帮助 agent 调整 load&#x2F;discharge empty 的数量，决策目标不仅要考虑自身未来的供需情况，还要考虑上下游港口的需求和情况</h5><ul>
+<li>出口导向型港口（例如中国的港口）显示出明显的高需求特征，通常需要额外的空集装箱供应，这些港口将倾向于从船上卸载空集装箱</li>
+<li>虽然以进口为导向的港口具有显著的盈余特征，但通常从收货人那里收到许多空集装箱，因此，如果存在空闲容量，面向进口的港口将倾向于将多余的空集装箱装入船舶</li>
+</ul>
+</li>
+</ul>
+<h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><ul>
+<li><h4 id="简单拓扑结构"><a href="#简单拓扑结构" class="headerlink" title="简单拓扑结构"></a>简单拓扑结构</h4><img src="/pictures/%E5%88%9D%E8%AF%86MARO/cim.toys.svg"></li>
+<li><h5 id="这里要特别注意上面这个图里面，这里的-S-和-D-并不是-source-和-destination，而是-empty-containers-的-supplier-和-demander，这里-order-也并不是货物订单，而是-empty-containers-的订单"><a href="#这里要特别注意上面这个图里面，这里的-S-和-D-并不是-source-和-destination，而是-empty-containers-的-supplier-和-demander，这里-order-也并不是货物订单，而是-empty-containers-的订单" class="headerlink" title="这里要特别注意上面这个图里面，这里的 S 和 D 并不是 source 和 destination，而是 empty containers 的 supplier 和 demander，这里 order 也并不是货物订单，而是 empty containers 的订单"></a>这里要特别注意上面这个图里面，这里的 S 和 D 并不是 source 和 destination，而是 empty containers 的 supplier 和 demander，这里 order 也并不是货物订单，而是 empty containers 的订单</h5></li>
+<li><h5 id="上图实线表示货物流向，虚线表示订单流向，S-与-D-由订单（Order）决定，订单发起方为-D，订单收到方为-S"><a href="#上图实线表示货物流向，虚线表示订单流向，S-与-D-由订单（Order）决定，订单发起方为-D，订单收到方为-S" class="headerlink" title="上图实线表示货物流向，虚线表示订单流向，S 与 D 由订单（Order）决定，订单发起方为 D，订单收到方为 S"></a>上图实线表示货物流向，虚线表示订单流向，S 与 D 由订单（Order）决定，订单发起方为 D，订单收到方为 S</h5><ul>
+<li><strong>拓扑（1）</strong> 有四个 port ，D1 和 D2 是简单的需求者（需要额外 empty container 的端口），而 S2 是简单的供应商（具有剩余空容器的端口），尽管 S1 是一个简单的目标端口，但它位于两个服务路由的交点，这使其成为此拓扑中的特殊端口，为了实现全局最优，S1 必须学会区分服务路由并执行特定于服务路由的重新定位操作</li>
+<li><strong>拓扑（2）</strong> 中有五个端口，根据订单，D1 和 D2 是简单的需求者，而 S1 和 S2 是简单的供应商，作为服务航线交汇处的港口，T1港口虽然可以达到自平衡状态，但仍对全局最优起着重要作用，T1 的最佳重新定位策略是将多余的空容器从左侧服务路由转移到右侧服务路由，此外，D1 和 D2 应该学会只卸载它们需要的 empty 数量，并将多余的 empty 留给其他端口</li>
+<li><strong>拓扑（3）</strong> 中有六个端口，简单的需求者 D1 和 D2 ，简单的供应商 S1 和 S2 ，以及自平衡端口 T1 和 T2 ，比拓扑（2）更困难的是，应该采取更多的转移来将多余的空集装箱从最左边的服务路线重新定位到最右边的航线，这意味着需要一个涉及更多港口的多步骤解决方案</li>
+</ul>
+</li>
+</ul>
+<h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><p><img src="/pictures/%E5%88%9D%E8%AF%86MARO/cim.global_trade.svg"></p>
+<ul>
+<li>这是基于真实世界数据设计的拓扑,大多数港口不再具有简单的供需功能。港口之间的合作要复杂得多，很难手动找到有效的重新定位策略</li>
+</ul>
+<h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><ul>
+<li><h4 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h4></li>
+<li><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymaro</span><br></pre></td></tr></table></figure></li>
+<li><h5 id="MARO-算法有两个关键步骤"><a href="#MARO-算法有两个关键步骤" class="headerlink" title="MARO 算法有两个关键步骤"></a>MARO 算法有两个关键步骤</h5></li>
+<li><h6 id="算法决策事件-DecisionEventDecisionEvent"><a href="#算法决策事件-DecisionEventDecisionEvent" class="headerlink" title="算法决策事件 DecisionEventDecisionEvent"></a>算法决策事件 DecisionEventDecisionEvent</h6><ul>
+<li>tick (int)：相应的刻度</li>
+<li>port_idx（int）：需要响应环境的端口&#x2F;代理的 ID</li>
+<li>vessel_idx（int）：港口&#x2F;代理人的船舶&#x2F;操作对象的 ID</li>
+<li>action_scope（操作范围）：操作范围有两个属性，load表示可以从船舶港口装载的最大数量，discharge表示从船舶到港口可以卸货的最大数量</li>
+<li>early_discharge（int）：当船上的可用容量不足以装载满载物时，船上的一些空容器将被提前卸货以释放空间，由于满载而提前卸货的空容器数量记录在该字段中</li>
+</ul>
+</li>
+<li><h6 id="行动-Action"><a href="#行动-Action" class="headerlink" title="行动 Action"></a>行动 Action</h6><ul>
+<li>none，这意味着什么都不做</li>
+<li>a valid instance，有效实例：</li>
+<li>vessel_idx（int）：港口&#x2F;代理人的船舶&#x2F;操作对象的 ID</li>
+<li>port_idx（int）：执行此操作的端口&#x2F;代理的 ID</li>
+<li>action_type（操作类型）：在此操作中是装载还是卸载空容器</li>
+<li>数量（int）：要装载&#x2F;卸载的空容器的（非负）数量</li>
+</ul>
+</li>
+</ul>
+<h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><p><img src="/pictures/%E5%88%9D%E8%AF%86MARO/maro_overview.svg"></p>
+<ul>
+<li><h4 id="上图是-MARO-框架图"><a href="#上图是-MARO-框架图" class="headerlink" title="上图是 MARO 框架图"></a>上图是 MARO 框架图</h4><ul>
+<li>Simulation toolkit：它提供了一些预定义的场景，以及用于构建新场景的可重用轮子</li>
+<li>RL toolkit：它为 RL 提供了全栈抽象，例如代理管理器、代理、RL 算法、学习器、参与者和各种塑造者</li>
+<li>Distributed toolkit：提供分布式通信组件、消息自动处理、集群配置、作业编排等用户定义功能的接口</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/Hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/23/Hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/" class="post-title-link" itemprop="url">Hexo 文档分类 图片存储</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-23 19:16:39" itemprop="dateCreated datePublished" datetime="2022-10-23T19:16:39+08:00">2022-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-24 10:28:55" itemprop="dateModified" datetime="2022-10-24T10:28:55+08:00">2022-10-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Hexo-Usage/" itemprop="url" rel="index"><span itemprop="name">Hexo-Usage</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>建立分类</strong></p>
+<ol>
+<li>输入 hexo new page ‘categories’</li>
+</ol>
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6><ol start="2">
+<li>在顶层工程目录的 source 目录中會看到 categories 文件夹</li>
+</ol>
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><ol start="3">
+<li><p>修改 categories 中的 index.md 开头，增加一些东西使得变成如下内容</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2022-10-23 13:30:15</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+<li><p>若要把 “_post” 內的其中一份文档添加到 “Hexo-Usage” categories 里面，在这个文档头部插入 categories: Hexo-Usage</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 基本美化</span><br><span class="line">date: 2022-10-23 16:08:56</span><br><span class="line">categories: Hexo-Usage</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+<li><p>重新生成静态网页，可以看到导航栏多了一个分类选项</p>
+</li>
+</ol>
+<p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.19.31.09.png"></p>
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><p><strong>建立标签</strong></p>
+<p>和建立分类一样，只不过内容改变一点</p>
+<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><ol>
+<li>输入 hexo new page ‘tags’</li>
+</ol>
+<h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><ol start="2">
+<li>在顶层工程目录的 source 目录中會看到 tags 文件夹</li>
+</ol>
+<h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><ol start="3">
+<li>修改 tags 中的 index.md 开头，增加一些东西使得变成如下内容 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2022-10-23 13:35:49</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+<li>若要把 “_post” 內的其中一份文档添加到 “Hexo” tag 里面，在这个文档头部插入 tags: Hexo <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 文档分类 图片存储</span><br><span class="line">date: 2022-10-23 19:16:39</span><br><span class="line">categories: Hexo-Usage</span><br><span class="line">tags: Hexo</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>插入多个 tags ，记得 tab 缩进 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 文档分类 图片存储</span><br><span class="line">date: 2022-10-23 19:16:39</span><br><span class="line">categories: Hexo-Usage</span><br><span class="line">tags:</span><br><span class="line">	- Hexo</span><br><span class="line">	- Github</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+<li>重新生成静态网页，可以看到导航栏多了一个标签选项</li>
+</ol>
+<h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.19.50.12.png"></p>
+<p><strong>文档里面插入图片</strong></p>
+<p>使用Hexo创建文件搭建博客时，会遇到图片插图，以及插入的图片无法显示的问题</p>
+<h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><ol>
+<li>在 Hexo 的目录（也就是顶层工程目录） source 中创建一个图片文件夹，例如 pictures</li>
+</ol>
+<p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.19.55.54.png"></p>
+<h6 id="-8"><a href="#-8" class="headerlink" title=""></a></h6><ol start="2">
+<li><p>把要插入的图片文件放到该目录下面，在文档中正常使用 markdown 的语法插入图片即可，例如</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](ictures/xxx.png)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当然，你还可以在 pictures 再创建目录以区分不同文章的图片</p>
+</li>
+</ol>
+<p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.20.00.11.png"></p>
+<ol start="4">
+<li><p>这个时候在文章里面引用的方式就是</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](ictures/hexo-文档分类-图片存储/xxx.png)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>记住在 “pictures” 前面有一个 “&#x2F;“ ，表示根目录的意思，因为对于 hexo 来说它的资源文件的根目录就是 source ，当然也可以修改 “_config.yml” 改变这个配置，下图是 hexo 框架文件夹描述</p>
+<p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/20191220164252492.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/Hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/23/Hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/" class="post-title-link" itemprop="url">Hexo 基本美化</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-10-23 16:08:56 / Modified: 17:27:44" itemprop="dateCreated datePublished" datetime="2022-10-23T16:08:56+08:00">2022-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Hexo-Usage/" itemprop="url" rel="index"><span itemprop="name">Hexo-Usage</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>首先是顶部背景</strong>，下面是原背景</p>
+<p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.14.49.png"></p>
+<p>在 blogs 文件夹（顶层工程文件目录）里面搜索 banner.jpg</p>
+<p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.17.17.png"></p>
+<p>把这两个 banner.jpg 替换成自己图片，替换之后名字还得是 banner.jpg</p>
+<p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.19.21.png"></p>
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.22.22.png"></p>
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><p><strong>定义自己的信息</strong>，定义在顶层工程目录的 “_config.yml” 里面</p>
+<p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.25.30.png"></p>
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.27.38.png"></p>
+<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><p><strong>美化代码块</strong>，原本的代码块没有 margin-left 和 margin-right ，不好看<br><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.29.42.png"></p>
+<p>在顶层工程文件目录里面，搜索 highlight.styl</p>
+<p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.32.39.png"></p>
+<h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.33.18.png"></p>
+<p>这两个 css 文件是一样的，要修改的地方也一样</p>
+<p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.35.28.png"></p>
+<p>注释掉原来的 margin ，换成 “margin:1px” 就可以</p>
+<p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.36.27.png"></p>
+<p>效果很 nice</p>
+<p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.38.27.png"></p>
+<h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><p><strong>最终效果</strong></p>
+<p><img src="/pictures/hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/2022.10.23.16.41.32.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/Github-Pages+Hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/23/Github-Pages+Hexo/" class="post-title-link" itemprop="url">Github Pages + Hexo</a>
         </h2>
 
         <div class="post-meta-container">
@@ -180,7 +568,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-29 15:41:30" itemprop="dateModified" datetime="2022-10-29T15:41:30+08:00">2022-10-29</time>
+      <time title="Modified: 2022-10-27 10:22:03" itemprop="dateModified" datetime="2022-10-27T10:22:03+08:00">2022-10-27</time>
     </span>
 
   
@@ -193,8 +581,43 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>可以参考里面的指引来设置默认浏览器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://wiki.debian.org/DefaultWebBrowser</span><br></pre></td></tr></table></figure>
+          <p><strong>Github Pages 可以为个人博客提供支持，Hexo 可以让 Github Pages 更加美观和提供本地预览，而不需要上传到 Github Pages 之后再看到效果</strong></p>
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6><p><strong>安装准备</strong>（本地）：</p>
+<ul>
+<li>git</li>
+<li>npm</li>
+</ul>
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><p><strong>配置 Git</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;github 用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;github 注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<p>Github 已经不支持密码登录，需要复杂一点的步骤去验证</p>
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><ol>
+<li>到个人中心-设置-setting</li>
+<li><img src="/pictures/github-pages-hexo/75e96721a3344ed5b397ec8adfeedb98.png"></li>
+<li><img src="/pictures/github-pages-hexo/4eb29e6a9b2c4bf6b2b5db9299b1a393.png"><br><img src="/pictures/github-pages-hexo/3def5390d66a40eab1305013f28383d1.png"></li>
+<li>选 classic 的 token 而不是 beta 的，因为 classic 可以永久</li>
+<li><img src="/pictures/github-pages-hexo/de366346ddf443fba27a2cda84d9593f.png"><br><img src="/pictures/github-pages-hexo/852ef46dcc3d4018bc79fdac2ed8c917.png"></li>
+<li>点击 generate token按钮</li>
+</ol>
+<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><p>然后 生成了token 一定要复制，不然刷新浏览器就没了</p>
+<h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><p>拿到token以后再去git push&#x2F;clone ，password就是输入刚才复制的token</p>
+<h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><p><strong>Hexo 安装（本地全局）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-cli -g</span><br></pre></td></tr></table></figure>
+<p>新建一个文件夹（我的是blogs）用于存放你的博客，然后进入该文件夹，并用如下命令进行初始化并安装必备组件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init </span><br><span class="line">hexo init .</span><br></pre></td></tr></table></figure>
+<p>初始化后，目录结构如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line"> ├── _config.yml 	# 网站配置信息</span><br><span class="line"> ├── package.json 	# 应用程序信息</span><br><span class="line"> ├── scaffolds		# 模板文件夹</span><br><span class="line"> ├── source 		# 存放用户资源</span><br><span class="line"> |   ├── _drafts</span><br><span class="line"> |   └── _posts		# 存放个人博客</span><br><span class="line"> └── themes 		# 主题文件夹</span><br></pre></td></tr></table></figure>
+<p>然后输入如下命令，然后在浏览器中打开 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> ，就可以预览原始网站</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new &#x27;博客名&#x27; 		# 新建博客</span><br><span class="line">hexo g 				# 生成静态网页</span><br><span class="line">hexo s 				# 打开本地服务器</span><br></pre></td></tr></table></figure>
+<p>然后就可以看到如下的界面<br><img src="/pictures/github-pages-hexo/2022.10.23.14.48.30.png"></p>
+<h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><p><strong>发布到 Github Pages 上面</strong></p>
+<h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><p>注册 Github 帐号，有帐号了不用注册</p>
+<h6 id="-8"><a href="#-8" class="headerlink" title=""></a></h6><p>新建一个空仓库，暂时不要创建 README.md ，而且得确保你的仓库是 public 同时，仓库名一定要是 <strong>用户名.github.io</strong></p>
+<h6 id="-9"><a href="#-9" class="headerlink" title=""></a></h6><p>在上文提到的 blogs 文件夹下面安装 hexo-deployer-git</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<h6 id="-10"><a href="#-10" class="headerlink" title=""></a></h6><p>在刚才的博客根目录中的站点配置文件 “_config.yml” ，设置为你的个人仓库名，branch 与你的 git 主分支对应<br><img src="/pictures/github-pages-hexo/v2-376b7a40b8e6a310cc31bd3522ea9a7a_r.jpg"><br><img src="/pictures/github-pages-hexo/v2-d15b384267cf4fa326c2e2febb1b2b62_r.png"></p>
+<h6 id="-11"><a href="#-11" class="headerlink" title=""></a></h6><p>开始推送内容到 Github 上去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo clean 					# 清理缓存</span><br><span class="line">hexo g     					# 将 md 生成 html</span><br><span class="line">git add -A 					# 添加到 git 缓冲区</span><br><span class="line">git commit -m &quot;first time&quot;			# 提交所有更改</span><br><span class="line">hexo d     					# 推送到远程</span><br></pre></td></tr></table></figure>
+<p>稍等片刻，就可以访问 https:&#x2F;&#x2F;用户名.github.io 了</p>
 
       
     </div>
@@ -274,6 +697,173 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile.d/path.sh</span><br></pre></td></tr></table></figure>
 
 <p>（环境变量相关）</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/debian-fcitx-%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/23/debian-fcitx-%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95/" class="post-title-link" itemprop="url">Debian Fcitx 中文输入法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-23 13:25:51" itemprop="dateCreated datePublished" datetime="2022-10-23T13:25:51+08:00">2022-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-29 15:41:06" itemprop="dateModified" datetime="2022-10-29T15:41:06+08:00">2022-10-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>不是中文环境需要进行切换中文环境,可以通过以下命令切换:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg-reconfigure locales</span><br></pre></td></tr></table></figure>
+
+<p>至少选择zh_CN.UTF-8</p>
+<p>更新</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update </span><br></pre></td></tr></table></figure>
+
+<p>安装 fcitx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install fcitx</span><br></pre></td></tr></table></figure>
+
+<p>安装 google-pinyin</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install fcitx-googlepinyin</span><br></pre></td></tr></table></figure>
+
+<p>重启</p>
+<p>命令行输入 im-config 选中fcitx</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/debian-gnome-default-browser/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/23/debian-gnome-default-browser/" class="post-title-link" itemprop="url">Debian Gnome 默认浏览器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-23 13:25:51" itemprop="dateCreated datePublished" datetime="2022-10-23T13:25:51+08:00">2022-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-29 15:41:30" itemprop="dateModified" datetime="2022-10-29T15:41:30+08:00">2022-10-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>可以参考里面的指引来设置默认浏览器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://wiki.debian.org/DefaultWebBrowser</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -517,399 +1107,6 @@
 
 <p>这样处理后，临时生效环境变量，然后修改配置错误的文件例如.bash_profile   &#x2F;etc&#x2F;profile .bashrc 等，修改后，执行source生效正确的环境变量</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile --根据实际情况修改后面的文件路径</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/linux-debian-gnome-desktop-launch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HCY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A Coder's Pocket">
-      <meta itemprop="description" content="A Space Belongs To HCY">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | A Coder's Pocket">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/23/linux-debian-gnome-desktop-launch/" class="post-title-link" itemprop="url">Gnome Desktop File 参考</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-23 13:25:51" itemprop="dateCreated datePublished" datetime="2022-10-23T13:25:51+08:00">2022-10-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-29 15:46:03" itemprop="dateModified" datetime="2022-10-29T15:46:03+08:00">2022-10-29</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>eg:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Name=Tabby</span><br><span class="line">Comment=Tabby</span><br><span class="line">Exec=/home/asleep/softwares/tabby/tabby/tabby %U</span><br><span class="line">Icon=/home/asleep/softwares/tabby/tabby/tabby.svg</span><br><span class="line">Terminal=<span class="literal">false</span></span><br><span class="line">StartupNotify=<span class="literal">true</span></span><br><span class="line">Type=Application</span><br><span class="line">Categories=Application;Development;</span><br><span class="line">StartupWMClass=tabby</span><br></pre></td></tr></table></figure>
-
-<p>需要改变的是 name，common，exec，icon，startupwmclass</p>
-<p>.desktop 文件位于 &#x2F;usr&#x2F;share&#x2F;application&#x2F; 下面</p>
-<p>StartupWMClass</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xprop | grep CLASS</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/linux-debian-vscode-fonts-firacode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HCY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A Coder's Pocket">
-      <meta itemprop="description" content="A Space Belongs To HCY">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | A Coder's Pocket">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/23/linux-debian-vscode-fonts-firacode/" class="post-title-link" itemprop="url">Linux VScode 字体</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-23 13:25:51" itemprop="dateCreated datePublished" datetime="2022-10-23T13:25:51+08:00">2022-10-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-29 15:46:52" itemprop="dateModified" datetime="2022-10-29T15:46:52+08:00">2022-10-29</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/tonsky/FiraCode</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/node%20%E6%8D%A2%E6%BA%90%20%E9%98%BF%E9%87%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HCY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A Coder's Pocket">
-      <meta itemprop="description" content="A Space Belongs To HCY">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | A Coder's Pocket">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/23/node%20%E6%8D%A2%E6%BA%90%20%E9%98%BF%E9%87%8C/" class="post-title-link" itemprop="url">Nodejs 换源</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-23 13:25:51" itemprop="dateCreated datePublished" datetime="2022-10-23T13:25:51+08:00">2022-10-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-29 15:47:28" itemprop="dateModified" datetime="2022-10-29T15:47:28+08:00">2022-10-29</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>由于 Node 的官方模块仓库网速太慢，模块仓库需要切换到阿里的源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org/</span><br></pre></td></tr></table></figure>
-
-<p>执行下面的命令，确认是否切换成功</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/path.sh%20gopath%20alias/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HCY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A Coder's Pocket">
-      <meta itemprop="description" content="A Space Belongs To HCY">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | A Coder's Pocket">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/23/path.sh%20gopath%20alias/" class="post-title-link" itemprop="url">Linux 环境变量配置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-23 13:25:51" itemprop="dateCreated datePublished" datetime="2022-10-23T13:25:51+08:00">2022-10-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-29 15:48:27" itemprop="dateModified" datetime="2022-10-29T15:48:27+08:00">2022-10-29</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>&#x2F;etc&#x2F;profile.d&#x2F;path.sh</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/conda/conda/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/qrcp/qrcp</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/nodejs/nodejs/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/baidunetdisk/baidunetdisk/opt/baidunetdisk</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/adb/adb</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/wine/wine</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/neovim/neovim</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/go/go_path/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/autossh/autossh</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> GOROOT=<span class="string">&#x27;/home/asleep/softwares/go/go_base/go&#x27;</span></span><br><span class="line"><span class="built_in">export</span> GOPATH=<span class="string">&#x27;/home/asleep/softwares/go/go_path&#x27;</span></span><br><span class="line"><span class="built_in">export</span> GOCACHE=<span class="string">&#x27;/home/asleep/softwares/go/go_cache&#x27;</span></span><br><span class="line"><span class="built_in">export</span> GOENV=<span class="string">&#x27;/home/asleep/softwares/go/go_env&#x27;</span></span><br><span class="line"><span class="comment"># export GOMOD=&#x27;/home/asleep/softwares/go/go_mod&#x27;</span></span><br><span class="line"><span class="built_in">export</span> GO111MODULE=<span class="string">&#x27;auto&#x27;</span></span><br><span class="line"><span class="comment"># export GOWORK=&#x27;/home/asleep/softwares/go/go_work&#x27;</span></span><br><span class="line"><span class="built_in">export</span> GOPROXY=<span class="string">&#x27;https://goproxy.cn/,direct&#x27;</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/go/go_base/go/bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># alias vim=&#x27;vim.tiny&#x27;</span></span><br><span class="line"><span class="comment"># alias sudo=&#x27;sudo &#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>这里只能存 path 和 alias，其他的能在 &#x2F;etc&#x2F;bash.bashrc 里面解决就在那里解决，原则！</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/vim-nvim-replace-%E6%89%B9%E9%87%8F%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HCY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A Coder's Pocket">
-      <meta itemprop="description" content="A Space Belongs To HCY">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | A Coder's Pocket">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/23/vim-nvim-replace-%E6%89%B9%E9%87%8F%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2/" class="post-title-link" itemprop="url">VIM 批量查找替换</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-23 13:25:51" itemprop="dateCreated datePublished" datetime="2022-10-23T13:25:51+08:00">2022-10-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-30 11:07:21" itemprop="dateModified" datetime="2022-10-30T11:07:21+08:00">2022-10-30</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 当前行进行替换</span><br><span class="line">:s/XXX/YYY/g</span><br><span class="line"># XXX是需要替换的字符串,YYY是替换后的字符串</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 全局替换</span><br><span class="line">:% s/XXX/YYY/g</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 对指定部分进行替换用V进入visual模式,再进行</span><br><span class="line">:s/XXX/YYY/g</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 或指定行范围 替换</span><br><span class="line">:100,102s/XXX/YYY/g</span><br><span class="line"></span><br><span class="line"># 模糊查找不区分大小写，在要查找的内容后面加上 \c 就行</span><br><span class="line">:/xxx\c</span><br><span class="line">:s/XXX\c/YYY/g</span><br></pre></td></tr></table></figure>
 
       
     </div>
