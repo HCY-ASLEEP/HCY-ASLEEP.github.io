@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hcy-asleep.github.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"remove","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="你是怎么理解InnoDB引擎中的事务的？    在我的理解下，事务可以使「一组操作」要么全部成功，要么全部失败    事务其目的是为了「保证数据最终的一致性」     举个例子，我给你发支付宝转了888块红包。那自然我的支付宝余额会扣减888块，你的支付宝余额会增加888块     而事务就是保证我的余额扣减跟你的余额增添是同时成功或者同时失败的，这样这次转账就正常了          嗯，那你">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL 闲谈 2">
+<meta property="og:url" content="https://hcy-asleep.github.com/2022/11/06/MySQL-%E9%97%B2%E8%B0%88-2/index.html">
+<meta property="og:site_name" content="A Coder&#39;s Pocket">
+<meta property="og:description" content="你是怎么理解InnoDB引擎中的事务的？    在我的理解下，事务可以使「一组操作」要么全部成功，要么全部失败    事务其目的是为了「保证数据最终的一致性」     举个例子，我给你发支付宝转了888块红包。那自然我的支付宝余额会扣减888块，你的支付宝余额会增加888块     而事务就是保证我的余额扣减跟你的余额增添是同时成功或者同时失败的，这样这次转账就正常了          嗯，那你">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-3ebaa5e83396dabab44bc9d6371a384b_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-8fd6ccf7a2ef047768f34992bd1c7c30_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-12c1d8d4396bb7d0383f72b5eb4d77d6_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-2325a411c8f9da2e8c5f83367d913793_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-e5c89083071510afe2afd6e6dc337efa_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-4ed4e54af979a73c24db83133be59359_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-6792ec868544bf39078b7e9255ff4f53_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-7e397fcccc1d5dc2a519b45bf36d334f_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-93fe1254a1c756b4ec092e44a2c6de12_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-7e397fcccc1d5dc2a519b45bf36d334f_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-cc344b44fe34fc54ec6c9e2f28a4aa2d_r.jpg">
+<meta property="article:published_time" content="2022-11-06T08:14:33.000Z">
+<meta property="article:modified_time" content="2022-11-06T08:55:29.298Z">
+<meta property="article:author" content="HCY">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="对话">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-3ebaa5e83396dabab44bc9d6371a384b_r.jpg">
+
+
+<link rel="canonical" href="https://hcy-asleep.github.com/2022/11/06/MySQL-%E9%97%B2%E8%B0%88-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://hcy-asleep.github.com/2022/11/06/MySQL-%E9%97%B2%E8%B0%88-2/","path":"2022/11/06/MySQL-闲谈-2/","title":"MySQL 闲谈 2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MySQL 闲谈 2 | A Coder's Pocket</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">A Coder's Pocket</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Just For Fun</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/HCY-ASLEEP" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/06/MySQL-%E9%97%B2%E8%B0%88-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MySQL 闲谈 2 | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL 闲谈 2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-11-06 16:14:33 / Modified: 16:55:29" itemprop="dateCreated datePublished" datetime="2022-11-06T16:14:33+08:00">2022-11-06</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+你是怎么理解InnoDB引擎中的事务的？
+</div></div></div>
+
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+在我的理解下，事务可以使「一组操作」要么全部成功，要么全部失败
+</div></div></div>
+
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+事务其目的是为了「保证数据最终的一致性」
+</div></div></div>
+
+
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+举个例子，我给你发支付宝转了888块红包。那自然我的支付宝余额会扣减888块，你的支付宝余额会增加888块
+</div></div></div>
+
+
+<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+而事务就是保证我的余额扣减跟你的余额增添是同时成功或者同时失败的，这样这次转账就正常了
+</div></div></div>
+
+
+<h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+<img src="/pictures/MySQL-闲谈/v2-3ebaa5e83396dabab44bc9d6371a384b_r.jpg"/>
+</div></div></div>
+
+
+<h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+嗯，那你了解事务的几大特性吗？
+</div></div></div>
+
+<h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+嗯，就是ACID嘛，分别是原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）
+</div></div></div>
+
+<h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+原子性指的是：当前事务的操作要么同时成功，要么同时失败。原子性由undo log日志来保证，因为undo log记载着数据修改前的信息
+</div></div></div>
+
+<h6 id="-8"><a href="#-8" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+比如我们要 insert 一条数据了，那undo log 会记录的一条对应的 delete 日志。我们要 update 一条记录时，那undo log会记录之前的「旧值」的update记录
+</div></div></div>
+
+<h6 id="-9"><a href="#-9" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+如果执行事务过程中出现异常的情况，那执行「回滚」。InnoDB引擎就是利用undo log记录下的数据，来将数据「恢复」到事务开始之前
+</div></div></div>
+
+<h6 id="-10"><a href="#-10" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+<img src="/pictures/MySQL-闲谈/v2-8fd6ccf7a2ef047768f34992bd1c7c30_r.jpg"/>
+</div></div></div>
+
+<h6 id="-11"><a href="#-11" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+一致性我稍稍往后讲，我先来说下隔离性
+</div></div></div>
+
+<h6 id="-12"><a href="#-12" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+嗯…
+</div></div></div>
+
+<h6 id="-13"><a href="#-13" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+隔离性指的是：在事务「并发」执行时，他们内部的操作不能互相干扰。如果多个事务可以同时操作一个数据，那么就会产生脏读、重复读、幻读的问题
+</div></div></div>
+
+<h6 id="-14"><a href="#-14" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+于是，事务与事务之间需要存在「一定」的隔离，在InnoDB引擎中，定义了四种隔离级别供我们使用
+</div></div></div>
+
+<h6 id="-15"><a href="#-15" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+分别是：read uncommit(读未提交)、read commit (读已提交)、repeatable read (可重复复读)、serializable (串行)
+</div></div></div>
+
+<h6 id="-16"><a href="#-16" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+不同的隔离级别对事务之间的隔离性是不一样的（级别越高事务隔离性越好，但性能就越低），而隔离性是由MySQL的各种锁来实现的，只是它屏蔽了加锁的细节
+</div></div></div>
+
+<h6 id="-17"><a href="#-17" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+<img src="/pictures/MySQL-闲谈/v2-12c1d8d4396bb7d0383f72b5eb4d77d6_r.jpg"/>
+</div></div></div>
+
+<h6 id="-18"><a href="#-18" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+持久性指的就是：一旦提交了事务，它对数据库的改变就应该是永久性的。说白了就是，会将数据持久化在硬盘上
+</div></div></div>
+
+<h6 id="-19"><a href="#-19" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+而持久性由redo log 日志来保证，当我们要修改数据时，MySQL是先把这条记录所在的「页」找到，然后把该页加载到内存中，将对应记录进行修改
+</div></div></div>
+
+<h6 id="-20"><a href="#-20" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+为了防止内存修改完了，MySQL就挂掉了（如果内存改完，直接挂掉，那这次的修改相当于就丢失了）
+</div></div></div>
+
+<h6 id="-21"><a href="#-21" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+MySQL引入了redo log，内存写完了，然后会写一份redo log，这份redo log记载着这次在某个页上做了什么修改
+</div></div></div>
+
+<h6 id="-22"><a href="#-22" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+即便MySQL在中途挂了，我们还可以根据redo log来对数据进行恢复
+</div></div></div>
+
+<h6 id="-23"><a href="#-23" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+redo log 是顺序写的，写入速度很快。并且它记录的是物理修改（xxxx页做了xxx修改），文件的体积很小，恢复速度也很快
+</div></div></div>
+
+<h6 id="-24"><a href="#-24" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+<img src="/pictures/MySQL-闲谈/v2-2325a411c8f9da2e8c5f83367d913793_r.jpg"/>
+</div></div></div>
+
+<h6 id="-25"><a href="#-25" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+回头再来讲一致性，「一致性」可以理解为我们使用事务的「目的」，而「隔离性」「原子性」「持久性」均是为了保障「一致性」的手段，保证一致性需要由应用程序代码来保证
+</div></div></div>
+
+<h6 id="-26"><a href="#-26" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+比如，如果事务在发生的过程中，出现了异常情况，此时你就得回滚事务，而不是强行提交事务来导致数据不一致
+</div></div></div>
+
+<h6 id="-27"><a href="#-27" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+<img src="/pictures/MySQL-闲谈/v2-e5c89083071510afe2afd6e6dc337efa_r.jpg"/>
+</div></div></div>
+
+<h6 id="-28"><a href="#-28" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+嗯，挺好的，讲了蛮多的
+</div></div></div>
+
+<h6 id="-29"><a href="#-29" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+刚才你也提到了隔离性嘛，然后你说在MySQL中有四种隔离级别，能分别来介绍下吗？
+</div></div></div>
+
+<h6 id="-30"><a href="#-30" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+嗯，为了讲清楚隔离级别，我顺带来说下MySQL锁相关的知识吧
+</div></div></div>
+
+<h6 id="-31"><a href="#-31" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+在InnoDB引擎下，按锁的粒度分类，可以简单分为行锁和表锁
+</div></div></div>
+
+<h6 id="-32"><a href="#-32" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+行锁实际上是作用在索引之上的（索引上次已经说过了，这里就不赘述了）。当我们的SQL命中了索引，那锁住的就是命中条件内的索引节点（这种就是行锁），如果没有命中索引，那我们锁的就是整个索引树（表锁）
+</div></div></div>
+
+<h6 id="-33"><a href="#-33" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+简单来说就是：锁住的是整棵树还是某几个节点，完全取决于SQL条件是否有命中到对应的索引节点
+</div></div></div>
+
+<h6 id="-34"><a href="#-34" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+而行锁又可以简单分为读锁（共享锁、S锁）和写锁（排它锁、X锁）
+</div></div></div>
+
+<h6 id="-35"><a href="#-35" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+读锁是共享的，多个事务可以同时读取同一个资源，但不允许其他事务修改。写锁是排他的，写锁会阻塞其他的写锁和读锁
+</div></div></div>
+
+<h6 id="-36"><a href="#-36" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+<img src="/pictures/MySQL-闲谈/v2-4ed4e54af979a73c24db83133be59359_r.jpg"/>
+</div></div></div>
+
+<h6 id="-37"><a href="#-37" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+我现在就再回到隔离级别上吧，就直接以例子来说明啦
+</div></div></div>
+
+<h6 id="-38"><a href="#-38" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+嗯…
+</div></div></div>
+
+<h6 id="-39"><a href="#-39" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+首先来说下read uncommit(读未提交)。比如说：A向B转账，A执行了转账语句，但A还没有提交事务，B读取数据，发现自己账户钱变多了！B跟A说，我已经收到钱了。A回滚事务【rollback】，等B再查看账户的钱时，发现钱并没有多
+</div></div></div>
+
+<h6 id="-40"><a href="#-40" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+简单的定义就是：事务B读取到了事务A还没提交的数据，这种用专业术语来说叫做「脏读」
+</div></div></div>
+
+<h6 id="-41"><a href="#-41" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+对于锁的维度而言，其实就是在read uncommit隔离级别下，读不会加任何锁，而写会加排他锁。读什么锁都不加，这就让排他锁无法排它了
+</div></div></div>
+
+<h6 id="-42"><a href="#-42" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+<img src="/pictures/MySQL-闲谈/v2-6792ec868544bf39078b7e9255ff4f53_r.jpg"/>
+</div></div></div>
+
+<h6 id="-43"><a href="#-43" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+而我们又知道，对于更新操作而言，InnoDB是肯定会加写锁的（数据库是不可能允许在同一时间，更新同一条记录的）。而读操作，如果不加任何锁，那就会造成上面的脏读
+</div></div></div>
+
+<h6 id="-44"><a href="#-44" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+脏读在生产环境下肯定是无法接受的，那如果读加锁的话，那意味着：当更新数据的时，就没办法读取了，这会极大地降低数据库性能
+</div></div></div>
+
+<h6 id="-45"><a href="#-45" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+在MySQL InnoDB引擎层面，又有新的解决方案（解决加锁后读写性能问题），叫做MVCC(Multi-Version Concurrency Control)多版本并发控制
+</div></div></div>
+
+<h6 id="-46"><a href="#-46" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+<img src="/pictures/MySQL-闲谈/v2-7e397fcccc1d5dc2a519b45bf36d334f_r.jpg"/>
+</div></div></div>
+
+<h6 id="-47"><a href="#-47" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+在MVCC下，就可以做到读写不阻塞，且避免了类似脏读这样的问题
+</div></div></div>
+
+<h6 id="-48"><a href="#-48" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+那MVCC是怎么做的呢？
+</div></div></div>
+
+<h6 id="-49"><a href="#-49" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+MVCC通过生成数据快照（Snapshot)，并用这个快照来提供一定级别（语句级或事务级）的一致性读取
+</div></div></div>
+
+<h6 id="-50"><a href="#-50" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+回到事务隔离级别下，针对于 read commit (读已提交) 隔离级别，它生成的就是语句级快照，而针对于repeatable read (可重复读)，它生成的就是事务级的快照
+</div></div></div>
+
+
+<h6 id="-51"><a href="#-51" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+<img src="/pictures/MySQL-闲谈/v2-93fe1254a1c756b4ec092e44a2c6de12_r.jpg"/>
+</div></div></div>
+
+<h6 id="-52"><a href="#-52" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+前面提到过read uncommit隔离级别下会产生脏读，而read commit (读已提交) 隔离级别解决了脏读。思想其实很简单：在读取的时候生成一个”版本号”，等到其他事务commit了之后，才会读取最新已commit的”版本号”数据
+</div></div></div>
+
+<h6 id="-53"><a href="#-53" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+比如说：事务A读取了记录(生成版本号)，事务B修改了记录(此时加了写锁)，事务A再读取的时候，是依据最新的版本号来读取的(当事务B执行commit了之后，会生成一个新的版本号)，如果事务B还没有commit，那事务A读取的还是之前版本号的数据
+</div></div></div>
+
+<h6 id="-54"><a href="#-54" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+通过「版本」的概念，这样就解决了脏读的问题，而「版本」其实就是对应快照的数据
+</div></div></div>
+
+<h6 id="-55"><a href="#-55" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+read commit (读已提交) 解决了脏读，但也会有其他并发的问题。「不可重复读」：一个事务读取到另外一个事务已经提交的数据，也就是说一个事务可以看到其他事务所做的修改
+</div></div></div>
+
+<h6 id="-56"><a href="#-56" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+不可重复读的例子：A查询数据库得到数据，B去修改数据库的数据，导致A多次查询数据库的结果都不一样【危害：A每次查询的结果都是受B的影响的】
+</div></div></div>
+
+<h6 id="-57"><a href="#-57" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+了解MVCC基础之后，就很容易想到repeatable read (可重复复读)隔离级别是怎么避免不可重复读的问题了（前面也提到了）
+</div></div></div>
+
+<h6 id="-58"><a href="#-58" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+repeatable read (可重复复读)隔离级别是「事务级别」的快照！每次读取的都是「当前事务的版本」，即使当前数据被其他事务修改了(commit)，也只会读取当前事务版本的数据
+</div></div></div>
+
+<h6 id="-59"><a href="#-59" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+<img src="/pictures/MySQL-闲谈/v2-7e397fcccc1d5dc2a519b45bf36d334f_r.jpg"/>
+</div></div></div>
+
+<h6 id="-60"><a href="#-60" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+而repeatable read (可重复复读)隔离级别会存在幻读的问题，「幻读」指的是指在一个事务内读取到了别的事务插入的数据，导致前后读取不一致
+</div></div></div>
+
+<h6 id="-61"><a href="#-61" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+在InnoDB引擎下的的repeatable read (可重复复读)隔离级别下，快照读MVCC影响下，已经解决了幻读的问题（因为它是读历史版本的数据）
+</div></div></div>
+
+<h6 id="-62"><a href="#-62" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+而如果是当前读（指的是 select * from table for update），则需要配合间隙锁来解决幻读的问题
+</div></div></div>
+
+<h6 id="-63"><a href="#-63" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+剩下的就是serializable (串行)隔离级别了，它的最高的隔离级别，相当于不允许事务的并发，事务与事务之间执行是串行的，它的效率最低，但同时也是最安全的
+</div></div></div>
+
+<h6 id="-64"><a href="#-64" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+嗯，不妨来说下MVCC的原理？
+</div></div></div>
+
+<h6 id="-65"><a href="#-65" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+MVCC的主要是通过read view和undo log来实现的
+</div></div></div>
+
+<h6 id="-66"><a href="#-66" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+<img src="/pictures/MySQL-闲谈/v2-cc344b44fe34fc54ec6c9e2f28a4aa2d_r.jpg"/>
+</div></div></div>
+
+<h6 id="-67"><a href="#-67" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+undo log前面也提到了，它会记录修改数据之前的信息，事务中的原子性就是通过undo log来实现的。所以，有undo log可以帮我们找到「版本」的数据
+</div></div></div>
+
+<h6 id="-68"><a href="#-68" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+而read view 实际上就是在查询时，InnoDB会生成一个read view，read view 有几个重要的字段，分别是：trx_ids（尚未提交commit的事务版本号集合），up_limit_id（下一次要生成的事务ID值），low_limit_id（尚未提交版本号的事务ID最小值）以及creator_trx_id（当前的事务版本号）
+</div></div></div>
+
+<h6 id="-69"><a href="#-69" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+在每行数据有两列隐藏的字段，分别是DB_TRX_ID（记录着当前ID）以及DB_ROLL_PTR（指向上一个版本数据在undo log 里的位置指针）
+</div></div></div>
+
+<h6 id="-70"><a href="#-70" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+铺垫到这了，很容易就发现，MVCC其实就是靠「比对版本」来实现读写不阻塞，而版本的数据存在于undo log中
+</div></div></div>
+
+<h6 id="-71"><a href="#-71" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+而针对于不同的隔离级别（read commit和repeatable read），无非就是read commit隔离级别下，每次都获取一个新的read view，repeatable read隔离级别则每次事务只获取一个read view
+</div></div></div>
+
+
+<h6 id="-72"><a href="#-72" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center; margin:5%">
+嗯，OK的。细节就不考究了，今天就到这里吧
+</div></div></div>
+
+
+<h6 id="-73"><a href="#-73" class="headerlink" title=""></a></h6><h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ul>
+<li>事务为了保证数据的最终一致性</li>
+</ul>
+<h6 id="-74"><a href="#-74" class="headerlink" title=""></a></h6><ul>
+<li><p>事务有四大特性，分别是原子性、一致性、隔离性、持久性</p>
+<ul>
+<li>原子性由undo log保证</li>
+<li>持久性由redo log 保证</li>
+<li>隔离性由数据库隔离级别供我们选择，分别有read uncommit,read commit,repeatable read,serializable</li>
+<li>一致性是事务的目的，一致性由应用程序来保证</li>
+</ul>
+</li>
+</ul>
+<h6 id="-75"><a href="#-75" class="headerlink" title=""></a></h6><ul>
+<li>事务并发会存在各种问题，分别有脏读、重复读、幻读问题，上面的不同隔离级别可以解决掉由于并发事务所造成的问题，而隔离级别实际上就是由MySQL锁来实现的</li>
+</ul>
+<h6 id="-76"><a href="#-76" class="headerlink" title=""></a></h6><ul>
+<li>频繁加锁会导致数据库性能低下，引入了MVCC多版本控制来实现读写不阻塞，提高数据库性能</li>
+</ul>
+<h6 id="-77"><a href="#-77" class="headerlink" title=""></a></h6><ul>
+<li>MVCC原理即通过read view 以及undo log来实现</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+              <a href="/tags/%E5%AF%B9%E8%AF%9D/" rel="tag"># 对话</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/05/MySQL-%E9%97%B2%E8%B0%88-1/" rel="prev" title="MySQL 闲谈 1">
+                  <i class="fa fa-chevron-left"></i> MySQL 闲谈 1
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/06/MySQL-%E9%97%B2%E8%B0%88-3/" rel="next" title="MySQL 闲谈 3">
+                  MySQL 闲谈 3 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HCY</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

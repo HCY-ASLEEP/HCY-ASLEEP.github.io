@@ -22,33 +22,33 @@
 
     <meta name="description" content="对MySQL InnoDB引擎的索引了解吗？    嗯啊，使用索引可以加快查询速度，其实就是将无序的数据变成有序（有序就能加快检索速度）    在InnoDB引擎中，索引的底层数据结构是B+树    那为什么不使用红黑树或者B树呢？    MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中    红黑树是「二叉查找树」的变种，一个Node节点只能存储一个Key和一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL 闲谈">
-<meta property="og:url" content="https://hcy-asleep.github.com/2022/11/05/MySQL-%E9%97%B2%E8%B0%88/index.html">
+<meta property="og:title" content="MySQL 闲谈 1">
+<meta property="og:url" content="https://hcy-asleep.github.com/2022/11/05/MySQL-%E9%97%B2%E8%B0%88-1/index.html">
 <meta property="og:site_name" content="A Coder&#39;s Pocket">
 <meta property="og:description" content="对MySQL InnoDB引擎的索引了解吗？    嗯啊，使用索引可以加快查询速度，其实就是将无序的数据变成有序（有序就能加快检索速度）    在InnoDB引擎中，索引的底层数据结构是B+树    那为什么不使用红黑树或者B树呢？    MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中    红黑树是「二叉查找树」的变种，一个Node节点只能存储一个Key和一">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://hcy-asleep.github.com/2022/11/05/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-54a18a07f7adfbda09983b815a92c5b8_r.jpg">
-<meta property="og:image" content="https://hcy-asleep.github.com/2022/11/05/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-2393680d1df54c696f97c8194b34237c_r.jpg">
-<meta property="og:image" content="https://hcy-asleep.github.com/2022/11/05/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-6d6af5c6cfe9be27d1f41af4d7860d3a_r.jpg">
-<meta property="og:image" content="https://hcy-asleep.github.com/2022/11/05/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-6d6af5c6cfe9be27d1f41af4d7860d3a_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-54a18a07f7adfbda09983b815a92c5b8_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-2393680d1df54c696f97c8194b34237c_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-6d6af5c6cfe9be27d1f41af4d7860d3a_r.jpg">
+<meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-ca51dbec74c22029ebde0650378dfbfd_r.jpg">
 <meta property="article:published_time" content="2022-11-05T14:00:29.000Z">
-<meta property="article:modified_time" content="2022-11-05T14:21:26.903Z">
+<meta property="article:modified_time" content="2022-11-06T08:55:29.166Z">
 <meta property="article:author" content="HCY">
 <meta property="article:tag" content="数据库">
 <meta property="article:tag" content="MySQL">
 <meta property="article:tag" content="对话">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://hcy-asleep.github.com/2022/11/05/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-54a18a07f7adfbda09983b815a92c5b8_r.jpg">
+<meta name="twitter:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-54a18a07f7adfbda09983b815a92c5b8_r.jpg">
 
 
-<link rel="canonical" href="https://hcy-asleep.github.com/2022/11/05/MySQL-%E9%97%B2%E8%B0%88/">
+<link rel="canonical" href="https://hcy-asleep.github.com/2022/11/05/MySQL-%E9%97%B2%E8%B0%88-1/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://hcy-asleep.github.com/2022/11/05/MySQL-%E9%97%B2%E8%B0%88/","path":"2022/11/05/MySQL-闲谈/","title":"MySQL 闲谈"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://hcy-asleep.github.com/2022/11/05/MySQL-%E9%97%B2%E8%B0%88-1/","path":"2022/11/05/MySQL-闲谈-1/","title":"MySQL 闲谈 1"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>MySQL 闲谈 | A Coder's Pocket</title>
+<title>MySQL 闲谈 1 | A Coder's Pocket</title>
   
 
 
@@ -155,7 +155,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/05/MySQL-%E9%97%B2%E8%B0%88/">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/05/MySQL-%E9%97%B2%E8%B0%88-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,12 +168,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="MySQL 闲谈 | A Coder's Pocket">
+      <meta itemprop="name" content="MySQL 闲谈 1 | A Coder's Pocket">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          MySQL 闲谈
+          MySQL 闲谈 1
         </h1>
 
         <div class="post-meta-container">
@@ -183,9 +183,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-11-05 22:00:29 / Modified: 22:21:26" itemprop="dateCreated datePublished" datetime="2022-11-05T22:00:29+08:00">2022-11-05</time>
+      <time title="Created: 2022-11-05 22:00:29" itemprop="dateCreated datePublished" datetime="2022-11-05T22:00:29+08:00">2022-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-11-06 16:55:29" itemprop="dateModified" datetime="2022-11-06T16:55:29+08:00">2022-11-06</time>
     </span>
 
   
@@ -243,7 +249,7 @@ B+树相对于B树而言，它又有两种特性
 </div></div></div>
 
 <h6 id="-10"><a href="#-10" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
-<img src="../pictures/MySQL-闲谈/v2-54a18a07f7adfbda09983b815a92c5b8_r.jpg"/>
+<img src="/pictures/MySQL-闲谈/v2-54a18a07f7adfbda09983b815a92c5b8_r.jpg"/>
 </div></div></div>
 
 <h6 id="-11"><a href="#-11" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
@@ -295,7 +301,7 @@ SQL都订单ID索引，但在订单ID的索引树的叶子节点只有orderId和
 </div></div></div>
 
 <h6 id="-23"><a href="#-23" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
-<img src="../pictures/MySQL-闲谈/v2-2393680d1df54c696f97c8194b34237c_r.jpg"/>
+<img src="/pictures/MySQL-闲谈/v2-2393680d1df54c696f97c8194b34237c_r.jpg"/>
 </div></div></div>
 
 <h6 id="-24"><a href="#-24" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
@@ -327,7 +333,7 @@ SQL都订单ID索引，但在订单ID的索引树的叶子节点只有orderId和
 </div></div></div>
 
 <h6 id="-31"><a href="#-31" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
-<img src="../pictures/MySQL-闲谈/v2-6d6af5c6cfe9be27d1f41af4d7860d3a_r.jpg"/>
+<img src="/pictures/MySQL-闲谈/v2-6d6af5c6cfe9be27d1f41af4d7860d3a_r.jpg"/>
 </div></div></div>
 
 <h6 id="-32"><a href="#-32" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
@@ -359,8 +365,37 @@ OK…
 </div></div></div>
 
 <h6 id="-39"><a href="#-39" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
-<img src="../pictures/MySQL-闲谈/v2-6d6af5c6cfe9be27d1f41af4d7860d3a_r.jpg"/>
+<img src="/pictures/MySQL-闲谈/v2-ca51dbec74c22029ebde0650378dfbfd_r.jpg"/>
 </div></div></div>
+
+<h6 id="-40"><a href="#-40" class="headerlink" title=""></a></h6><h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ul>
+<li><p><strong>为什么B+树？</strong></p>
+<ul>
+<li>数据无法一次load到内存，B+树是多路搜索树，只有叶子节点才存储数据，叶子节点之间链表进行关联。（树矮，易遍历）</li>
+</ul>
+</li>
+</ul>
+<h6 id="-41"><a href="#-41" class="headerlink" title=""></a></h6><ul>
+<li><p><strong>什么是回表？</strong></p>
+<ul>
+<li>非聚簇索引在叶子节点只存储列值以及主键ID，有条件下尽可能用覆盖索引避免回表操作，提高查询速度</li>
+</ul>
+</li>
+</ul>
+<h6 id="-42"><a href="#-42" class="headerlink" title=""></a></h6><ul>
+<li><p><strong>什么是最左匹配原则？</strong></p>
+<ul>
+<li>从最左边为起点开始连续匹配，遇到范围查询终止</li>
+</ul>
+</li>
+</ul>
+<h6 id="-43"><a href="#-43" class="headerlink" title=""></a></h6><ul>
+<li><p><strong>主键非自增会有什么问题？</strong></p>
+<ul>
+<li>插入效率下降，存在移动块的数据问题</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -384,6 +419,9 @@ OK…
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2022/11/06/MySQL-%E9%97%B2%E8%B0%88-2/" rel="next" title="MySQL 闲谈 2">
+                  MySQL 闲谈 2 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
