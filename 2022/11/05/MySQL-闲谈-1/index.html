@@ -20,19 +20,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hcy-asleep.github.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"remove","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="对MySQL InnoDB引擎的索引了解吗？    嗯啊，使用索引可以加快查询速度，其实就是将无序的数据变成有序（有序就能加快检索速度）    在InnoDB引擎中，索引的底层数据结构是B+树    那为什么不使用红黑树或者B树呢？    MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中    红黑树是「二叉查找树」的变种，一个Node节点只能存储一个Key和一">
+    <meta name="description" content="对MySQL InnoDB引擎的索引了解吗？       嗯啊，使用索引可以加快查询速度，其实就是将无序的数据变成有序（有序就能加快检索速度）       在InnoDB引擎中，索引的底层数据结构是B+树        那为什么不使用红黑树或者B树呢？       MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中       红黑树是「二叉查找树」的变种，一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 闲谈 1">
 <meta property="og:url" content="https://hcy-asleep.github.com/2022/11/05/MySQL-%E9%97%B2%E8%B0%88-1/index.html">
 <meta property="og:site_name" content="A Coder&#39;s Pocket">
-<meta property="og:description" content="对MySQL InnoDB引擎的索引了解吗？    嗯啊，使用索引可以加快查询速度，其实就是将无序的数据变成有序（有序就能加快检索速度）    在InnoDB引擎中，索引的底层数据结构是B+树    那为什么不使用红黑树或者B树呢？    MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中    红黑树是「二叉查找树」的变种，一个Node节点只能存储一个Key和一">
+<meta property="og:description" content="对MySQL InnoDB引擎的索引了解吗？       嗯啊，使用索引可以加快查询速度，其实就是将无序的数据变成有序（有序就能加快检索速度）       在InnoDB引擎中，索引的底层数据结构是B+树        那为什么不使用红黑树或者B树呢？       MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中       红黑树是「二叉查找树」的变种，一个">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-54a18a07f7adfbda09983b815a92c5b8_r.jpg">
 <meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-2393680d1df54c696f97c8194b34237c_r.jpg">
 <meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-6d6af5c6cfe9be27d1f41af4d7860d3a_r.jpg">
 <meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-ca51dbec74c22029ebde0650378dfbfd_r.jpg">
 <meta property="article:published_time" content="2022-11-05T14:00:29.000Z">
-<meta property="article:modified_time" content="2022-11-06T08:55:29.166Z">
+<meta property="article:modified_time" content="2022-11-07T08:51:30.196Z">
 <meta property="article:author" content="HCY">
 <meta property="article:tag" content="数据库">
 <meta property="article:tag" content="MySQL">
@@ -191,7 +191,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-11-06 16:55:29" itemprop="dateModified" datetime="2022-11-06T16:55:29+08:00">2022-11-06</time>
+      <time title="Modified: 2022-11-07 16:51:30" itemprop="dateModified" datetime="2022-11-07T16:51:30+08:00">2022-11-07</time>
     </span>
 
   
@@ -204,192 +204,275 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+        <div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span> 
 对MySQL InnoDB引擎的索引了解吗？
-</div></div></div>
+</div></div><br/>
 
-<h6 id=""><a href="#" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 嗯啊，使用索引可以加快查询速度，其实就是将无序的数据变成有序（有序就能加快检索速度）
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 在InnoDB引擎中，索引的底层数据结构是B+树
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span> 
 那为什么不使用红黑树或者B树呢？
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 红黑树是「二叉查找树」的变种，一个Node节点只能存储一个Key和一个Value
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 B和B+树跟红黑树不一样，它们算是「多路搜索树」，相较于「二叉搜索树」而言，一个Node节点可以存储的信息会更多，「多路搜索树」的高度会比「二叉搜索树」更低
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 了解了区别之后，其实就很容易发现，在数据不能一次加载至内存的场景下，数据需要被检索出来，选择B或B+树的理由就很充分了（一个Node节点存储信息更多（相较于二叉搜索树），树的高度更低，树的高度影响检索的速度）
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 B+树相对于B树而言，它又有两种特性
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-8"><a href="#-8" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 一、B+树非叶子节点不存储数据，在相同的数据量下，B+树更加矮壮。（这个应该不用多解释了，数据都存储在叶子节点上，非叶子节点的存储能存储更多的索引，所以整棵树就更加矮壮）
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-9"><a href="#-9" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 二、B+树叶子节点之间组成一个链表，方便于遍历查询（遍历操作在MySQL中比较常见）
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-10"><a href="#-10" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 <img src="/pictures/MySQL-闲谈/v2-54a18a07f7adfbda09983b815a92c5b8_r.jpg"/>
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-11"><a href="#-11" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 我稍微解释一下吧，你可以脑补下画面
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-12"><a href="#-12" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 我们在MySQL InnoDB引擎下，每创建一个索引，相当于生成了一颗B+树
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-13"><a href="#-13" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 如果该索引是「聚集(聚簇)索引」，那当前B+树的叶子节点存储着「主键和当前行的数据」
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-14"><a href="#-14" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 如果该索引是「非聚簇索引」，那当前B+树的叶子节点存储着「主键和当前索引列值」
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-15"><a href="#-15" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 比如写了一句sql：select * from user where id >=10，那只要定位到id为10的记录，然后在叶子节点之间通过遍历链表(叶子节点组成的链表)，即可以找到往后的记录了
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-16"><a href="#-16" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 由于B树是会在非叶子节点也存储数据，要遍历的时候可能就得跨层检索，相对麻烦些
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-17"><a href="#-17" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 基于树的层级以及业务使用场景的特性，所以MySQL选择了B+树作为索引的底层数据结构
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-18"><a href="#-18" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 对于哈希结构，其实InnoDB引擎是「自适应」哈希索引的（hash索引的创建由InnoDB存储引擎引擎自动优化创建，我们是干预不了）
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-19"><a href="#-19" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span> 
 嗯…那我了解了，顺便想问下，你知道什么叫做回表吗？
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-20"><a href="#-20" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 所谓的回表其实就是，当我们使用索引查询数据时，检索出来的数据可能包含其他列，但走的索引树叶子节点只能查到当前列值以及主键ID，所以需要根据主键ID再去查一遍数据，得到SQL 所需的列
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-21"><a href="#-21" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 举个例子，我这边建了给订单号ID建了个索引，但我的SQL 是：select orderId,orderName from orderdetail where orderId = 123
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-22"><a href="#-22" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 SQL都订单ID索引，但在订单ID的索引树的叶子节点只有orderId和Id，而我们还想检索出orderName，所以MySQL 会拿到ID再去查出orderName给我们返回，这种操作就叫回表
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-23"><a href="#-23" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 <img src="/pictures/MySQL-闲谈/v2-2393680d1df54c696f97c8194b34237c_r.jpg"/>
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-24"><a href="#-24" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 想要避免回表，也可以使用覆盖索引（能使用就使用，因为避免了回表操作）
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-25"><a href="#-25" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 所谓的覆盖索引，实际上就是你想要查出的列刚好在叶子节点上都存在，比如我建了orderId和orderName联合索引，刚好我需要查询也是orderId和orderName，这些数据都存在索引树的叶子节点上，就不需要回表操作了
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-26"><a href="#-26" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span> 
 既然你也提到了联合索引，我想问下你了解最左匹配原则吗？
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-27"><a href="#-27" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 嗯，说明这个概念，还是举例子比较容易说明
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-28"><a href="#-28" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 如有索引 (a,b,c,d)，查询条件 a=1 and b=2 and c>3 and d=4，则会在每个节点依次命中a、b、c，无法命中d
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-29"><a href="#-29" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 先匹配最左边的，索引只能用于查找key是否存在（相等），遇到范围查询 (>、<、between、like左匹配)等就不能进一步匹配了，后续退化为线性查找
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-30"><a href="#-30" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 这就是最左匹配原则
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-31"><a href="#-31" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 <img src="/pictures/MySQL-闲谈/v2-6d6af5c6cfe9be27d1f41af4d7860d3a_r.jpg"/>
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-32"><a href="#-32" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span> 
 嗯嗯，我还想问下你们主键是怎么生成的？
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-33"><a href="#-33" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 主键就自增的
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-34"><a href="#-34" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span> 
 那假设我不用MySQL自增的主键，你觉得会有什么问题呢？
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-35"><a href="#-35" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 首先主键得保证它的唯一性和空间尽可能短吧，这两块是需要考虑的
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-36"><a href="#-36" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 另外，由于索引的特性（有序），如果生成像uuid类似的主键，那插入的的性能是比自增的要差的
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-37"><a href="#-37" class="headerlink" title=""></a></h6><div align="right"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 因为生成的uuid，在插入时有可能需要移动磁盘块（比如，块内的空间在当前时刻已经存储满了，但新生成的uuid需要插入已满的块内，就需要移动块的数据）
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-38"><a href="#-38" class="headerlink" title=""></a></h6><div align="left"><div style="width:60%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
 OK…
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-39"><a href="#-39" class="headerlink" title=""></a></h6><div align="right"><div style="width:80%; border-style:solid; border-width:1px; border-radius:15px"><div style="text-align:center;margin:5%">
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 <img src="/pictures/MySQL-闲谈/v2-ca51dbec74c22029ebde0650378dfbfd_r.jpg"/>
-</div></div></div>
+</div></div><br/>
 
-<h6 id="-40"><a href="#-40" class="headerlink" title=""></a></h6><h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ul>
+ 
+
+
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ul>
 <li><p><strong>为什么B+树？</strong></p>
 <ul>
 <li>数据无法一次load到内存，B+树是多路搜索树，只有叶子节点才存储数据，叶子节点之间链表进行关联。（树矮，易遍历）</li>
 </ul>
 </li>
 </ul>
-<h6 id="-41"><a href="#-41" class="headerlink" title=""></a></h6><ul>
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6><ul>
 <li><p><strong>什么是回表？</strong></p>
 <ul>
 <li>非聚簇索引在叶子节点只存储列值以及主键ID，有条件下尽可能用覆盖索引避免回表操作，提高查询速度</li>
 </ul>
 </li>
 </ul>
-<h6 id="-42"><a href="#-42" class="headerlink" title=""></a></h6><ul>
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><ul>
 <li><p><strong>什么是最左匹配原则？</strong></p>
 <ul>
 <li>从最左边为起点开始连续匹配，遇到范围查询终止</li>
 </ul>
 </li>
 </ul>
-<h6 id="-43"><a href="#-43" class="headerlink" title=""></a></h6><ul>
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><ul>
 <li><p><strong>主键非自增会有什么问题？</strong></p>
 <ul>
 <li>插入效率下降，存在移动块的数据问题</li>
