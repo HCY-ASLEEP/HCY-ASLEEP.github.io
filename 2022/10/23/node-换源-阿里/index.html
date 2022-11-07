@@ -20,29 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hcy-asleep.github.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"remove","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="&#x2F;etc&#x2F;profile.d&#x2F;path.sh 12345678910111213141516171819202122export PATH&#x3D;$PATH:&#x2F;home&#x2F;asleep&#x2F;softwares&#x2F;conda&#x2F;conda&#x2F;binexport PATH&#x3D;$PATH:&#x2F;home&#x2F;asleep&#x2F;softwares&#x2F;qrcp&#x2F;qrcpexport PATH&#x3D;$PATH:&#x2F;ho">
+    <meta name="description" content="由于 Node 的官方模块仓库网速太慢，模块仓库需要切换到阿里的源 1npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org&#x2F;  执行下面的命令，确认是否切换成功 1npm config get registry">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 环境变量配置">
-<meta property="og:url" content="https://hcy-asleep.github.com/2022/10/23/path.sh%20gopath%20alias/index.html">
+<meta property="og:title" content="Nodejs 换源">
+<meta property="og:url" content="https://hcy-asleep.github.com/2022/10/23/node-%E6%8D%A2%E6%BA%90-%E9%98%BF%E9%87%8C/index.html">
 <meta property="og:site_name" content="A Coder&#39;s Pocket">
-<meta property="og:description" content="&#x2F;etc&#x2F;profile.d&#x2F;path.sh 12345678910111213141516171819202122export PATH&#x3D;$PATH:&#x2F;home&#x2F;asleep&#x2F;softwares&#x2F;conda&#x2F;conda&#x2F;binexport PATH&#x3D;$PATH:&#x2F;home&#x2F;asleep&#x2F;softwares&#x2F;qrcp&#x2F;qrcpexport PATH&#x3D;$PATH:&#x2F;ho">
+<meta property="og:description" content="由于 Node 的官方模块仓库网速太慢，模块仓库需要切换到阿里的源 1npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org&#x2F;  执行下面的命令，确认是否切换成功 1npm config get registry">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-10-23T05:25:51.000Z">
-<meta property="article:modified_time" content="2022-10-29T07:48:27.700Z">
+<meta property="article:modified_time" content="2022-10-29T07:47:28.473Z">
 <meta property="article:author" content="HCY">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Bash">
+<meta property="article:tag" content="Nodejs">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://hcy-asleep.github.com/2022/10/23/path.sh%20gopath%20alias/">
+<link rel="canonical" href="https://hcy-asleep.github.com/2022/10/23/node-%E6%8D%A2%E6%BA%90-%E9%98%BF%E9%87%8C/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://hcy-asleep.github.com/2022/10/23/path.sh%20gopath%20alias/","path":"2022/10/23/path.sh gopath alias/","title":"Linux 环境变量配置"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://hcy-asleep.github.com/2022/10/23/node-%E6%8D%A2%E6%BA%90-%E9%98%BF%E9%87%8C/","path":"2022/10/23/node-换源-阿里/","title":"Nodejs 换源"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Linux 环境变量配置 | A Coder's Pocket</title>
+<title>Nodejs 换源 | A Coder's Pocket</title>
   
 
 
@@ -149,7 +148,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/path.sh%20gopath%20alias/">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/node-%E6%8D%A2%E6%BA%90-%E9%98%BF%E9%87%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -162,12 +161,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Linux 环境变量配置 | A Coder's Pocket">
+      <meta itemprop="name" content="Nodejs 换源 | A Coder's Pocket">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Linux 环境变量配置
+          Nodejs 换源
         </h1>
 
         <div class="post-meta-container">
@@ -185,7 +184,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-29 15:48:27" itemprop="dateModified" datetime="2022-10-29T15:48:27+08:00">2022-10-29</time>
+      <time title="Modified: 2022-10-29 15:47:28" itemprop="dateModified" datetime="2022-10-29T15:47:28+08:00">2022-10-29</time>
     </span>
 
   
@@ -198,10 +197,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>&#x2F;etc&#x2F;profile.d&#x2F;path.sh</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/conda/conda/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/qrcp/qrcp</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/nodejs/nodejs/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/baidunetdisk/baidunetdisk/opt/baidunetdisk</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/adb/adb</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/wine/wine</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/neovim/neovim</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/go/go_path/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/autossh/autossh</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> GOROOT=<span class="string">&#x27;/home/asleep/softwares/go/go_base/go&#x27;</span></span><br><span class="line"><span class="built_in">export</span> GOPATH=<span class="string">&#x27;/home/asleep/softwares/go/go_path&#x27;</span></span><br><span class="line"><span class="built_in">export</span> GOCACHE=<span class="string">&#x27;/home/asleep/softwares/go/go_cache&#x27;</span></span><br><span class="line"><span class="built_in">export</span> GOENV=<span class="string">&#x27;/home/asleep/softwares/go/go_env&#x27;</span></span><br><span class="line"><span class="comment"># export GOMOD=&#x27;/home/asleep/softwares/go/go_mod&#x27;</span></span><br><span class="line"><span class="built_in">export</span> GO111MODULE=<span class="string">&#x27;auto&#x27;</span></span><br><span class="line"><span class="comment"># export GOWORK=&#x27;/home/asleep/softwares/go/go_work&#x27;</span></span><br><span class="line"><span class="built_in">export</span> GOPROXY=<span class="string">&#x27;https://goproxy.cn/,direct&#x27;</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/asleep/softwares/go/go_base/go/bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># alias vim=&#x27;vim.tiny&#x27;</span></span><br><span class="line"><span class="comment"># alias sudo=&#x27;sudo &#x27;</span></span><br></pre></td></tr></table></figure>
+        <p>由于 Node 的官方模块仓库网速太慢，模块仓库需要切换到阿里的源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org/</span><br></pre></td></tr></table></figure>
 
-<p>这里只能存 path 和 alias，其他的能在 &#x2F;etc&#x2F;bash.bashrc 里面解决就在那里解决，原则！</p>
+<p>执行下面的命令，确认是否切换成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -211,21 +211,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
-              <a href="/tags/Bash/" rel="tag"># Bash</a>
+              <a href="/tags/Nodejs/" rel="tag"># Nodejs</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/10/23/vim-nvim-replace-%E6%89%B9%E9%87%8F%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2/" rel="prev" title="VIM 批量查找替换">
-                  <i class="fa fa-chevron-left"></i> VIM 批量查找替换
+                <a href="/2022/10/23/path.sh-gopath-alias/" rel="prev" title="Linux 环境变量配置">
+                  <i class="fa fa-chevron-left"></i> Linux 环境变量配置
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/10/23/node%20%E6%8D%A2%E6%BA%90%20%E9%98%BF%E9%87%8C/" rel="next" title="Nodejs 换源">
-                  Nodejs 换源 <i class="fa fa-chevron-right"></i>
+                <a href="/2022/10/23/linux-debian-vscode-fonts-firacode/" rel="next" title="Linux VScode 字体">
+                  Linux VScode 字体 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
