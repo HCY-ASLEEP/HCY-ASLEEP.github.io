@@ -20,19 +20,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hcy-asleep.github.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"remove","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="对MySQL InnoDB引擎的索引了解吗？       嗯啊，使用索引可以加快查询速度，其实就是将无序的数据变成有序（有序就能加快检索速度）       在InnoDB引擎中，索引的底层数据结构是B+树        那为什么不使用红黑树或者B树呢？       MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中       红黑树是「二叉查找树」的变种，一个">
+    <meta name="description" content="对MySQL InnoDB引擎的索引了解吗？       嗯啊，使用索引可以加快查询速度，其实就是将无序的数据变成有序（有序就能加快检索速度）       在InnoDB引擎中，索引的底层数据结构是B+树        那为什么不使用红黑树或者B树呢？       MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中        红黑树是「二叉查找树」的变种，一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 闲谈 1">
 <meta property="og:url" content="https://hcy-asleep.github.com/2022/11/05/MySQL-%E9%97%B2%E8%B0%88-1/index.html">
 <meta property="og:site_name" content="A Coder&#39;s Pocket">
-<meta property="og:description" content="对MySQL InnoDB引擎的索引了解吗？       嗯啊，使用索引可以加快查询速度，其实就是将无序的数据变成有序（有序就能加快检索速度）       在InnoDB引擎中，索引的底层数据结构是B+树        那为什么不使用红黑树或者B树呢？       MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中       红黑树是「二叉查找树」的变种，一个">
+<meta property="og:description" content="对MySQL InnoDB引擎的索引了解吗？       嗯啊，使用索引可以加快查询速度，其实就是将无序的数据变成有序（有序就能加快检索速度）       在InnoDB引擎中，索引的底层数据结构是B+树        那为什么不使用红黑树或者B树呢？       MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中        红黑树是「二叉查找树」的变种，一">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-54a18a07f7adfbda09983b815a92c5b8_r.jpg">
 <meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-2393680d1df54c696f97c8194b34237c_r.jpg">
 <meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-6d6af5c6cfe9be27d1f41af4d7860d3a_r.jpg">
 <meta property="og:image" content="https://hcy-asleep.github.com/pictures/MySQL-%E9%97%B2%E8%B0%88/v2-ca51dbec74c22029ebde0650378dfbfd_r.jpg">
 <meta property="article:published_time" content="2022-11-05T14:00:29.000Z">
-<meta property="article:modified_time" content="2022-11-07T08:51:30.196Z">
+<meta property="article:modified_time" content="2022-11-07T11:58:10.659Z">
 <meta property="article:author" content="HCY">
 <meta property="article:tag" content="数据库">
 <meta property="article:tag" content="MySQL">
@@ -191,7 +191,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-11-07 16:51:30" itemprop="dateModified" datetime="2022-11-07T16:51:30+08:00">2022-11-07</time>
+      <time title="Modified: 2022-11-07 19:58:10" itemprop="dateModified" datetime="2022-11-07T19:58:10+08:00">2022-11-07</time>
     </span>
 
   
@@ -231,6 +231,7 @@
 <div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中
 </div></div><br/>
+
 
  
 

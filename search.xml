@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>Linux 命令行格式化磁盘（U盘)</title>
+      <link href="/2022/11/17/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98%EF%BC%88U%E7%9B%98/"/>
+      <url>/2022/11/17/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98%EF%BC%88U%E7%9B%98/</url>
+      
+        <content type="html"><![CDATA[<h5 id="注意：以下操作都属于高危行为，请谨慎使用！"><a href="#注意：以下操作都属于高危行为，请谨慎使用！" class="headerlink" title="注意：以下操作都属于高危行为，请谨慎使用！"></a>注意：以下操作都属于高危行为，请谨慎使用！</h5><ul><li><p>在插入 U盘 之前，先查看有哪些磁盘</p>  <img src="../pictures/Linux 命令行格式化/2022.11.17.16.36.19.png"/><ul><li>可以看到加粗的有两行，第一行开头是 “Disk” ，第二行开头是 “Device”</li><li>整个输出只有一行加粗的 “Disk” ，表示目前只有一个硬盘</li><li>每一个加粗的 “Device” 都对应上一行的 “Disk”</li><li>“Device” 里面的内容表示 “Disk” 里面的分区</li></ul></li></ul><h6 id=""><a href="#" class="headerlink" title=""></a></h6><ul><li><p>在插入 U盘 之后，再查看有哪些磁盘</p>  <img src="../pictures/Linux 命令行格式化/2022.11.17.16.39.41.png"/>  <ul><li>发现多了一行加粗的 “Disk”</li><li>这个正是我们插入的 U盘</li></ul></li></ul><h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><ul><li>卸载 U盘  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount /dev/sda</span><br></pre></td></tr></table></figure><ul><li><h5 id="x2F-dev-x2F-后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！"><a href="#x2F-dev-x2F-后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！" class="headerlink" title="&#x2F;dev&#x2F;后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！"></a>&#x2F;dev&#x2F;后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！</h5></li></ul></li></ul><h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><ul><li>格式化 U盘 ，并且建立 vfat 文件系统  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.vfat -I /dev/sda</span><br></pre></td></tr></table></figure><ul><li><h5 id="x2F-dev-x2F-后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！-1"><a href="#x2F-dev-x2F-后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！-1" class="headerlink" title="&#x2F;dev&#x2F;后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！"></a>&#x2F;dev&#x2F;后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！</h5></li></ul></li></ul><h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><ul><li><p>最后再 mount 上 U盘 ，或者把 U盘 拨了再插上，系统可能会自动 mount 上, 就可以使用 U盘 了</p></li><li><p>异常处理</p><ul><li>假设 U盘 信息如下  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Disk /dev/sdb：7.5 GiB，8004304896 bytes，15633408 sectors</span><br><span class="line">Units：sectors of / 1 * 512 = 512 bytes</span><br><span class="line">Sector size(logical/physical)：512 bytes / 512 bytes</span><br><span class="line">I/O size(mininum/optimal)：512 bytes / 512 bytes</span><br><span class="line">Disklabel type：dos</span><br><span class="line">Disk identifier：0x663eb4c4</span><br><span class="line"></span><br><span class="line">Device    boot      Start     End Sectors  Size Id Type</span><br><span class="line">/dev/sdb1    *          0 3815135 3815136  1.8G  0 Empty</span><br><span class="line">/dev/sdb2         3737268 3741939    4672  2.3M ef EFI (FAT-12/16/32)</span><br></pre></td></tr></table></figure><ul><li><p>如果 mkfs.vfat &#x2F;dev&#x2F;sdb 出现如下错误</p>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkfs.vfat 3.0.10 (12 Sep 2010)</span><br><span class="line">mkfs.vfat: unable to open /dev/sdb</span><br></pre></td></tr></table></figure></li><li><p>则需要先格式化 &#x2F;dev&#x2F;sdb1 ，即使用 mkfs.vfat &#x2F;dev&#x2F;sdb1 命令，将 &#x2F;dev&#x2F;sdb1 先格式化掉，然后再格式化 &#x2F;dev&#x2F;sdb</p></li><li><p>如果出现如下错误</p>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkfs.vfat 3.0.10 (12 Sep 2010)</span><br><span class="line">mkfs.vfat: Device partition expected, not making filesystem on entire device &#x27;/dev/sdb&#x27; (use -I to override)</span><br></pre></td></tr></table></figure></li><li><p>系统提示需要使用 -I 参数来完成格式化：mkfs.vfat -I &#x2F;dev&#x2F;sdb, 这样就可以完全格式化的U盘</p></li></ul></li></ul></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Vim Diff</title>
+      <link href="/2022/11/07/vim-diff/"/>
+      <url>/2022/11/07/vim-diff/</url>
+      
+        <content type="html"><![CDATA[<p>VIM(NEOVIM) 比较不同</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim -d file_1 file_2</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vim </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Redis-基础-闲聊</title>
       <link href="/2022/11/07/Redis-%E5%9F%BA%E7%A1%80-%E9%97%B2%E8%81%8A/"/>
       <url>/2022/11/07/Redis-%E5%9F%BA%E7%A1%80-%E9%97%B2%E8%81%8A/</url>

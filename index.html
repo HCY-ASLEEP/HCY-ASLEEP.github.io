@@ -144,6 +144,204 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/17/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98%EF%BC%88U%E7%9B%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/17/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98%EF%BC%88U%E7%9B%98/" class="post-title-link" itemprop="url">Linux 命令行格式化磁盘（U盘)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-11-17 16:27:52 / Modified: 17:11:53" itemprop="dateCreated datePublished" datetime="2022-11-17T16:27:52+08:00">2022-11-17</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h5 id="注意：以下操作都属于高危行为，请谨慎使用！"><a href="#注意：以下操作都属于高危行为，请谨慎使用！" class="headerlink" title="注意：以下操作都属于高危行为，请谨慎使用！"></a>注意：以下操作都属于高危行为，请谨慎使用！</h5><ul>
+<li><p>在插入 U盘 之前，先查看有哪些磁盘</p>
+  <img src="../pictures/Linux 命令行格式化/2022.11.17.16.36.19.png"/>
+
+<ul>
+<li>可以看到加粗的有两行，第一行开头是 “Disk” ，第二行开头是 “Device”</li>
+<li>整个输出只有一行加粗的 “Disk” ，表示目前只有一个硬盘</li>
+<li>每一个加粗的 “Device” 都对应上一行的 “Disk”</li>
+<li>“Device” 里面的内容表示 “Disk” 里面的分区</li>
+</ul>
+</li>
+</ul>
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6><ul>
+<li><p>在插入 U盘 之后，再查看有哪些磁盘</p>
+  <img src="../pictures/Linux 命令行格式化/2022.11.17.16.39.41.png"/>
+  
+<ul>
+<li>发现多了一行加粗的 “Disk”</li>
+<li>这个正是我们插入的 U盘</li>
+</ul>
+</li>
+</ul>
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><ul>
+<li>卸载 U盘  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount /dev/sda</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h5 id="x2F-dev-x2F-后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！"><a href="#x2F-dev-x2F-后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！" class="headerlink" title="&#x2F;dev&#x2F;后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！"></a>&#x2F;dev&#x2F;后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！</h5></li>
+</ul>
+</li>
+</ul>
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><ul>
+<li>格式化 U盘 ，并且建立 vfat 文件系统  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.vfat -I /dev/sda</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h5 id="x2F-dev-x2F-后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！-1"><a href="#x2F-dev-x2F-后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！-1" class="headerlink" title="&#x2F;dev&#x2F;后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！"></a>&#x2F;dev&#x2F;后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！</h5></li>
+</ul>
+</li>
+</ul>
+<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><ul>
+<li><p>最后再 mount 上 U盘 ，或者把 U盘 拨了再插上，系统可能会自动 mount 上, 就可以使用 U盘 了</p>
+</li>
+<li><p>异常处理</p>
+<ul>
+<li>假设 U盘 信息如下  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Disk /dev/sdb：7.5 GiB，8004304896 bytes，15633408 sectors</span><br><span class="line">Units：sectors of / 1 * 512 = 512 bytes</span><br><span class="line">Sector size(logical/physical)：512 bytes / 512 bytes</span><br><span class="line">I/O size(mininum/optimal)：512 bytes / 512 bytes</span><br><span class="line">Disklabel type：dos</span><br><span class="line">Disk identifier：0x663eb4c4</span><br><span class="line"></span><br><span class="line">Device    boot      Start     End Sectors  Size Id Type</span><br><span class="line">/dev/sdb1    *          0 3815135 3815136  1.8G  0 Empty</span><br><span class="line">/dev/sdb2         3737268 3741939    4672  2.3M ef EFI (FAT-12/16/32)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>如果 mkfs.vfat &#x2F;dev&#x2F;sdb 出现如下错误</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkfs.vfat 3.0.10 (12 Sep 2010)</span><br><span class="line">mkfs.vfat: unable to open /dev/sdb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>则需要先格式化 &#x2F;dev&#x2F;sdb1 ，即使用 mkfs.vfat &#x2F;dev&#x2F;sdb1 命令，将 &#x2F;dev&#x2F;sdb1 先格式化掉，然后再格式化 &#x2F;dev&#x2F;sdb</p>
+</li>
+<li><p>如果出现如下错误</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkfs.vfat 3.0.10 (12 Sep 2010)</span><br><span class="line">mkfs.vfat: Device partition expected, not making filesystem on entire device &#x27;/dev/sdb&#x27; (use -I to override)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>系统提示需要使用 -I 参数来完成格式化：mkfs.vfat -I &#x2F;dev&#x2F;sdb, 这样就可以完全格式化的U盘</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/07/vim-diff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/07/vim-diff/" class="post-title-link" itemprop="url">Vim Diff</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-11-07 19:50:01 / Modified: 19:51:13" itemprop="dateCreated datePublished" datetime="2022-11-07T19:50:01+08:00">2022-11-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>VIM(NEOVIM) 比较不同</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim -d file_1 file_2</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/07/Redis-%E5%9F%BA%E7%A1%80-%E9%97%B2%E8%81%8A/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2076,7 +2274,7 @@ undo log前面也提到了，它会记录修改数据之前的信息，事务中
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-11-07 16:51:30" itemprop="dateModified" datetime="2022-11-07T16:51:30+08:00">2022-11-07</time>
+      <time title="Modified: 2022-11-07 19:58:10" itemprop="dateModified" datetime="2022-11-07T19:58:10+08:00">2022-11-07</time>
     </span>
 
   
@@ -2116,6 +2314,7 @@ undo log前面也提到了，它会记录修改数据之前的信息，事务中
 <div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
 MySQL的数据是存储在硬盘的，在查询时一般是不能「一次性」把全部数据加载到内存中
 </div></div><br/>
+
 
  
 
@@ -2636,387 +2835,8 @@ OK…
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/05/wayland-wemeet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HCY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A Coder's Pocket">
-      <meta itemprop="description" content="A Space Belongs To HCY">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | A Coder's Pocket">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/05/wayland-wemeet/" class="post-title-link" itemprop="url">Wayland Wemeet</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-11-05 14:45:11 / Modified: 14:54:21" itemprop="dateCreated datePublished" datetime="2022-11-05T14:45:11+08:00">2022-11-05</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>腾讯会议不支持 Wayland</p>
-<img src="/pictures/wayland-wemeet/2022-04-19-13-25-31屏幕截图.png"/>
-
-
-<h6 id=""><a href="#" class="headerlink" title=""></a></h6><p>解决方法</p>
-<ul>
-<li><p>进入 &#x2F;opt&#x2F;wemeet 目录</p>
-</li>
-<li><p>编辑 wemeetapp.sh 文件</p>
-</li>
-<li><p>在 export QT_PLUGIN_PATH&#x3D;”${HERE}&#x2F;plugins” 后添加如下三行代码后保存</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export XDG_SESSION_TYPE=x11</span><br><span class="line">export QT_QPA_PLATFORM=xcb</span><br><span class="line">unset WAYLAND_DISPLAY</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启即可</p>
-</li>
-</ul>
-<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><p>缺点</p>
-<ul>
-<li>由于 Wayland 的限制，腾讯会议现在无法捕捉到屏幕，自然“共享屏幕”也就失效了，实际效果是当尝试共享屏幕时，共享的是 pure black</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/04/MARO-Distibuted-toolkit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HCY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A Coder's Pocket">
-      <meta itemprop="description" content="A Space Belongs To HCY">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | A Coder's Pocket">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/04/MARO-Distibuted-toolkit/" class="post-title-link" itemprop="url">MARO Distibuted Toolkit</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-11-04 18:15:29 / Modified: 22:37:56" itemprop="dateCreated datePublished" datetime="2022-11-04T18:15:29+08:00">2022-11-04</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="MARO-三层框架"><a href="#MARO-三层框架" class="headerlink" title="MARO 三层框架"></a>MARO 三层框架</h3><img src="/pictures/maro-distributed-toolkit/maro_overview.svg"/>
-
-<h6 id=""><a href="#" class="headerlink" title=""></a></h6><h4 id="接下来展示的是第三层-Distibuted-toolkit"><a href="#接下来展示的是第三层-Distibuted-toolkit" class="headerlink" title="接下来展示的是第三层 Distibuted toolkit"></a>接下来展示的是第三层 Distibuted toolkit</h4><img src="/pictures/maro-distributed-toolkit/overview.svg"/>
-
-<ul>
-<li><p>MARO Distibuted Toolkit 遵循 message-passing 模式，即不同组件之间的协作基于消息<strong>发送</strong>和<strong>接收</strong></p>
-</li>
-<li><p>典型的 <strong>master&#x2F;worker</strong> 分布式程序通常包含以下步骤</p>
-<ul>
-<li>master 会将任务（w&#x2F; or w&#x2F;o data）发送到 worker</li>
-<li>worker 将在其本地计算环境或本地设备中完成任务</li>
-<li>worker 将计算结果返回到 master</li>
-</ul>
-</li>
-</ul>
-<img src="/pictures/maro-distributed-toolkit/v2-b5f0db269480aceb6590007f8ad9dfe8_r.jpg" style="zoom:40%"/>
-
-    
-<ul>
-<li>根据实际需要，主控组件和工作组件之间的通信方式可以是同步的，也可以是异步的</li>
-</ul>
-<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><h4 id="关键部件"><a href="#关键部件" class="headerlink" title="关键部件"></a>关键部件</h4><img src="/pictures/maro-distributed-toolkit/key_components.svg"/> 
-
-<ul>
-<li><h5 id="Comunication"><a href="#Comunication" class="headerlink" title="Comunication"></a>Comunication</h5><ul>
-<li><h5 id="大致功能预览"><a href="#大致功能预览" class="headerlink" title="大致功能预览"></a>大致功能预览</h5><ul>
-<li><p>提供通用的消息传递接口</p>
-<ul>
-<li>send, receive</li>
-<li>broadcast</li>
-<li>scatter</li>
-</ul>
-</li>
-</ul>
-<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><ul>
-<li><p>通信组件使用<strong>可替换</strong>的通信协议驱动程序来适应不同的通信协议栈</p>
-<ul>
-<li>TCP&#x2F;IP</li>
-<li>InfiniBand</li>
-</ul>
-</li>
-</ul>
-<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><ul>
-<li><p>Peer Discovering</p>
-</li>
-<li><p>部分故障恢复</p>
-</li>
-<li><p>条件事件自动调度</p>
-</li>
-</ul>
-</li>
-</ul>
-<h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><ul>
-<li><h5 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h5>  <img src="/pictures/maro-distributed-toolkit/proxy.svg"/>
-
-<h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><ul>
-<li>Proxy 提供通信原语的实现，是通信操作接口，是通信组件的主要实体</li>
-<li>Proxy 默认使用 ZeroMQ 框架</li>
-<li>Proxy 为基于 Redis 的 peer discovering 提供支持</li>
-<li>分布式通信原语常见操作如下<h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><ul>
-<li><p><strong>Broadcast</strong></p>
-  <img src="/pictures/maro-distributed-toolkit/v2-c9aa7762a6ec00d370c58de183441362_r.jpg"/>
-
-
-  <img src="/pictures/maro-distributed-toolkit/v2-1ff295f93679ebe9a03ad510259ead8b_r.jpg"/></li>
-</ul>
-<h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><h6 id="-8"><a href="#-8" class="headerlink" title=""></a></h6><h6 id="-9"><a href="#-9" class="headerlink" title=""></a></h6><ul>
-<li><p><strong>Scatter</strong></p>
-  <img src="/pictures/maro-distributed-toolkit/v2-be03c436a4f699aa001deb4490f33813_r.jpg"/>
-
-  <img src="/pictures/maro-distributed-toolkit/v2-f17bd118677f919e255d5b1689fc66dc_r.jpg"/></li>
-</ul>
-<h6 id="-10"><a href="#-10" class="headerlink" title=""></a></h6><h6 id="-11"><a href="#-11" class="headerlink" title=""></a></h6><h6 id="-12"><a href="#-12" class="headerlink" title=""></a></h6><ul>
-<li><p><strong>Reduce (强调聚合之后处理)</strong></p>
-  <img src="/pictures/maro-distributed-toolkit/v2-466054a11a994842eb1b062b13b9bde3_r.png"/>
-
-  
-  <img src="/pictures/maro-distributed-toolkit/v2-c7bdad601780f9798a62c2dfb1bbef4d_r.jpg"/></li>
-</ul>
-<h6 id="-13"><a href="#-13" class="headerlink" title=""></a></h6><h6 id="-14"><a href="#-14" class="headerlink" title=""></a></h6><h6 id="-15"><a href="#-15" class="headerlink" title=""></a></h6><ul>
-<li><p><strong>Gather (单纯聚合没有额外处理)</strong></p>
-  <img src="/pictures/maro-distributed-toolkit/v2-3b2ec50810fc8d92971a4b7c0b800b1b_r.jpg"/>
-
-  <img src="/pictures/maro-distributed-toolkit/v2-dc3fcf248c39b4a76947bcea140840d1_720w.webp"/></li>
-</ul>
-<h6 id="-16"><a href="#-16" class="headerlink" title=""></a></h6><h6 id="-17"><a href="#-17" class="headerlink" title=""></a></h6><h6 id="-18"><a href="#-18" class="headerlink" title=""></a></h6><ul>
-<li><p><strong>All Reduce</strong></p>
-  <img src="/pictures/maro-distributed-toolkit/v2-0e90f4c9b66d42dfa41145d3b6a52361_r.jpg"/>
-
-
-  <img src="/pictures/maro-distributed-toolkit/v2-80b1bd60a2fdefb19f792fdf193c6d76_r.jpg"/></li>
-</ul>
-<h6 id="-19"><a href="#-19" class="headerlink" title=""></a></h6><h6 id="-20"><a href="#-20" class="headerlink" title=""></a></h6><h6 id="-21"><a href="#-21" class="headerlink" title=""></a></h6><ul>
-<li><p><strong>All Gather</strong></p>
-  <img src="/pictures/maro-distributed-toolkit/v2-ce5261aec55090a1f9e9dd5233b22af9_r.jpg"/>
-
-  
-  <img src="/pictures/maro-distributed-toolkit/v2-831e0b04646c78f9e74bf4f29c35b8af_720w.webp"/></li>
-</ul>
-<h6 id="-22"><a href="#-22" class="headerlink" title=""></a></h6><h6 id="-23"><a href="#-23" class="headerlink" title=""></a></h6><h6 id="-24"><a href="#-24" class="headerlink" title=""></a></h6><ul>
-<li><p><strong>Reduce Scatter</strong></p>
-  <img src="/pictures/maro-distributed-toolkit/v2-14cdd631faae00452885a116dd36737c_720w.webp"/></li>
-</ul>
-<h6 id="-25"><a href="#-25" class="headerlink" title=""></a></h6><h6 id="-26"><a href="#-26" class="headerlink" title=""></a></h6><h6 id="-27"><a href="#-27" class="headerlink" title=""></a></h6><ul>
-<li><p><strong>All to All</strong></p>
-  <img src="/pictures/maro-distributed-toolkit/v2-945ffd7612632fa88ed2bc68ec832071_r.jpg"/></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h6 id="-28"><a href="#-28" class="headerlink" title=""></a></h6><ul>
-<li><p><strong>Message</strong></p>
-<ul>
-<li><p>用于打包组件之间的通信内容，消息实例的主要属性包括</p>
-<ul>
-<li>tag：自定义属性，可用于通过 <strong>conditional event register table</strong> 实现自动调度逻辑</li>
-<li>source：message 发送者的别名</li>
-<li>destination：message 接收者的别名</li>
-<li>payload：用于远程函数调用的 Python 对象</li>
-<li>session_id（自动生成）：特定会话的 UUID ，一个会话可能包含多条消息</li>
-<li>message_id（自动生成）：特定消息的 UUID</li>
-</ul>
-</li>
-</ul>
-<h6 id="-29"><a href="#-29" class="headerlink" title=""></a></h6><ul>
-<li><p>Example</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from maro.communication import Message</span><br><span class="line"></span><br><span class="line">message = Message(tag=&quot;check_in&quot;,</span><br><span class="line">                  source=&quot;worker_001&quot;,</span><br><span class="line">                  destination=&quot;master&quot;,</span><br><span class="line">                  body=&quot;&quot;)</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h6 id="-30"><a href="#-30" class="headerlink" title=""></a></h6><ul>
-<li><p><strong>Session Message</strong></p>
-<ul>
-<li><p>MARO 为常见的分布式场景提供了两种预定义的会话类型</p>
-<ul>
-<li><p><strong>Task Session</strong></p>
-<ul>
-<li><p>存在 master 和 worker 关系</p>
-</li>
-<li><p>用于描述从 master 发送到 worker 的 computing task</p>
-<ul>
-<li>master 将 task 发送给 worker</li>
-<li>一旦 worker 收到 task ，worker 就开始执行 task</li>
-<li>worker 将 computing result 返回给 master</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h6 id="-31"><a href="#-31" class="headerlink" title=""></a></h6><ul>
-<li><p><strong>Notification Session</strong></p>
-<ul>
-<li><p>sender 和 receiver 关系</p>
-</li>
-<li><p>用于信息同步</p>
-<ul>
-<li>sender 发送 notification message</li>
-<li>receiver 接收 notification message</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h6 id="-32"><a href="#-32" class="headerlink" title=""></a></h6><ul>
-<li>session 的每个阶段由 proxy 在内部维护</li>
-<li>Example  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">from maro.communication import SessionMessage, SessionType</span><br><span class="line"></span><br><span class="line">task_message = SessionMessage(tag=&quot;sum&quot;,</span><br><span class="line">                              source=&quot;master&quot;,</span><br><span class="line">                              destination=&quot;worker_001&quot;,</span><br><span class="line">                              body=[0, 1, 2, ...],</span><br><span class="line">                              session_type=SessionType.TASK)</span><br><span class="line"></span><br><span class="line">notification_message = SessionMessage(tag=&quot;check_out&quot;,</span><br><span class="line">                                      source=&quot;worker_001&quot;,</span><br><span class="line">                                      destination=&quot;master&quot;,</span><br><span class="line">                                      body=&quot;&quot;,</span><br><span class="line">                                      session_type=SessionType.NOTIFICATION)</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h6 id="-33"><a href="#-33" class="headerlink" title=""></a></h6><ul>
-<li><h5 id="MARO-通信原语实际接口"><a href="#MARO-通信原语实际接口" class="headerlink" title="MARO 通信原语实际接口"></a>MARO 通信原语实际接口</h5><ul>
-<li>receive：用于持续接收消息<br>  receive_by_id：仅接收具有给定 session ID 的消息</li>
-<li>send：单播，这是一种阻塞、一对一的发送模式，监视并收集来自远程对等方的回复消息   </li>
-<li>isend：非阻塞版的 send ，将立即返回 message session ID，该 ID 可由  receive_by_id 使用</li>
-<li>scatter：send 的高级版本，用于向 peer 发送消息，并监视和收集来自 peer 的回复消息，不是真正的多播，每条消息都会经过完整的 TCP&#x2F;IP 堆栈（ZeroMQ driver），如果要发送的消息完全相同，并且想要更好的性能，请改用 broadcast 接口</li>
-<li>iscatter：非阻塞版本的 scatter ，message session ID 将立即返回，可由 receive_by_id 使用</li>
-<li>broadcast：阻塞，用于向所有订阅者广播消息，将监视并收集所有订阅者的回复消息</li>
-<li>ibroadcast：非阻塞版本的 broadcast ，相关 message session ID 将立即返回，可供 receive_by_id 使用</li>
-</ul>
-</li>
-</ul>
-<h6 id="-34"><a href="#-34" class="headerlink" title=""></a></h6><ul>
-<li><h5 id="Conditional-Event-Register-Table"><a href="#Conditional-Event-Register-Table" class="headerlink" title="Conditional Event Register Table"></a>Conditional Event Register Table</h5><ul>
-<li>提供消息自动发送机制</li>
-<li>通过将 conditional event 和相关的 handler function 注册到注册表中，当 conditional event 满足时，handler function 将与接收到的消息一起自动执行</li>
-</ul>
-<h6 id="-35"><a href="#-35" class="headerlink" title=""></a></h6>  <img src="/pictures/maro-distributed-toolkit/register_table.register.svg"/>
-  
-<h6 id="-36"><a href="#-36" class="headerlink" title=""></a></h6><ul>
-<li><p>conditional event 用于声明自动触发相关 handler function 所需的消息组</p>
-</li>
-<li><p>unit event 是条件事件中的最小组件，声明格式分三段</p>
-<ul>
-<li>source：用于声明所需的消息源</li>
-<li>tag：消息实例的属性</li>
-<li>amount：所需的消息实例量</li>
-</ul>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">unit_event_abs = &quot;worker:update:10&quot;</span><br><span class="line"></span><br><span class="line">unit_event_rel = &quot;worker:update:60%&quot;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>AND OR 操作支持更复杂的业务逻辑</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">combined_event_and = (&quot;worker_01:update:2&quot;,</span><br><span class="line">                   &quot;worker_02:update:3&quot;,</span><br><span class="line">                   &quot;AND&quot;)</span><br><span class="line"></span><br><span class="line">combined_event_or = (&quot;worker_03:update:1&quot;,</span><br><span class="line">                      &quot;worker_04:update:5&quot;,</span><br><span class="line">                      &quot;OR&quot;)</span><br><span class="line"></span><br><span class="line">combined_event_mix = ((&quot;worker_01:update:2&quot;, &quot;worker_02:update:3&quot;, &quot;AND&quot;),</span><br><span class="line">                      &quot;worker_03:update:1&quot;,</span><br><span class="line">                      &quot;OR&quot;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Handler function 是绑定到特定 conditional event 的用户定义的回调函数，当满足事件的条件时，相关消息将被发送到处理程序函数执行</p>
-  <img src="/pictures/maro-distributed-toolkit/register_table.trigger.svg"/>
-
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># A common handler function signature</span><br><span class="line">def handler(that, proxy, messages):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">        Conditional event handler function.</span><br><span class="line"></span><br><span class="line">        Args:</span><br><span class="line">            that: local instance reference, which needs to be operated.</span><br><span class="line">            proxy: the proxy reference for remote communication.</span><br><span class="line">            messages: received messages.</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h6 id="-37"><a href="#-37" class="headerlink" title=""></a></h6><ul>
-<li><h5 id="Distributed-Decorator"><a href="#Distributed-Decorator" class="headerlink" title="Distributed Decorator"></a>Distributed Decorator</h5><ul>
-<li><p>从本地函数类生成分布式 worker 类的帮助程序</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">from maro.communication import dist, Proxy</span><br><span class="line"></span><br><span class="line"># Initialize proxy instance for remote communication.</span><br><span class="line">proxy = Proxy(group_name=&quot;master-worker&quot;,</span><br><span class="line">              component_type=&quot;worker&quot;,</span><br><span class="line">              expected_peers=[(&quot;master&quot;, 1)])</span><br><span class="line"></span><br><span class="line"># Declare the trigger condition of rollout event.</span><br><span class="line">rollout_event = &quot;master:rollout:1&quot;</span><br><span class="line"></span><br><span class="line"># Implement rollout event handler logic.</span><br><span class="line">def on_rollout(that, proxy, messages):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"># Assemble event-handler directory.</span><br><span class="line">handler_dict = &#123;rollout_event: on_rollout&#125;</span><br><span class="line"></span><br><span class="line"># Convert a local functional class to a distributed one.</span><br><span class="line">@dist(proxy, handler_dict)</span><br><span class="line">class Worker:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 </div>
