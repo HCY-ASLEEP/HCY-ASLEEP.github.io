@@ -20,25 +20,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hcy-asleep.github.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"remove","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="A Space Belongs To HCY">
-<meta property="og:type" content="website">
-<meta property="og:title" content="A Coder&#39;s Pocket">
-<meta property="og:url" content="https://hcy-asleep.github.com/archives/2022/10/page/2/index.html">
+    <meta name="description" content="Coc-pright 是静态语法分析器，而 python 有一些包是没有经过预编译的，比如说 opencv ，所以就会有找不到相关包的语法分析的情况发生  首先   1pip install mypy      生成 cv2 的 pyi 文件   1stubgen -m cv2 -o &amp;#123;cv2-package-folder&amp;#125;  在我的环境下 {cv2-package-fold">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Coc-pyright 找不到相关的语法分析">
+<meta property="og:url" content="https://hcy-asleep.github.com/2022/11/17/coc-pyright-%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="A Coder&#39;s Pocket">
-<meta property="og:description" content="A Space Belongs To HCY">
+<meta property="og:description" content="Coc-pright 是静态语法分析器，而 python 有一些包是没有经过预编译的，比如说 opencv ，所以就会有找不到相关包的语法分析的情况发生  首先   1pip install mypy      生成 cv2 的 pyi 文件   1stubgen -m cv2 -o &amp;#123;cv2-package-folder&amp;#125;  在我的环境下 {cv2-package-fold">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-17T11:09:23.000Z">
+<meta property="article:modified_time" content="2022-11-17T11:30:30.583Z">
 <meta property="article:author" content="HCY">
+<meta property="article:tag" content="VIM">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://hcy-asleep.github.com/archives/2022/10/page/2/">
+<link rel="canonical" href="https://hcy-asleep.github.com/2022/11/17/coc-pyright-%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"archives/2022/10/page/2/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://hcy-asleep.github.com/2022/11/17/coc-pyright-%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/","path":"2022/11/17/coc-pyright-找不到相关的语法分析/","title":"Coc-pyright 找不到相关的语法分析"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Archive | A Coder's Pocket</title>
+<title>Coc-pyright 找不到相关的语法分析 | A Coder's Pocket</title>
   
 
 
@@ -69,7 +73,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">A Coder's Pocket</h1>
+      <p class="site-title">A Coder's Pocket</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Just For Fun</p>
@@ -134,233 +138,110 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/17/coc-pyright-%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Coc-pyright 找不到相关的语法分析 | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Coc-pyright 找不到相关的语法分析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-11-17 19:09:23 / Modified: 19:30:30" itemprop="dateCreated datePublished" datetime="2022-11-17T19:09:23+08:00">2022-11-17</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li><p>Coc-pright 是静态语法分析器，而 python 有一些包是没有经过预编译的，比如说 opencv ，所以就会有找不到相关包的语法分析的情况发生</p>
+</li>
+<li><p>首先</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mypy    </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成 cv2 的 pyi 文件</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stubgen -m cv2 -o &#123;cv2-package-folder&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在我的环境下 {cv2-package-folder} 是  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/asleep/softwares/conda/conda/envs/ocv/lib/python3.9/site-packages/cv2</span><br></pre></td></tr></table></figure></li>
+<li>执行命令之后会在目录下生成 cv2.pyi 文件</li>
+</ul>
+</li>
+</ul>
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6><ul>
+<li><p>将 cv2.pyi 移动到 coc-pyright 的解析目录，成功解析</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /home/asleep/softwares/conda/conda/envs/ocv/lib/python3.9/site-packages/cv2/cv2.pyi  /home/asleep/.config/coc/extensions/node_modules/coc-pyright/node_modules/pyright/dist/typeshed-fallback/stdlib   </span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/VIM/" rel="tag"># VIM</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
         
-        <span class="collection-header">OK! 33 posts in total. Keep on posting.</span>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-10-23T13:25:51+08:00"
-              content="2022-10-23">
-          10-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/23/debian-gnome-default-browser/" itemprop="url">
-            <span itemprop="name">Debian Gnome 默认浏览器</span>
-          </a>
-      </div>
-
-      
-    </header>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/17/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98%EF%BC%88U%E7%9B%98/" rel="prev" title="Linux 命令行格式化磁盘（U盘)">
+                  <i class="fa fa-chevron-left"></i> Linux 命令行格式化磁盘（U盘)
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-10-23T13:25:51+08:00"
-              content="2022-10-23">
-          10-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/23/debian-nvidia/" itemprop="url">
-            <span itemprop="name">Debian Nvidia 驱动</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-10-23T13:25:51+08:00"
-              content="2022-10-23">
-          10-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/23/linux-bash-powerline-arrow/" itemprop="url">
-            <span itemprop="name">Bash Powerline Fonts 美化</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-10-23T13:25:51+08:00"
-              content="2022-10-23">
-          10-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/23/linux-command-not-found-bash/" itemprop="url">
-            <span itemprop="name">Linux 环境变量配置错误处理</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-10-23T13:25:51+08:00"
-              content="2022-10-23">
-          10-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/23/linux-debian-gnome-desktop-launch/" itemprop="url">
-            <span itemprop="name">Gnome Desktop File 参考</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-10-23T13:25:51+08:00"
-              content="2022-10-23">
-          10-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/23/linux-debian-vscode-fonts-firacode/" itemprop="url">
-            <span itemprop="name">Linux VScode 字体</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-10-23T13:25:51+08:00"
-              content="2022-10-23">
-          10-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/23/node-%E6%8D%A2%E6%BA%90-%E9%98%BF%E9%87%8C/" itemprop="url">
-            <span itemprop="name">Nodejs 换源</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-10-23T13:25:51+08:00"
-              content="2022-10-23">
-          10-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/23/path.sh-gopath-alias/" itemprop="url">
-            <span itemprop="name">Linux 环境变量配置</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-10-23T13:25:51+08:00"
-              content="2022-10-23">
-          10-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/23/vim-nvim-replace-%E6%89%B9%E9%87%8F%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2/" itemprop="url">
-            <span itemprop="name">VIM 批量查找替换</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-10-22T21:16:22+08:00"
-              content="2022-10-22">
-          10-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/22/The-First-Blog/" itemprop="url">
-            <span itemprop="name">The First Blog</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2022/10/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/2022/10/">1</a><span class="page-number current">2</span>
-  </nav>
+
+
+
 
 </div>
   </main>
