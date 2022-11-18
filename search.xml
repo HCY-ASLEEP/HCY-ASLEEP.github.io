@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Linux Host 与 KVM Windows Guest 共享文件</title>
+      <link href="/2022/11/18/Linux-%E4%B8%8E-KVM-Windows-guest-%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/"/>
+      <url>/2022/11/18/Linux-%E4%B8%8E-KVM-Windows-guest-%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<ul><li><h4 id="将文件从-Linux-Host-传到-KVM-Windows-Guest"><a href="#将文件从-Linux-Host-传到-KVM-Windows-Guest" class="headerlink" title="将文件从 Linux Host 传到 KVM Windows Guest"></a>将文件从 Linux Host 传到 KVM Windows Guest</h4><ul><li>在 Windows Guest 里面下载安装如下地址的软件</li></ul>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe</span><br></pre></td></tr></table></figure><ul><li>重启 Windows Guest</li><li>发现可以把 Linux 文件拖拽到 Windwos 里面，可是无法反向拖拽</li></ul></li></ul><h6 id=""><a href="#" class="headerlink" title=""></a></h6><ul><li><h4 id="将文件从-KVM-Windows-Guest-传到-Linux-Host"><a href="#将文件从-KVM-Windows-Guest-传到-Linux-Host" class="headerlink" title="将文件从 KVM Windows Guest 传到 Linux Host"></a>将文件从 KVM Windows Guest 传到 Linux Host</h4><ul><li><h5 id="在-Windows-Guest-里面设置共享文件夹"><a href="#在-Windows-Guest-里面设置共享文件夹" class="headerlink" title="在 Windows Guest 里面设置共享文件夹"></a>在 Windows Guest 里面设置共享文件夹</h5><ul><li><p>新建文件夹（此处在 C盘 根目录下）</p>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.19.37.19.png"/></li><li><p>设置文件夹共享</p><ul><li><p>右键 -&gt; 属性 -&gt; 共享</p>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.19.39.56.png"/>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.19.41.28.png"/></li></ul><h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><ul><li><p>选择 Everyone -&gt; 添加</p>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.19.43.00.png"/></li></ul><h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><ul><li><p>选择权限</p>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.19.45.31.png"/></li></ul><h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><ul><li><p>Share</p>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.19.46.52.png"/></li></ul><h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><ul><li><p>留意这里，图片里面的 “DESKTOP-5J93LDB” 在 Linux mount 操作时将会被换为 Windows 的 IP 地址</p>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.19.48.24.png"/></li></ul><h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><ul><li>点击 Done 完成共享设置</li></ul></li></ul><h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><ul><li><p>设置外部可以访问 Windows</p><ul><li><p>回到 Share 的 share 属性页面</p>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.19.39.56.png"/></li></ul><h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><ul><li><p>点击 Network and Sharing Center</p>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.19.54.42.png"/></li></ul><h6 id="-8"><a href="#-8" class="headerlink" title=""></a></h6><ul><li><p>改变设置如下</p>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.19.56.55.png"/></li></ul><h6 id="-9"><a href="#-9" class="headerlink" title=""></a></h6><ul><li>保存设置完成 Windows 端配置</li></ul></li></ul></li></ul><h6 id="-10"><a href="#-10" class="headerlink" title=""></a></h6><ul><li><h5 id="Linux-Host-挂载"><a href="#Linux-Host-挂载" class="headerlink" title="Linux Host 挂载"></a>Linux Host 挂载</h5><ul><li><p>在 Linux Host 下将 Windows Guset 的共享目录挂载到 Linux Host 的某个文件夹下面，然后 cd 到这个文件夹下面就可以访问 share 目录了</p>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.20.17.42.png"/>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -t cifs //192.168.122.8/share /home/asleep/share/</span><br></pre></td></tr></table></figure><ul><li>“-t cifs” 指定要挂载外部文件系统</li></ul><h6 id="-11"><a href="#-11" class="headerlink" title=""></a></h6></li><li><p>查看 Linux Host 下的文件目录内容，发现已经可以访问到 Windows Guset 的共享目录</p>  <img src="../pictures/Linux-H-Windows-G 共享文件/2022.11.18.20.21.08.png"/>  <h6 id="-12"><a href="#-12" class="headerlink" title=""></a></h6></li><li><p>要卸载共享，也就是取消挂载，执行如下命令</p>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo umount -t cifs //192.168.122.8/share</span><br></pre></td></tr></table></figure></li></ul></li></ul></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Coc-pyright 找不到相关的语法分析</title>
       <link href="/2022/11/17/coc-pyright-%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
       <url>/2022/11/17/coc-pyright-%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</url>
