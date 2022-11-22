@@ -1260,7 +1260,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-11-04 18:17:25" itemprop="dateModified" datetime="2022-11-04T18:17:25+08:00">2022-11-04</time>
+      <time title="Modified: 2022-11-22 20:43:05" itemprop="dateModified" datetime="2022-11-22T20:43:05+08:00">2022-11-22</time>
     </span>
 
   
@@ -1275,20 +1275,20 @@
     <div class="post-body" itemprop="articleBody">
           <h4 id="Hexo-Next-主题"><a href="#Hexo-Next-主题" class="headerlink" title="Hexo-Next 主题"></a>Hexo-Next 主题</h4><p>hexo-theme-next 应该是目前最广泛使用的hexo主题</p>
 <h4 id="安装-Hexo-Next-主题"><a href="#安装-Hexo-Next-主题" class="headerlink" title="安装 Hexo-Next 主题"></a>安装 Hexo-Next 主题</h4><p>切换到你的博客顶级工程目录，npm 安装</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-next</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-next</span><br></pre></td></tr></table></figure>
 
 <h4 id="切换到-Next-主题"><a href="#切换到-Next-主题" class="headerlink" title="切换到 Next 主题"></a>切换到 Next 主题</h4><p>在你的博客顶层工程目录下打开 “_config.yml”</p>
 <img src="/pictures/hexo-next-theme-美化/2022.10.26.13.24.11.png"/>
 
 <p>搜索themes，将里面的值改为next</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
 <h4 id="配置-Next-主题"><a href="#配置-Next-主题" class="headerlink" title="配置 Next 主题"></a>配置 Next 主题</h4><p>将 node_modules&#x2F;hexo-theme-next&#x2F;_config.yml 复制到博客顶层文件目录，重命名为 “_config.next.yml”</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd your_site_dir</span><br><span class="line">cp node_modules/hexo-theme-next/_config.yml  _config.next.yml</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> your_site_dir</span><br><span class="line"><span class="built_in">cp</span> node_modules/hexo-theme-next/_config.yml  _config.next.yml</span><br></pre></td></tr></table></figure>
 <ul>
 <li><h5 id="选择-Schemes"><a href="#选择-Schemes" class="headerlink" title="选择 Schemes"></a>选择 Schemes</h5><p>  打开 “_config.next.yml” ，首先可以看到 Scheme Settings ，里面提供了四种模式，本站使用 Mist 主题</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Schemes</span><br><span class="line">#scheme: Muse</span><br><span class="line">scheme: Mist</span><br><span class="line">#scheme: Pisces</span><br><span class="line">#scheme: Gemini</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Mist</span></span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line"><span class="comment">#scheme: Gemini</span></span><br></pre></td></tr></table></figure></li>
 <li><h5 id="设置站点-icon"><a href="#设置站点-icon" class="headerlink" title="设置站点 icon"></a>设置站点 icon</h5><p>  在 favicon 中，可以设置侧边栏头像以及站点 icon ，需要把你的 icon 放在主题目录的 source&#x2F;img&#x2F; 目录下</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">favicon:</span><br><span class="line">     small: /img/avatar.jfif</span><br><span class="line">     medium: /img/avatar.jfif</span><br><span class="line">     apple_touch_icon: /img/avatar.jfif</span><br><span class="line">     safari_pinned_tab: /images/logo.svg</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">     <span class="attr">small:</span> <span class="string">/img/avatar.jfif</span></span><br><span class="line">     <span class="attr">medium:</span> <span class="string">/img/avatar.jfif</span></span><br><span class="line">     <span class="attr">apple_touch_icon:</span> <span class="string">/img/avatar.jfif</span></span><br><span class="line">     <span class="attr">safari_pinned_tab:</span> <span class="string">/images/logo.svg</span></span><br></pre></td></tr></table></figure></li>
 <li><h5 id="还有其余的很多配置，可以参考-“-config-next-yml”-里面的提示来配置"><a href="#还有其余的很多配置，可以参考-“-config-next-yml”-里面的提示来配置" class="headerlink" title="还有其余的很多配置，可以参考 “_config.next.yml” 里面的提示来配置"></a>还有其余的很多配置，可以参考 “_config.next.yml” 里面的提示来配置</h5></li>
 </ul>
 
@@ -1506,7 +1506,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-24 10:28:55" itemprop="dateModified" datetime="2022-10-24T10:28:55+08:00">2022-10-24</time>
+      <time title="Modified: 2022-11-22 20:45:43" itemprop="dateModified" datetime="2022-11-22T20:45:43+08:00">2022-11-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1537,9 +1537,9 @@
 </ol>
 <h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><ol start="3">
 <li><p>修改 categories 中的 index.md 开头，增加一些东西使得变成如下内容</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2022-10-23 13:30:15</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2022-10-23 13:30:15</span><br><span class="line"><span class="section">type: &quot;categories&quot;</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure></li>
 <li><p>若要把 “_post” 內的其中一份文档添加到 “Hexo-Usage” categories 里面，在这个文档头部插入 categories: Hexo-Usage</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 基本美化</span><br><span class="line">date: 2022-10-23 16:08:56</span><br><span class="line">categories: Hexo-Usage</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 基本美化</span><br><span class="line">date: 2022-10-23 16:08:56</span><br><span class="line"><span class="section">categories: Hexo-Usage</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure></li>
 <li><p>重新生成静态网页，可以看到导航栏多了一个分类选项</p>
 </li>
 </ol>

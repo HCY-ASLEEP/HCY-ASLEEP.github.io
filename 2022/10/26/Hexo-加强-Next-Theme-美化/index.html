@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://hcy-asleep.github.com/pictures/hexo-next-theme-%E7%BE%8E%E5%8C%96/2022.10.26.13.24.11.png">
 <meta property="article:published_time" content="2022-10-26T03:27:15.000Z">
-<meta property="article:modified_time" content="2022-11-04T10:17:25.026Z">
+<meta property="article:modified_time" content="2022-11-22T12:43:05.145Z">
 <meta property="article:author" content="HCY">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
@@ -186,7 +186,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-11-04 18:17:25" itemprop="dateModified" datetime="2022-11-04T18:17:25+08:00">2022-11-04</time>
+      <time title="Modified: 2022-11-22 20:43:05" itemprop="dateModified" datetime="2022-11-22T20:43:05+08:00">2022-11-22</time>
     </span>
 
   
@@ -201,20 +201,20 @@
     <div class="post-body" itemprop="articleBody">
         <h4 id="Hexo-Next-主题"><a href="#Hexo-Next-主题" class="headerlink" title="Hexo-Next 主题"></a>Hexo-Next 主题</h4><p>hexo-theme-next 应该是目前最广泛使用的hexo主题</p>
 <h4 id="安装-Hexo-Next-主题"><a href="#安装-Hexo-Next-主题" class="headerlink" title="安装 Hexo-Next 主题"></a>安装 Hexo-Next 主题</h4><p>切换到你的博客顶级工程目录，npm 安装</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-next</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-next</span><br></pre></td></tr></table></figure>
 
 <h4 id="切换到-Next-主题"><a href="#切换到-Next-主题" class="headerlink" title="切换到 Next 主题"></a>切换到 Next 主题</h4><p>在你的博客顶层工程目录下打开 “_config.yml”</p>
 <img src="/pictures/hexo-next-theme-美化/2022.10.26.13.24.11.png"/>
 
 <p>搜索themes，将里面的值改为next</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
 <h4 id="配置-Next-主题"><a href="#配置-Next-主题" class="headerlink" title="配置 Next 主题"></a>配置 Next 主题</h4><p>将 node_modules&#x2F;hexo-theme-next&#x2F;_config.yml 复制到博客顶层文件目录，重命名为 “_config.next.yml”</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd your_site_dir</span><br><span class="line">cp node_modules/hexo-theme-next/_config.yml  _config.next.yml</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> your_site_dir</span><br><span class="line"><span class="built_in">cp</span> node_modules/hexo-theme-next/_config.yml  _config.next.yml</span><br></pre></td></tr></table></figure>
 <ul>
 <li><h5 id="选择-Schemes"><a href="#选择-Schemes" class="headerlink" title="选择 Schemes"></a>选择 Schemes</h5><p>  打开 “_config.next.yml” ，首先可以看到 Scheme Settings ，里面提供了四种模式，本站使用 Mist 主题</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Schemes</span><br><span class="line">#scheme: Muse</span><br><span class="line">scheme: Mist</span><br><span class="line">#scheme: Pisces</span><br><span class="line">#scheme: Gemini</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Mist</span></span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line"><span class="comment">#scheme: Gemini</span></span><br></pre></td></tr></table></figure></li>
 <li><h5 id="设置站点-icon"><a href="#设置站点-icon" class="headerlink" title="设置站点 icon"></a>设置站点 icon</h5><p>  在 favicon 中，可以设置侧边栏头像以及站点 icon ，需要把你的 icon 放在主题目录的 source&#x2F;img&#x2F; 目录下</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">favicon:</span><br><span class="line">     small: /img/avatar.jfif</span><br><span class="line">     medium: /img/avatar.jfif</span><br><span class="line">     apple_touch_icon: /img/avatar.jfif</span><br><span class="line">     safari_pinned_tab: /images/logo.svg</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">     <span class="attr">small:</span> <span class="string">/img/avatar.jfif</span></span><br><span class="line">     <span class="attr">medium:</span> <span class="string">/img/avatar.jfif</span></span><br><span class="line">     <span class="attr">apple_touch_icon:</span> <span class="string">/img/avatar.jfif</span></span><br><span class="line">     <span class="attr">safari_pinned_tab:</span> <span class="string">/images/logo.svg</span></span><br></pre></td></tr></table></figure></li>
 <li><h5 id="还有其余的很多配置，可以参考-“-config-next-yml”-里面的提示来配置"><a href="#还有其余的很多配置，可以参考-“-config-next-yml”-里面的提示来配置" class="headerlink" title="还有其余的很多配置，可以参考 “_config.next.yml” 里面的提示来配置"></a>还有其余的很多配置，可以参考 “_config.next.yml” 里面的提示来配置</h5></li>
 </ul>
 
