@@ -144,6 +144,141 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/Hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/23/Hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/" class="post-title-link" itemprop="url">Hexo 文档分类 图片存储</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-23 19:16:39" itemprop="dateCreated datePublished" datetime="2022-10-23T19:16:39+08:00">2022-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-11-22 20:45:43" itemprop="dateModified" datetime="2022-11-22T20:45:43+08:00">2022-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Hexo-Usage/" itemprop="url" rel="index"><span itemprop="name">Hexo-Usage</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>建立分类</strong></p>
+<ol>
+<li>输入 hexo new page ‘categories’</li>
+</ol>
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6><ol start="2">
+<li>在顶层工程目录的 source 目录中會看到 categories 文件夹</li>
+</ol>
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><ol start="3">
+<li><p>修改 categories 中的 index.md 开头，增加一些东西使得变成如下内容</p>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2022-10-23 13:30:15</span><br><span class="line"><span class="section">type: &quot;categories&quot;</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure></li>
+<li><p>若要把 “_post” 內的其中一份文档添加到 “Hexo-Usage” categories 里面，在这个文档头部插入 categories: Hexo-Usage</p>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 基本美化</span><br><span class="line">date: 2022-10-23 16:08:56</span><br><span class="line"><span class="section">categories: Hexo-Usage</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure></li>
+<li><p>重新生成静态网页，可以看到导航栏多了一个分类选项</p>
+</li>
+</ol>
+<p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.19.31.09.png"></p>
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><p><strong>建立标签</strong></p>
+<p>和建立分类一样，只不过内容改变一点</p>
+<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><ol>
+<li>输入 hexo new page ‘tags’</li>
+</ol>
+<h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><ol start="2">
+<li>在顶层工程目录的 source 目录中會看到 tags 文件夹</li>
+</ol>
+<h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><ol start="3">
+<li>修改 tags 中的 index.md 开头，增加一些东西使得变成如下内容 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2022-10-23 13:35:49</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+<li>若要把 “_post” 內的其中一份文档添加到 “Hexo” tag 里面，在这个文档头部插入 tags: Hexo <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 文档分类 图片存储</span><br><span class="line">date: 2022-10-23 19:16:39</span><br><span class="line">categories: Hexo-Usage</span><br><span class="line">tags: Hexo</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>插入多个 tags ，记得 tab 缩进 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo 文档分类 图片存储</span><br><span class="line">date: 2022-10-23 19:16:39</span><br><span class="line">categories: Hexo-Usage</span><br><span class="line">tags:</span><br><span class="line">	- Hexo</span><br><span class="line">	- Github</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+<li>重新生成静态网页，可以看到导航栏多了一个标签选项</li>
+</ol>
+<h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.19.50.12.png"></p>
+<p><strong>文档里面插入图片</strong></p>
+<p>使用Hexo创建文件搭建博客时，会遇到图片插图，以及插入的图片无法显示的问题</p>
+<h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><ol>
+<li>在 Hexo 的目录（也就是顶层工程目录） source 中创建一个图片文件夹，例如 pictures</li>
+</ol>
+<p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.19.55.54.png"></p>
+<h6 id="-8"><a href="#-8" class="headerlink" title=""></a></h6><ol start="2">
+<li><p>把要插入的图片文件放到该目录下面，在文档中正常使用 markdown 的语法插入图片即可，例如</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](ictures/xxx.png)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当然，你还可以在 pictures 再创建目录以区分不同文章的图片</p>
+</li>
+</ol>
+<p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/2022.10.23.20.00.11.png"></p>
+<ol start="4">
+<li><p>这个时候在文章里面引用的方式就是</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](ictures/hexo-文档分类-图片存储/xxx.png)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>记住在 “pictures” 前面有一个 “&#x2F;“ ，表示根目录的意思，因为对于 hexo 来说它的资源文件的根目录就是 source ，当然也可以修改 “_config.yml” 改变这个配置，下图是 hexo 框架文件夹描述</p>
+<p><img src="/pictures/hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/20191220164252492.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/Hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -901,82 +1036,6 @@
 <p>.desktop 文件位于 &#x2F;usr&#x2F;share&#x2F;application&#x2F; 下面</p>
 <p>StartupWMClass</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xprop | grep CLASS</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/23/linux-debian-vscode-fonts-firacode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HCY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A Coder's Pocket">
-      <meta itemprop="description" content="A Space Belongs To HCY">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | A Coder's Pocket">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/23/linux-debian-vscode-fonts-firacode/" class="post-title-link" itemprop="url">Linux VScode 字体</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-23 13:25:51" itemprop="dateCreated datePublished" datetime="2022-10-23T13:25:51+08:00">2022-10-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-29 15:46:52" itemprop="dateModified" datetime="2022-10-29T15:46:52+08:00">2022-10-29</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/tonsky/FiraCode</span><br></pre></td></tr></table></figure>
 
       
     </div>
