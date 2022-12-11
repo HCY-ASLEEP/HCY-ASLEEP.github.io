@@ -144,6 +144,1352 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/07/Redis-%E5%9F%BA%E7%A1%80-%E9%97%B2%E8%81%8A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/07/Redis-%E5%9F%BA%E7%A1%80-%E9%97%B2%E8%81%8A/" class="post-title-link" itemprop="url">Redis-基础-闲聊</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-11-07 17:36:41 / Modified: 19:39:17" itemprop="dateCreated datePublished" datetime="2022-11-07T17:36:41+08:00">2022-11-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+今天要不来聊聊Redis吧？
+</div></div><br/>
+
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+好
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+我个人是这样理解的：无论Redis也好、MySQL也好、HDFS也好、HBase也好，他们都是存储数据的地方
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+因为它们的设计理念的不同，我们会根据不同的应用场景使用不同的存储
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+像Redis一般我们会把它用作于缓存
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+当然啦，日常有的应用场景比较简单，用个HashMap也能解决很多的问题了，没必要上Redis
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+这就好比，有的单机限流可能应对某些场景就够用了，也没必要说一定要上分布式限流把系统搞得复杂
+</div></div><br/>
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/redis-基础-闲聊/2022.11.07.17.43.04.png"/>
+</div></div><br/>
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+你在项目里有用到Redis吗？怎么用的？
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+Redis肯定是用到的，我负责的项目几乎都会有Redis的踪影
+</div></div><br/>
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+举几个项目用的案例？
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+嗯
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+我这边负责消息管理平台，简单来说就是发消息的
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+那发完消息肯定我们是得知道消息有没有下发成功的，是吧？
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+于是我们系统有一套完整的链路追踪体系
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+其中实时的数据我们就用Redis来进行存储，有实时肯定就会有离线的嘛（离线的数据我们是存储到Hive的）
+</div></div><br/>
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/redis-基础-闲聊/008i3skNgy1gtyvevn728j60ko0fygm202.jpg"/>
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+对消息进行实时链路追踪，我这边就用了Redis好几种的数据结构
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+分别有Set、List和Hash
+</div></div><br/>
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯….
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+我再稍微铺垫下链路追踪的背景吧
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+要在消息管理平台发消息，首先得在后台新建一个「模板」，有模板自然会有一个模板ID
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+对模板ID进行扩展，比如说加上日期和固定的业务参数，形成的ID可以唯一标识某个模板的下发链路
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+在系统上，我这边叫它为UMPID
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+在发送入口处会对所有需要下发的消息打上UMPID，然后在关键链路上打上对应的点位
+</div></div><br/>
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/redis-基础-闲聊/008i3skNgy1gtyvfly3b7j60q205cglr02.jpg"/>
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+嗯，你继续吧
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+接下来的工作就是清洗出统一的模型，然后根据不同维度进行处理啦。比如说：
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+我要看某一天下发的所有模板有哪些，那只要我把清洗出来后数据的，将对应UMPID扔到了Set就好了
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+我要看某一个模板的消息下发的整体链路情况，那我以UMPID为Key，Value是Hash结构，Key是state，Value则是人数
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+这里的state我们在下发的过程中打的关键点位，比如接收到消息打个51，消息被去重了打个61，消息成功下发了打个81…
+</div></div><br/>
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/redis-基础-闲聊/008i3skNgy1gtyvgkxib0j60pc066aac02.jpg"/>
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+以UMPID为Key，Hash结构的Key（State）进行不断的累加，就可以实现某一个模板的消息下发的整体链路情况
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+我要看某个用户当天下发的消息有哪些，以及这些消息的整体链路是如何
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+这边我用的是List结构，Key是userId，Value则是UMPID+state(关键点位)+processTime（处理时间)
+</div></div><br/>
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯….
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+简单来说，就是通过Redis丰富的数据结构来实现对下发消息多个维度的统计
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+不同的应用场景选择不同的数据结构，再等到透出做处理的时候，就变得十分简单了
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+消息下发过程中去重或者一般正常的场景就直接Key-Value就能符合需求了
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+像bitmap、hyperloglogs、sortset、steam等等这些数据结构在我所负责的项目用得是真不多
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+要是我有机会去到贵公司，贵公司有相关的应用场景，我相信我也很快就能掌握
+</div></div><br/>
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/redis-基础-闲聊/008i3skNgy1gtyvh1wbjoj60pk06w74l02.jpg"/>
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+这些数据结构底层都由对应的object来支撑着，object记录对应的「编码」
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+其实就是会根据key-value存储的数量或者长度来使用选择不同的底层数据结构实现
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+比如说：ziplist压缩列表这个底层数据结构有可能上层的实现是list、hash和sortset
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+Hash结构的底层数据结构可能是hash和ziplist
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+在节省内存和性能的考量之中切换
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+Redis还是有点屌的啊
+</div></div><br/>
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/redis-基础-闲聊/008i3skNgy1gtyvhui46sj60py04ut9402.jpg"/>
+</div></div><br/>
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+就你上面那个实时链路场景，可以用其他的存储替代吗？
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+嗯，理论上是可以的（或许可以尝试用HBase），但总体来说没这么好吧
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+因为Redis拥有丰富的数据结构，在透出的时候，处理会非常的方便
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+如果不用Redis的话，还得做很多解析的工作
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+并且，我那场景的并发还是相当大的（就一条消息发送，可能就产生10条记录）
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+监控峰值命令处理数会去到20k+QPS，当然了，这场景我肯定用了Pipeline的（不然处理会慢很多）
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+综合上面并发量和实时性以及数据结构，用Redis是一个比较好的选择
+</div></div><br/>
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/redis-基础-闲聊/008i3skNgy1gtyw0mlggbj60y405emy302.jpg"/>
+</div></div><br/>
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯….你觉得为什么Redis可以这么快？
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+首先，它是纯内存操作，内存本身就很快
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+其次，它是单线程的，Redis服务器核心是基于非阻塞的IO多路复用机制，单线程避免了多线程的频繁上下文切换问题
+</div></div><br/>
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+至于这个单线程，其实官网也有过说明（：表示使用Redis往往的瓶颈在于内与和网络，而不在于CPU
+</div></div><br/>
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+了解
+</div></div><br/>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/07/TCP-Shakes-and-Waves-hands-%E9%97%B2%E8%81%8A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/07/TCP-Shakes-and-Waves-hands-%E9%97%B2%E8%81%8A/" class="post-title-link" itemprop="url">TCP Shakes/Waves Hands 闲谈</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-11-07 13:58:17 / Modified: 17:22:44" itemprop="dateCreated datePublished" datetime="2022-11-07T13:58:17+08:00">2022-11-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+面试官你好，请问面试可以开始了吗
+</div></div><br/>
+
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯，开始吧
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+今天来聊聊TCP吧，TCP的各个状态还有印象吗？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+还有些许印象的，要不我就来简单说下TCP的三次握手和四次挥手的流程吧
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+说完这两个流程，就能把TCP的状态给涵盖上了
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+可以
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+在说TCP的三次握手和四次挥手之前，我先给你画下TCP的头部格式呗（：
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/TCP-握手挥手/008i3skNgy1gvbm49hyr9j60u00vvn2o02.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+对于TCP三次握手和四次挥手，我们最主要的就是关注TCP头部的序列号、确认号以及几个标记位（SYN/FIN/ACK/RST）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+序列号：在初次建立连接的时候，客户端和服务端都会为「本次的连接」随机初始化一个序列号。（纵观整个TCP流程中，序列号可以用来解决网络包乱序的问题）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+确认号：该字段表示「接收端」告诉「发送端」对上一个数据包已经成功接收（确认号可以⽤来解决网络包丢失的问题）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+而标记位就很好理解啦。SYN为1时，表示希望创建连接。ACK为1时，确认号字段有效。FIN为1时，表示希望断开连接。RST为1时，表示TCP连接出现异常，需要断开
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/TCP-握手挥手/008i3skNgy1gvbm4ptqt5j60v00h0q6x02.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+下面就先从三次握手开始吧，期间我也会在三次握手中涉及到的TCP状态也说下的
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+TCP三次握手的过程其实就是在：确认通信双方（客户端和服务端）的序列号
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/TCP-握手挥手/008i3skNgy1gvbpkkvctrj614e0diq4702.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+它的过程是这样的
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+在最开始的时候，客户端和服务端都处于 CLOSE 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+服务器主动监听某个端口，处于 LISTEN 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+客户端会随机生成出序列号（这里的序列号一般叫做client_isn），并且把标志位设置为SYN（意味着要连接），然后把该报文发送给服务端
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+客户端发送完SYN报文以后，自己便进入了 SYN_SEND 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/TCP-握手挥手/008i3skNgy1gvbpqrtuz5j61ai0ggjsz02.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+服务端接收到了客户端的请求之后，自己也初始化对应的序列号（这里的序列号一般叫做 server_isn）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+在「确认号」字段里填上client_isn + 1（相当于告诉客户端，已经收到了发送过来的序列号了） ，并且把 SYN 和 ACK 标记位都点亮(置为1)
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+把该报文发送客户端，服务端的状态变成 SYN-REVD 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/TCP-握手挥手/008i3skNgy1gvcuaebe9oj619g0u0gox02.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+客户端收到服务端发送的报文后，就知道服务端已经接收到了自己的序列号（通过确认号就可以知道），并且接收到了服务端的序列号(server_isn)
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+此时，客户端需要告诉服务端自己已经接收到了他发送过来的序列号，所以在「确认号」字段上填上server_isn+1，，并且标记位 ACK 为1
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/TCP-握手挥手/008i3skNgy1gvcueanzntj61380u0adr02.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+客户端在发送报文之后，进入 ESTABLISHED 状态，而服务端接收到客户端的报文之后，也进入 ESTABLISHED 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+这就是三次握手的过程以及涉及到的TCP状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+总结下来，就是双方都把自身的序列号发给对方，看对方能不能接收到。如果「确认可以」，那就可以正常通信。（三次握手这个过程就可以看到双方都有接收和发送的能力）
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+那两次握手行吗？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+两次握手只能保证客户端的序列号成功被服务端接收，而服务端是无法确认自己的序列号是否被客户端成功接收。所以是不行的（：
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+了解了，那我想问问序列号为什么是随机的？以及序列号是怎么生成的？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+一方面为了安全性（随机ISN能避免非同一网络的攻击），另一方面可以让通信双方能够根据序号将「不属于」本连接的报文段丢弃
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+序列号怎么生成的？这…随便猜下就应该跟「时钟」和TCP头部的某些属性做运算生成的吧，类似于雪花算法（：具体我忘了
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+既然网络是不可靠的，那建立连接不是会经过三次握手吗？那要是在中途丢了，怎么办？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+假设第一个包丢了，客户端发送给服务端的 SYN 包丢了（简而要之就是服务端没接收到客户端的SYN包）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+客户端迟迟收不到服务端的ACK包，那会周期性超时重传，直到收到服务端的ACK
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+假设第二个包丢了，服务端发送的SYN+ACK包丢了（简而要之就是客户端没接收到服务端的SYN+ACK包）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+服务端迟迟收不到客户端的ACK包，那会周期性超时重传，直到收到客户端的ACK
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+假设第三个包丢了（ACK包），客户端发送完第三个包后单方面进入了 ESTABLISHED 状态，而服务端也认为此时连接是正常的，但第三个包没到达服务端
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+一、如果此时客户端与服务端都还没数据发送，那服务端会认为自己发送的SYN+ACK的包没发送至客户端，所以会超时重传自己的SYN+ACK包
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+二、如果这时候客户端已经要发送数据了，服务端接收到了ACK + Data数据包，那自然就切换到 ESTABLISHED 状态下，并且接收客户端的Data数据包
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+三、如果此时服务端要发送数据了，但发送不了，会一直周期性超时重传SYN + ACK，直到接收到客户端的ACK包
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/TCP-握手挥手/008i3skNgy1gvdzs5pbp3j60so048dgb02.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯，是不是要讲下四次挥手了？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+嗯，在建立完连接之后，客户端和服务端双方都处于 ESTABLISHED 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+断开连接双方都有权利的，下面我还是以客户端主动断开为例好啦
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+客户端打算关闭连接，会发 FIN 报文给服务端（其实就是把标志位 FIN 点亮），客户端发送完之后，就进入FIN_WAIT_1状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+服务端收到 FIN 报文之后，回复 ACK 报文给客户端（表示已经收到了），服务端发送完之后，就进入 CLOSE_WAIT 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+客户端接收到服务端的 ACK 报文，就进入了 FIN_WAIT_2 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/TCP-握手挥手/008i3skNgy1gvdztfq4shj61as0jw0uz02.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+这时候，服务器可能还有数据要发送给客户端，等服务端确认自己已经没有数据返回给客户端之后，就发送FIN报文给客户端了，自己进入 LAST_ACK 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+客户端收到服务端的FIN报文之后，回应ACK报文，自己进入 TIME_WAIT 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+服务端收到客户端的ACK报文之后，服务端就进入 CLOSE 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+客户端在TIME_WAIT等到2MSL，也进入了 CLOSE 状态
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/TCP-握手挥手/008i3skNgy1gvdzz74bokj614q0u0gp002.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+四次挥手的流程到这里就结束了，结合三次握手，TCP的各个状态也已经说完了
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯嗯，刚聊完四次挥手嘛，那你觉得为什么是四次呢？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+其实很好理解，当客户端第一次发送 FIN 报文之后，只是代表着客户端不再发送数据给服务端，但此时客户端还是有接收数据的能力的。而服务端收到FIN报文的时候，可能还有数据要传输给客户端，所以只能先回复 ACK给客户端
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+等到服务端不再有数据发送给客户端时，才发送 FIN 报文给客户端，表示可以关闭了
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+所以，一来一回就四次了
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/TCP-握手挥手/008i3skNgy1gve15uf3m1j60ze04gwf802.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+从四次挥手的流程上来看，有个 TIME_WAIT 状态，你知道这个状态干什么用的吗？（等待 2MSL）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+主要有两个原因吧。1.保证最后的 ACK 报文 「接收方」一定能收到（如果收不到，对方会 重发 FIN 报文）2. 确保在创建新连接时，先前网络中残余的数据都丢失了
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+其实也比较好理解的。就正如我们重启服务器一样，会先优雅关闭各种资源，再留有一段时间，希望在这段时间内，资源是正常关闭的，这样重启服务器（或者发布）就基本认为不会影响到线上运行了
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+假设 TIME_WAIT 状态多过会有什么危害？怎么解决呢？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+从流程上看， TIME_WAIT 状态 只会出现在 主动发起 关闭连接的一方。危害就是会占用内存资源和端口呗（毕竟在等待嘛），解决的话，有Linux参数可以设置，具体忘了额
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+今天最后再问个问题吧，我们常说TCP连接，那这个连接到底是什么？你是怎么理解的？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+其实从三次握手可以发现的是，TCP建立连接无非就是交换了双方的状态（比如序列号）。然后就没有然后了…连接本质上「只是互相维持一个状态，有连接特性」
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+好吧
+</div></div><br/>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/06/MySQL-%E9%97%B2%E8%B0%88-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HCY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A Coder's Pocket">
+      <meta itemprop="description" content="A Space Belongs To HCY">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | A Coder's Pocket">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/06/MySQL-%E9%97%B2%E8%B0%88-3/" class="post-title-link" itemprop="url">MySQL 闲谈 3</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-11-06 16:20:23" itemprop="dateCreated datePublished" datetime="2022-11-06T16:20:23+08:00">2022-11-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-11-07 16:54:14" itemprop="dateModified" datetime="2022-11-07T16:54:14+08:00">2022-11-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+要不你来讲讲你们对MySQL是怎么调优的？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+哇，这命题很大阿…我认为，对于开发者而言，对MySQL的调优重点一般是在「开发规范」、「数据库索引」又或者说解决线上慢查询上
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+而对于MySQL内部的参数调优，由专业的DBA来搞
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+扯了这么多，你就是想表达你不会MySQL参数调优，对吧
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+草，被发现了
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+那你来聊聊你们平时开发的规范和索引这块，平时是怎么样的吧
+</div></div><br/>
+
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+嗯，首先，我们在生产环境下，创建数据库表，都是在工单系统下完成的（那就自然需要DBA审批）。如果在创建表时检测到没有创建索引，那就会直接提示warning（：
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/MySQL-闲谈/v2-adf9da0a7ab5845f85b8e487095f71ae_r.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+理论上来说，如果表有一定的数据量，那就应该要创建对应的索引。从数据库查询数据需要注意的地方还是蛮多的，其中很多都是平时积累来的。比如说：
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+1. 是否能使用「覆盖索引」，减少「回表」所消耗的时间。意味着，我们在select 的时候，一定要指明对应的列，而不是select *
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+2. 考虑是否组建「联合索引」，如果组建「联合索引」，尽量将区分度最高的放在最左边，并且需要考虑「最左匹配原则」
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+3.对索引进行函数操作或者表达式计算会导致索引失效
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+4.利用子查询优化超多分页场景。比如 limit offset , n 在MySQL是获取 offset + n的记录，再返回n条。而利用子查询则是查出n条，通过ID检索对应的记录出来，提高查询效率
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯…
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+5.通过explain命令来查看SQL的执行计划，看看自己写的SQL是否走了索引，走了什么索引。通过show profile 来查看SQL对系统资源的损耗情况（不过一般还是比较少用到的）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+6.在开启事务后，在事务内尽可能只操作数据库，并有意识地减少锁的持有时间（比如在事务内需要插入&&修改数据，那可以先插入后修改。因为修改是更新操作，会加行锁。如果先更新，那并发下可能会导致多个事务的请求等待行锁释放）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/MySQL-闲谈/v2-482ac758e3b5d1bb5e52407e52f44fb1_r.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯，你提到了事务，之前也讲过了事务的隔离级别嘛，那你线上用的是什么隔离级别？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+嗯，我们这边用的是Read Commit（读已提交），MySQL默认用的是Repeatable read（可重复读）。选用什么隔离级别，主要看应用场景嘛，因为隔离级别越低，事务并发性能越高
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+一般互联网公司都选择Read Commit作为主要的隔离级别）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+像Repeatable read（可重复读）隔离级别，就有可能因为「间隙锁」导致的死锁问题
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+但可能你已经知道，MySQL默认的隔离级别为Repeatable read。很大一部分原因是在最开始的时候，MySQL的binlog没有row模式，在read commit隔离级别下会存在「主从数据不一致」的问题
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+binlog记录了数据库表结构和表数据「变更」，比如update/delete/insert/truncate/create。在MySQL中，主从同步实际上就是应用了binlog来实现的（：
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+有了该历史原因，所以MySQL就将默认的隔离级别设置为Repeatable read
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/MySQL-闲谈/v2-89983c3f82aef2f68bc720567f0d1980_r.jpg"/>
+</div></div><br/>
+
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯，那我顺便想问下，你们遇到过类似的问题吗：即便走对了索引，线上查询还是慢
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+嗯嗯，当然遇到过了
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+那你们是怎么做的？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+如果走对了索引，但查询还是慢，那一般来说就是表的数据量实在是太大了
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+首先，考虑能不能把「旧的数据」给”删掉”，对于我们公司而言，我们都会把数据同步到Hive，说明已经离线存储了一份了
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+那如果「旧的数据」已经没有查询的业务了，那最简单的办法肯定是”删掉”部分数据咯。数据量降低了，那自然，检索速度就快了…
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯，但一般不会删的
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+没错，只有极少部分业务可以删掉数据（：
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+随后，就考虑另一种情况，能不能在查询之前，直接走一层缓存（Redis）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+而走缓存的话，又要看业务能不能忍受读取的「非真正实时」的数据（毕竟Redis和MySQL的数据一致性需要保证），如果查询条件相对复杂且多变的话（涉及各种group by 和sum），那走缓存也不是一种好的办法，维护起来就不方便了…
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+再看看是不是有「字符串」检索的场景导致查询低效，如果是的话，可以考虑把表的数据导入至Elasticsearch类的搜索引擎，后续的线上查询就直接走Elasticsearch了
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+MySQL->Elasticsearch需要有对应的同步程序(一般就是监听MySQL的binlog，解析binlog后导入到Elasticsearch)
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+如果还不是的话，那考虑要不要根据查询条件的维度，做相对应的聚合表，线上的请求就查询聚合表的数据，不走原表
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+比如，用户下单后，有一份订单明细，而订单明细表的量级太大。但在产品侧(前台)透出的查询功能是以「天」维度来展示的，那就可以将每个用户的每天数据聚合起来，在聚合表就是一个用户一天只有一条汇总后的数据
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+查询走聚合后的表，那速度肯定杠杠的（聚合后的表数据量肯定比原始表要少很多）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+思路大致的就是「以空间换时间」，相同的数据换别的地方也存储一份，提高查询效率
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/MySQL-闲谈/v2-6a1dc5b0c6ee82fc7337006ff80b67ff_r.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+那我还想问下，除了读之外，写性能同样有瓶颈，怎么办？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+你说到这个，我就不困了
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+如果在MySQL读写都有瓶颈，那首先看下目前MySQL的架构是怎么样的
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+如果是单库的，那是不是可以考虑升级至主从架构，实现读写分离
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+简单理解就是：主库接收写请求，从库接收读请求。从库的数据由主库发送的binlog进而更新，实现主从数据一致（在一般场景下，主从的数据是通过异步来保证最终一致性的）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/MySQL-闲谈/v2-68894ad64aceece371fe98507a6d4232_r.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯…
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+如果在主从架构下，读写仍存在瓶颈，那就要考虑是否要分库分表了
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+至少在我前公司的架构下，业务是区分的。流量有流量数据库，广告有广告的数据库，商品有商品的数据库。所以，我这里讲的分库分表的含义是：在原来的某个库的某个表进而拆分
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+比如，现在我有一张业务订单表，这张订单表在广告库中，假定这张业务订单表已经有1亿数据量了，现在我要分库分表
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+那就会将这张表的数据分至多个广告库以及多张表中（：
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+分库分表的最明显的好处就是把请求进行均摊（本来单个库单个表有一亿的数据，那假设我分开8个库，那每个库1200+W的数据量，每个库下分8张表，那每张表就150W的数据量）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/MySQL-闲谈/v2-998aa34d5433837a585196f111bbf771_r.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+你们是以什么来作为分库键的？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+按照我们这边的经验，一般来说是按照userId的（因为按照用户的维度查询比较多），如果要按照其他的维度进行查询，那还是参照上面的的思路（以空间换时间）
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+那分库分表后的ID是怎么生成的？
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+这就涉及到分布式ID生成的方式了，思路有很多。有借助MySQL自增的，有借助Redis自增的，有基于「雪花算法」自增的。具体使用哪种方式，那就看公司的技术栈了，一般使用Redis和基于「雪花算法」实现用得比较多
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+至于为什么强调自增（还是跟索引是有序有关，前面已经讲过了，你应该还记得）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/MySQL-闲谈/v2-effeac74c8efb2b5c1627884b4ec8843_r.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯，那如果我要分库分表了，迁移的过程是怎么样的呢
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+我们一般采取「双写」的方式来进行迁移，大致步骤就是
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+一、增量的消息各自往新表和旧表写一份
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+二、将旧表的数据迁移至新库
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+三、迟早新表的数据都会追得上旧表（在某个节点上数据是同步的）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+四、校验新表和老表的数据是否正常（主要看能不能对得上）
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+五、开启双读（一部分流量走新表，一部分流量走老表），相当于灰度上线的过程
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+六、读流量全部切新表，停止老表的写入
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+七、提前准备回滚机制，临时切换失败能恢复正常业务以及有修数据的相关程序
+</div></div><br/>
+
+ 
+
+<div align="right"><div style="width: 80%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent black; border-width: 10px; position: absolute; top: 10px; right: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent transparent transparent white; border-width: 10px; position: absolute; top: 10px; right: -19px"></span>
+<img src="/pictures/MySQL-闲谈/v2-546dffdeecd9c7dc2da98ad5867dfc4c_r.jpg"/>
+</div></div><br/>
+
+ 
+
+<div align="left"><div style="width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center"><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent black transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -20px;"></span><span style="width: 0px; height: 0px; border-style: solid; border-color: transparent white transparent transparent; border-width: 10px; position: absolute; top: 10px; left: -19px;"></span>
+嗯…今天就到这吧
+</div></div><br/>
+
+ 
+
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ul>
+<li>数据库表存在一定数据量，就需要有对应的索引</li>
+</ul>
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6><ul>
+<li>发现慢查询时，检查是否走对索引，是否能用更好的索引进行优化查询速度，查看使用索引的姿势有没有问题</li>
+</ul>
+<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><ul>
+<li>当索引解决不了慢查询时，一般由于业务表的数据量太大导致，利用空间换时间的思想</li>
+</ul>
+<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><ul>
+<li>当读写性能均遇到瓶颈时，先考虑能否升级数据库架构即可解决问题，若不能则需要考虑分库分表</li>
+</ul>
+<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><ul>
+<li>分库分表虽然能解决掉读写瓶颈，但同时会带来各种问题，需要提前调研解决方案和踩坑</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/11/06/MySQL-%E9%97%B2%E8%B0%88-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1668,555 +3014,6 @@ PRE : <a href="/2022/10/26/%E5%88%9D%E8%AF%86-MARO/" title="初识 MARO">初识 
 NEXT : <a href="/2022/10/27/MARO-VM-%E8%B0%83%E5%BA%A6/" title="MARO VM 调度">MARO VM 调度</a>
 </span>
 </h3>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/29/VIM-%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HCY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A Coder's Pocket">
-      <meta itemprop="description" content="A Space Belongs To HCY">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | A Coder's Pocket">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/29/VIM-%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">VIM 配置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-10-29 14:31:55 / Modified: 15:19:56" itemprop="dateCreated datePublished" datetime="2022-10-29T14:31:55+08:00">2022-10-29</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="VIM-配置说明"><a href="#VIM-配置说明" class="headerlink" title="VIM 配置说明"></a>VIM 配置说明</h3><ol>
-<li><p>安装 neovim 可以直接从 github 下载 appimage</p>
-</li>
-<li><p>配置 neovim 首次启动使用 :checkhealth 查看配置的路径等信息</p>
-</li>
-<li><p>coc.nvim 的 LSP 服务需要 npm （ node.js ）提供支持，npm 安装的时候可以从官方网站那里下载然后安装到指定 path，之后的 -g 安装 npm 包的时候包会安装在安装 npm 的目录下面</p>
-</li>
-<li><p>注意这个 coc-setting.json 这个在安装了 coc.nvim 之后可以 :CocConfig 来进行编辑，json 里面这一句话一定要加上，解决了初次 tab 选中的问题</p>
-</li>
-<li><p>配置文件 init.vim 位于 &#x2F;home&#x2F;asleep&#x2F;.config&#x2F;nvim 下，coc-settings.json 也是在这个路径下面</p>
-</li>
-<li><p>vimplug 管理插件，这里有点特殊，这里我将其他插件安装在与 vimplug 的 plug.vim 同一个目录下面，即  &#x2F;home&#x2F;asleep&#x2F;.local&#x2F;share&#x2F;nvim&#x2F;site&#x2F;autoload</p>
-</li>
-<li><p>安装各种插件之前，应该要了解各个插件的依赖</p>
-</li>
-<li><p>至于 vimplug 的安装，只需要把 github 上面的那个 plug.vim 文件弄下来放在上面说的那个 path 下面就可以调用 :PlugInstall，不用整个仓库弄下来</p>
-</li>
-<li><p>至于 coc 的插件，coc.nvim 是一个插件管理器，coc.nvim 管理的插件在 &#x2F;home&#x2F;asleep&#x2F;.config&#x2F;coc&#x2F;extensions 下面</p>
-</li>
-<li><p>综上所述，如果要迁移 nvim 及其配置，只需要复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/home/asleep/.config/coc/extensions   “coc-extensions”</span><br><span class="line"></span><br><span class="line">/home/asleep/.config/nvim   “coc-settings.json”  “init.vim“</span><br><span class="line"></span><br><span class="line">/home/asleep/.local/share/nvim/site/autoload   “plug.vim” “vim-plug extensions”</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>这三个路径下的文件就可以完成迁移 </p>
-</li>
-<li><p>每次修改 init.vim 之后，都要 :so % 即 :source init.vim 生效</p>
-</li>
-</ol>
-<h6 id=""><a href="#" class="headerlink" title=""></a></h6><h3 id="coc-setting-json"><a href="#coc-setting-json" class="headerlink" title="coc-setting.json"></a>coc-setting.json</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;suggest.noselect&quot;: true,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><h3 id="init-vim-已启用的配置"><a href="#init-vim-已启用的配置" class="headerlink" title="init.vim 已启用的配置"></a>init.vim 已启用的配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line">&quot; -------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot; ---------------------------------------------common-start----------------------------------------------------</span><br><span class="line">&quot; -------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">set number</span><br><span class="line">set mouse=c</span><br><span class="line">set tabstop=4</span><br><span class="line">set autoindent</span><br><span class="line">set backspace=indent,eol,start</span><br><span class="line">set hlsearch</span><br><span class="line">set clipboard+=unnamedplus</span><br><span class="line">set foldmethod=syntax</span><br><span class="line">set nofoldenable</span><br><span class="line">&quot; 自动同步</span><br><span class="line">set autoread</span><br><span class="line">set fillchars=eob:\ </span><br><span class="line"></span><br><span class="line">&quot; Vim jump to the last position when reopening a file</span><br><span class="line">if has(&quot;autocmd&quot;)</span><br><span class="line">  au BufReadPost * if line(&quot;&#x27;\&quot;&quot;) &gt; 1 &amp;&amp; line(&quot;&#x27;\&quot;&quot;) &lt;= line(&quot;$&quot;) | exe &quot;normal! g&#x27;\&quot;&quot; | endif</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function! ESC_IMAP()</span><br><span class="line">    let l:frontChar = getline(&#x27;.&#x27;)[col(&#x27;.&#x27;) - 2]</span><br><span class="line">    if l:frontChar == &quot;;&quot; </span><br><span class="line">        call feedkeys(&quot;\&lt;BS&gt;\&lt;BS&gt;\&lt;ESC&gt;&quot;, &#x27;n&#x27;)</span><br><span class="line">    else</span><br><span class="line">        call feedkeys(&quot;\&lt;BS&gt;\;&quot;, &#x27;n&#x27;)</span><br><span class="line">    endif</span><br><span class="line">endfunction</span><br><span class="line">inoremap &lt;expr&gt; ; ESC_IMAP()</span><br><span class="line"></span><br><span class="line">set timeoutlen=200</span><br><span class="line"></span><br><span class="line">nnoremap ;; &lt;ESC&gt;</span><br><span class="line">vnoremap ;; &lt;ESC&gt;</span><br><span class="line">snoremap ;; &lt;ESC&gt;</span><br><span class="line">xnoremap ;; &lt;ESC&gt;</span><br><span class="line">cnoremap ;; &lt;ESC&gt;</span><br><span class="line">onoremap ;; &lt;ESC&gt;</span><br><span class="line"></span><br><span class="line">&quot; exit windows</span><br><span class="line">tnoremap ;; &lt;C-\&gt;&lt;C-n&gt;</span><br><span class="line"></span><br><span class="line">&quot; switch windows</span><br><span class="line">nnoremap &lt;TAB&gt; &lt;C-w&gt;w</span><br><span class="line">nnoremap vv &lt;C-v&gt;</span><br><span class="line"></span><br><span class="line">echo expand(&quot;%:p:h&quot;)</span><br><span class="line"></span><br><span class="line">cnoreabbrev fd echo expand(&quot;%:p:h&quot;)</span><br><span class="line">cnoreabbrev vst vs&lt;ENTER&gt;:term</span><br><span class="line">cnoreabbrev spt sp&lt;ENTER&gt;:term</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot; -------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;-----------------------------------------------common-end----------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;</span><br><span class="line">&quot;</span><br><span class="line">&quot;</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;--------------------------------------------vim-plug-start---------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">call plug#begin(&#x27;/home/asleep/.local/share/nvim/site/autoload&#x27;)</span><br><span class="line">Plug &#x27;itchyny/lightline.vim&#x27;</span><br><span class="line">Plug &#x27;joshdick/onedark.vim&#x27;</span><br><span class="line">Plug &#x27;neoclide/coc.nvim&#x27;, &#123;&#x27;branch&#x27;: &#x27;release&#x27;&#125;</span><br><span class="line">Plug &#x27;jiangmiao/auto-pairs&#x27;</span><br><span class="line">Plug &#x27;ms-jpq/chadtree&#x27;, &#123;&#x27;branch&#x27;: &#x27;chad&#x27;, &#x27;do&#x27;: &#x27;python3 -m chadtree deps&#x27;&#125;</span><br><span class="line">Plug &#x27;sheerun/vim-polyglot&#x27;</span><br><span class="line">Plug &#x27;Yggdroot/LeaderF&#x27;, &#123; &#x27;do&#x27;: &#x27;:LeaderfInstallCExtension&#x27; &#125;</span><br><span class="line">Plug &#x27;tpope/vim-fugitive&#x27;</span><br><span class="line">Plug &#x27;sbdchd/neoformat&#x27;</span><br><span class="line">Plug &#x27;iamcco/markdown-preview.nvim&#x27;, &#123; &#x27;do&#x27;: &#x27;cd app &amp;&amp; yarn install&#x27; &#125;</span><br><span class="line">call plug#end()</span><br><span class="line"></span><br><span class="line">&quot;有些插件需要安装 nerd fonts！</span><br><span class="line">&quot;nerd fonts 包括了 powerline fonts！</span><br><span class="line">&quot;建议安装 DejaVuSansMonoNerd！</span><br><span class="line"></span><br><span class="line">&quot;这个是 LeaderF 的设置</span><br><span class="line">let g:Lf_WindowPosition = &#x27;popup&#x27;</span><br><span class="line">cnoreabbrev ff LeaderfFile</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cnoreabbrev fm Neoformat</span><br><span class="line"></span><br><span class="line">cnoreabbrev mt MarkdownPreviewToggle</span><br><span class="line">let g:mkdp_theme = &quot;light&quot;</span><br><span class="line"></span><br><span class="line">&quot;这个是 chadtree 的设置</span><br><span class="line">&quot;明确指定绑定的键之后，就不会使用默认的键</span><br><span class="line">let g:chadtree_settings = &#123;</span><br><span class="line">  \ &#x27;keymap.change_focus_up&#x27;: [&quot;..&quot;],</span><br><span class="line">  \ &#x27;keymap.secondary&#x27;: [&quot;&lt;2-leftmouse&gt;&quot;]</span><br><span class="line">\&#125;</span><br><span class="line"></span><br><span class="line">nnoremap &lt;F2&gt; :CHADopen&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">let g:onedark_terminal_italics=1</span><br><span class="line">autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE </span><br><span class="line">colorscheme onedark</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let g:lightline = &#123;</span><br><span class="line">      \&#x27;colorscheme&#x27; : &#x27;onedark&#x27;,</span><br><span class="line">      \ &#x27;separator&#x27;: &#123; &#x27;left&#x27;: &#x27;&#x27;, &#x27;right&#x27;: &#x27;&#x27; &#125;,</span><br><span class="line">      \ &#x27;subseparator&#x27;: &#123; &#x27;left&#x27;: &#x27;&#x27;, &#x27;right&#x27;: &#x27;&#x27; &#125;,</span><br><span class="line">      \ &#x27;component&#x27;: &#123;</span><br><span class="line">            \ &#x27;lineinfo&#x27;: &#x27; %3l / %L : %-2v&#x27;,</span><br><span class="line">            \ &#125;, </span><br><span class="line">      \ &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;-----------------------------------------------vim-plug-end--------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;------------------------------------------------coc-start----------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">inoremap &lt;silent&gt;&lt;expr&gt; &lt;TAB&gt; coc#pum#visible() ? coc#pum#next(1) :&quot;\&lt;Tab&gt;&quot; </span><br><span class="line"></span><br><span class="line">nnoremap gd &lt;Plug&gt;(coc-definition)</span><br><span class="line">nnoremap gt &lt;Plug&gt;(coc-type-definition)</span><br><span class="line">nnoremap gi &lt;Plug&gt;(coc-implementation)</span><br><span class="line">nnoremap gr &lt;Plug&gt;(coc-references)</span><br><span class="line"></span><br><span class="line">&quot; Use K to show documentation in preview window.</span><br><span class="line">function! ShowDocumentation()</span><br><span class="line">  if CocAction(&#x27;hasProvider&#x27;, &#x27;hover&#x27;)</span><br><span class="line">    call CocActionAsync(&#x27;doHover&#x27;)</span><br><span class="line">  else</span><br><span class="line">    call feedkeys(&#x27;K&#x27;, &#x27;in&#x27;)</span><br><span class="line">  endif</span><br><span class="line">endfunction</span><br><span class="line">nnoremap &lt;silent&gt; K :call ShowDocumentation()&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">&quot; Highlight the symbol and its references when holding the cursor.</span><br><span class="line">autocmd CursorHold * silent call CocActionAsync(&#x27;highlight&#x27;)</span><br><span class="line"></span><br><span class="line">&quot; Symbol renaming.</span><br><span class="line">nnoremap &lt;space&gt;r &lt;Plug&gt;(coc-rename)</span><br><span class="line"></span><br><span class="line">&quot; Show all diagnostics.</span><br><span class="line">nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;a  :&lt;C-u&gt;CocList diagnostics&lt;cr&gt;</span><br><span class="line"></span><br><span class="line">&quot; Manage extensions.</span><br><span class="line">nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;e  :&lt;C-u&gt;CocList extensions&lt;cr&gt;</span><br><span class="line"></span><br><span class="line">&quot; Find symbol of current document.</span><br><span class="line">nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;o  :&lt;C-u&gt;CocList outline&lt;cr&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------coc-end-----------------------------------------------------</span><br><span class="line">&quot;-------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
-
-<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><h3 id="init-vim-未启用的配置"><a href="#init-vim-未启用的配置" class="headerlink" title="init.vim 未启用的配置"></a>init.vim 未启用的配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;&quot;----------------------------------------------netrw_start----------------------------------------------------</span><br><span class="line">&quot;&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;let g:netrw_banner = 0</span><br><span class="line">&quot;&quot;let g:netrw_liststyle = 3</span><br><span class="line">&quot;&quot;let g:netrw_browse_split = 4</span><br><span class="line">&quot;&quot;let g:netrw_altv = 1</span><br><span class="line">&quot;&quot;let g:netrw_winsize = 15</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;set autochdir</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;&quot; Toggle Vexplore with &lt;F2&gt;</span><br><span class="line">&quot;&quot;function! ToggleVExplorer()</span><br><span class="line">&quot;&quot;    if exists(&quot;t:expl_buf_num&quot;)</span><br><span class="line">&quot;&quot;        let expl_win_num = bufwinnr(t:expl_buf_num)</span><br><span class="line">&quot;&quot;        let cur_win_num = winnr()</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;        if expl_win_num != -1</span><br><span class="line">&quot;&quot;            while expl_win_num != cur_win_num</span><br><span class="line">&quot;&quot;                exec &quot;wincmd w&quot;</span><br><span class="line">&quot;&quot;                let cur_win_num = winnr()</span><br><span class="line">&quot;&quot;            endwhile</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;            close</span><br><span class="line">&quot;&quot;        endif</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;        unlet t:expl_buf_num</span><br><span class="line">&quot;&quot;    else</span><br><span class="line">&quot;&quot;         Vexplore</span><br><span class="line">&quot;&quot;         let t:expl_buf_num = bufnr(&quot;%&quot;)</span><br><span class="line">&quot;&quot;    endif</span><br><span class="line">&quot;&quot;endfunction</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;map &lt;F2&gt; :call ToggleVExplorer()&lt;CR&gt;</span><br><span class="line">&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;&quot; 状态栏无插件设置</span><br><span class="line">&quot;&quot;hi VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE</span><br><span class="line">&quot;&quot;set fillchars=vert:\ </span><br><span class="line">&quot;&quot;&quot;&quot;set fillchars=vert:\│</span><br><span class="line">&quot;&quot;set statusline=%*\ %.50F\               &quot;显示文件名和文件路径</span><br><span class="line">&quot;&quot;set statusline+=%=%y%m%r%h%w\ %*        &quot;显示文件类型及文件状态</span><br><span class="line">&quot;&quot;set statusline+=%&#123;&amp;ff&#125;\[%&#123;&amp;fenc&#125;]\ %*   &quot;显示文件编码类型</span><br><span class="line">&quot;&quot;set statusline+=%l/%L,%c\ %*            &quot;显示光标所在行和列</span><br><span class="line">&quot;&quot;set statusline+=%3p%%                   &quot;显示光标前文本所占总文本的比例</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;</span><br><span class="line">&quot;&quot;hi Statusline ctermfg=NONE ctermbg=NONE cterm=bold </span><br><span class="line">&quot;&quot;hi StatuslineNC ctermfg=NONE ctermbg=NONE cterm=NONE</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;&quot;-------------------------------------------------------------------------------------------------------------</span><br><span class="line">&quot;&quot;-----------------------------------------------netrw-end-----------------------------------------------------</span><br><span class="line">&quot;&quot;-------------------------------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/27/MARO-VM-%E8%B0%83%E5%BA%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HCY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A Coder's Pocket">
-      <meta itemprop="description" content="A Space Belongs To HCY">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | A Coder's Pocket">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/27/MARO-VM-%E8%B0%83%E5%BA%A6/" class="post-title-link" itemprop="url">MARO VM 调度</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-27 11:01:57" itemprop="dateCreated datePublished" datetime="2022-10-27T11:01:57+08:00">2022-10-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-11-23 20:01:57" itemprop="dateModified" datetime="2022-11-23T20:01:57+08:00">2022-11-23</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
-<li>在云服务期间，用户请求具有一定数量资源的 <strong>虚拟机（VM）（Virtual Mechine）</strong>，例如中央处理器、内存等</li>
-<li>假设一个特定的时间，VM 请求的数量和到达模式是固定的，给定一个物理资源有限的 <strong>物理机（PM）（Physical Mechine）</strong> 集群</li>
-<li>不同的 VM 分配策略导致数据中心的成功完成量不同，运营成本也不同</li>
-<li>对于云提供商，一个好的 VM 分配策略可以最大限度地提高资源利用率，从而可以通过向用户提供更多的 VM 来增加利润</li>
-<li>对于云用户，良好的 VM 分配策略可以最大程度地缩短 VM 响应时间，并提供更好的使用体验</li>
-</ul>
-<h6 id=""><a href="#" class="headerlink" title=""></a></h6><h3 id="资源供需"><a href="#资源供需" class="headerlink" title="资源供需"></a>资源供需</h3><img src="/pictures/maro-vm-调度/2022.10.27.20.00.43.png"/>
-
-<ul>
-<li><p>每个 <strong>PM</strong> 中的物理资源是中心资源，包括 <strong>物理内核</strong> 和 <strong>内存</strong></p>
-<ul>
-<li>VM 请求需要一定数量的 <strong>物理资源</strong> ，资源要求因不同的 VM 请求而异 </li>
-<li>只要指定的 PM 的剩余资源足够，<strong>模拟器</strong> 就会将 VM 分配到指定 PM ，VM 会在指定 PM 中创建 </li>
-<li>VM 的资源利用率动态变化，PM 的实时能耗将在 <strong>Runtime-Simulation（模拟器）</strong> 中被模拟出来</li>
-<li>VM 执行一段时间后完成其任务，<strong>模拟器</strong> 将释放分配给此 VM 的资源，并从 PM 中解除分配此 VM ，物理资源被释放，可以处理下一个 VM 请求</li>
-</ul>
-</li>
-</ul>
-<img src="/pictures/maro-vm-调度/2022.10.28.15.14.52.png"/>
-
-
-<h6 id="-1"><a href="#-1" class="headerlink" title=""></a></h6><h3 id="VM-Request"><a href="#VM-Request" class="headerlink" title="VM Request"></a>VM Request</h3><ul>
-<li>MARO 和机器学习算法原理类似，需要 <strong>样本数据</strong> 训练出 <strong>模型（找出当前场景的规律）</strong>，再通过模型去 <strong>预测</strong> 怎样的行为更加正确符合实际</li>
-<li>VM scheduling 场景里面，<strong>样本数据</strong> 是 VM Request<strong>s</strong> ，样本数据从实际工作负荷中统一采样</li>
-<li>只要原始数据集足够大，采样率不太小，采样的 VM Requests<strong>（复数名词）</strong> 就可以被认为遵循与原始请求类似的分布</li>
-<li>一个 VM Request 包含 <strong>VM 信息</strong>（如 订阅 ID、部署 ID 和 VM 类别）、<strong>VM 的所需资源</strong>（包括所需的 CPU 核心数和内存）以及 <strong>剩余缓冲时间（remaining buffer time）</strong></li>
-</ul>
-<h6 id="-2"><a href="#-2" class="headerlink" title=""></a></h6><h3 id="VM-类型"><a href="#VM-类型" class="headerlink" title="VM 类型"></a>VM 类型</h3><ul>
-<li><p>交互式</p>
-<ul>
-<li>交互式 VM 通常需要较低的响应时间，因此设置此类 VM 只能分配给不可超额订阅的 PM 服务器</li>
-</ul>
-</li>
-</ul>
-<h6 id="-3"><a href="#-3" class="headerlink" title=""></a></h6><ul>
-<li><p>延迟不敏感</p>
-<ul>
-<li>不区分延迟的 VM 通常用于批处理任务或开发工作负荷，可以将此类 VM 分配给可过度订阅的 PM 服务器</li>
-</ul>
-</li>
-</ul>
-<h6 id="-4"><a href="#-4" class="headerlink" title=""></a></h6><h3 id="VM-分配"><a href="#VM-分配" class="headerlink" title="VM 分配"></a>VM 分配</h3><ul>
-<li><p>根据 <strong>有效的 PM 列表</strong> ，<strong>模拟器记录的历史信息</strong> 以及 <strong>VM 的详细所需资源</strong> ，<strong>VM 调度器（决策代理）</strong> 将根据其分配策略做出决策</p>
-</li>
-<li><p>两种有意义的操作</p>
-<ul>
-<li>将 <strong>有效的 PM ID</strong> 传送到模拟器</li>
-<li>推迟如果 <strong>剩余缓冲区时间</strong> 足够，则可以稍后将处理的 VM Request</li>
-</ul>
-</li>
-</ul>
-<h6 id="-5"><a href="#-5" class="headerlink" title=""></a></h6><h3 id="Oversubscription-超额订阅"><a href="#Oversubscription-超额订阅" class="headerlink" title="Oversubscription 超额订阅"></a>Oversubscription 超额订阅</h3><ul>
-<li><p>考虑到各种服务级别，将物理机分为可超额订阅和非超额订阅的</p>
-</li>
-<li><p>所谓超额，就比如 10 个 VM 实际上只使用 7 个 PM （就是厂商为了省钱）</p>
-</li>
-<li><p>对于超额订阅，可以在 <strong>config.yml</strong> 中设置参数</p>
-</li>
-<li><p>在此场景，有两个资源可能被超额订阅，CPU 和 内存，因可以设置这两个的最大超额订阅率</p>
-<ul>
-<li><p><strong>MAX_CPU_OVERSUBSCRIPTION_RATE</strong> ，CPU 的超额订阅率，默认设置为 1.15 ，意味着每个 PM 最多可以分配其资源容量的 1.15 倍 </p>
-</li>
-<li><p><strong>MAX_MEM_OVERSUBSCRIPTION_RATE</strong> ，内存的超额订阅率，与 CPU 的类似</p>
-</li>
-</ul>
-</li>
-<li><p>为了保护 PM 免受过载的影响，需要考虑 CPU 利用率 ，MAX_UTILIZATION_RATE 被用作安全机制</p>
-<ul>
-<li><strong>MAX_UTILIZATION_RATE</strong> ，默认设置为 1，这意味着在筛选有效 PM 时，允许的最大物理 CPU 使用率为 100%</li>
-</ul>
-</li>
-</ul>
-<h6 id="-6"><a href="#-6" class="headerlink" title=""></a></h6><h3 id="Runtime-Simulation"><a href="#Runtime-Simulation" class="headerlink" title="Runtime Simulation"></a>Runtime Simulation</h3><ul>
-<li><h4 id="动态利用率"><a href="#动态利用率" class="headerlink" title="动态利用率"></a>动态利用率</h4><ul>
-<li>为了使模拟环境最接近真实情况，MARO 模拟每个 VM 的资源利用率（当前仅为 CPU 利用率）</li>
-<li><strong>模拟的</strong> VM CPU 利用率根据<strong>实际的</strong> VM 工作负载读数而变化</li>
-<li>MARO 还将根据每个 PM 中的<strong>实时</strong> VM 定期更新<strong>实时</strong>资源利用率</li>
-</ul>
-</li>
-<li><h4 id="实时能耗"><a href="#实时能耗" class="headerlink" title="实时能耗"></a>实时能耗</h4><ul>
-<li><p>不同的 VM 分配会导致 PM 集群的能耗不同，MARO 还根据 CPU 利用率模拟（计算）能耗</p>
-<ul>
-<li><p>能耗曲线</p>
-<ul>
-<li>这个非线性曲线反映了 CPU 利用率 与 能耗 的关系，用于模拟（计算）能耗</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-  <img src="/pictures/maro-vm-调度/vm.energy_curve.svg"/></li>
-</ul>
-<h6 id="-7"><a href="#-7" class="headerlink" title=""></a></h6><h3 id="Overload"><a href="#Overload" class="headerlink" title="Overload"></a>Overload</h3><ul>
-<li><p>由于 VM 的 CPU 使用率随时间而变化，因此在启用超额订阅时，VM 的 CPU 使用率之和可能会超过物理资源的容量，这种情况称为过载</p>
-<ul>
-<li><p>目前对于过载的情况，MARO 只支持<strong>静默（杀死）所有虚拟机</strong> 或 <strong>仅记录过载时间</strong>，在 config.yml 里面设置</p>
-<ul>
-<li><p><strong>KILL_ALL_VMS_IF_OVERLOAD</strong> </p>
-<ul>
-<li>如果启用此操作，则一旦发生重载，将解除分配位于重载 PM 的<strong>所有</strong> VM</li>
-<li>考虑到过载的影响，MARO 仍然会计算高利用率的能耗，静默行动对 PM 利用率的影响将反映在下一次 tick 中</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h6 id="-8"><a href="#-8" class="headerlink" title=""></a></h6><ul>
-<li>无论是否启用终止所有 VM，过载 PM 的数量和过载 VM 的数量都会被计算</li>
-<li>这两个指标是累积值，将被记录为环境指标</li>
-</ul>
-<h6 id="-9"><a href="#-9" class="headerlink" title=""></a></h6><h3 id="VM-解除分配"><a href="#VM-解除分配" class="headerlink" title="VM 解除分配"></a>VM 解除分配</h3><ul>
-<li>MARO 模拟器会定期检查每次 tick 中完成任务的虚拟机</li>
-<li>完成的 VM 意味着它经历了一个完整的生命周期，已准备好终止，它所占用的资源最终将再次可用</li>
-<li>然后，模拟器将释放已完成的 VM 的资源，并最终从 PM 中删除 VM</li>
-</ul>
-<h6 id="-10"><a href="#-10" class="headerlink" title=""></a></h6><h3 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h3><ul>
-<li><p>准备两个 csv 文件 vm_table 和 cpu_readings_file</p>
-<ul>
-<li><p>vm_table</p>
-<ul>
-<li><p><strong>vm_id</strong>:       int, 每个 vm 的id</p>
-</li>
-<li><p><strong>sub_id</strong>:      int, subscription id（每个 vm 的订阅 id）</p>
-</li>
-<li><p><strong>deploy_id</strong>:   int, 每个 vm 的部署 id</p>
-</li>
-<li><p><strong>timestamp</strong>:   int, 每个 vm 的创建时间</p>
-</li>
-<li><p><strong>vm_deleted</strong>:  int. 每个 vm 的删除时间</p>
-</li>
-<li><p><strong>vm_lifetime</strong>: int, 每个 vm 的生存时间，Lifetime &#x3D; deletion time - creation time (timestamp) + 1</p>
-</li>
-<li><p><strong>vm_category</strong>: int, 目前有三种类型</p>
-<ul>
-<li><p>Delay-Insensitive</p>
-<ul>
-<li>可能延迟的 VM 工作负荷，例如批处理任务或测试工作负荷</li>
-<li>可以将此类 VM 分配给可过度订阅的 PM</li>
-</ul>
-</li>
-<li><p>Interactive</p>
-<ul>
-<li>交互式 VM 工作负荷，需要用户及时响应</li>
-<li>此类 VM 只能分配给不可超额订阅的 PM</li>
-</ul>
-</li>
-<li><p>Unknown</p>
-<ul>
-<li>未知类型</li>
-<li>为避免过载，此类 VM 被视为交互式 VM，只能分配给不可超额订阅的 PM</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>cpu_readings_file </p>
-<ul>
-<li><strong>timestamp</strong>:   int, 与 vm_table 中的 timestamp 匹配</li>
-<li><strong>vm_id</strong>: int, 与 vm_table 中的 vm_id 匹配</li>
-<li><strong>cpu_utilization</strong>: float, VM CPU 的利用率，以百分比单位 （%）存储</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h6 id="-11"><a href="#-11" class="headerlink" title=""></a></h6><h3 id="构建命令"><a href="#构建命令" class="headerlink" title="构建命令"></a>构建命令</h3><ul>
-<li><p>将 CSV 数据集构建为 MARO 模拟器可以使用的二进制文件</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># maro data build --meta $PATH_TO_META_FILE --file $PATH_TO_CSV_FILE  --output $PATH_TO_OUTPUT_FILE</span><br><span class="line">maro data build --meta ~/.maro/data/vm_scheduling/meta/vmtable.yml  --file ~/.maro/data/vm_scheduling/.build/azure.2019.10k/vmtable.bin --output $PWD/vmtable.bin</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>–meta：必需，用于指定 meta file 的路径。默认情况下，meta file 位于</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.maro/data/vm_scheduling/meta/</span><br></pre></td></tr></table></figure></li>
-<li><p>–file：必需，用于指定源 CSV 数据文件的路径，如果需要多个源 CSV 数据文件，则可以在特定文件中列出源文件的所有完整路径，并使用 @ 符号指定这个特定文件</p>
-</li>
-<li><p>–output：必需，用于指定目标二进制文件的路径</p>
-</li>
-</ul>
-</li>
-<li><p>生成二进制文件之后，在 topologies 目录下的 config.yml 中指定 VM_TABLE 和 CPU_READINGS 的直接路径</p>
-</li>
-</ul>
-<h6 id="-12"><a href="#-12" class="headerlink" title=""></a></h6><h3 id="Environment-Interface"><a href="#Environment-Interface" class="headerlink" title="Environment Interface"></a>Environment Interface</h3><ul>
-<li><h4 id="DecisionPayload"><a href="#DecisionPayload" class="headerlink" title="DecisionPayload"></a>DecisionPayload</h4><ul>
-<li><p>一旦环境需要代理的响应来促进模拟，它就会抛出一个带有 DecisionPayload 的 PendingDecision 事件</p>
-</li>
-<li><p>DecisionPayload 包含以下信息</p>
-<ul>
-<li><strong>valid_pms (List[int])</strong> ：被视为有效的 PM ID 列表（其 CPU 和内存资源足以满足传入的 VM 请求） </li>
-<li><strong>vm_id (int)</strong> ：传入的 VM Request（正在等待分配的 VM Request）的 vm_id ，</li>
-<li><strong>vm_cpu_cores_requirement (int)</strong> ：传入的 VM Request 的 CPU 内核数量</li>
-<li><strong>vm_memory_requirement (int)</strong> ：传入的 VM Request 请求的内存资源大小</li>
-<li><strong>remaining_buffer_time（int）</strong> ：当使用 remaining_buffer_time 时，VM Request 将被视为失败，可以在 config.yml 里面设置</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h4><ul>
-<li><p>从环境中获取 PendingDecisionAction 事件后，代理应使用 Action 进行响应，以下是有效的 Action</p>
-<ul>
-<li><p><strong>None</strong>：除了忽略此 VM Request 之外什么都不执行</p>
-</li>
-<li><p><strong>AllocateAction</strong>：VM 的创建时间将固定在它收到这个 Request 的 tick 处，模拟器将更新目标 PM 的工作负载（CPU 核心数量，内存和能耗），这个 Action 包括:</p>
-<ul>
-<li>**vm_id(int)**：等待分配资源的 VM 的 ID</li>
-<li>**pm_id(int)**：计划将 VM 分配到的 PM 的 ID</li>
-</ul>
-</li>
-<li><p><strong>PostponeAction</strong>：计算 remaining buffer time，这个 Action 包括：</p>
-<ul>
-<li><strong>vm_id (int)</strong> ：等待分配的 VM 的 ID</li>
-<li><strong>postpone_step（int）</strong>：分配要推迟的次数，单位是 DELAY_DURATION ，1 表示延迟 1 DELAY_DURATION ，可以在 config.yml 中设置</li>
-<li>如果时间仍然足够，模拟器将重新生成一个新的请求事件，新需求事件的 仅在剩余缓冲时间上与旧事件不同</li>
-<li>如果时间用完，模拟器会将其记录为失败的分配</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h6 id="-13"><a href="#-13" class="headerlink" title=""></a></h6><h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> maro.simulator <span class="keyword">import</span> Env</span><br><span class="line"><span class="keyword">from</span> maro.simulator.scenarios.vm_scheduling <span class="keyword">import</span> AllocateAction, DecisionPayload, PostponeAction</span><br><span class="line"></span><br><span class="line"><span class="comment"># Initialize an Env for vm_scheduling scenario</span></span><br><span class="line"><span class="comment"># 初始化环境</span></span><br><span class="line">env = Env(</span><br><span class="line">  scenario=<span class="string">&quot;vm_scheduling&quot;</span>,     </span><br><span class="line">  topology=<span class="string">&quot;azure.2019.10k&quot;</span>,    </span><br><span class="line">  start_tick=<span class="number">0</span>,                </span><br><span class="line">  durations=<span class="number">8638</span>,              </span><br><span class="line">  snapshot_resolution=<span class="number">1</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化变量，声明类型，&quot;:&quot;用于声明类型</span></span><br><span class="line">metrics: <span class="built_in">object</span> = <span class="literal">None</span></span><br><span class="line">decision_event: DecisionPayload = <span class="literal">None</span></span><br><span class="line">is_done: <span class="built_in">bool</span> = <span class="literal">False</span></span><br><span class="line">action: AllocateAction = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Start the env with a None Action</span></span><br><span class="line"><span class="comment"># 开始模拟</span></span><br><span class="line">metrics, decision_event, is_done = env.step(<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">not</span> is_done:</span><br><span class="line">    valid_pm_num: <span class="built_in">int</span> = <span class="built_in">len</span>(decision_event.valid_pms)</span><br><span class="line">	<span class="comment"># 作出决策</span></span><br><span class="line">    <span class="keyword">if</span> valid_pm_num &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># No valid PM now, postpone.</span></span><br><span class="line">		<span class="comment"># 没有可用的 PM ，推迟分配</span></span><br><span class="line">        action: PostponeAction = PostponeAction(</span><br><span class="line">            vm_id=decision_event.vm_id,</span><br><span class="line">            postpone_step=<span class="number">1</span></span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># Randomly choose an available PM.</span></span><br><span class="line">		<span class="comment"># 有可用的 PM ，随机选一个 PM 与 VM 绑定</span></span><br><span class="line">        random_idx = random.randint(<span class="number">0</span>, valid_pm_num - <span class="number">1</span>)</span><br><span class="line">        pm_id = decision_event.valid_pms[random_idx]</span><br><span class="line">        action: AllocateAction = AllocateAction(</span><br><span class="line">            vm_id=decision_event.vm_id,</span><br><span class="line">            pm_id=pm_id</span><br><span class="line">        )</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># 采取行动</span></span><br><span class="line">    metrics, decision_event, is_done = env.step(action)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[Random] Topology: azure.2019.10k. Total ticks: 8638. Start tick: 0&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(metrics)</span><br></pre></td></tr></table></figure>
-
-<br/>
-<h3>
-<div align="left">
-PRE : <a href="/2022/11/04/MARO-Distibuted-toolkit/" title="MARO Distibuted Toolkit">MARO Distibuted toolkit</a>
-</div>
-</h3>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hcy-asleep.github.com/2022/10/26/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HCY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A Coder's Pocket">
-      <meta itemprop="description" content="A Space Belongs To HCY">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | A Coder's Pocket">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/26/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/" class="post-title-link" itemprop="url">工作面试</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-26 14:11:21" itemprop="dateCreated datePublished" datetime="2022-10-26T14:11:21+08:00">2022-10-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-11-29 19:59:42" itemprop="dateModified" datetime="2022-11-29T19:59:42+08:00">2022-11-29</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="深信服-Go-后端笔试-实习-2022-9-29"><a href="#深信服-Go-后端笔试-实习-2022-9-29" class="headerlink" title="深信服 Go 后端笔试(实习) 2022.9.29"></a>深信服 Go 后端笔试(实习) 2022.9.29</h4><ul>
-<li>牛客，要求录屏</li>
-<li>Go 语言基本语法（非常细节）</li>
-<li>算法 编辑距离</li>
-</ul>
-<h4 id="字节飞书搜索后端一面-实习-2022-10-11"><a href="#字节飞书搜索后端一面-实习-2022-10-11" class="headerlink" title="字节飞书搜索后端一面(实习) 2022.10.11"></a>字节飞书搜索后端一面(实习) 2022.10.11</h4><ul>
-<li>飞书浏览器或者客户端面试</li>
-<li>自我介绍</li>
-<li>简历内容（项目过程里面遇到什么问题，如何解决)</li>
-<li>为什么选择字节</li>
-<li>为什么选择 Go 语言</li>
-<li>Python 为什么比 Go 效率低下</li>
-<li>Go 语言 sync 包的数据结构以及函数用过哪些</li>
-<li>Go 语言逃逸分析</li>
-<li>Go 内存管理</li>
-<li>什么是线程安全</li>
-<li>redis 如何实现线程安全</li>
-<li>你写的 redis 是线程安全的吗</li>
-<li>redis 实现原理</li>
-<li>算法 对称二叉树（感觉有点羞辱）</li>
-<li>C++ 现在最新标准，有什么新特性</li>
-</ul>
-<h4 id="海能达-Go-后端笔试一面-实习-2022-10-18"><a href="#海能达-Go-后端笔试一面-实习-2022-10-18" class="headerlink" title="海能达 Go 后端笔试一面(实习) 2022.10.18"></a>海能达 Go 后端笔试一面(实习) 2022.10.18</h4><ul>
-<li>腾讯会议</li>
-<li>自我介绍</li>
-<li>Go 的切片数组区别</li>
-<li>为什么大三就来面试</li>
-<li>简历内容（项目过程里面遇到什么问题，如何解决)</li>
-<li>软件工程</li>
-<li>软件开发流程</li>
-<li>软件设计模式</li>
-<li>影响数据库查询速率的因素</li>
-</ul>
-<h4 id="腾讯游戏技术运营一面-实习-2022-10-25"><a href="#腾讯游戏技术运营一面-实习-2022-10-25" class="headerlink" title="腾讯游戏技术运营一面(实习) 2022.10.25"></a>腾讯游戏技术运营一面(实习) 2022.10.25</h4><ul>
-<li><p>腾讯会议面试，要求录屏</p>
-</li>
-<li><p>先来做几条题目，很简单，主要看思路，但是基本语法不能错误，任意语言</p>
-<ul>
-<li>使用 js&#x2F;php&#x2F;python 自行实现函数方法 去掉一个数组的重复元素，例如：let arr &#x3D; [1 ,1 ,2, 3, 3, 2, 1] (若是百亿数据，要求时间O(n)，空间O(1)，有什么思路)</li>
-<li>使用 js&#x2F;php&#x2F;python 实现一个函数，将字符串 “hello_world” 转换成 “HelloWorld” , “hello_hang_zhou” 转换成 “HelloHangZhou” (注意：通用性)</li>
-<li>使用 js&#x2F;php&#x2F;python 实现一个函数方法，参数为输入一个整数，然后输出这个数所有的因数以及总的个数，比如参数传 48 ，此时输出 1、2、3、4、6、8、12、16、24、48 共 10 个数字，比如参数传 21 ，此时输出 1、3、7、21 共 4 个数字</li>
-<li>使用 js&#x2F;php&#x2F;python 函数遍历以下 json 数据，输出指定格式结果（考虑 children 层次会无限嵌套）	</li>
-<li>数据库操作，建一个表学生 student (id,name,sex,birth) (编号、姓名、性别、出生年月)<ul>
-<li>写下建表语句：</li>
-<li>student 表新增一个字段“班级编号”（class_no），写出对应的执行 sql 语句</li>
-<li>统计每个班级有多少个学生，根据班级编号统计，写下统计 sql</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>自我介绍</p>
-</li>
-<li><p>问简历的内容</p>
-</li>
-<li><p>redis 五种数据类型</p>
-</li>
-<li><p>平时喜欢看什么书（简历有写）</p>
-</li>
-<li><p>bash 基本知识</p>
-</li>
-<li><p>面向对象三大特性</p>
-</li>
-<li><p>数据库三大范式深入理解</p>
-</li>
-<li><p>sql 备份主从一致</p>
-</li>
-</ul>
 
       
     </div>
