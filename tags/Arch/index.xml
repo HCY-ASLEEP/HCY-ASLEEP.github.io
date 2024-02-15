@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Arch on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/Arch/</link>
+    <description>Recent content in Arch on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 11 Mar 2023 11:33:35 +0800</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/Arch/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flameshot Arch 无法命令行使用</title>
+      <link>https://hcy-asleep.github.io/Flameshot-Arch-%E6%97%A0%E6%B3%95%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 11 Mar 2023 11:33:35 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Flameshot-Arch-%E6%97%A0%E6%B3%95%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8/</guid>
+      <description>在终端执行 flameshot gui 的时候异常，安装 xdg-desktop-portal 包就行，Gnome 桌面环境的话安装 xdg-desktop-portal-gnome</description>
+    </item>
+    <item>
+      <title>Linux Grub 分辨率</title>
+      <link>https://hcy-asleep.github.io/Linux-Grub-%E5%88%86%E8%BE%A8%E7%8E%87/</link>
+      <pubDate>Tue, 28 Feb 2023 22:27:36 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-Grub-%E5%88%86%E8%BE%A8%E7%8E%87/</guid>
+      <description>Change grub resolution on arch/debian</description>
+    </item>
+    <item>
+      <title>KDE Slow Shutdown</title>
+      <link>https://hcy-asleep.github.io/KDE-Slow-Shutdown/</link>
+      <pubDate>Tue, 28 Feb 2023 21:58:38 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/KDE-Slow-Shutdown/</guid>
+      <description>KDE 关机慢</description>
+    </item>
+    <item>
+      <title>Arch KDE 折腾日志</title>
+      <link>https://hcy-asleep.github.io/Arch-KDE-%E6%8A%98%E8%85%BE%E6%97%A5%E5%BF%97/</link>
+      <pubDate>Tue, 21 Feb 2023 05:09:57 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Arch-KDE-%E6%8A%98%E8%85%BE%E6%97%A5%E5%BF%97/</guid>
+      <description>live cd 安装使用 WIFI 先用命令 ip link查看网络接口
+1 ip link 查看到我的机器的无线网络接口是wlan0(不同的机器可能名字不同)，这里 wlan0 为例
+默认是关闭的状态，需要先开启它，而开启它之前还需要先激活它(即取消禁用，我这台机器默认是blockeded，禁用的)
+1 2 rfkill unblock wifi # 取消禁用wifi设备 ip link set wlan0 up # 开启wlan0 输入iwctl进入交互式提示符（interactive prompt），配置并连接到互联网
+1 2 3 4 5 station wlan0 scan station wlan0 get-networks station wlan0 connect &amp;lt;network name&amp;gt; station wlan0 show exit　# 回到命令行 ping百度可以ping通，就说明已经连接上了互联网
+免密 sudo Arch Linux run sudo without passwd
+首先
+1 sudo visudo 然后编辑里面的内容
+1 myname ALL=(ALL) NOPASSWD: ALL 添加中科大源 添加中科大的Arch Linux源</description>
+    </item>
+    <item>
+      <title>Nautilus 添加右键打开 terminal 选项</title>
+      <link>https://hcy-asleep.github.io/Nautilus-%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E6%89%93%E5%BC%80-terminal-%E9%80%89%E9%A1%B9/</link>
+      <pubDate>Tue, 21 Feb 2023 04:50:37 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Nautilus-%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E6%89%93%E5%BC%80-terminal-%E9%80%89%E9%A1%B9/</guid>
+      <description>Nautilus open any terminal</description>
+    </item>
+  </channel>
+</rss>

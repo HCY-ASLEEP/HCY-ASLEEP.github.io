@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Github on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/Github/</link>
+    <description>Recent content in Github on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 12 Feb 2023 04:22:54 +0000</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/Github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git 修改 / 添加 / 删除远程仓库</title>
+      <link>https://hcy-asleep.github.io/Git-%E4%BF%AE%E6%94%B9-/-%E6%B7%BB%E5%8A%A0-/-%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</link>
+      <pubDate>Sun, 12 Feb 2023 04:22:54 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Git-%E4%BF%AE%E6%94%B9-/-%E6%B7%BB%E5%8A%A0-/-%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</guid>
+      <description>多端同步可能会用到</description>
+    </item>
+    <item>
+      <title>Git Multi End Sync</title>
+      <link>https://hcy-asleep.github.io/Git-Multi-End-Sync/</link>
+      <pubDate>Sat, 11 Feb 2023 11:19:54 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Git-Multi-End-Sync/</guid>
+      <description>git 远端比本地领先的时候如何同步</description>
+    </item>
+    <item>
+      <title>Git no passwd login</title>
+      <link>https://hcy-asleep.github.io/Git-no-passwd-login/</link>
+      <pubDate>Sat, 11 Feb 2023 11:06:29 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Git-no-passwd-login/</guid>
+      <description>git 免密码登陆</description>
+    </item>
+    <item>
+      <title>Github Pages &#43; Hexo</title>
+      <link>https://hcy-asleep.github.io/Github-Pages--Hexo/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Github-Pages--Hexo/</guid>
+      <description>白嫖 github 的服务器</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Bash on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/Bash/</link>
+    <description>Recent content in Bash on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 23 Oct 2022 13:25:51 +0000</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/Bash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bash Powerline Fonts 美化</title>
+      <link>https://hcy-asleep.github.io/Bash-Powerline-Fonts-%E7%BE%8E%E5%8C%96/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Bash-Powerline-Fonts-%E7%BE%8E%E5%8C%96/</guid>
+      <description>powerline fonts</description>
+    </item>
+    <item>
+      <title>Debian Bashrc</title>
+      <link>https://hcy-asleep.github.io/Debian-Bashrc/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Bashrc/</guid>
+      <description>环境变量相关</description>
+    </item>
+    <item>
+      <title>Linux 环境变量配置</title>
+      <link>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;/etc/profile.d/path.sh&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux 环境变量配置错误处理</title>
+      <link>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/</guid>
+      <description>&lt;p&gt;Linux 环境变量配置出错后，提示command not found&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

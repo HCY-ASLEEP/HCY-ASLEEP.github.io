@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Hexo on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/Hexo/</link>
+    <description>Recent content in Hexo on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 13 Mar 2023 19:26:15 +0800</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/Hexo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo Hexo 添加音乐播放器</title>
+      <link>https://hcy-asleep.github.io/Hugo-Hexo-%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8/</link>
+      <pubDate>Mon, 13 Mar 2023 19:26:15 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Hugo-Hexo-%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8/</guid>
+      <description>直接上代码，就完事了
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;body&amp;gt; &amp;lt;style&amp;gt; .parent { margin-top:25px; position: relative; } .parent .child { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width:100%; } &amp;lt;/style&amp;gt; &amp;lt;div class=&amp;#34;parent&amp;#34;&amp;gt; &amp;lt;audio controls class=&amp;#34;child&amp;#34;&amp;gt; &amp;lt;source src=&amp;#34;horse.mp3&amp;#34; type=&amp;#34;audio/mpeg&amp;#34;&amp;gt; Your browser does not support the audio element. &amp;lt;/audio&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; </description>
+    </item>
+    <item>
+      <title>Migrate to Hugo</title>
+      <link>https://hcy-asleep.github.io/Migrate-to-Hugo/</link>
+      <pubDate>Sun, 26 Feb 2023 15:07:16 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Migrate-to-Hugo/</guid>
+      <description>如何从 Hexo 迁移到 Hugo</description>
+    </item>
+    <item>
+      <title>Hexo Next 原生相册支持</title>
+      <link>https://hcy-asleep.github.io/Hexo-Next-%E5%8E%9F%E7%94%9F%E7%9B%B8%E5%86%8C%E6%94%AF%E6%8C%81/</link>
+      <pubDate>Mon, 20 Feb 2023 13:13:22 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-Next-%E5%8E%9F%E7%94%9F%E7%9B%B8%E5%86%8C%E6%94%AF%E6%8C%81/</guid>
+      <description>Hexo Next Group Pictures (Photo Album)</description>
+    </item>
+    <item>
+      <title>Markdown (HTML) 砌体 (瀑布) 布局</title>
+      <link>https://hcy-asleep.github.io/Markdown-HTML-%E7%A0%8C%E4%BD%93-%E7%80%91%E5%B8%83-%E5%B8%83%E5%B1%80/</link>
+      <pubDate>Wed, 15 Feb 2023 02:18:52 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Markdown-HTML-%E7%A0%8C%E4%BD%93-%E7%80%91%E5%B8%83-%E5%B8%83%E5%B1%80/</guid>
+      <description>瀑布流相册设计</description>
+    </item>
+    <item>
+      <title>Hexo next 开启 fancybox 查看图片大图</title>
+      <link>https://hcy-asleep.github.io/Hexo-next-%E5%BC%80%E5%90%AF-fancybox-%E6%9F%A5%E7%9C%8B%E5%9B%BE%E7%89%87%E5%A4%A7%E5%9B%BE/</link>
+      <pubDate>Wed, 15 Feb 2023 02:11:21 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-next-%E5%BC%80%E5%90%AF-fancybox-%E6%9F%A5%E7%9C%8B%E5%9B%BE%E7%89%87%E5%A4%A7%E5%9B%BE/</guid>
+      <description>Next 8.x 一键开启 fancybox</description>
+    </item>
+    <item>
+      <title>Hexo Giscus 评论 (NexT 主题)</title>
+      <link>https://hcy-asleep.github.io/Hexo-Giscus-%E8%AF%84%E8%AE%BA-NexT-%E4%B8%BB%E9%A2%98/</link>
+      <pubDate>Sun, 12 Feb 2023 06:24:19 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-Giscus-%E8%AF%84%E8%AE%BA-NexT-%E4%B8%BB%E9%A2%98/</guid>
+      <description>让你的 Github Pages 也可以像 WordPress 一样评论！</description>
+    </item>
+    <item>
+      <title>Hexo 添加友情链接</title>
+      <link>https://hcy-asleep.github.io/Hexo-%E6%B7%BB%E5%8A%A0%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</link>
+      <pubDate>Sun, 12 Feb 2023 01:32:23 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-%E6%B7%BB%E5%8A%A0%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</guid>
+      <description>骚操作--自定义友链页面</description>
+    </item>
+    <item>
+      <title>Hexo 代码块配置</title>
+      <link>https://hcy-asleep.github.io/Hexo-%E4%BB%A3%E7%A0%81%E5%9D%97%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sat, 11 Feb 2023 12:13:01 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-%E4%BB%A3%E7%A0%81%E5%9D%97%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;在 NexT 的主题配置文件里面启用&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hexo首页只显示部分摘要</title>
+      <link>https://hcy-asleep.github.io/Hexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</link>
+      <pubDate>Sat, 11 Feb 2023 11:54:16 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</guid>
+      <description>hexo首页不显示全文</description>
+    </item>
+    <item>
+      <title>Hexo next favicon</title>
+      <link>https://hcy-asleep.github.io/Hexo-next-favicon/</link>
+      <pubDate>Sat, 11 Feb 2023 11:01:48 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-next-favicon/</guid>
+      <description>设置网站的图标</description>
+    </item>
+    <item>
+      <title>Podman hexo</title>
+      <link>https://hcy-asleep.github.io/Podman-hexo/</link>
+      <pubDate>Sat, 11 Feb 2023 10:38:59 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Podman-hexo/</guid>
+      <description>将 hexo 容器化便于迁移</description>
+    </item>
+    <item>
+      <title>Hexo Inner Link</title>
+      <link>https://hcy-asleep.github.io/Hexo-Inner-Link/</link>
+      <pubDate>Wed, 23 Nov 2022 20:05:16 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-Inner-Link/</guid>
+      <description>Markdown 编写的 Hexo 博客文章内部跳转</description>
+    </item>
+    <item>
+      <title>Hexo 加强 Next Theme 美化</title>
+      <link>https://hcy-asleep.github.io/Hexo-%E5%8A%A0%E5%BC%BA-Next-Theme-%E7%BE%8E%E5%8C%96/</link>
+      <pubDate>Wed, 26 Oct 2022 11:27:15 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-%E5%8A%A0%E5%BC%BA-Next-Theme-%E7%BE%8E%E5%8C%96/</guid>
+      <description>选择用户基数大的 Next 更加容易解决问题</description>
+    </item>
+    <item>
+      <title>Hexo 文档分类 图片存储</title>
+      <link>https://hcy-asleep.github.io/Hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/</link>
+      <pubDate>Sun, 23 Oct 2022 19:16:39 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;建立分类&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hexo 基本美化</title>
+      <link>https://hcy-asleep.github.io/Hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/</link>
+      <pubDate>Sun, 23 Oct 2022 16:08:56 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;首先是顶部背景&lt;/strong&gt;，下面是原背景&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Github Pages &#43; Hexo</title>
+      <link>https://hcy-asleep.github.io/Github-Pages--Hexo/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Github-Pages--Hexo/</guid>
+      <description>白嫖 github 的服务器</description>
+    </item>
+  </channel>
+</rss>

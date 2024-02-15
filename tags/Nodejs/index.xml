@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Nodejs on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/Nodejs/</link>
+    <description>Recent content in Nodejs on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 11 Feb 2023 12:16:38 +0000</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/Nodejs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nodejs 升级版本</title>
+      <link>https://hcy-asleep.github.io/Nodejs-%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/</link>
+      <pubDate>Sat, 11 Feb 2023 12:16:38 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Nodejs-%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/</guid>
+      <description>&lt;p&gt;用n升级nodejs&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nodejs 换源</title>
+      <link>https://hcy-asleep.github.io/Nodejs-%E6%8D%A2%E6%BA%90/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Nodejs-%E6%8D%A2%E6%BA%90/</guid>
+      <description>&lt;p&gt;由于 Node 的官方模块仓库网速太慢，模块仓库需要切换到阿里的源&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

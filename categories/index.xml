@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Categories on Memos</title>
+    <link>https://hcy-asleep.github.io/categories/</link>
+    <description>Recent content in Categories on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 13 Mar 2023 18:15:21 +0800</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Campus</title>
+      <link>https://hcy-asleep.github.io/categories/Campus/</link>
+      <pubDate>Mon, 13 Mar 2023 18:15:21 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/categories/Campus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IT</title>
+      <link>https://hcy-asleep.github.io/categories/IT/</link>
+      <pubDate>Wed, 15 Feb 2023 02:18:52 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/categories/IT/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

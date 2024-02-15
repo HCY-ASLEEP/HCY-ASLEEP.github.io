@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Memos</title>
+    <link>https://hcy-asleep.github.io/post/</link>
+    <description>Recent content in Posts on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 23 Jan 2024 11:40:20 +0800</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Debian Gnome 修改默认目录</title>
+      <link>https://hcy-asleep.github.io/Debian-Gnome-%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E7%9B%AE%E5%BD%95/</link>
+      <pubDate>Tue, 23 Jan 2024 11:40:20 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Gnome-%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E7%9B%AE%E5%BD%95/</guid>
+      <description>我在 askbuntu 里面找到了答案：
+Change default user folders path
+具体做法：
+1 vi ~/.config/user-dirs.dirs 以下是我的配置：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 # This file is written by xdg-user-dirs-update # If you want to change or add directories, just edit the line you&amp;#39;re # interested in. All local changes will be retained on the next run. # Format is XDG_xxx_DIR=&amp;#34;$HOME/yyy&amp;#34;, where yyy is a shell-escaped # homedir-relative path, or XDG_xxx_DIR=&amp;#34;/yyy&amp;#34;, where /yyy is an # absolute path.</description>
+    </item>
+    <item>
+      <title>Debian 安装 Flameshot 和迅雷以及 Neovim 剪切板</title>
+      <link>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85-Flameshot-%E5%92%8C%E8%BF%85%E9%9B%B7%E4%BB%A5%E5%8F%8A-Neovim-%E5%89%AA%E5%88%87%E6%9D%BF/</link>
+      <pubDate>Sun, 07 Jan 2024 07:07:48 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85-Flameshot-%E5%92%8C%E8%BF%85%E9%9B%B7%E4%BB%A5%E5%8F%8A-Neovim-%E5%89%AA%E5%88%87%E6%9D%BF/</guid>
+      <description>Flameshot 直接从仓库安装 flameshot
+1 sudo apt install flameshot 要在 Wayland 下面可以复制粘贴图片还需安装：
+1 sudo apt install xdg-desktop-portal xdg-desktop-portal-kde wl-clipboard 为了让 flameshot 在 wayland 和 x11 下都可以使用剪切板，可以编写一个小脚本：
+1 2 3 4 5 if [[ $XDG_SESSION_TYPE == &amp;#34;wayland&amp;#34; ]] || [[ -n $WAYLAND_DISPLAY ]]; then flameshot gui -c --raw | wl-copy else flameshot gui -c fi 将这一个脚本压缩为一行：
+1 [[ $XDG_SESSION_TYPE == &amp;#34;wayland&amp;#34; ]] || [[ -n $WAYLAND_DISPLAY ]] &amp;amp;&amp;amp; flameshot gui -c --raw | wl-copy || flameshot gui -c Flameshot 的 GitHub 仓库 Issue 里面有讨论这个问题</description>
+    </item>
+    <item>
+      <title>Debian 安装 Deepin(UOS) 的原生微信(非 WINE)</title>
+      <link>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85-DeepinUOS-%E7%9A%84%E5%8E%9F%E7%94%9F%E5%BE%AE%E4%BF%A1%E9%9D%9E-WINE/</link>
+      <pubDate>Sun, 07 Jan 2024 05:08:55 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85-DeepinUOS-%E7%9A%84%E5%8E%9F%E7%94%9F%E5%BE%AE%E4%BF%A1%E9%9D%9E-WINE/</guid>
+      <description>优麒麟（ukylin）原生微信 在用 Deepin 的星火商店微信之前，我一直是用优麒麟的微信，但是这个优麒麟的微信已经好久没有维护了，以下是这个版本微信的链接，是阿里云镜像上面的，进入网页之后，页内搜索关键字 weixin 即可：
+1 https://mirrors.aliyun.com/ubuntukylin/pool/partner/ Deepin 星火商店微信 尝试安装，出现依赖问题 直到有一天我刷到知乎里面有一篇文章说 Linux 微信支持语音通话，是星火商店的，于是我去看了以下，官网写的是支持的，星火商店链接：
+1 https://www.spark-app.store/store/sort/chat 上面有好多个微信，当时第三个才是我们需要的无 WINE 的原生微信，名字叫 ”微信Linux“，链接如下
+1 https://mirrors.sdu.edu.cn/spark-store-repository/store//chat/store.spark-app.wechat-linux-spark/store.spark-app.wechat-linux-spark_2.1.9_amd64.deb 下载下来之后使用命令安装：
+1 sudo apt install ./store.spark-app.wechat-linux-spark_2.1.9_amd64.deb 意料之中出现报错：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 hcy@debian:~/Downloads$ sudo apt install ./store.spark-app.wechat-linux-spark_2.1.9_amd64.deb 正在读取软件包列表... 完成 正在分析软件包的依赖关系树... 完成 正在读取状态信息... 完成 注意，选中 &amp;#39;store.spark-app.wechat-linux-spark&amp;#39; 而非 &amp;#39;./store.spark-app.wechat-linux-spark_2.1.9_amd64.deb&amp;#39; 有一些软件包无法被安装。如果您用的是 unstable 发行版，这也许是 因为系统无法达到您要求的状态造成的。该版本中可能会有一些您需要的软件 包尚未被创建或是它们已被从新到(Incoming)目录移出。 下列信息可能会对解决问题有所帮助： 下列软件包有未满足的依赖关系： store.spark-app.wechat-linux-spark : 依赖: libssl1.1 但无法安装它 推荐: deepin-elf-verify (&amp;gt;= 0.</description>
+    </item>
+    <item>
+      <title>知识链接</title>
+      <link>https://hcy-asleep.github.io/%E7%9F%A5%E8%AF%86%E9%93%BE%E6%8E%A5/</link>
+      <pubDate>Fri, 05 Jan 2024 08:58:21 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/%E7%9F%A5%E8%AF%86%E9%93%BE%E6%8E%A5/</guid>
+      <description>Github 八股文博客 fupenfei
+为什么C++20是最awesome的网络编程语言
+C++ STL std::vector 底层实现机制
+socket的任意event都会导致epoll_wait的惊群效应吗？(1)
+socket的任意event都会导致epoll_wait的惊群效应吗？(2)
+高性能网络模式：Reactor 和 Proactor
+两种 IO 设计模式 Reactor 和 Proactor
+Proactor 与 Reactor
+五种网络 IO 模型
+100%弄明白5种IO模型
+IO多路复用——深入浅出理解select、poll、epoll的实现
+C 语言 Socket 理解
+30天自制C++服务器
+深入学习MySQL事务：ACID特性的实现原理
+全网最全一篇数据库MVCC详解，不全你打我
+对线面试官</description>
+    </item>
+    <item>
+      <title>Debian 系统清理</title>
+      <link>https://hcy-asleep.github.io/Debian-%E7%B3%BB%E7%BB%9F%E6%B8%85%E7%90%86/</link>
+      <pubDate>Wed, 03 Jan 2024 09:03:13 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-%E7%B3%BB%E7%BB%9F%E6%B8%85%E7%90%86/</guid>
+      <description>删除软件安装包 apt-get下载的安装包会保存在/var/cache/apt/archives目录下，在软件安装完成后，这些安装包不会被删除
+查看archives文件夹大小
+1 du -sh /var/cache/apt/archives 删除已卸载软件的安装包
+1 sudo apt-get autoclean 删除所有的软件安装包
+1 sudo apt-get clean 删除孤立的软件（空间足够不建议操作）
+1 sudo apt-get autoremove 清理老旧内核 查看系统已安装过的内核（deinstall状态可以卸载，其他的建议保留）
+1 sudo dpkg --get-selections | grep linux 卸载内核
+1 sudo apt-get purge [要卸载的内核] 删除残余的配置文件 查看当前残余的配置文件
+1 sudo dpkg --list | grep &amp;#34;^rc&amp;#34; 删除残余的配置文件
+1 sudo dpkg --list | grep &amp;#34;^rc&amp;#34; | cut -d &amp;#34; &amp;#34; -f 3 | xargs sudo dpkg --purge </description>
+    </item>
+    <item>
+      <title>Linux 图标位置以及配置模板</title>
+      <link>https://hcy-asleep.github.io/Linux-%E5%9B%BE%E6%A0%87%E4%BD%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E9%85%8D%E7%BD%AE%E6%A8%A1%E6%9D%BF/</link>
+      <pubDate>Wed, 03 Jan 2024 03:23:39 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E5%9B%BE%E6%A0%87%E4%BD%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E9%85%8D%E7%BD%AE%E6%A8%A1%E6%9D%BF/</guid>
+      <description>系统级图标位置 系统级图标通常位于以下目录：
+系统默认图标目录 1 /usr/share/icons 程序安装时通常会在该目录下添加程序图标 1 /usr/share/pixmaps 应用程序的启动器文件通常位于该目录下 1 /usr/share/applications 用户级图标位置 用户级图标通常位于以下目录：
+用户自己添加的图标或自己下载的图标可以放在这个目录下 1 ~/.local/share/icons 桌面上的图标通常位于这个目录下 1 ~/Desktop 用户自己修改的应用程序菜单通常位于这个目录下 1 ~/.config/menus desktop 文件模板（以 onlyoffice 为例） 1 2 3 4 5 6 7 8 9 [Desktop Entry] Name=Onlyoffice Exec=/opt/only-office/DesktopEditors-x86_64.AppImage Terminal=false Type=Application Icon=/usr/share/icons/hicolor/only-office/onlyoffice.png StartupWMClass=&amp;#34;ONLYOFFICE Desktop Editors&amp;#34; Comment=Office Categories=Office; </description>
+    </item>
+    <item>
+      <title>关于 Hugo Paper Mod 主题的 Toc 配置</title>
+      <link>https://hcy-asleep.github.io/%E5%85%B3%E4%BA%8E-Hugo-Paper-Mod-%E4%B8%BB%E9%A2%98%E7%9A%84-Toc-%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 01 Jan 2024 08:48:56 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/%E5%85%B3%E4%BA%8E-Hugo-Paper-Mod-%E4%B8%BB%E9%A2%98%E7%9A%84-Toc-%E9%85%8D%E7%BD%AE/</guid>
+      <description>Hugo 默认生成 Toc 的只是一二三级标题，如果像六级标题都可以生成 Toc ，可以这样子配置:
+1 2 3 4 5 markup: tableOfContents: startLevel: 1 endLevel: 6 ordered: false 参考文章：
+1 https://atlex00.com/hugo/toc/#configure-toc 如果想让 Hugo 拥有侧边栏 Toc ，参考我 fork 的这个仓库：
+1 https://github.com/HCY-ASLEEP/hugo-PaperMod-Mod-Sidebar-Toc 顺便说一句题外话，就是 Hugo 的各个文件夹都有着不同的用处，值得去了解一下，比如说 archetypes 文件夹用于存放 hugo new 的生成模板，而 assets 文件夹用于存放自定义的 override 的 css ，layouts 文件夹用于存放自定义的 js 或者 html</description>
+    </item>
+    <item>
+      <title>让 KDE 可以像 GNOME 一样使用 Meta 键进行后台窗口调度</title>
+      <link>https://hcy-asleep.github.io/%E8%AE%A9-KDE-%E5%8F%AF%E4%BB%A5%E5%83%8F-GNOME-%E4%B8%80%E6%A0%B7%E4%BD%BF%E7%94%A8-Meta-%E9%94%AE%E8%BF%9B%E8%A1%8C%E5%90%8E%E5%8F%B0%E7%AA%97%E5%8F%A3%E8%B0%83%E5%BA%A6/</link>
+      <pubDate>Mon, 01 Jan 2024 08:09:17 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/%E8%AE%A9-KDE-%E5%8F%AF%E4%BB%A5%E5%83%8F-GNOME-%E4%B8%80%E6%A0%B7%E4%BD%BF%E7%94%A8-Meta-%E9%94%AE%E8%BF%9B%E8%A1%8C%E5%90%8E%E5%8F%B0%E7%AA%97%E5%8F%A3%E8%B0%83%E5%BA%A6/</guid>
+      <description>众所周知，KDE Plasma 的 Meta 键也就是 Win 键或者叫 Super 键是很难直接在图形界面的设置里面直接重新调度 Remap,当你尝试要单独去映射 Meta 键的时候总会乱码，所以需要借助命令行的作用来使得 Meta 键位失效或者 Remap
+原来的 Meta 键是唤起 KDE 的菜单，要想使得它失效，可以应用以下命令：
+1 kwriteconfig5 --file kwinrc --group ModifierOnlyShortcuts --key Meta &amp;#34;&amp;#34; 如果要将 Meta 映射为激活后台切换调度，也就是图形界面设置里面 KWin 的&amp;quot;Overview=Meta+W,Meta+W,显示/隐藏桌面总览&amp;quot;，要使用如下命令：
+首先是映射：
+1 kwriteconfig5 --file kwinrc --group ModifierOnlyShortcuts --key Meta &amp;#34;org.kde.kglobalaccel,/component/kwin,,invokeShortcut,Overview&amp;#34; 然后是重启 KWin ：
+1 qdbus org.kde.KWin /KWin reconfigure 找到解决办法的 Reddit 讨论链接：
+1 https://www.reddit.com/r/kde/comments/t416lu/rebind_meta_key_to_open_overview/ </description>
+    </item>
+    <item>
+      <title>快速本地部署 Hugo 环境</title>
+      <link>https://hcy-asleep.github.io/%E5%BF%AB%E9%80%9F%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2-Hugo-%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Sat, 30 Dec 2023 11:29:35 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/%E5%BF%AB%E9%80%9F%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2-Hugo-%E7%8E%AF%E5%A2%83/</guid>
+      <description>进入要存放博客文件的目录之后才可以执行以下指令
+拉取安装最新Hugo 1 2 3 4 5 6 7 8 9 10 response=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest);\ version=$(echo &amp;#34;$response&amp;#34; | jq -r &amp;#39;.tag_name&amp;#39;);\ download_url=$(echo &amp;#34;$response&amp;#34; | jq -r &amp;#39;.assets[-5].browser_download_url&amp;#39;);\ echo &amp;#34;--- Hugo version: &amp;#34;$version&amp;#34; ----&amp;#34;;\ curl -L -o hugo.deb $download_url;\ sudo apt install ./hugo.deb;\ rm hugo.deb;\ unset response;\ unset version;\ unset download_url 拉取博客源数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 git config --global init.</description>
+    </item>
+    <item>
+      <title>快速配置Ubuntu Docker开发环境</title>
+      <link>https://hcy-asleep.github.io/%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AEUbuntu-Docker%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Sat, 30 Dec 2023 10:46:03 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AEUbuntu-Docker%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <description>下面指令执行之前建议先挂个代理 启动一个 Ubuntu 容器 快速创建一个 Ubuntu 容器
+1 2 xhost +;\ podman run -it --net=host -e DISPLAY=$DISPLAY --name=devenv -v /home/hcy/Documents/ubuntu/:/home/devenv/ ubuntu /bin/bash Ubuntu 容器基本设置 基本设置和基本软件
+1 2 3 4 5 6 7 8 9 apt update;\ apt upgrade -y;\ apt install jq xz-utils curl sudo git apt-transport-https ca-certificates ripgrep vim-tiny -y;\ useradd -m devenv;\ usermod -s /bin/bash devenv;\ sudo sh -c &amp;#39;echo &amp;#34;devenv ALL=(ALL) NOPASSWD:ALL&amp;#34; &amp;gt;&amp;gt; /etc/sudoers&amp;#39;;\ sudo chown devenv /home/devenv/;\ sudo chgrp devenv /home/devenv/;\ su devenv 切换到普通用户目录 回到家目录</description>
+    </item>
+    <item>
+      <title>Alacritty 配置 JetBrains Mono 字体</title>
+      <link>https://hcy-asleep.github.io/Alacritty-%E9%85%8D%E7%BD%AE-JetBrains-Mono-%E5%AD%97%E4%BD%93/</link>
+      <pubDate>Tue, 26 Dec 2023 14:37:39 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Alacritty-%E9%85%8D%E7%BD%AE-JetBrains-Mono-%E5%AD%97%E4%BD%93/</guid>
+      <description>在 ~/.config/alacritty/ 目录下创建 alacritty.yml
+1 2 mkdir ~/.config/alacritty/;\ touch ~/.config/alacritty/alacritty.yml 写入 alacritty.yml 配置
+1 2 3 4 5 font: normal: family: Jetbrains Mono style: Regular size: 12 </description>
+    </item>
+    <item>
+      <title>为 xv6-riscv 移植扫雷(minesweeper) 2048 以及非常简单的 sl</title>
+      <link>https://hcy-asleep.github.io/%E4%B8%BA-xv6-riscv-%E7%A7%BB%E6%A4%8D%E6%89%AB%E9%9B%B7minesweeper-2048-%E4%BB%A5%E5%8F%8A%E9%9D%9E%E5%B8%B8%E7%AE%80%E5%8D%95%E7%9A%84-sl/</link>
+      <pubDate>Tue, 06 Jun 2023 13:59:46 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/%E4%B8%BA-xv6-riscv-%E7%A7%BB%E6%A4%8D%E6%89%AB%E9%9B%B7minesweeper-2048-%E4%BB%A5%E5%8F%8A%E9%9D%9E%E5%B8%B8%E7%AE%80%E5%8D%95%E7%9A%84-sl/</guid>
+      <description>前言 我使用的 xv6-riscv 是 fork MIT 官方的库，在它的基础上面进行移植，这个教学系统原本是与 6.1810 一起配套使用的，下面这个是官方仓库地址：
+👉 https://github.com/mit-pdos/xv6-riscv
+这是我所做过的移植交互程序及之前 SZU OS 课程在 xv6 上面做的一些实验：
+👉 我对 xv6-riscv 的一些改动
+2048 移植以及相关移植准备 终端交互移植最关键的就是要把缺失的库函数都补完，首先就得增加和改进 xv6-riscv 原有的终端交互相关的库
+在 xv6-riscv 的顶层目录下新建一个 include 文件夹，里面存放改进的头文件
+Head What it does assert.h 断言的相关宏定义和函数声明，用于断言检查 ctype.h 字符处理的函数和宏定义，对字符进行分类和转换 limits.h 定义了各种数据类型的取值范围以及其他与整数类型相关的常量 stdarg.h 提供了支持可变参数函数的宏和类型定义 stdbool.h 定义了布尔类型和相关的常量，没错，xv6-riscv 原本甚至不支持 bool 型变量 stddef.h 提供了一些与指针、大小和偏移量相关的常量和类型定义 stdio.h 用于处理标准输入输出 stdlib.h 用于内存管理、字符串转换、伪随机数生成、算术运算和程序终止等 termios.h 用于控制和配置终端的行为 unistd.h 定义了一些与系统调用、文件操作、进程控制、环境变量和程序终止相关的函数和常量 上面这些改进的库函数里面最关键的是 termios.h 和 stdio.h ，没错，xv6-riscv 连标准输入输出都没有，刷新终端都做不到。。。即便如此 termios.h 移植之后也是极度残缺的，因为没有 xv6-riscv 压根就没有提供 ioctl 的系统调用！也正是因为这个原因，C语言里面的标准库 curses.</description>
+    </item>
+    <item>
+      <title>Vim ripgrep quickfix netrw nmap autocmd wincmd 。。。大杂烩 ？！</title>
+      <link>https://hcy-asleep.github.io/Vim-ripgrep-quickfix-netrw-nmap-autocmd-wincmd-%E5%A4%A7%E6%9D%82%E7%83%A9/</link>
+      <pubDate>Wed, 24 May 2023 13:51:22 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Vim-ripgrep-quickfix-netrw-nmap-autocmd-wincmd-%E5%A4%A7%E6%9D%82%E7%83%A9/</guid>
+      <description>啊，这篇文章就随意一点吧，就意识流地写吧（虽然一直都是这样子），记录一下最近搞 Neovim 的心得
+1. 如何使用 nvim + coc 如何滚动悬浮窗口内的内容呢？ 使用 nvim + coc 编写代码的时候，弹出来的悬浮窗口内有滚动条，我怎样才能滚动悬浮窗口内的内容呢？试试 ctrl-w ctrl-w 切换到 floatwin 中，再翻页；更顺手一些的操作是：如果触发 floatwin 的按键是 nmap K, 连按两次 K 就会切换到 floatwin 中
+👉 https://segmentfault.com/q/1010000040349668
+或者直接映射相关的键位，参考官方 Github 的 Readme
+👉 https://github.com/neoclide/coc.nvim/commit/
+2. Vim f和t的快捷方式 [ 移动到指定字符 ]
+如果我们想在当前行内快速移动，可以使用f, t, F, T命令
+&amp;ldquo;f&amp;quot;命令移动到光标右边的指定字符上，例如，&amp;ldquo;fx&amp;rdquo;，会把移动到光标右边的第一个&amp;rsquo;x&amp;rsquo;字符上，&amp;ldquo;F&amp;quot;命令则反方向查找，也就是移动到光标左边的指定字符上
+&amp;ldquo;t&amp;quot;命令和&amp;quot;f&amp;quot;命令的区别在于，它移动到光标右边的指定字符之前，例如，&amp;ldquo;tx&amp;quot;会移动到光标右边第一个&amp;rsquo;x&amp;rsquo;字符的前面，&amp;ldquo;T&amp;quot;命令是&amp;quot;t&amp;quot;命令的反向版本，它移动到光标左边的指定字符之后
+这四个命令只在当前行中移动光标，光标不会跨越回车换行符
+可以在命令前面使用数字，表示倍数，例如，&amp;ldquo;3fx&amp;quot;表示移动到光标右边的第3个&amp;rsquo;x&amp;rsquo;字符上
+&amp;ldquo;;&amp;ldquo;命令重复前一次输入的f, t, F, T命令，而&amp;rdquo;,&amp;ldquo;命令会反方向重复前一次输入的f, t, F, T命令，这两个命令前也可以使用数字来表示倍数
+👉 https://www.jianshu.com/p/a46a89b460a9
+3. 如何在 Vim 里面使用 ripgrep ？ 关于这个问题有两种解决思路：
+使用 Vim 里面自带的 quickfix</description>
+    </item>
+    <item>
+      <title>Git 列出除了 .gitignore 以外的所有文件（包括 tracked 和 untracked 的）</title>
+      <link>https://hcy-asleep.github.io/Git-%E5%88%97%E5%87%BA%E9%99%A4%E4%BA%86-.gitignore-%E4%BB%A5%E5%A4%96%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8C%85%E6%8B%AC-tracked-%E5%92%8C-untracked-%E7%9A%84/</link>
+      <pubDate>Thu, 18 May 2023 11:14:10 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Git-%E5%88%97%E5%87%BA%E9%99%A4%E4%BA%86-.gitignore-%E4%BB%A5%E5%A4%96%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8C%85%E6%8B%AC-tracked-%E5%92%8C-untracked-%E7%9A%84/</guid>
+      <description>在执行 git ls-files 的时候，只会列出被 git 跟踪了 (tracked) 的文件，而不会列出那些新建未跟踪的文件 (untracked) ，这个时候用以下命令就可以列出除了 .gitignore 以外的所有文件（包括 tracked 和 untracked 的）：
+1 git ls-files --exclude-standard --cache --others 这个命令也可以简写成：
+1 git ls-files --exclude-standard -c -o 或者：
+1 git ls-files --exclude-standard -co 各项参数的意思（参考 Git 官方文档）：
+-c &amp;ndash;cached Show all files cached in Git’s index, i.e. all tracked files. (This is the default if no -c/-s/-d/-o/-u/-k/-m/&amp;ndash;resolve-undo options are specified.)
+-o &amp;ndash;others Show other (i.e. untracked) files in the output</description>
+    </item>
+    <item>
+      <title>Linux 下文件名字乱码（无效的编码）（invalid encoding）（Windows）</title>
+      <link>https://hcy-asleep.github.io/Linux-%E4%B8%8B%E6%96%87%E4%BB%B6%E5%90%8D%E5%AD%97%E4%B9%B1%E7%A0%81%E6%97%A0%E6%95%88%E7%9A%84%E7%BC%96%E7%A0%81invalid-encodingWindows/</link>
+      <pubDate>Wed, 17 May 2023 17:13:58 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E4%B8%8B%E6%96%87%E4%BB%B6%E5%90%8D%E5%AD%97%E4%B9%B1%E7%A0%81%E6%97%A0%E6%95%88%E7%9A%84%E7%BC%96%E7%A0%81invalid-encodingWindows/</guid>
+      <description>文件是在 Windows 下创建的，Windows 的文件名中文编码默认为 GBK ，而 Linux 中默认文件名编码为 UTF8，由于编码不一致所以导致了文件名乱码的问题，解决这个问题需要对文件名进行转码
+安装 convmv ：
+1 sudo apt-get install convmv convmv 使用方法：
+1 convmv -f 源编码 -t 新编码 [选项] 文件名 常用参数：
+-r 递归处理子文件夹 &amp;ndash;notest 真正进行操作，默认情况下是不对文件进行真实操作 &amp;ndash;list 显示所有支持的编码 &amp;ndash;unescap 可以做一下转义，比如把%20变成空格 Eg:
+1 convmv -f GBK -t UTF-8 --notest –-unescap *.mp3 参考链接👉 https://www.shuzhiduo.com/A/RnJWmlWvdq/</description>
+    </item>
+    <item>
+      <title>Hugo PaperMod 改变主题配色（代码块背景颜色）</title>
+      <link>https://hcy-asleep.github.io/Hugo-PaperMod-%E6%94%B9%E5%8F%98%E4%B8%BB%E9%A2%98%E9%85%8D%E8%89%B2%E4%BB%A3%E7%A0%81%E5%9D%97%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2/</link>
+      <pubDate>Thu, 04 May 2023 15:47:32 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Hugo-PaperMod-%E6%94%B9%E5%8F%98%E4%B8%BB%E9%A2%98%E9%85%8D%E8%89%B2%E4%BB%A3%E7%A0%81%E5%9D%97%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2/</guid>
+      <description>Hugo PaperMod 主题的 Code block 背景 (background) 颜色总是黑色，然后我使用 F12 检查之后发现，黑色的代码块背景源自一个 CSS 变量 “hljs-bg” ，然后我通过 Google 查到了如何修改这个变量的颜色值:
+https://github.com/adityatelange/hugo-PaperMod/discussions/645
+在网站（不是主题）中创建一个文件，例如 assets/css/extended/theme-vars-override.css
+1 2 3 4 5 6 7 8 9 10 11 12 13 source ├──archetypes ├── assets │ └── css │ └── extended │ ├── emacs.css │ └── theme-vars-override.css ├── config ├── content ├── layouts ├── public ├── resources └── themes 在 theme-vars-override.css 里面添加以下内容：
+1 2 3 4 5 6 7 8 9 10 11 :root { --theme: rgb(255, 255, 255); --entry: rgb(255, 255, 255); --primary: rgb(30, 30, 30); --secondary: rgb(108, 108, 108); --tertiary: rgb(214, 214, 214); --content: rgb(31, 31, 31); --hljs-bg: rgb(245, 246, 247); --code-bg: rgb(245, 246, 247); --border: rgb(238, 238, 238); } 重新生成网站就行，喜欢什么配色可以自己微调</description>
+    </item>
+    <item>
+      <title>VIM 代码折叠 Folding</title>
+      <link>https://hcy-asleep.github.io/VIM-%E4%BB%A3%E7%A0%81%E6%8A%98%E5%8F%A0-Folding/</link>
+      <pubDate>Sun, 30 Apr 2023 19:44:43 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E4%BB%A3%E7%A0%81%E6%8A%98%E5%8F%A0-Folding/</guid>
+      <description>VIM设置代码折叠
+zc 关闭当前打开的折叠 (也就是重新折叠起来) zo 打开当前的折叠 (也就是展开折叠) zm 关闭所有折叠 (也就是将所有展开的折叠都重新折叠起来) zM 关闭所有折叠及其嵌套的折叠 zr 打开所有折叠 zR 打开所有折叠及其嵌套的折叠 zd 删除当前折叠 zE 删除所有折叠 zj 移动至下一个折叠 zk 移动至上一个折叠 zn 禁用折叠 zN 启用折叠 </description>
+    </item>
+    <item>
+      <title>Git 修正中文乱码</title>
+      <link>https://hcy-asleep.github.io/Git-%E4%BF%AE%E6%AD%A3%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</link>
+      <pubDate>Tue, 18 Apr 2023 10:06:35 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Git-%E4%BF%AE%E6%AD%A3%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</guid>
+      <description>在 Linux （Mac）使用 git status 或者 git ls-files 的时候，若 git 在显示中文文件名的时候出现类似下面这个乱码：
+&amp;quot;\321\203\321\201\321\202\320\260\320\275\320\276\320\262&amp;quot;
+这个因为 git 默认预设之会打印出 non-ASCII 字符，对于 UTF-8 的文件名或者信息，会用 quoted octal notation 印出。
+Git has always used octal utf8 display, and one way to show the actual name is by using printf in a bash shell.
+Since Git 1.7.10 introduced the support of unicode, this wiki page mentions:
+By default, git will print non-ASCII file names in quoted octal notation, i.</description>
+    </item>
+    <item>
+      <title>VIM 全局搜索目录下所有文件关键词</title>
+      <link>https://hcy-asleep.github.io/VIM-%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%85%B3%E9%94%AE%E8%AF%8D/</link>
+      <pubDate>Wed, 22 Mar 2023 19:40:22 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%85%B3%E9%94%AE%E8%AF%8D/</guid>
+      <description>vimgrep 和 lvimgrep 是 vim 内置的搜索命令，可以处理不太复杂的正则表达式
+它们的搜索结果都会放入一个列表里面，grep 和 vimgrep 的搜索结果放在 quickfix list 里，quickfix list 可以使用 :cw 或者 :copen 在 vim 中打开，它的结果可以和所有的vim窗口共享；lgrep 和 lvimgrep 的结果存放在 location list 里，location list 是当前窗口的，可以使用 :lw 或者 :lopen 打开
+最妙的是搜索结果在cw或lw展现的时候，可以回车跳转到指定文件的搜索文本的位置
+g：代表所有匹配，而不是其中的一行匹配 j：代表vim不会自动跳转到第一个匹配的地方
+比如要在当前文件夹下递归所有文件搜索tar或者是zip，就可以这样搜：
+1 2 : lvim /\&amp;lt;\(tar\|zip\)\&amp;gt;/gj **/* : lw tip: 使用cword取当前文件光标所在出的文字，.vimrc配置如下：
+1 map &amp;lt;F3&amp;gt; :execute &amp;#34;lvimgrep /&amp;#34; . expand(&amp;#34;&amp;lt;cword&amp;gt;&amp;#34;) . &amp;#34;/gj **/*&amp;#34; &amp;lt;Bar&amp;gt; lw&amp;lt;CR&amp;gt; 上述配置完成后，在vim中当前光标下，按下F3就会在vim的当前目录下搜索所有的文件及其子文件夹的文件，并显示出来，还可以使用 %:e 来做，意思是当前目录（%）下的同类型文件（e），如下：
+1 map &amp;lt;F3&amp;gt; :execute &amp;#34;lvimgrep /&amp;#34; .</description>
+    </item>
+    <item>
+      <title>Git 自动化提交脚本 (bash)</title>
+      <link>https://hcy-asleep.github.io/Git-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%8F%90%E4%BA%A4%E8%84%9A%E6%9C%AC-bash/</link>
+      <pubDate>Sun, 19 Mar 2023 20:53:05 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Git-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%8F%90%E4%BA%A4%E8%84%9A%E6%9C%AC-bash/</guid>
+      <description>我自己的:
+1 2 3 4 5 6 cd $(dirname $0) cur=`date +%Y-%m-%d\ \|\ %H-%M-%S` git add -A git commit -m &amp;#34;$cur&amp;#34; git push -f origin main unset cur 网上的:
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 #!/bin/bash echo &amp;#34;=================&amp;#34; echo &amp;#34;auto git by JOEY&amp;#34; echo &amp;#34;======= 🤪 =========&amp;#34; echo -e &amp;#34; ▶ \033[33;1mgit add .</description>
+    </item>
+    <item>
+      <title>VIM 自带的自动补全</title>
+      <link>https://hcy-asleep.github.io/VIM-%E8%87%AA%E5%B8%A6%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/</link>
+      <pubDate>Sun, 19 Mar 2023 19:55:18 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E8%87%AA%E5%B8%A6%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/</guid>
+      <description>VIM 的自带补全是根据上下文出现过的单词作为补全元的，将以下代码加入到你的 init.vim 里面就可以实现 Tab 触发补全以及连续使用 Tab 来进行切换选中补全
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 &amp;#34; Simple tab completion ----------------------------------------------------------------------------- &amp;#34; A simple tab completion, if you use the coc.nvim, you should remove this simple completion inoremap &amp;lt;expr&amp;gt; &amp;lt;Tab&amp;gt; getline(&amp;#39;.&amp;#39;)[col(&amp;#39;.&amp;#39;)-2] !~ &amp;#39;^\s\?$&amp;#39; \|\| pumvisible() \ ? &amp;#39;&amp;lt;C-N&amp;gt;&amp;#39; : &amp;#39;&amp;lt;Tab&amp;gt;&amp;#39; inoremap &amp;lt;expr&amp;gt; &amp;lt;S-Tab&amp;gt; pumvisible() \|\| getline(&amp;#39;.&amp;#39;)[col(&amp;#39;.&amp;#39;)-2] !~ &amp;#39;^\s\?$&amp;#39; \ ? &amp;#39;&amp;lt;C-P&amp;gt;&amp;#39; : &amp;#39;&amp;lt;Tab&amp;gt;&amp;#39; augroup SimpleComplete autocmd CmdwinEnter * inoremap &amp;lt;expr&amp;gt; &amp;lt;buffer&amp;gt; &amp;lt;Tab&amp;gt; \ getline(&amp;#39;.</description>
+    </item>
+    <item>
+      <title>Podman 换源</title>
+      <link>https://hcy-asleep.github.io/Podman-%E6%8D%A2%E6%BA%90/</link>
+      <pubDate>Sun, 19 Mar 2023 19:50:14 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Podman-%E6%8D%A2%E6%BA%90/</guid>
+      <description> Podman 默认注册表配置文件在 /etc/containers/registries.conf
+国内的镜像源有:
+docker官方中国区 https://registry.docker-cn.com 网易 http://hub-mirror.c.163.com USTC http://docker.mirrors.ustc.edu.cn 阿里云 http://&amp;lt;你的ID&amp;gt;.mirror.aliyuncs.com 修改为以下内容:
+1 2 3 4 5 6 # 这个是添加 dockerhub 的搜索源 unqualified-search-registries = [&amp;#34;docker.io&amp;#34;] [[registry]] prefix = &amp;#34;docker.io&amp;#34; location = &amp;#34;xxxxxxxx.mirror.aliyuncs.com&amp;#34; </description>
+    </item>
+    <item>
+      <title>Hugo Hexo 添加音乐播放器</title>
+      <link>https://hcy-asleep.github.io/Hugo-Hexo-%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8/</link>
+      <pubDate>Mon, 13 Mar 2023 19:26:15 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Hugo-Hexo-%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8/</guid>
+      <description>直接上代码，就完事了
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;body&amp;gt; &amp;lt;style&amp;gt; .parent { margin-top:25px; position: relative; } .parent .child { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width:100%; } &amp;lt;/style&amp;gt; &amp;lt;div class=&amp;#34;parent&amp;#34;&amp;gt; &amp;lt;audio controls class=&amp;#34;child&amp;#34;&amp;gt; &amp;lt;source src=&amp;#34;horse.mp3&amp;#34; type=&amp;#34;audio/mpeg&amp;#34;&amp;gt; Your browser does not support the audio element. &amp;lt;/audio&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; </description>
+    </item>
+    <item>
+      <title>佤咖啡有感</title>
+      <link>https://hcy-asleep.github.io/%E4%BD%A4%E5%92%96%E5%95%A1%E6%9C%89%E6%84%9F/</link>
+      <pubDate>Mon, 13 Mar 2023 18:15:21 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/%E4%BD%A4%E5%92%96%E5%95%A1%E6%9C%89%E6%84%9F/</guid>
+      <description>说真的，能认识这一首歌是隔壁宿舍杨教士传给我的，然后就是现在这个样子，佤也成为了一名传教士。这首歌的 Drill 是其灵魂所在，前奏和尾声都是 &amp;ldquo;River Flows In You&amp;rdquo; 的影子，一开始觉得挺搞的，后面越听越觉得悲惨&amp;hellip;
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 作词 : 王云宏 作曲 : 王云宏 编曲 : YvngRick 直到外面下了大雨 我才选择离开，唉 我会控制不住的想你 我的女孩，唉 一个人喝苦咖啡好好干给他一大杯 不想擦眼泪你说我是寨子鬼 本来不会醉v8才是忘情水 我是真的累 我是真的累 为什么不喝南腊 我怕我会想你 我们熟悉的包谷地 我提去你家的腊肉 你吃了没有 你爸妈说相当香 你说的话就像农药把我干掉 我听了就睡不着 我送你的vivo我借钱买的 都分手了还在还钱 你是我的观音菩萨 我是你的刘德滑 你是我的观音菩萨 我是你的刘德滑 直到外面下了大雨 我才选择离开，唉 我会控制不住的想你 我的女孩，唉 一个人喝苦咖啡好好干给他一大杯 不想擦眼泪你说我是寨子鬼 本来不会醉v8才是忘情水 我是真的累 我是真的累 你是我的观音菩萨 我是你的刘德滑 你是我的观音菩萨 我是你的刘德滑 你不爱么我也不爱了嘛 搭伙都不爱了嘛 Your browser does not support the audio element.</description>
+    </item>
+    <item>
+      <title>Flameshot Arch 无法命令行使用</title>
+      <link>https://hcy-asleep.github.io/Flameshot-Arch-%E6%97%A0%E6%B3%95%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 11 Mar 2023 11:33:35 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Flameshot-Arch-%E6%97%A0%E6%B3%95%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8/</guid>
+      <description>在终端执行 flameshot gui 的时候异常，安装 xdg-desktop-portal 包就行，Gnome 桌面环境的话安装 xdg-desktop-portal-gnome</description>
+    </item>
+    <item>
+      <title>SSH连接Docker容器</title>
+      <link>https://hcy-asleep.github.io/SSH%E8%BF%9E%E6%8E%A5Docker%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Mon, 06 Mar 2023 15:29:12 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/SSH%E8%BF%9E%E6%8E%A5Docker%E5%AE%B9%E5%99%A8/</guid>
+      <description>创建容器并且端口映射以及后台运行
+1 docker run -it -d -p 9009:22 ubuntu /bin/bash 查看containerId (或者containerAlias)
+1 docker ps -a 进入容器
+1 2 3 # 这里的 containerId 换成 containerAlias 也是可以的 docker start containerId docker exec -it containerId /bin/bash ubuntu 更新源列表
+1 apt-get update 安装ssh-client、ssh-server
+1 2 3 4 apt-get install openssh-client apt-get install openssh-server # 安装 neovim 工具 apt-get install neovim 编辑 sshd_config 文件
+1 vim /etc/ssh/sshd_config 允许 ssh 以 root 用户登录
+1 PermitRootLogin yes 设置 root 密码，同时也是设置 ssh root登录的密码</description>
+    </item>
+    <item>
+      <title>SSH 允许非root用户登录</title>
+      <link>https://hcy-asleep.github.io/SSH-%E5%85%81%E8%AE%B8%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/</link>
+      <pubDate>Sun, 05 Mar 2023 13:53:48 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/SSH-%E5%85%81%E8%AE%B8%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/</guid>
+      <description>通过配置/etc/ssh/sshd_config文件的AllowUsers，可以添加多个允许登录的用户名，不同用户名之间用空格分开，不在其中的用户则不可以登录
+1 AllowUsers [username] 例如只想允许john和teena两个用户通过ssh登录，其余用户均不允许
+1 AllowUsers john teena 执行下面的命令，重启sshd服务使配置生效
+1 service sshd restart </description>
+    </item>
+    <item>
+      <title>Jupyter Notebook 远程访问 免密 设置密码登录</title>
+      <link>https://hcy-asleep.github.io/Jupyter-Notebook-%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE-%E5%85%8D%E5%AF%86-%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/</link>
+      <pubDate>Sun, 05 Mar 2023 13:39:33 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Jupyter-Notebook-%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE-%E5%85%8D%E5%AF%86-%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/</guid>
+      <description> 免密码登录
+1 jupyter notebook --ip=&amp;#39;*&amp;#39; --NotebookApp.token=&amp;#39;&amp;#39; --NotebookApp.password=&amp;#39;&amp;#39; 其中 &amp;hellip; &amp;ndash;ip=&amp;rsquo;*&amp;rsquo; &amp;hellip; 表示允许所有 ip 访问而不仅是本机的 127.0.0.1 ，从而达到远程连接的效果 远程连接但是加上一点点安全性
+1 jupyter notebook --ip=&amp;#39;*&amp;#39; --NotebookApp.token=&amp;#39;hcy&amp;#39; 设置 token 为 hcy ，远程访问的时候如下访问
+1 2 # {jupyter notebook ip}:8888/?token=hcy http://172.35.40.120:8888/?token=hcy </description>
+    </item>
+    <item>
+      <title>SZU 宿舍区上网 命令行</title>
+      <link>https://hcy-asleep.github.io/SZU-%E5%AE%BF%E8%88%8D%E5%8C%BA%E4%B8%8A%E7%BD%91-%E5%91%BD%E4%BB%A4%E8%A1%8C/</link>
+      <pubDate>Sat, 04 Mar 2023 11:14:49 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/SZU-%E5%AE%BF%E8%88%8D%E5%8C%BA%E4%B8%8A%E7%BD%91-%E5%91%BD%E4%BB%A4%E8%A1%8C/</guid>
+      <description>So easy：
+1 2 # curl &amp;#34;http://172.30.255.42:801/eportal/portal/login?user_account={校园卡卡号}&amp;amp;user_password={校园卡密码}&amp;#34; curl &amp;#34;http://172.30.255.42:801/eportal/portal/login?user_account=392257&amp;amp;user_password=12345678&amp;#34; </description>
+    </item>
+    <item>
+      <title>Hugo Server 远程调试</title>
+      <link>https://hcy-asleep.github.io/Hugo-Server-%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/</link>
+      <pubDate>Fri, 03 Mar 2023 19:54:56 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Hugo-Server-%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/</guid>
+      <description>hugo server 命令一般是在 127.0.0.1 启动服务，而使用以下命令就可以远端预览 hugo server 的结果
+1 hugo server --bind=0.0.0.0 --baseURL={启动服务的机器的IP} 比如说我在服务器写了 passage ，在服务器 hugo server ，想在本地浏览器看到 server 效果，这时候 {启动服务的机器的IP} 就是服务器的 IP
+我在内网远端预览
+1 hugo server --bind=0.0.0.0 --baseURL=172.29.40.118 </description>
+    </item>
+    <item>
+      <title>Linux Grub 分辨率</title>
+      <link>https://hcy-asleep.github.io/Linux-Grub-%E5%88%86%E8%BE%A8%E7%8E%87/</link>
+      <pubDate>Tue, 28 Feb 2023 22:27:36 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-Grub-%E5%88%86%E8%BE%A8%E7%8E%87/</guid>
+      <description>Change grub resolution on arch/debian</description>
+    </item>
+    <item>
+      <title>KDE Slow Shutdown</title>
+      <link>https://hcy-asleep.github.io/KDE-Slow-Shutdown/</link>
+      <pubDate>Tue, 28 Feb 2023 21:58:38 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/KDE-Slow-Shutdown/</guid>
+      <description>KDE 关机慢</description>
+    </item>
+    <item>
+      <title>Thunar 设置打开终端</title>
+      <link>https://hcy-asleep.github.io/Thunar-%E8%AE%BE%E7%BD%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/</link>
+      <pubDate>Sun, 26 Feb 2023 19:27:50 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Thunar-%E8%AE%BE%E7%BD%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/</guid>
+      <description>XFCE 文件浏览器打开默认终端</description>
+    </item>
+    <item>
+      <title>Migrate to Hugo</title>
+      <link>https://hcy-asleep.github.io/Migrate-to-Hugo/</link>
+      <pubDate>Sun, 26 Feb 2023 15:07:16 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Migrate-to-Hugo/</guid>
+      <description>如何从 Hexo 迁移到 Hugo</description>
+    </item>
+    <item>
+      <title>Vim =&gt; iamcco/markdown-preview.nvim without nodejs</title>
+      <link>https://hcy-asleep.github.io/Vim-iamcco/markdown-preview.nvim-without-nodejs/</link>
+      <pubDate>Tue, 21 Feb 2023 11:33:20 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Vim-iamcco/markdown-preview.nvim-without-nodejs/</guid>
+      <description>安装离线版本</description>
+    </item>
+    <item>
+      <title>Arch KDE 折腾日志</title>
+      <link>https://hcy-asleep.github.io/Arch-KDE-%E6%8A%98%E8%85%BE%E6%97%A5%E5%BF%97/</link>
+      <pubDate>Tue, 21 Feb 2023 05:09:57 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Arch-KDE-%E6%8A%98%E8%85%BE%E6%97%A5%E5%BF%97/</guid>
+      <description>live cd 安装使用 WIFI 先用命令 ip link查看网络接口
+1 ip link 查看到我的机器的无线网络接口是wlan0(不同的机器可能名字不同)，这里 wlan0 为例
+默认是关闭的状态，需要先开启它，而开启它之前还需要先激活它(即取消禁用，我这台机器默认是blockeded，禁用的)
+1 2 rfkill unblock wifi # 取消禁用wifi设备 ip link set wlan0 up # 开启wlan0 输入iwctl进入交互式提示符（interactive prompt），配置并连接到互联网
+1 2 3 4 5 station wlan0 scan station wlan0 get-networks station wlan0 connect &amp;lt;network name&amp;gt; station wlan0 show exit　# 回到命令行 ping百度可以ping通，就说明已经连接上了互联网
+免密 sudo Arch Linux run sudo without passwd
+首先
+1 sudo visudo 然后编辑里面的内容
+1 myname ALL=(ALL) NOPASSWD: ALL 添加中科大源 添加中科大的Arch Linux源</description>
+    </item>
+    <item>
+      <title>Nautilus 添加右键打开 terminal 选项</title>
+      <link>https://hcy-asleep.github.io/Nautilus-%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E6%89%93%E5%BC%80-terminal-%E9%80%89%E9%A1%B9/</link>
+      <pubDate>Tue, 21 Feb 2023 04:50:37 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Nautilus-%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E6%89%93%E5%BC%80-terminal-%E9%80%89%E9%A1%B9/</guid>
+      <description>Nautilus open any terminal</description>
+    </item>
+    <item>
+      <title>Gnome 下设置默认 terminal</title>
+      <link>https://hcy-asleep.github.io/Gnome-%E4%B8%8B%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4-terminal/</link>
+      <pubDate>Mon, 20 Feb 2023 13:42:53 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Gnome-%E4%B8%8B%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4-terminal/</guid>
+      <description>Gnome default terminal</description>
+    </item>
+    <item>
+      <title>Shell 走代理</title>
+      <link>https://hcy-asleep.github.io/Shell-%E8%B5%B0%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Mon, 20 Feb 2023 13:26:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Shell-%E8%B5%B0%E4%BB%A3%E7%90%86/</guid>
+      <description>Shell bash proxy</description>
+    </item>
+    <item>
+      <title>Hexo Next 原生相册支持</title>
+      <link>https://hcy-asleep.github.io/Hexo-Next-%E5%8E%9F%E7%94%9F%E7%9B%B8%E5%86%8C%E6%94%AF%E6%8C%81/</link>
+      <pubDate>Mon, 20 Feb 2023 13:13:22 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-Next-%E5%8E%9F%E7%94%9F%E7%9B%B8%E5%86%8C%E6%94%AF%E6%8C%81/</guid>
+      <description>Hexo Next Group Pictures (Photo Album)</description>
+    </item>
+    <item>
+      <title>大三下课表</title>
+      <link>https://hcy-asleep.github.io/%E5%A4%A7%E4%B8%89%E4%B8%8B%E8%AF%BE%E8%A1%A8/</link>
+      <pubDate>Wed, 15 Feb 2023 08:42:42 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/%E5%A4%A7%E4%B8%89%E4%B8%8B%E8%AF%BE%E8%A1%A8/</guid>
+      <description>完蛋，暴露学校了</description>
+    </item>
+    <item>
+      <title>Markdown (HTML) 砌体 (瀑布) 布局</title>
+      <link>https://hcy-asleep.github.io/Markdown-HTML-%E7%A0%8C%E4%BD%93-%E7%80%91%E5%B8%83-%E5%B8%83%E5%B1%80/</link>
+      <pubDate>Wed, 15 Feb 2023 02:18:52 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Markdown-HTML-%E7%A0%8C%E4%BD%93-%E7%80%91%E5%B8%83-%E5%B8%83%E5%B1%80/</guid>
+      <description>瀑布流相册设计</description>
+    </item>
+    <item>
+      <title>Hexo next 开启 fancybox 查看图片大图</title>
+      <link>https://hcy-asleep.github.io/Hexo-next-%E5%BC%80%E5%90%AF-fancybox-%E6%9F%A5%E7%9C%8B%E5%9B%BE%E7%89%87%E5%A4%A7%E5%9B%BE/</link>
+      <pubDate>Wed, 15 Feb 2023 02:11:21 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-next-%E5%BC%80%E5%90%AF-fancybox-%E6%9F%A5%E7%9C%8B%E5%9B%BE%E7%89%87%E5%A4%A7%E5%9B%BE/</guid>
+      <description>Next 8.x 一键开启 fancybox</description>
+    </item>
+    <item>
+      <title>Hexo Giscus 评论 (NexT 主题)</title>
+      <link>https://hcy-asleep.github.io/Hexo-Giscus-%E8%AF%84%E8%AE%BA-NexT-%E4%B8%BB%E9%A2%98/</link>
+      <pubDate>Sun, 12 Feb 2023 06:24:19 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-Giscus-%E8%AF%84%E8%AE%BA-NexT-%E4%B8%BB%E9%A2%98/</guid>
+      <description>让你的 Github Pages 也可以像 WordPress 一样评论！</description>
+    </item>
+    <item>
+      <title>Git 修改 / 添加 / 删除远程仓库</title>
+      <link>https://hcy-asleep.github.io/Git-%E4%BF%AE%E6%94%B9-/-%E6%B7%BB%E5%8A%A0-/-%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</link>
+      <pubDate>Sun, 12 Feb 2023 04:22:54 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Git-%E4%BF%AE%E6%94%B9-/-%E6%B7%BB%E5%8A%A0-/-%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</guid>
+      <description>多端同步可能会用到</description>
+    </item>
+    <item>
+      <title>VIM 删除包含指定字符的行</title>
+      <link>https://hcy-asleep.github.io/VIM-%E5%88%A0%E9%99%A4%E5%8C%85%E5%90%AB%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E7%9A%84%E8%A1%8C/</link>
+      <pubDate>Sun, 12 Feb 2023 02:03:47 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E5%88%A0%E9%99%A4%E5%8C%85%E5%90%AB%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E7%9A%84%E8%A1%8C/</guid>
+      <description>高级操作喔</description>
+    </item>
+    <item>
+      <title>Hexo 添加友情链接</title>
+      <link>https://hcy-asleep.github.io/Hexo-%E6%B7%BB%E5%8A%A0%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</link>
+      <pubDate>Sun, 12 Feb 2023 01:32:23 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-%E6%B7%BB%E5%8A%A0%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/</guid>
+      <description>骚操作--自定义友链页面</description>
+    </item>
+    <item>
+      <title>Podman 登录脚本</title>
+      <link>https://hcy-asleep.github.io/Podman-%E7%99%BB%E5%BD%95%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Sun, 12 Feb 2023 00:51:01 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Podman-%E7%99%BB%E5%BD%95%E8%84%9A%E6%9C%AC/</guid>
+      <description>有点类似 MySQL 登录</description>
+    </item>
+    <item>
+      <title>Docker (Podman) MySQL</title>
+      <link>https://hcy-asleep.github.io/Docker-Podman-MySQL/</link>
+      <pubDate>Sat, 11 Feb 2023 13:27:00 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Docker-Podman-MySQL/</guid>
+      <description>Docker 安装、启动 MySQL</description>
+    </item>
+    <item>
+      <title>VIM 长行(han)慢</title>
+      <link>https://hcy-asleep.github.io/VIM-%E9%95%BF%E8%A1%8Chan%E6%85%A2/</link>
+      <pubDate>Sat, 11 Feb 2023 12:56:36 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E9%95%BF%E8%A1%8Chan%E6%85%A2/</guid>
+      <description>Long lines make vim slow ...</description>
+    </item>
+    <item>
+      <title>Podman 基本操作</title>
+      <link>https://hcy-asleep.github.io/Podman-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Sat, 11 Feb 2023 12:21:23 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Podman-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</guid>
+      <description>基本操作（与docker兼容）</description>
+    </item>
+    <item>
+      <title>Nodejs 升级版本</title>
+      <link>https://hcy-asleep.github.io/Nodejs-%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/</link>
+      <pubDate>Sat, 11 Feb 2023 12:16:38 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Nodejs-%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/</guid>
+      <description>&lt;p&gt;用n升级nodejs&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hexo 代码块配置</title>
+      <link>https://hcy-asleep.github.io/Hexo-%E4%BB%A3%E7%A0%81%E5%9D%97%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sat, 11 Feb 2023 12:13:01 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-%E4%BB%A3%E7%A0%81%E5%9D%97%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;在 NexT 的主题配置文件里面启用&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hexo首页只显示部分摘要</title>
+      <link>https://hcy-asleep.github.io/Hexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</link>
+      <pubDate>Sat, 11 Feb 2023 11:54:16 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81/</guid>
+      <description>hexo首页不显示全文</description>
+    </item>
+    <item>
+      <title>Git Multi End Sync</title>
+      <link>https://hcy-asleep.github.io/Git-Multi-End-Sync/</link>
+      <pubDate>Sat, 11 Feb 2023 11:19:54 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Git-Multi-End-Sync/</guid>
+      <description>git 远端比本地领先的时候如何同步</description>
+    </item>
+    <item>
+      <title>Git no passwd login</title>
+      <link>https://hcy-asleep.github.io/Git-no-passwd-login/</link>
+      <pubDate>Sat, 11 Feb 2023 11:06:29 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Git-no-passwd-login/</guid>
+      <description>git 免密码登陆</description>
+    </item>
+    <item>
+      <title>Hexo next favicon</title>
+      <link>https://hcy-asleep.github.io/Hexo-next-favicon/</link>
+      <pubDate>Sat, 11 Feb 2023 11:01:48 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-next-favicon/</guid>
+      <description>设置网站的图标</description>
+    </item>
+    <item>
+      <title>Podman hexo</title>
+      <link>https://hcy-asleep.github.io/Podman-hexo/</link>
+      <pubDate>Sat, 11 Feb 2023 10:38:59 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Podman-hexo/</guid>
+      <description>将 hexo 容器化便于迁移</description>
+    </item>
+    <item>
+      <title>Podman GUI Wayland/X11</title>
+      <link>https://hcy-asleep.github.io/Podman-GUI-Wayland/X11/</link>
+      <pubDate>Sat, 11 Feb 2023 08:32:39 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Podman-GUI-Wayland/X11/</guid>
+      <description>最简单的一种方法！</description>
+    </item>
+    <item>
+      <title>Hexo Inner Link</title>
+      <link>https://hcy-asleep.github.io/Hexo-Inner-Link/</link>
+      <pubDate>Wed, 23 Nov 2022 20:05:16 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-Inner-Link/</guid>
+      <description>Markdown 编写的 Hexo 博客文章内部跳转</description>
+    </item>
+    <item>
+      <title>Linux Host 与 KVM Windows Guest 共享文件</title>
+      <link>https://hcy-asleep.github.io/Linux-Host-%E4%B8%8E-KVM-Windows-Guest-%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Fri, 18 Nov 2022 19:24:07 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-Host-%E4%B8%8E-KVM-Windows-Guest-%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</guid>
+      <description>互传文件</description>
+    </item>
+    <item>
+      <title>Coc-pyright 找不到相关的语法分析</title>
+      <link>https://hcy-asleep.github.io/Coc-pyright-%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</link>
+      <pubDate>Thu, 17 Nov 2022 19:09:23 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Coc-pyright-%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</guid>
+      <description>github issue 里面的方法是手动生成存根</description>
+    </item>
+    <item>
+      <title>Linux 命令行格式化磁盘（U盘)</title>
+      <link>https://hcy-asleep.github.io/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98U%E7%9B%98/</link>
+      <pubDate>Thu, 17 Nov 2022 16:27:52 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98U%E7%9B%98/</guid>
+      <description>注意：以下操作都属于高危行为，请谨慎使用!
+在插入 U盘 之前，先查看有哪些磁盘
+可以看到加粗的有两行，第一行开头是 &amp;ldquo;Disk&amp;rdquo; ，第二行开头是 &amp;ldquo;Device&amp;rdquo; 整个输出只有一行加粗的 &amp;ldquo;Disk&amp;rdquo; ，表示目前只有一个硬盘 每一个加粗的 &amp;ldquo;Device&amp;rdquo; 都对应上一行的 &amp;ldquo;Disk&amp;rdquo; &amp;ldquo;Device&amp;rdquo; 里面的内容表示 &amp;ldquo;Disk&amp;rdquo; 里面的分区 在插入 U盘 之后，再查看有哪些磁盘
+发现多了一行加粗的 &amp;ldquo;Disk&amp;rdquo; 这个正是我们插入的 U盘 卸载 U盘
+1 umount /dev/sda /dev/后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！ 格式化 U盘 ，并且建立 vfat 文件系统
+1 mkfs.vfat -I /dev/sda /dev/后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！ 最后再 mount 上 U盘 ，或者把 U盘 拨了再插上，系统可能会自动 mount 上, 就可以使用 U盘 了
+异常处理
+假设 U盘 信息如下
+1 2 3 4 5 6 7 8 9 10 Disk /dev/sdb：7.5 GiB，8004304896 bytes，15633408 sectors Units：sectors of / 1 * 512 = 512 bytes Sector size(logical/physical)：512 bytes / 512 bytes I/O size(mininum/optimal)：512 bytes / 512 bytes Disklabel type：dos Disk identifier：0x663eb4c4 Device boot Start End Sectors Size Id Type /dev/sdb1 * 0 3815135 3815136 1.</description>
+    </item>
+    <item>
+      <title>Vim Diff</title>
+      <link>https://hcy-asleep.github.io/Vim-Diff/</link>
+      <pubDate>Mon, 07 Nov 2022 19:50:01 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Vim-Diff/</guid>
+      <description>对比文档</description>
+    </item>
+    <item>
+      <title>Redis-基础-闲聊</title>
+      <link>https://hcy-asleep.github.io/Redis-%E5%9F%BA%E7%A1%80-%E9%97%B2%E8%81%8A/</link>
+      <pubDate>Mon, 07 Nov 2022 17:36:41 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Redis-%E5%9F%BA%E7%A1%80-%E9%97%B2%E8%81%8A/</guid>
+      <description>&lt;div align=&#34;left&#34;&gt;&lt;div style=&#34;width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center&#34;&gt;
+今天要不来聊聊Redis吧？
+&lt;/div&gt;&lt;/div&gt;&lt;br/&gt;</description>
+    </item>
+    <item>
+      <title>TCP Shakes/Waves Hands 闲谈</title>
+      <link>https://hcy-asleep.github.io/TCP-Shakes/Waves-Hands-%E9%97%B2%E8%B0%88/</link>
+      <pubDate>Mon, 07 Nov 2022 13:58:17 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/TCP-Shakes/Waves-Hands-%E9%97%B2%E8%B0%88/</guid>
+      <description>&lt;div align=&#34;right&#34;&gt;&lt;div style=&#34;width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center&#34;&gt;
+面试官你好，请问面试可以开始了吗
+&lt;/div&gt;&lt;/div&gt;&lt;br/&gt;</description>
+    </item>
+    <item>
+      <title>MySQL 闲谈 3</title>
+      <link>https://hcy-asleep.github.io/MySQL-%E9%97%B2%E8%B0%88-3/</link>
+      <pubDate>Sun, 06 Nov 2022 16:20:23 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/MySQL-%E9%97%B2%E8%B0%88-3/</guid>
+      <description>&lt;div align=&#34;left&#34;&gt;&lt;div style=&#34;width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center&#34;&gt;
+要不你来讲讲你们对MySQL是怎么调优的？
+&lt;/div&gt;&lt;/div&gt;&lt;br/&gt;</description>
+    </item>
+    <item>
+      <title>MySQL 闲谈 2</title>
+      <link>https://hcy-asleep.github.io/MySQL-%E9%97%B2%E8%B0%88-2/</link>
+      <pubDate>Sun, 06 Nov 2022 16:14:33 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/MySQL-%E9%97%B2%E8%B0%88-2/</guid>
+      <description>&lt;div align=&#34;left&#34;&gt;&lt;div style=&#34;width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center&#34;&gt;
+你是怎么理解InnoDB引擎中的事务的？
+&lt;/div&gt;&lt;/div&gt;&lt;br/&gt;</description>
+    </item>
+    <item>
+      <title>Markdown 对话框</title>
+      <link>https://hcy-asleep.github.io/Markdown-%E5%AF%B9%E8%AF%9D%E6%A1%86/</link>
+      <pubDate>Sat, 05 Nov 2022 20:43:19 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Markdown-%E5%AF%B9%E8%AF%9D%E6%A1%86/</guid>
+      <description>markdown 写对话</description>
+    </item>
+    <item>
+      <title>Linux 查看硬盘空间</title>
+      <link>https://hcy-asleep.github.io/Linux-%E6%9F%A5%E7%9C%8B%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4/</link>
+      <pubDate>Sat, 05 Nov 2022 15:46:02 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E6%9F%A5%E7%9C%8B%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4/</guid>
+      <description>如何知道服务器硬盘爆了...</description>
+    </item>
+    <item>
+      <title>VLC Linux 安装在自定义目录</title>
+      <link>https://hcy-asleep.github.io/VLC-Linux-%E5%AE%89%E8%A3%85%E5%9C%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%AE%E5%BD%95/</link>
+      <pubDate>Sat, 05 Nov 2022 15:16:56 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/VLC-Linux-%E5%AE%89%E8%A3%85%E5%9C%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%AE%E5%BD%95/</guid>
+      <description>&lt;p&gt;apt 只下载包及其依赖而不安装&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# sudo apt-get install -d &amp;lt;软件包&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install -d vlc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Wayland Wemeet</title>
+      <link>https://hcy-asleep.github.io/Wayland-Wemeet/</link>
+      <pubDate>Sat, 05 Nov 2022 14:45:11 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Wayland-Wemeet/</guid>
+      <description>腾讯会议不支持 Wayland 解决方法</description>
+    </item>
+    <item>
+      <title>MARO Distibuted Toolkit</title>
+      <link>https://hcy-asleep.github.io/MARO-Distibuted-Toolkit/</link>
+      <pubDate>Fri, 04 Nov 2022 18:15:29 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/MARO-Distibuted-Toolkit/</guid>
+      <description>&lt;h3 id=&#34;maro-三层框架&#34;&gt;MARO 三层框架&lt;/h3&gt;</description>
+    </item>
+    <item>
+      <title>VIM 配置</title>
+      <link>https://hcy-asleep.github.io/VIM-%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sat, 29 Oct 2022 14:31:55 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E9%85%8D%E7%BD%AE/</guid>
+      <description>VIM 配置是会随着使用时间慢慢改进的，需要看最新最完整的需移步到 我的 Github 仓库
+VIM 配置说明
+安装 neovim 可以直接从 github 下载 appimage
+配置 neovim 首次启动使用 :checkhealth 查看配置的路径等信息
+coc.nvim 的 LSP 服务需要 npm （ node.js ）提供支持，npm 安装的时候可以从官方网站那里下载然后安装到指定 path，之后的 -g 安装 npm 包的时候包会安装在安装 npm 的目录下面
+注意这个 coc-setting.json 这个在安装了 coc.nvim 之后可以 :CocConfig 来进行编辑，json 里面这一句话一定要加上，解决了初次 tab 选中的问题
+配置文件 init.vim 位于 /home/asleep/.config/nvim 下，coc-settings.json 也是在这个路径下面
+vimplug 管理插件，这里有点特殊，这里我将其他插件安装在与 vimplug 的 plug.vim 同一个目录下面，即 /home/asleep/.local/share/nvim/site/autoload
+安装各种插件之前，应该要了解各个插件的依赖
+至于 vimplug 的安装，只需要把 github 上面的那个 plug.vim 文件弄下来放在上面说的那个 path 下面就可以调用 :PlugInstall，不用整个仓库弄下来
+至于 coc 的插件，coc.</description>
+    </item>
+    <item>
+      <title>MARO VM 调度</title>
+      <link>https://hcy-asleep.github.io/MARO-VM-%E8%B0%83%E5%BA%A6/</link>
+      <pubDate>Thu, 27 Oct 2022 11:01:57 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/MARO-VM-%E8%B0%83%E5%BA%A6/</guid>
+      <description>&lt;h3 id=&#34;背景&#34;&gt;背景&lt;/h3&gt;</description>
+    </item>
+    <item>
+      <title>工作面试</title>
+      <link>https://hcy-asleep.github.io/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/</link>
+      <pubDate>Wed, 26 Oct 2022 14:11:21 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/</guid>
+      <description>被毒打经历</description>
+    </item>
+    <item>
+      <title>Hexo 加强 Next Theme 美化</title>
+      <link>https://hcy-asleep.github.io/Hexo-%E5%8A%A0%E5%BC%BA-Next-Theme-%E7%BE%8E%E5%8C%96/</link>
+      <pubDate>Wed, 26 Oct 2022 11:27:15 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-%E5%8A%A0%E5%BC%BA-Next-Theme-%E7%BE%8E%E5%8C%96/</guid>
+      <description>选择用户基数大的 Next 更加容易解决问题</description>
+    </item>
+    <item>
+      <title>初识 MARO</title>
+      <link>https://hcy-asleep.github.io/%E5%88%9D%E8%AF%86-MARO/</link>
+      <pubDate>Wed, 26 Oct 2022 10:20:02 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/%E5%88%9D%E8%AF%86-MARO/</guid>
+      <description>&lt;h3 id=&#34;maro-multi-agent-resource-optimization-httpsgithubcommicrosoftmaro&#34;&gt;&lt;a href=&#34;https://github.com/microsoft/maro&#34;&gt;MARO ，“Multi-Agent-Resource Optimization” &lt;/a&gt;&lt;/h3&gt;</description>
+    </item>
+    <item>
+      <title>Hexo 文档分类 图片存储</title>
+      <link>https://hcy-asleep.github.io/Hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/</link>
+      <pubDate>Sun, 23 Oct 2022 19:16:39 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-%E6%96%87%E6%A1%A3%E5%88%86%E7%B1%BB-%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;建立分类&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hexo 基本美化</title>
+      <link>https://hcy-asleep.github.io/Hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/</link>
+      <pubDate>Sun, 23 Oct 2022 16:08:56 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Hexo-%E5%9F%BA%E6%9C%AC%E7%BE%8E%E5%8C%96/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;首先是顶部背景&lt;/strong&gt;，下面是原背景&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Bash Powerline Fonts 美化</title>
+      <link>https://hcy-asleep.github.io/Bash-Powerline-Fonts-%E7%BE%8E%E5%8C%96/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Bash-Powerline-Fonts-%E7%BE%8E%E5%8C%96/</guid>
+      <description>powerline fonts</description>
+    </item>
+    <item>
+      <title>Debian Bashrc</title>
+      <link>https://hcy-asleep.github.io/Debian-Bashrc/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Bashrc/</guid>
+      <description>环境变量相关</description>
+    </item>
+    <item>
+      <title>Debian Fcitx 中文输入法</title>
+      <link>https://hcy-asleep.github.io/Debian-Fcitx-%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Fcitx-%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95/</guid>
+      <description>&lt;p&gt;不是中文环境需要进行切换中文环境&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Debian Gnome 默认浏览器</title>
+      <link>https://hcy-asleep.github.io/Debian-Gnome-%E9%BB%98%E8%AE%A4%E6%B5%8F%E8%A7%88%E5%99%A8/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Gnome-%E9%BB%98%E8%AE%A4%E6%B5%8F%E8%A7%88%E5%99%A8/</guid>
+      <description>xdg</description>
+    </item>
+    <item>
+      <title>Debian Nvidia 驱动</title>
+      <link>https://hcy-asleep.github.io/Debian-Nvidia-%E9%A9%B1%E5%8A%A8/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Nvidia-%E9%A9%B1%E5%8A%A8/</guid>
+      <description>&lt;p&gt;最重要的一点，去 bios 那里关闭 secure boot 先！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Github Pages &#43; Hexo</title>
+      <link>https://hcy-asleep.github.io/Github-Pages--Hexo/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Github-Pages--Hexo/</guid>
+      <description>白嫖 github 的服务器</description>
+    </item>
+    <item>
+      <title>Gnome Desktop File 参考</title>
+      <link>https://hcy-asleep.github.io/Gnome-Desktop-File-%E5%8F%82%E8%80%83/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Gnome-Desktop-File-%E5%8F%82%E8%80%83/</guid>
+      <description>&lt;p&gt;eg:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux VScode 字体</title>
+      <link>https://hcy-asleep.github.io/Linux-VScode-%E5%AD%97%E4%BD%93/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-VScode-%E5%AD%97%E4%BD%93/</guid>
+      <description>使用 firacode 字体</description>
+    </item>
+    <item>
+      <title>Linux 环境变量配置</title>
+      <link>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;/etc/profile.d/path.sh&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux 环境变量配置错误处理</title>
+      <link>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/</guid>
+      <description>&lt;p&gt;Linux 环境变量配置出错后，提示command not found&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nodejs 换源</title>
+      <link>https://hcy-asleep.github.io/Nodejs-%E6%8D%A2%E6%BA%90/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Nodejs-%E6%8D%A2%E6%BA%90/</guid>
+      <description>&lt;p&gt;由于 Node 的官方模块仓库网速太慢，模块仓库需要切换到阿里的源&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VIM 批量查找替换</title>
+      <link>https://hcy-asleep.github.io/VIM-%E6%89%B9%E9%87%8F%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E6%89%B9%E9%87%8F%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2/</guid>
+      <description>VIM 实用技巧</description>
+    </item>
+    <item>
+      <title>The First Blog</title>
+      <link>https://hcy-asleep.github.io/The-First-Blog/</link>
+      <pubDate>Sat, 22 Oct 2022 21:16:22 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/The-First-Blog/</guid>
+      <description>&lt;p&gt;&amp;ldquo;开始记录进步与欢乐！&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Debian 安装中文环境</title>
+      <link>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E7%8E%AF%E5%A2%83/</guid>
+      <description>容器里面可能要先安装 locale</description>
+    </item>
+    <item>
+      <title>MySQL 闲谈 1</title>
+      <link>https://hcy-asleep.github.io/MySQL-%E9%97%B2%E8%B0%88-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/MySQL-%E9%97%B2%E8%B0%88-1/</guid>
+      <description>&lt;div align=&#34;left&#34;&gt;&lt;div style=&#34;width: 60%; border-style: solid; border-width: 1px; border-radius: 16px; position: relative; padding:30px; text-align:center&#34;&gt; 
+对MySQL InnoDB引擎的索引了解吗？
+&lt;/div&gt;&lt;/div&gt;&lt;br/&gt;</description>
+    </item>
+    <item>
+      <title>Podman &#43; X11 环境运行 GUI 程序</title>
+      <link>https://hcy-asleep.github.io/Podman--X11-%E7%8E%AF%E5%A2%83%E8%BF%90%E8%A1%8C-GUI-%E7%A8%8B%E5%BA%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Podman--X11-%E7%8E%AF%E5%A2%83%E8%BF%90%E8%A1%8C-GUI-%E7%A8%8B%E5%BA%8F/</guid>
+      <description>比较麻烦的一种方法(后面还有一种更加方便的方法)</description>
+    </item>
+  </channel>
+</rss>

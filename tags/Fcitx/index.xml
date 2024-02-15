@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Fcitx on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/Fcitx/</link>
+    <description>Recent content in Fcitx on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 23 Oct 2022 13:25:51 +0000</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/Fcitx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Debian Fcitx 中文输入法</title>
+      <link>https://hcy-asleep.github.io/Debian-Fcitx-%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Fcitx-%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95/</guid>
+      <description>&lt;p&gt;不是中文环境需要进行切换中文环境&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

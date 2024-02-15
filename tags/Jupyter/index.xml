@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Jupyter on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/Jupyter/</link>
+    <description>Recent content in Jupyter on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 05 Mar 2023 13:39:33 +0800</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/Jupyter/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jupyter Notebook 远程访问 免密 设置密码登录</title>
+      <link>https://hcy-asleep.github.io/Jupyter-Notebook-%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE-%E5%85%8D%E5%AF%86-%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/</link>
+      <pubDate>Sun, 05 Mar 2023 13:39:33 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Jupyter-Notebook-%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE-%E5%85%8D%E5%AF%86-%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/</guid>
+      <description> 免密码登录
+1 jupyter notebook --ip=&amp;#39;*&amp;#39; --NotebookApp.token=&amp;#39;&amp;#39; --NotebookApp.password=&amp;#39;&amp;#39; 其中 &amp;hellip; &amp;ndash;ip=&amp;rsquo;*&amp;rsquo; &amp;hellip; 表示允许所有 ip 访问而不仅是本机的 127.0.0.1 ，从而达到远程连接的效果 远程连接但是加上一点点安全性
+1 jupyter notebook --ip=&amp;#39;*&amp;#39; --NotebookApp.token=&amp;#39;hcy&amp;#39; 设置 token 为 hcy ，远程访问的时候如下访问
+1 2 # {jupyter notebook ip}:8888/?token=hcy http://172.35.40.120:8888/?token=hcy </description>
+    </item>
+  </channel>
+</rss>

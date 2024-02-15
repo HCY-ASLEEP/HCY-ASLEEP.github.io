@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Nvidia on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/Nvidia/</link>
+    <description>Recent content in Nvidia on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 23 Oct 2022 13:25:51 +0000</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/Nvidia/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Debian Nvidia 驱动</title>
+      <link>https://hcy-asleep.github.io/Debian-Nvidia-%E9%A9%B1%E5%8A%A8/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Nvidia-%E9%A9%B1%E5%8A%A8/</guid>
+      <description>&lt;p&gt;最重要的一点，去 bios 那里关闭 secure boot 先！&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

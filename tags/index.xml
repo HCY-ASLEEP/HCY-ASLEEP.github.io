@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/</link>
+    <description>Recent content in Tags on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 06 Jun 2023 13:59:46 +0800</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Xv6</title>
+      <link>https://hcy-asleep.github.io/tags/Xv6/</link>
+      <pubDate>Tue, 06 Jun 2023 13:59:46 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Xv6/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VIM</title>
+      <link>https://hcy-asleep.github.io/tags/VIM/</link>
+      <pubDate>Wed, 24 May 2023 13:51:22 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/VIM/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>https://hcy-asleep.github.io/tags/Git/</link>
+      <pubDate>Thu, 18 May 2023 11:14:10 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Markdown</title>
+      <link>https://hcy-asleep.github.io/tags/Markdown/</link>
+      <pubDate>Thu, 18 May 2023 11:14:10 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Markdown/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>https://hcy-asleep.github.io/tags/Linux/</link>
+      <pubDate>Wed, 17 May 2023 17:13:58 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hugo</title>
+      <link>https://hcy-asleep.github.io/tags/Hugo/</link>
+      <pubDate>Thu, 04 May 2023 15:47:32 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Hugo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Podman</title>
+      <link>https://hcy-asleep.github.io/tags/Podman/</link>
+      <pubDate>Sun, 19 Mar 2023 19:50:14 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Podman/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hexo</title>
+      <link>https://hcy-asleep.github.io/tags/Hexo/</link>
+      <pubDate>Mon, 13 Mar 2023 19:26:15 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Hexo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HTML</title>
+      <link>https://hcy-asleep.github.io/tags/HTML/</link>
+      <pubDate>Mon, 13 Mar 2023 19:26:15 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/HTML/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Music</title>
+      <link>https://hcy-asleep.github.io/tags/Music/</link>
+      <pubDate>Mon, 13 Mar 2023 18:15:21 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Music/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Arch</title>
+      <link>https://hcy-asleep.github.io/tags/Arch/</link>
+      <pubDate>Sat, 11 Mar 2023 11:33:35 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Arch/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SSH</title>
+      <link>https://hcy-asleep.github.io/tags/SSH/</link>
+      <pubDate>Mon, 06 Mar 2023 15:29:12 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/SSH/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Jupyter</title>
+      <link>https://hcy-asleep.github.io/tags/Jupyter/</link>
+      <pubDate>Sun, 05 Mar 2023 13:39:33 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Jupyter/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>备忘录</title>
+      <link>https://hcy-asleep.github.io/tags/%E5%A4%87%E5%BF%98%E5%BD%95/</link>
+      <pubDate>Sat, 04 Mar 2023 11:14:49 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/%E5%A4%87%E5%BF%98%E5%BD%95/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Debian</title>
+      <link>https://hcy-asleep.github.io/tags/Debian/</link>
+      <pubDate>Tue, 28 Feb 2023 22:27:36 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Debian/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>KDE</title>
+      <link>https://hcy-asleep.github.io/tags/KDE/</link>
+      <pubDate>Tue, 28 Feb 2023 21:58:38 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/KDE/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gnome</title>
+      <link>https://hcy-asleep.github.io/tags/Gnome/</link>
+      <pubDate>Sun, 26 Feb 2023 19:27:50 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Gnome/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>XFCE</title>
+      <link>https://hcy-asleep.github.io/tags/XFCE/</link>
+      <pubDate>Sun, 26 Feb 2023 19:27:50 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/XFCE/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linu</title>
+      <link>https://hcy-asleep.github.io/tags/Linu/</link>
+      <pubDate>Tue, 21 Feb 2023 05:09:57 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Linu/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Giscus</title>
+      <link>https://hcy-asleep.github.io/tags/Giscus/</link>
+      <pubDate>Sun, 12 Feb 2023 06:24:19 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Giscus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Github</title>
+      <link>https://hcy-asleep.github.io/tags/Github/</link>
+      <pubDate>Sun, 12 Feb 2023 04:22:54 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Github/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MySQL</title>
+      <link>https://hcy-asleep.github.io/tags/MySQL/</link>
+      <pubDate>Sat, 11 Feb 2023 13:27:00 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/MySQL/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nodejs</title>
+      <link>https://hcy-asleep.github.io/tags/Nodejs/</link>
+      <pubDate>Sat, 11 Feb 2023 12:16:38 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Nodejs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Wayland</title>
+      <link>https://hcy-asleep.github.io/tags/Wayland/</link>
+      <pubDate>Sat, 11 Feb 2023 08:32:39 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Wayland/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://hcy-asleep.github.io/tags/Python/</link>
+      <pubDate>Thu, 17 Nov 2022 19:09:23 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Redis</title>
+      <link>https://hcy-asleep.github.io/tags/Redis/</link>
+      <pubDate>Mon, 07 Nov 2022 17:36:41 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Redis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>对话</title>
+      <link>https://hcy-asleep.github.io/tags/%E5%AF%B9%E8%AF%9D/</link>
+      <pubDate>Mon, 07 Nov 2022 17:36:41 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/%E5%AF%B9%E8%AF%9D/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>TCP</title>
+      <link>https://hcy-asleep.github.io/tags/TCP/</link>
+      <pubDate>Mon, 07 Nov 2022 13:58:17 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/TCP/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>网络</title>
+      <link>https://hcy-asleep.github.io/tags/%E7%BD%91%E7%BB%9C/</link>
+      <pubDate>Mon, 07 Nov 2022 13:58:17 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/%E7%BD%91%E7%BB%9C/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>数据库</title>
+      <link>https://hcy-asleep.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Sun, 06 Nov 2022 16:20:23 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MARO</title>
+      <link>https://hcy-asleep.github.io/tags/MARO/</link>
+      <pubDate>Fri, 04 Nov 2022 18:15:29 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/MARO/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>工作面试</title>
+      <link>https://hcy-asleep.github.io/tags/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/</link>
+      <pubDate>Wed, 26 Oct 2022 14:11:21 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Bash</title>
+      <link>https://hcy-asleep.github.io/tags/Bash/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Bash/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fcitx</title>
+      <link>https://hcy-asleep.github.io/tags/Fcitx/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Fcitx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nvidia</title>
+      <link>https://hcy-asleep.github.io/tags/Nvidia/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Nvidia/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Powerline</title>
+      <link>https://hcy-asleep.github.io/tags/Powerline/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/Powerline/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VScode</title>
+      <link>https://hcy-asleep.github.io/tags/VScode/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/tags/VScode/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

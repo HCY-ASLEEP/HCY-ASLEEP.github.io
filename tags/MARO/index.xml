@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>MARO on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/MARO/</link>
+    <description>Recent content in MARO on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 04 Nov 2022 18:15:29 +0000</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/MARO/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MARO Distibuted Toolkit</title>
+      <link>https://hcy-asleep.github.io/MARO-Distibuted-Toolkit/</link>
+      <pubDate>Fri, 04 Nov 2022 18:15:29 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/MARO-Distibuted-Toolkit/</guid>
+      <description>&lt;h3 id=&#34;maro-三层框架&#34;&gt;MARO 三层框架&lt;/h3&gt;</description>
+    </item>
+    <item>
+      <title>MARO VM 调度</title>
+      <link>https://hcy-asleep.github.io/MARO-VM-%E8%B0%83%E5%BA%A6/</link>
+      <pubDate>Thu, 27 Oct 2022 11:01:57 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/MARO-VM-%E8%B0%83%E5%BA%A6/</guid>
+      <description>&lt;h3 id=&#34;背景&#34;&gt;背景&lt;/h3&gt;</description>
+    </item>
+    <item>
+      <title>初识 MARO</title>
+      <link>https://hcy-asleep.github.io/%E5%88%9D%E8%AF%86-MARO/</link>
+      <pubDate>Wed, 26 Oct 2022 10:20:02 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/%E5%88%9D%E8%AF%86-MARO/</guid>
+      <description>&lt;h3 id=&#34;maro-multi-agent-resource-optimization-httpsgithubcommicrosoftmaro&#34;&gt;&lt;a href=&#34;https://github.com/microsoft/maro&#34;&gt;MARO ，“Multi-Agent-Resource Optimization” &lt;/a&gt;&lt;/h3&gt;</description>
+    </item>
+  </channel>
+</rss>

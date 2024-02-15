@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>XFCE on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/XFCE/</link>
+    <description>Recent content in XFCE on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 26 Feb 2023 19:27:50 +0800</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/XFCE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Thunar 设置打开终端</title>
+      <link>https://hcy-asleep.github.io/Thunar-%E8%AE%BE%E7%BD%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/</link>
+      <pubDate>Sun, 26 Feb 2023 19:27:50 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Thunar-%E8%AE%BE%E7%BD%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/</guid>
+      <description>XFCE 文件浏览器打开默认终端</description>
+    </item>
+  </channel>
+</rss>

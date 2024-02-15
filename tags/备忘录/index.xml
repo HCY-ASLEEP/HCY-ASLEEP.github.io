@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>备忘录 on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/%E5%A4%87%E5%BF%98%E5%BD%95/</link>
+    <description>Recent content in 备忘录 on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 04 Mar 2023 11:14:49 +0800</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/%E5%A4%87%E5%BF%98%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SZU 宿舍区上网 命令行</title>
+      <link>https://hcy-asleep.github.io/SZU-%E5%AE%BF%E8%88%8D%E5%8C%BA%E4%B8%8A%E7%BD%91-%E5%91%BD%E4%BB%A4%E8%A1%8C/</link>
+      <pubDate>Sat, 04 Mar 2023 11:14:49 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/SZU-%E5%AE%BF%E8%88%8D%E5%8C%BA%E4%B8%8A%E7%BD%91-%E5%91%BD%E4%BB%A4%E8%A1%8C/</guid>
+      <description>So easy：
+1 2 # curl &amp;#34;http://172.30.255.42:801/eportal/portal/login?user_account={校园卡卡号}&amp;amp;user_password={校园卡密码}&amp;#34; curl &amp;#34;http://172.30.255.42:801/eportal/portal/login?user_account=392257&amp;amp;user_password=12345678&amp;#34; </description>
+    </item>
+    <item>
+      <title>大三下课表</title>
+      <link>https://hcy-asleep.github.io/%E5%A4%A7%E4%B8%89%E4%B8%8B%E8%AF%BE%E8%A1%A8/</link>
+      <pubDate>Wed, 15 Feb 2023 08:42:42 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/%E5%A4%A7%E4%B8%89%E4%B8%8B%E8%AF%BE%E8%A1%A8/</guid>
+      <description>完蛋，暴露学校了</description>
+    </item>
+  </channel>
+</rss>

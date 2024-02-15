@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Xv6 on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/Xv6/</link>
+    <description>Recent content in Xv6 on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 06 Jun 2023 13:59:46 +0800</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/Xv6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>为 xv6-riscv 移植扫雷(minesweeper) 2048 以及非常简单的 sl</title>
+      <link>https://hcy-asleep.github.io/%E4%B8%BA-xv6-riscv-%E7%A7%BB%E6%A4%8D%E6%89%AB%E9%9B%B7minesweeper-2048-%E4%BB%A5%E5%8F%8A%E9%9D%9E%E5%B8%B8%E7%AE%80%E5%8D%95%E7%9A%84-sl/</link>
+      <pubDate>Tue, 06 Jun 2023 13:59:46 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/%E4%B8%BA-xv6-riscv-%E7%A7%BB%E6%A4%8D%E6%89%AB%E9%9B%B7minesweeper-2048-%E4%BB%A5%E5%8F%8A%E9%9D%9E%E5%B8%B8%E7%AE%80%E5%8D%95%E7%9A%84-sl/</guid>
+      <description>前言 我使用的 xv6-riscv 是 fork MIT 官方的库，在它的基础上面进行移植，这个教学系统原本是与 6.1810 一起配套使用的，下面这个是官方仓库地址：
+👉 https://github.com/mit-pdos/xv6-riscv
+这是我所做过的移植交互程序及之前 SZU OS 课程在 xv6 上面做的一些实验：
+👉 我对 xv6-riscv 的一些改动
+2048 移植以及相关移植准备 终端交互移植最关键的就是要把缺失的库函数都补完，首先就得增加和改进 xv6-riscv 原有的终端交互相关的库
+在 xv6-riscv 的顶层目录下新建一个 include 文件夹，里面存放改进的头文件
+Head What it does assert.h 断言的相关宏定义和函数声明，用于断言检查 ctype.h 字符处理的函数和宏定义，对字符进行分类和转换 limits.h 定义了各种数据类型的取值范围以及其他与整数类型相关的常量 stdarg.h 提供了支持可变参数函数的宏和类型定义 stdbool.h 定义了布尔类型和相关的常量，没错，xv6-riscv 原本甚至不支持 bool 型变量 stddef.h 提供了一些与指针、大小和偏移量相关的常量和类型定义 stdio.h 用于处理标准输入输出 stdlib.h 用于内存管理、字符串转换、伪随机数生成、算术运算和程序终止等 termios.h 用于控制和配置终端的行为 unistd.h 定义了一些与系统调用、文件操作、进程控制、环境变量和程序终止相关的函数和常量 上面这些改进的库函数里面最关键的是 termios.h 和 stdio.h ，没错，xv6-riscv 连标准输入输出都没有，刷新终端都做不到。。。即便如此 termios.h 移植之后也是极度残缺的，因为没有 xv6-riscv 压根就没有提供 ioctl 的系统调用！也正是因为这个原因，C语言里面的标准库 curses.</description>
+    </item>
+  </channel>
+</rss>

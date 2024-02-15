@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linux on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/Linux/</link>
+    <description>Recent content in Linux on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 17 May 2023 17:13:58 +0800</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/Linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux 下文件名字乱码（无效的编码）（invalid encoding）（Windows）</title>
+      <link>https://hcy-asleep.github.io/Linux-%E4%B8%8B%E6%96%87%E4%BB%B6%E5%90%8D%E5%AD%97%E4%B9%B1%E7%A0%81%E6%97%A0%E6%95%88%E7%9A%84%E7%BC%96%E7%A0%81invalid-encodingWindows/</link>
+      <pubDate>Wed, 17 May 2023 17:13:58 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E4%B8%8B%E6%96%87%E4%BB%B6%E5%90%8D%E5%AD%97%E4%B9%B1%E7%A0%81%E6%97%A0%E6%95%88%E7%9A%84%E7%BC%96%E7%A0%81invalid-encodingWindows/</guid>
+      <description>文件是在 Windows 下创建的，Windows 的文件名中文编码默认为 GBK ，而 Linux 中默认文件名编码为 UTF8，由于编码不一致所以导致了文件名乱码的问题，解决这个问题需要对文件名进行转码
+安装 convmv ：
+1 sudo apt-get install convmv convmv 使用方法：
+1 convmv -f 源编码 -t 新编码 [选项] 文件名 常用参数：
+-r 递归处理子文件夹 &amp;ndash;notest 真正进行操作，默认情况下是不对文件进行真实操作 &amp;ndash;list 显示所有支持的编码 &amp;ndash;unescap 可以做一下转义，比如把%20变成空格 Eg:
+1 convmv -f GBK -t UTF-8 --notest –-unescap *.mp3 参考链接👉 https://www.shuzhiduo.com/A/RnJWmlWvdq/</description>
+    </item>
+    <item>
+      <title>Podman 换源</title>
+      <link>https://hcy-asleep.github.io/Podman-%E6%8D%A2%E6%BA%90/</link>
+      <pubDate>Sun, 19 Mar 2023 19:50:14 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Podman-%E6%8D%A2%E6%BA%90/</guid>
+      <description> Podman 默认注册表配置文件在 /etc/containers/registries.conf
+国内的镜像源有:
+docker官方中国区 https://registry.docker-cn.com 网易 http://hub-mirror.c.163.com USTC http://docker.mirrors.ustc.edu.cn 阿里云 http://&amp;lt;你的ID&amp;gt;.mirror.aliyuncs.com 修改为以下内容:
+1 2 3 4 5 6 # 这个是添加 dockerhub 的搜索源 unqualified-search-registries = [&amp;#34;docker.io&amp;#34;] [[registry]] prefix = &amp;#34;docker.io&amp;#34; location = &amp;#34;xxxxxxxx.mirror.aliyuncs.com&amp;#34; </description>
+    </item>
+    <item>
+      <title>Flameshot Arch 无法命令行使用</title>
+      <link>https://hcy-asleep.github.io/Flameshot-Arch-%E6%97%A0%E6%B3%95%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 11 Mar 2023 11:33:35 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Flameshot-Arch-%E6%97%A0%E6%B3%95%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8/</guid>
+      <description>在终端执行 flameshot gui 的时候异常，安装 xdg-desktop-portal 包就行，Gnome 桌面环境的话安装 xdg-desktop-portal-gnome</description>
+    </item>
+    <item>
+      <title>SSH连接Docker容器</title>
+      <link>https://hcy-asleep.github.io/SSH%E8%BF%9E%E6%8E%A5Docker%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Mon, 06 Mar 2023 15:29:12 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/SSH%E8%BF%9E%E6%8E%A5Docker%E5%AE%B9%E5%99%A8/</guid>
+      <description>创建容器并且端口映射以及后台运行
+1 docker run -it -d -p 9009:22 ubuntu /bin/bash 查看containerId (或者containerAlias)
+1 docker ps -a 进入容器
+1 2 3 # 这里的 containerId 换成 containerAlias 也是可以的 docker start containerId docker exec -it containerId /bin/bash ubuntu 更新源列表
+1 apt-get update 安装ssh-client、ssh-server
+1 2 3 4 apt-get install openssh-client apt-get install openssh-server # 安装 neovim 工具 apt-get install neovim 编辑 sshd_config 文件
+1 vim /etc/ssh/sshd_config 允许 ssh 以 root 用户登录
+1 PermitRootLogin yes 设置 root 密码，同时也是设置 ssh root登录的密码</description>
+    </item>
+    <item>
+      <title>SSH 允许非root用户登录</title>
+      <link>https://hcy-asleep.github.io/SSH-%E5%85%81%E8%AE%B8%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/</link>
+      <pubDate>Sun, 05 Mar 2023 13:53:48 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/SSH-%E5%85%81%E8%AE%B8%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/</guid>
+      <description>通过配置/etc/ssh/sshd_config文件的AllowUsers，可以添加多个允许登录的用户名，不同用户名之间用空格分开，不在其中的用户则不可以登录
+1 AllowUsers [username] 例如只想允许john和teena两个用户通过ssh登录，其余用户均不允许
+1 AllowUsers john teena 执行下面的命令，重启sshd服务使配置生效
+1 service sshd restart </description>
+    </item>
+    <item>
+      <title>Linux Grub 分辨率</title>
+      <link>https://hcy-asleep.github.io/Linux-Grub-%E5%88%86%E8%BE%A8%E7%8E%87/</link>
+      <pubDate>Tue, 28 Feb 2023 22:27:36 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-Grub-%E5%88%86%E8%BE%A8%E7%8E%87/</guid>
+      <description>Change grub resolution on arch/debian</description>
+    </item>
+    <item>
+      <title>KDE Slow Shutdown</title>
+      <link>https://hcy-asleep.github.io/KDE-Slow-Shutdown/</link>
+      <pubDate>Tue, 28 Feb 2023 21:58:38 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/KDE-Slow-Shutdown/</guid>
+      <description>KDE 关机慢</description>
+    </item>
+    <item>
+      <title>Thunar 设置打开终端</title>
+      <link>https://hcy-asleep.github.io/Thunar-%E8%AE%BE%E7%BD%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/</link>
+      <pubDate>Sun, 26 Feb 2023 19:27:50 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Thunar-%E8%AE%BE%E7%BD%AE%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF/</guid>
+      <description>XFCE 文件浏览器打开默认终端</description>
+    </item>
+    <item>
+      <title>Nautilus 添加右键打开 terminal 选项</title>
+      <link>https://hcy-asleep.github.io/Nautilus-%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E6%89%93%E5%BC%80-terminal-%E9%80%89%E9%A1%B9/</link>
+      <pubDate>Tue, 21 Feb 2023 04:50:37 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Nautilus-%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E6%89%93%E5%BC%80-terminal-%E9%80%89%E9%A1%B9/</guid>
+      <description>Nautilus open any terminal</description>
+    </item>
+    <item>
+      <title>Gnome 下设置默认 terminal</title>
+      <link>https://hcy-asleep.github.io/Gnome-%E4%B8%8B%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4-terminal/</link>
+      <pubDate>Mon, 20 Feb 2023 13:42:53 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Gnome-%E4%B8%8B%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4-terminal/</guid>
+      <description>Gnome default terminal</description>
+    </item>
+    <item>
+      <title>Shell 走代理</title>
+      <link>https://hcy-asleep.github.io/Shell-%E8%B5%B0%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Mon, 20 Feb 2023 13:26:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Shell-%E8%B5%B0%E4%BB%A3%E7%90%86/</guid>
+      <description>Shell bash proxy</description>
+    </item>
+    <item>
+      <title>Podman GUI Wayland/X11</title>
+      <link>https://hcy-asleep.github.io/Podman-GUI-Wayland/X11/</link>
+      <pubDate>Sat, 11 Feb 2023 08:32:39 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Podman-GUI-Wayland/X11/</guid>
+      <description>最简单的一种方法！</description>
+    </item>
+    <item>
+      <title>Linux Host 与 KVM Windows Guest 共享文件</title>
+      <link>https://hcy-asleep.github.io/Linux-Host-%E4%B8%8E-KVM-Windows-Guest-%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Fri, 18 Nov 2022 19:24:07 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-Host-%E4%B8%8E-KVM-Windows-Guest-%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</guid>
+      <description>互传文件</description>
+    </item>
+    <item>
+      <title>Linux 命令行格式化磁盘（U盘)</title>
+      <link>https://hcy-asleep.github.io/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98U%E7%9B%98/</link>
+      <pubDate>Thu, 17 Nov 2022 16:27:52 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98U%E7%9B%98/</guid>
+      <description>注意：以下操作都属于高危行为，请谨慎使用!
+在插入 U盘 之前，先查看有哪些磁盘
+可以看到加粗的有两行，第一行开头是 &amp;ldquo;Disk&amp;rdquo; ，第二行开头是 &amp;ldquo;Device&amp;rdquo; 整个输出只有一行加粗的 &amp;ldquo;Disk&amp;rdquo; ，表示目前只有一个硬盘 每一个加粗的 &amp;ldquo;Device&amp;rdquo; 都对应上一行的 &amp;ldquo;Disk&amp;rdquo; &amp;ldquo;Device&amp;rdquo; 里面的内容表示 &amp;ldquo;Disk&amp;rdquo; 里面的分区 在插入 U盘 之后，再查看有哪些磁盘
+发现多了一行加粗的 &amp;ldquo;Disk&amp;rdquo; 这个正是我们插入的 U盘 卸载 U盘
+1 umount /dev/sda /dev/后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！ 格式化 U盘 ，并且建立 vfat 文件系统
+1 mkfs.vfat -I /dev/sda /dev/后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！ 最后再 mount 上 U盘 ，或者把 U盘 拨了再插上，系统可能会自动 mount 上, 就可以使用 U盘 了
+异常处理
+假设 U盘 信息如下
+1 2 3 4 5 6 7 8 9 10 Disk /dev/sdb：7.5 GiB，8004304896 bytes，15633408 sectors Units：sectors of / 1 * 512 = 512 bytes Sector size(logical/physical)：512 bytes / 512 bytes I/O size(mininum/optimal)：512 bytes / 512 bytes Disklabel type：dos Disk identifier：0x663eb4c4 Device boot Start End Sectors Size Id Type /dev/sdb1 * 0 3815135 3815136 1.</description>
+    </item>
+    <item>
+      <title>Linux 查看硬盘空间</title>
+      <link>https://hcy-asleep.github.io/Linux-%E6%9F%A5%E7%9C%8B%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4/</link>
+      <pubDate>Sat, 05 Nov 2022 15:46:02 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E6%9F%A5%E7%9C%8B%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4/</guid>
+      <description>如何知道服务器硬盘爆了...</description>
+    </item>
+    <item>
+      <title>VLC Linux 安装在自定义目录</title>
+      <link>https://hcy-asleep.github.io/VLC-Linux-%E5%AE%89%E8%A3%85%E5%9C%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%AE%E5%BD%95/</link>
+      <pubDate>Sat, 05 Nov 2022 15:16:56 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/VLC-Linux-%E5%AE%89%E8%A3%85%E5%9C%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%AE%E5%BD%95/</guid>
+      <description>&lt;p&gt;apt 只下载包及其依赖而不安装&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# sudo apt-get install -d &amp;lt;软件包&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install -d vlc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Wayland Wemeet</title>
+      <link>https://hcy-asleep.github.io/Wayland-Wemeet/</link>
+      <pubDate>Sat, 05 Nov 2022 14:45:11 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Wayland-Wemeet/</guid>
+      <description>腾讯会议不支持 Wayland 解决方法</description>
+    </item>
+    <item>
+      <title>Bash Powerline Fonts 美化</title>
+      <link>https://hcy-asleep.github.io/Bash-Powerline-Fonts-%E7%BE%8E%E5%8C%96/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Bash-Powerline-Fonts-%E7%BE%8E%E5%8C%96/</guid>
+      <description>powerline fonts</description>
+    </item>
+    <item>
+      <title>Debian Bashrc</title>
+      <link>https://hcy-asleep.github.io/Debian-Bashrc/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Bashrc/</guid>
+      <description>环境变量相关</description>
+    </item>
+    <item>
+      <title>Debian Fcitx 中文输入法</title>
+      <link>https://hcy-asleep.github.io/Debian-Fcitx-%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Fcitx-%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95/</guid>
+      <description>&lt;p&gt;不是中文环境需要进行切换中文环境&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Debian Gnome 默认浏览器</title>
+      <link>https://hcy-asleep.github.io/Debian-Gnome-%E9%BB%98%E8%AE%A4%E6%B5%8F%E8%A7%88%E5%99%A8/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Gnome-%E9%BB%98%E8%AE%A4%E6%B5%8F%E8%A7%88%E5%99%A8/</guid>
+      <description>xdg</description>
+    </item>
+    <item>
+      <title>Debian Nvidia 驱动</title>
+      <link>https://hcy-asleep.github.io/Debian-Nvidia-%E9%A9%B1%E5%8A%A8/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-Nvidia-%E9%A9%B1%E5%8A%A8/</guid>
+      <description>&lt;p&gt;最重要的一点，去 bios 那里关闭 secure boot 先！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gnome Desktop File 参考</title>
+      <link>https://hcy-asleep.github.io/Gnome-Desktop-File-%E5%8F%82%E8%80%83/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Gnome-Desktop-File-%E5%8F%82%E8%80%83/</guid>
+      <description>&lt;p&gt;eg:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux VScode 字体</title>
+      <link>https://hcy-asleep.github.io/Linux-VScode-%E5%AD%97%E4%BD%93/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-VScode-%E5%AD%97%E4%BD%93/</guid>
+      <description>使用 firacode 字体</description>
+    </item>
+    <item>
+      <title>Linux 环境变量配置</title>
+      <link>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;/etc/profile.d/path.sh&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux 环境变量配置错误处理</title>
+      <link>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/</guid>
+      <description>&lt;p&gt;Linux 环境变量配置出错后，提示command not found&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Debian 安装中文环境</title>
+      <link>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E7%8E%AF%E5%A2%83/</guid>
+      <description>容器里面可能要先安装 locale</description>
+    </item>
+  </channel>
+</rss>

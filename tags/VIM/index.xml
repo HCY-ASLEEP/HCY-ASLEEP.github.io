@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>VIM on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/VIM/</link>
+    <description>Recent content in VIM on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 24 May 2023 13:51:22 +0800</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/VIM/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vim ripgrep quickfix netrw nmap autocmd wincmd 。。。大杂烩 ？！</title>
+      <link>https://hcy-asleep.github.io/Vim-ripgrep-quickfix-netrw-nmap-autocmd-wincmd-%E5%A4%A7%E6%9D%82%E7%83%A9/</link>
+      <pubDate>Wed, 24 May 2023 13:51:22 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Vim-ripgrep-quickfix-netrw-nmap-autocmd-wincmd-%E5%A4%A7%E6%9D%82%E7%83%A9/</guid>
+      <description>啊，这篇文章就随意一点吧，就意识流地写吧（虽然一直都是这样子），记录一下最近搞 Neovim 的心得
+1. 如何使用 nvim + coc 如何滚动悬浮窗口内的内容呢？ 使用 nvim + coc 编写代码的时候，弹出来的悬浮窗口内有滚动条，我怎样才能滚动悬浮窗口内的内容呢？试试 ctrl-w ctrl-w 切换到 floatwin 中，再翻页；更顺手一些的操作是：如果触发 floatwin 的按键是 nmap K, 连按两次 K 就会切换到 floatwin 中
+👉 https://segmentfault.com/q/1010000040349668
+或者直接映射相关的键位，参考官方 Github 的 Readme
+👉 https://github.com/neoclide/coc.nvim/commit/
+2. Vim f和t的快捷方式 [ 移动到指定字符 ]
+如果我们想在当前行内快速移动，可以使用f, t, F, T命令
+&amp;ldquo;f&amp;quot;命令移动到光标右边的指定字符上，例如，&amp;ldquo;fx&amp;rdquo;，会把移动到光标右边的第一个&amp;rsquo;x&amp;rsquo;字符上，&amp;ldquo;F&amp;quot;命令则反方向查找，也就是移动到光标左边的指定字符上
+&amp;ldquo;t&amp;quot;命令和&amp;quot;f&amp;quot;命令的区别在于，它移动到光标右边的指定字符之前，例如，&amp;ldquo;tx&amp;quot;会移动到光标右边第一个&amp;rsquo;x&amp;rsquo;字符的前面，&amp;ldquo;T&amp;quot;命令是&amp;quot;t&amp;quot;命令的反向版本，它移动到光标左边的指定字符之后
+这四个命令只在当前行中移动光标，光标不会跨越回车换行符
+可以在命令前面使用数字，表示倍数，例如，&amp;ldquo;3fx&amp;quot;表示移动到光标右边的第3个&amp;rsquo;x&amp;rsquo;字符上
+&amp;ldquo;;&amp;ldquo;命令重复前一次输入的f, t, F, T命令，而&amp;rdquo;,&amp;ldquo;命令会反方向重复前一次输入的f, t, F, T命令，这两个命令前也可以使用数字来表示倍数
+👉 https://www.jianshu.com/p/a46a89b460a9
+3. 如何在 Vim 里面使用 ripgrep ？ 关于这个问题有两种解决思路：
+使用 Vim 里面自带的 quickfix</description>
+    </item>
+    <item>
+      <title>VIM 代码折叠 Folding</title>
+      <link>https://hcy-asleep.github.io/VIM-%E4%BB%A3%E7%A0%81%E6%8A%98%E5%8F%A0-Folding/</link>
+      <pubDate>Sun, 30 Apr 2023 19:44:43 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E4%BB%A3%E7%A0%81%E6%8A%98%E5%8F%A0-Folding/</guid>
+      <description>VIM设置代码折叠
+zc 关闭当前打开的折叠 (也就是重新折叠起来) zo 打开当前的折叠 (也就是展开折叠) zm 关闭所有折叠 (也就是将所有展开的折叠都重新折叠起来) zM 关闭所有折叠及其嵌套的折叠 zr 打开所有折叠 zR 打开所有折叠及其嵌套的折叠 zd 删除当前折叠 zE 删除所有折叠 zj 移动至下一个折叠 zk 移动至上一个折叠 zn 禁用折叠 zN 启用折叠 </description>
+    </item>
+    <item>
+      <title>VIM 全局搜索目录下所有文件关键词</title>
+      <link>https://hcy-asleep.github.io/VIM-%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%85%B3%E9%94%AE%E8%AF%8D/</link>
+      <pubDate>Wed, 22 Mar 2023 19:40:22 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%85%B3%E9%94%AE%E8%AF%8D/</guid>
+      <description>vimgrep 和 lvimgrep 是 vim 内置的搜索命令，可以处理不太复杂的正则表达式
+它们的搜索结果都会放入一个列表里面，grep 和 vimgrep 的搜索结果放在 quickfix list 里，quickfix list 可以使用 :cw 或者 :copen 在 vim 中打开，它的结果可以和所有的vim窗口共享；lgrep 和 lvimgrep 的结果存放在 location list 里，location list 是当前窗口的，可以使用 :lw 或者 :lopen 打开
+最妙的是搜索结果在cw或lw展现的时候，可以回车跳转到指定文件的搜索文本的位置
+g：代表所有匹配，而不是其中的一行匹配 j：代表vim不会自动跳转到第一个匹配的地方
+比如要在当前文件夹下递归所有文件搜索tar或者是zip，就可以这样搜：
+1 2 : lvim /\&amp;lt;\(tar\|zip\)\&amp;gt;/gj **/* : lw tip: 使用cword取当前文件光标所在出的文字，.vimrc配置如下：
+1 map &amp;lt;F3&amp;gt; :execute &amp;#34;lvimgrep /&amp;#34; . expand(&amp;#34;&amp;lt;cword&amp;gt;&amp;#34;) . &amp;#34;/gj **/*&amp;#34; &amp;lt;Bar&amp;gt; lw&amp;lt;CR&amp;gt; 上述配置完成后，在vim中当前光标下，按下F3就会在vim的当前目录下搜索所有的文件及其子文件夹的文件，并显示出来，还可以使用 %:e 来做，意思是当前目录（%）下的同类型文件（e），如下：
+1 map &amp;lt;F3&amp;gt; :execute &amp;#34;lvimgrep /&amp;#34; .</description>
+    </item>
+    <item>
+      <title>VIM 自带的自动补全</title>
+      <link>https://hcy-asleep.github.io/VIM-%E8%87%AA%E5%B8%A6%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/</link>
+      <pubDate>Sun, 19 Mar 2023 19:55:18 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E8%87%AA%E5%B8%A6%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/</guid>
+      <description>VIM 的自带补全是根据上下文出现过的单词作为补全元的，将以下代码加入到你的 init.vim 里面就可以实现 Tab 触发补全以及连续使用 Tab 来进行切换选中补全
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 &amp;#34; Simple tab completion ----------------------------------------------------------------------------- &amp;#34; A simple tab completion, if you use the coc.nvim, you should remove this simple completion inoremap &amp;lt;expr&amp;gt; &amp;lt;Tab&amp;gt; getline(&amp;#39;.&amp;#39;)[col(&amp;#39;.&amp;#39;)-2] !~ &amp;#39;^\s\?$&amp;#39; \|\| pumvisible() \ ? &amp;#39;&amp;lt;C-N&amp;gt;&amp;#39; : &amp;#39;&amp;lt;Tab&amp;gt;&amp;#39; inoremap &amp;lt;expr&amp;gt; &amp;lt;S-Tab&amp;gt; pumvisible() \|\| getline(&amp;#39;.&amp;#39;)[col(&amp;#39;.&amp;#39;)-2] !~ &amp;#39;^\s\?$&amp;#39; \ ? &amp;#39;&amp;lt;C-P&amp;gt;&amp;#39; : &amp;#39;&amp;lt;Tab&amp;gt;&amp;#39; augroup SimpleComplete autocmd CmdwinEnter * inoremap &amp;lt;expr&amp;gt; &amp;lt;buffer&amp;gt; &amp;lt;Tab&amp;gt; \ getline(&amp;#39;.</description>
+    </item>
+    <item>
+      <title>Vim =&gt; iamcco/markdown-preview.nvim without nodejs</title>
+      <link>https://hcy-asleep.github.io/Vim-iamcco/markdown-preview.nvim-without-nodejs/</link>
+      <pubDate>Tue, 21 Feb 2023 11:33:20 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Vim-iamcco/markdown-preview.nvim-without-nodejs/</guid>
+      <description>安装离线版本</description>
+    </item>
+    <item>
+      <title>VIM 删除包含指定字符的行</title>
+      <link>https://hcy-asleep.github.io/VIM-%E5%88%A0%E9%99%A4%E5%8C%85%E5%90%AB%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E7%9A%84%E8%A1%8C/</link>
+      <pubDate>Sun, 12 Feb 2023 02:03:47 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E5%88%A0%E9%99%A4%E5%8C%85%E5%90%AB%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E7%9A%84%E8%A1%8C/</guid>
+      <description>高级操作喔</description>
+    </item>
+    <item>
+      <title>VIM 长行(han)慢</title>
+      <link>https://hcy-asleep.github.io/VIM-%E9%95%BF%E8%A1%8Chan%E6%85%A2/</link>
+      <pubDate>Sat, 11 Feb 2023 12:56:36 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E9%95%BF%E8%A1%8Chan%E6%85%A2/</guid>
+      <description>Long lines make vim slow ...</description>
+    </item>
+    <item>
+      <title>Coc-pyright 找不到相关的语法分析</title>
+      <link>https://hcy-asleep.github.io/Coc-pyright-%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</link>
+      <pubDate>Thu, 17 Nov 2022 19:09:23 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Coc-pyright-%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</guid>
+      <description>github issue 里面的方法是手动生成存根</description>
+    </item>
+    <item>
+      <title>Vim Diff</title>
+      <link>https://hcy-asleep.github.io/Vim-Diff/</link>
+      <pubDate>Mon, 07 Nov 2022 19:50:01 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Vim-Diff/</guid>
+      <description>对比文档</description>
+    </item>
+    <item>
+      <title>VIM 配置</title>
+      <link>https://hcy-asleep.github.io/VIM-%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sat, 29 Oct 2022 14:31:55 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E9%85%8D%E7%BD%AE/</guid>
+      <description>VIM 配置是会随着使用时间慢慢改进的，需要看最新最完整的需移步到 我的 Github 仓库
+VIM 配置说明
+安装 neovim 可以直接从 github 下载 appimage
+配置 neovim 首次启动使用 :checkhealth 查看配置的路径等信息
+coc.nvim 的 LSP 服务需要 npm （ node.js ）提供支持，npm 安装的时候可以从官方网站那里下载然后安装到指定 path，之后的 -g 安装 npm 包的时候包会安装在安装 npm 的目录下面
+注意这个 coc-setting.json 这个在安装了 coc.nvim 之后可以 :CocConfig 来进行编辑，json 里面这一句话一定要加上，解决了初次 tab 选中的问题
+配置文件 init.vim 位于 /home/asleep/.config/nvim 下，coc-settings.json 也是在这个路径下面
+vimplug 管理插件，这里有点特殊，这里我将其他插件安装在与 vimplug 的 plug.vim 同一个目录下面，即 /home/asleep/.local/share/nvim/site/autoload
+安装各种插件之前，应该要了解各个插件的依赖
+至于 vimplug 的安装，只需要把 github 上面的那个 plug.vim 文件弄下来放在上面说的那个 path 下面就可以调用 :PlugInstall，不用整个仓库弄下来
+至于 coc 的插件，coc.</description>
+    </item>
+    <item>
+      <title>VIM 批量查找替换</title>
+      <link>https://hcy-asleep.github.io/VIM-%E6%89%B9%E9%87%8F%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2/</link>
+      <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/VIM-%E6%89%B9%E9%87%8F%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2/</guid>
+      <description>VIM 实用技巧</description>
+    </item>
+  </channel>
+</rss>

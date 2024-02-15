@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Wayland on Memos</title>
+    <link>https://hcy-asleep.github.io/tags/Wayland/</link>
+    <description>Recent content in Wayland on Memos</description>
+    <image>
+      <title>Memos</title>
+      <url>https://hcy-asleep.github.io/</url>
+      <link>https://hcy-asleep.github.io/</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 11 Feb 2023 08:32:39 +0000</lastBuildDate>
+    <atom:link href="https://hcy-asleep.github.io/tags/Wayland/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Podman GUI Wayland/X11</title>
+      <link>https://hcy-asleep.github.io/Podman-GUI-Wayland/X11/</link>
+      <pubDate>Sat, 11 Feb 2023 08:32:39 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Podman-GUI-Wayland/X11/</guid>
+      <description>最简单的一种方法！</description>
+    </item>
+    <item>
+      <title>Wayland Wemeet</title>
+      <link>https://hcy-asleep.github.io/Wayland-Wemeet/</link>
+      <pubDate>Sat, 05 Nov 2022 14:45:11 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Wayland-Wemeet/</guid>
+      <description>腾讯会议不支持 Wayland 解决方法</description>
+    </item>
+  </channel>
+</rss>
