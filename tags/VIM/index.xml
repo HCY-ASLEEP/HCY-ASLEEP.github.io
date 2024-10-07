@@ -9,7 +9,7 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.135.0</generator>
     <language>zh</language>
     <lastBuildDate>Wed, 24 May 2023 13:51:22 +0800</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/tags/VIM/index.xml" rel="self" type="application/rss+xml" />
@@ -18,51 +18,222 @@
       <link>https://hcy-asleep.github.io/Vim-ripgrep-quickfix-netrw-nmap-autocmd-wincmd-%E5%A4%A7%E6%9D%82%E7%83%A9/</link>
       <pubDate>Wed, 24 May 2023 13:51:22 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/Vim-ripgrep-quickfix-netrw-nmap-autocmd-wincmd-%E5%A4%A7%E6%9D%82%E7%83%A9/</guid>
-      <description>啊，这篇文章就随意一点吧，就意识流地写吧（虽然一直都是这样子），记录一下最近搞 Neovim 的心得
-1. 如何使用 nvim + coc 如何滚动悬浮窗口内的内容呢？ 使用 nvim + coc 编写代码的时候，弹出来的悬浮窗口内有滚动条，我怎样才能滚动悬浮窗口内的内容呢？试试 ctrl-w ctrl-w 切换到 floatwin 中，再翻页；更顺手一些的操作是：如果触发 floatwin 的按键是 nmap K, 连按两次 K 就会切换到 floatwin 中
-👉 https://segmentfault.com/q/1010000040349668
-或者直接映射相关的键位，参考官方 Github 的 Readme
-👉 https://github.com/neoclide/coc.nvim/commit/
-2. Vim f和t的快捷方式 [ 移动到指定字符 ]
-如果我们想在当前行内快速移动，可以使用f, t, F, T命令
-&amp;ldquo;f&amp;quot;命令移动到光标右边的指定字符上，例如，&amp;ldquo;fx&amp;rdquo;，会把移动到光标右边的第一个&amp;rsquo;x&amp;rsquo;字符上，&amp;ldquo;F&amp;quot;命令则反方向查找，也就是移动到光标左边的指定字符上
-&amp;ldquo;t&amp;quot;命令和&amp;quot;f&amp;quot;命令的区别在于，它移动到光标右边的指定字符之前，例如，&amp;ldquo;tx&amp;quot;会移动到光标右边第一个&amp;rsquo;x&amp;rsquo;字符的前面，&amp;ldquo;T&amp;quot;命令是&amp;quot;t&amp;quot;命令的反向版本，它移动到光标左边的指定字符之后
-这四个命令只在当前行中移动光标，光标不会跨越回车换行符
-可以在命令前面使用数字，表示倍数，例如，&amp;ldquo;3fx&amp;quot;表示移动到光标右边的第3个&amp;rsquo;x&amp;rsquo;字符上
-&amp;ldquo;;&amp;ldquo;命令重复前一次输入的f, t, F, T命令，而&amp;rdquo;,&amp;ldquo;命令会反方向重复前一次输入的f, t, F, T命令，这两个命令前也可以使用数字来表示倍数
-👉 https://www.jianshu.com/p/a46a89b460a9
-3. 如何在 Vim 里面使用 ripgrep ？ 关于这个问题有两种解决思路：
-使用 Vim 里面自带的 quickfix</description>
+      <description>&lt;p&gt;啊，这篇文章就随意一点吧，就意识流地写吧（虽然一直都是这样子），记录一下最近搞 Neovim 的心得&lt;/p&gt;
+&lt;h3 id=&#34;1-如何使用-nvim--coc-如何滚动悬浮窗口内的内容呢&#34;&gt;1. 如何使用 nvim + coc 如何滚动悬浮窗口内的内容呢？&lt;/h3&gt;
+&lt;p&gt;使用 nvim + coc 编写代码的时候，弹出来的悬浮窗口内有滚动条，我怎样才能滚动悬浮窗口内的内容呢？试试 ctrl-w ctrl-w 切换到 floatwin 中，再翻页；更顺手一些的操作是：如果触发 floatwin 的按键是 nmap K, 连按两次 K 就会切换到 floatwin 中&lt;/p&gt;
+&lt;p&gt;👉 &lt;a href=&#34;https://segmentfault.com/q/1010000040349668&#34;&gt;https://segmentfault.com/q/1010000040349668&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;或者直接映射相关的键位，参考官方 Github 的 Readme&lt;/p&gt;
+&lt;p&gt;👉 &lt;a href=&#34;https://github.com/neoclide/coc.nvim/commit/624549dab287bd63ef7525d85fbf145669dc3b03&#34;&gt;https://github.com/neoclide/coc.nvim/commit/&lt;/a&gt;&lt;/p&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;2-vim-f和t的快捷方式&#34;&gt;2. Vim f和t的快捷方式&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;[ 移动到指定字符 ]&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果我们想在当前行内快速移动，可以使用f, t, F, T命令&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;f&amp;quot;命令移动到光标右边的指定字符上，例如，&amp;ldquo;fx&amp;rdquo;，会把移动到光标右边的第一个&amp;rsquo;x&amp;rsquo;字符上，&amp;ldquo;F&amp;quot;命令则反方向查找，也就是移动到光标左边的指定字符上&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;t&amp;quot;命令和&amp;quot;f&amp;quot;命令的区别在于，它移动到光标右边的指定字符之前，例如，&amp;ldquo;tx&amp;quot;会移动到光标右边第一个&amp;rsquo;x&amp;rsquo;字符的前面，&amp;ldquo;T&amp;quot;命令是&amp;quot;t&amp;quot;命令的反向版本，它移动到光标左边的指定字符之后&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;这四个命令只在当前行中移动光标，光标不会跨越回车换行符&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可以在命令前面使用数字，表示倍数，例如，&amp;ldquo;3fx&amp;quot;表示移动到光标右边的第3个&amp;rsquo;x&amp;rsquo;字符上&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;;&amp;ldquo;命令重复前一次输入的f, t, F, T命令，而&amp;rdquo;,&amp;ldquo;命令会反方向重复前一次输入的f, t, F, T命令，这两个命令前也可以使用数字来表示倍数&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;👉 &lt;a href=&#34;https://www.jianshu.com/p/a46a89b460a9&#34;&gt;https://www.jianshu.com/p/a46a89b460a9&lt;/a&gt;&lt;/p&gt;
+&lt;/br&gt;
+&lt;h3 id=&#34;3-如何在-vim-里面使用-ripgrep-&#34;&gt;3. 如何在 Vim 里面使用 ripgrep ？&lt;/h3&gt;
+&lt;p&gt;关于这个问题有两种解决思路：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用 Vim 里面自带的 quickfix&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;将 rg 搜索结果切割填充到 quickfix 里面，这个部分由 Vim 自己完成，要想使用这个功能，只需要在你的 vimrc 或者 init.vim 里面添加这句话就行&lt;/p&gt;</description>
     </item>
     <item>
       <title>VIM 代码折叠 Folding</title>
       <link>https://hcy-asleep.github.io/VIM-%E4%BB%A3%E7%A0%81%E6%8A%98%E5%8F%A0-Folding/</link>
       <pubDate>Sun, 30 Apr 2023 19:44:43 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/VIM-%E4%BB%A3%E7%A0%81%E6%8A%98%E5%8F%A0-Folding/</guid>
-      <description>VIM设置代码折叠
-zc 关闭当前打开的折叠 (也就是重新折叠起来) zo 打开当前的折叠 (也就是展开折叠) zm 关闭所有折叠 (也就是将所有展开的折叠都重新折叠起来) zM 关闭所有折叠及其嵌套的折叠 zr 打开所有折叠 zR 打开所有折叠及其嵌套的折叠 zd 删除当前折叠 zE 删除所有折叠 zj 移动至下一个折叠 zk 移动至上一个折叠 zn 禁用折叠 zN 启用折叠 </description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/fakis/archive/2011/04/14/2016213.html&#34;&gt;VIM设置代码折叠&lt;/a&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zc&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;关闭当前打开的折叠 (也就是重新折叠起来)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zo&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;打开当前的折叠 (也就是展开折叠)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zm&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;关闭所有折叠 (也就是将所有展开的折叠都重新折叠起来)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zM&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;关闭所有折叠及其嵌套的折叠&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zr&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;打开所有折叠&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zR&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;打开所有折叠及其嵌套的折叠&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zd&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;删除当前折叠&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zE&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;删除所有折叠&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zj&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;移动至下一个折叠&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zk&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;移动至上一个折叠&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zn&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;禁用折叠&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;zN&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;启用折叠&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</description>
     </item>
     <item>
       <title>VIM 全局搜索目录下所有文件关键词</title>
       <link>https://hcy-asleep.github.io/VIM-%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%85%B3%E9%94%AE%E8%AF%8D/</link>
       <pubDate>Wed, 22 Mar 2023 19:40:22 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/VIM-%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%85%B3%E9%94%AE%E8%AF%8D/</guid>
-      <description>vimgrep 和 lvimgrep 是 vim 内置的搜索命令，可以处理不太复杂的正则表达式
-它们的搜索结果都会放入一个列表里面，grep 和 vimgrep 的搜索结果放在 quickfix list 里，quickfix list 可以使用 :cw 或者 :copen 在 vim 中打开，它的结果可以和所有的vim窗口共享；lgrep 和 lvimgrep 的结果存放在 location list 里，location list 是当前窗口的，可以使用 :lw 或者 :lopen 打开
-最妙的是搜索结果在cw或lw展现的时候，可以回车跳转到指定文件的搜索文本的位置
-g：代表所有匹配，而不是其中的一行匹配 j：代表vim不会自动跳转到第一个匹配的地方
-比如要在当前文件夹下递归所有文件搜索tar或者是zip，就可以这样搜：
-1 2 : lvim /\&amp;lt;\(tar\|zip\)\&amp;gt;/gj **/* : lw tip: 使用cword取当前文件光标所在出的文字，.vimrc配置如下：
-1 map &amp;lt;F3&amp;gt; :execute &amp;#34;lvimgrep /&amp;#34; . expand(&amp;#34;&amp;lt;cword&amp;gt;&amp;#34;) . &amp;#34;/gj **/*&amp;#34; &amp;lt;Bar&amp;gt; lw&amp;lt;CR&amp;gt; 上述配置完成后，在vim中当前光标下，按下F3就会在vim的当前目录下搜索所有的文件及其子文件夹的文件，并显示出来，还可以使用 %:e 来做，意思是当前目录（%）下的同类型文件（e），如下：
-1 map &amp;lt;F3&amp;gt; :execute &amp;#34;lvimgrep /&amp;#34; .</description>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;vimgrep 和 lvimgrep 是 vim 内置的搜索命令，可以处理不太复杂的正则表达式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;它们的搜索结果都会放入一个列表里面，grep 和 vimgrep 的搜索结果放在 quickfix list 里，quickfix list 可以使用 :cw 或者 :copen 在 vim 中打开，它的结果可以和所有的vim窗口共享；lgrep 和 lvimgrep 的结果存放在 location list 里，location list 是当前窗口的，可以使用 :lw 或者 :lopen 打开&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;最妙的是搜索结果在cw或lw展现的时候，可以回车跳转到指定文件的搜索文本的位置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;g：代表所有匹配，而不是其中的一行匹配 j：代表vim不会自动跳转到第一个匹配的地方&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;比如要在当前文件夹下递归所有文件搜索tar或者是zip，就可以这样搜：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;lvim&lt;/span&gt; &lt;span class=&#34;sr&#34;&gt;/\&amp;lt;\(tar\|zip\)\&amp;gt;/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;gj&lt;/span&gt; **/*
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;lw&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;tip: 使用cword取当前文件光标所在出的文字，.vimrc配置如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;F3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; :&lt;span class=&#34;k&#34;&gt;execute&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;lvimgrep /&amp;#34;&lt;/span&gt; . &lt;span class=&#34;nx&#34;&gt;expand&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;lt;cword&amp;gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; . &lt;span class=&#34;s2&#34;&gt;&amp;#34;/gj **/*&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;lw&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;CR&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;上述配置完成后，在vim中当前光标下，按下F3就会在vim的当前目录下搜索所有的文件及其子文件夹的文件，并显示出来，还可以使用 %:e 来做，意思是当前目录（%）下的同类型文件（e），如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;F3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; :&lt;span class=&#34;k&#34;&gt;execute&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;lvimgrep /&amp;#34;&lt;/span&gt; . &lt;span class=&#34;nx&#34;&gt;expand&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;lt;cword&amp;gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; . &lt;span class=&#34;s2&#34;&gt;&amp;#34;/gj &amp;#34;&lt;/span&gt; . &lt;span class=&#34;nx&#34;&gt;expand&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;%:e&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;lw&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;CR&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;关闭autocmds以加速搜索，使用vimgrep搜索上百个文件会很慢，而用外置的grep就很快，一个原因是vimgrep使用vim的时序来读取文件，而这个时序将执行几个autocommands，所以我们在检索时关掉这个功能就会提速不少，所以最终的vimrc中配置如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;F3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; :&lt;span class=&#34;nx&#34;&gt;noautocmd&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;execute&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;lvimgrep /&amp;#34;&lt;/span&gt; . &lt;span class=&#34;nx&#34;&gt;expand&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;lt;cword&amp;gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; . &lt;span class=&#34;s2&#34;&gt;&amp;#34;/gj **/*&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;lw&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;CR&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     <item>
       <title>VIM 自带的自动补全</title>
       <link>https://hcy-asleep.github.io/VIM-%E8%87%AA%E5%B8%A6%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/</link>
       <pubDate>Sun, 19 Mar 2023 19:55:18 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/VIM-%E8%87%AA%E5%B8%A6%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/</guid>
-      <description>VIM 的自带补全是根据上下文出现过的单词作为补全元的，将以下代码加入到你的 init.vim 里面就可以实现 Tab 触发补全以及连续使用 Tab 来进行切换选中补全
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 &amp;#34; Simple tab completion ----------------------------------------------------------------------------- &amp;#34; A simple tab completion, if you use the coc.nvim, you should remove this simple completion inoremap &amp;lt;expr&amp;gt; &amp;lt;Tab&amp;gt; getline(&amp;#39;.&amp;#39;)[col(&amp;#39;.&amp;#39;)-2] !~ &amp;#39;^\s\?$&amp;#39; \|\| pumvisible() \ ? &amp;#39;&amp;lt;C-N&amp;gt;&amp;#39; : &amp;#39;&amp;lt;Tab&amp;gt;&amp;#39; inoremap &amp;lt;expr&amp;gt; &amp;lt;S-Tab&amp;gt; pumvisible() \|\| getline(&amp;#39;.&amp;#39;)[col(&amp;#39;.&amp;#39;)-2] !~ &amp;#39;^\s\?$&amp;#39; \ ? &amp;#39;&amp;lt;C-P&amp;gt;&amp;#39; : &amp;#39;&amp;lt;Tab&amp;gt;&amp;#39; augroup SimpleComplete autocmd CmdwinEnter * inoremap &amp;lt;expr&amp;gt; &amp;lt;buffer&amp;gt; &amp;lt;Tab&amp;gt; \ getline(&amp;#39;.</description>
+      <description>&lt;p&gt;VIM 的自带补全是根据上下文出现过的单词作为补全元的，将以下代码加入到你的 init.vim 里面就可以实现 Tab 触发补全以及连续使用 Tab 来进行切换选中补全&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&amp;#34; Simple tab completion -----------------------------------------------------------------------------&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&amp;#34; A simple tab completion, if you use the coc.nvim, you should remove this simple completion&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;inoremap&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;expr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;getline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;[&lt;span class=&#34;nx&#34;&gt;col&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;-2&lt;/span&gt;] &lt;span class=&#34;p&#34;&gt;!~&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;^\s\?$&amp;#39;&lt;/span&gt; \&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;\&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;pumvisible&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      \ ? &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;lt;C-N&amp;gt;&amp;#39;&lt;/span&gt; : &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;lt;Tab&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;inoremap&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;expr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;pumvisible&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; \&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;\&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;getline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;[&lt;span class=&#34;nx&#34;&gt;col&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;-2&lt;/span&gt;] &lt;span class=&#34;p&#34;&gt;!~&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;^\s\?$&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      \ ? &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;lt;C-P&amp;gt;&amp;#39;&lt;/span&gt; : &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;lt;Tab&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;augroup&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;SimpleComplete&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;autocmd&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;CmdwinEnter&lt;/span&gt; * &lt;span class=&#34;nx&#34;&gt;inoremap&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;expr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;buffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          \ &lt;span class=&#34;nx&#34;&gt;getline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;[&lt;span class=&#34;nx&#34;&gt;col&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;-2&lt;/span&gt;] &lt;span class=&#34;p&#34;&gt;!~&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;^\s\?$&amp;#39;&lt;/span&gt; \&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;\&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;pumvisible&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          \ ? &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;lt;C-X&amp;gt;&amp;lt;C-V&amp;gt;&amp;#39;&lt;/span&gt; : &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;lt;Tab&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;augroup&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;END&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&amp;#34; When you use konsole, you may need this&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;hi&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Pmenu&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ctermfg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;yellow&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;hi&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;PmenuSel&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ctermbg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;darkgray&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ctermfg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;white&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;不过值得注意的是，这个 VIM 设置片段不应该与其他那些自动补全插件一起使用，容易造成冲突，比如不能和 coc.nvim 一起使用&lt;/p&gt;</description>
     </item>
     <item>
       <title>Vim =&gt; iamcco/markdown-preview.nvim without nodejs</title>
@@ -104,17 +275,35 @@ g：代表所有匹配，而不是其中的一行匹配 j：代表vim不会自�
       <link>https://hcy-asleep.github.io/VIM-%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sat, 29 Oct 2022 14:31:55 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/VIM-%E9%85%8D%E7%BD%AE/</guid>
-      <description>VIM 配置是会随着使用时间慢慢改进的，需要看最新最完整的需移步到 我的 Github 仓库
-VIM 配置说明
-安装 neovim 可以直接从 github 下载 appimage
-配置 neovim 首次启动使用 :checkhealth 查看配置的路径等信息
-coc.nvim 的 LSP 服务需要 npm （ node.js ）提供支持，npm 安装的时候可以从官方网站那里下载然后安装到指定 path，之后的 -g 安装 npm 包的时候包会安装在安装 npm 的目录下面
-注意这个 coc-setting.json 这个在安装了 coc.nvim 之后可以 :CocConfig 来进行编辑，json 里面这一句话一定要加上，解决了初次 tab 选中的问题
-配置文件 init.vim 位于 /home/asleep/.config/nvim 下，coc-settings.json 也是在这个路径下面
-vimplug 管理插件，这里有点特殊，这里我将其他插件安装在与 vimplug 的 plug.vim 同一个目录下面，即 /home/asleep/.local/share/nvim/site/autoload
-安装各种插件之前，应该要了解各个插件的依赖
-至于 vimplug 的安装，只需要把 github 上面的那个 plug.vim 文件弄下来放在上面说的那个 path 下面就可以调用 :PlugInstall，不用整个仓库弄下来
-至于 coc 的插件，coc.</description>
+      <description>&lt;p&gt;VIM 配置是会随着使用时间慢慢改进的，需要看最新最完整的需移步到 &lt;a href=&#34;https://github.com/HCY-ASLEEP/NVIM-Config&#34;&gt;我的 Github 仓库&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;VIM 配置说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装 neovim 可以直接从 github 下载 appimage&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置 neovim 首次启动使用 :checkhealth 查看配置的路径等信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;coc.nvim 的 LSP 服务需要 npm （ node.js ）提供支持，npm 安装的时候可以从官方网站那里下载然后安装到指定 path，之后的 -g 安装 npm 包的时候包会安装在安装 npm 的目录下面&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;注意这个 coc-setting.json 这个在安装了 coc.nvim 之后可以 :CocConfig 来进行编辑，json 里面这一句话一定要加上，解决了初次 tab 选中的问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置文件 init.vim 位于 /home/asleep/.config/nvim 下，coc-settings.json 也是在这个路径下面&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;vimplug 管理插件，这里有点特殊，这里我将其他插件安装在与 vimplug 的 plug.vim 同一个目录下面，即  /home/asleep/.local/share/nvim/site/autoload&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装各种插件之前，应该要了解各个插件的依赖&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;至于 vimplug 的安装，只需要把 github 上面的那个 plug.vim 文件弄下来放在上面说的那个 path 下面就可以调用 :PlugInstall，不用整个仓库弄下来&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;至于 coc 的插件，coc.nvim 是一个插件管理器，coc.nvim 管理的插件在 /home/asleep/.config/coc/extensions 下面&lt;/p&gt;</description>
     </item>
     <item>
       <title>VIM 批量查找替换</title>

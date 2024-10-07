@@ -9,7 +9,7 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.135.0</generator>
     <language>zh</language>
     <lastBuildDate>Thu, 18 May 2023 11:14:10 +0800</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/tags/Markdown/index.xml" rel="self" type="application/rss+xml" />
@@ -18,12 +18,43 @@
       <link>https://hcy-asleep.github.io/Git-%E5%88%97%E5%87%BA%E9%99%A4%E4%BA%86-.gitignore-%E4%BB%A5%E5%A4%96%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8C%85%E6%8B%AC-tracked-%E5%92%8C-untracked-%E7%9A%84/</link>
       <pubDate>Thu, 18 May 2023 11:14:10 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/Git-%E5%88%97%E5%87%BA%E9%99%A4%E4%BA%86-.gitignore-%E4%BB%A5%E5%A4%96%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8C%85%E6%8B%AC-tracked-%E5%92%8C-untracked-%E7%9A%84/</guid>
-      <description>在执行 git ls-files 的时候，只会列出被 git 跟踪了 (tracked) 的文件，而不会列出那些新建未跟踪的文件 (untracked) ，这个时候用以下命令就可以列出除了 .gitignore 以外的所有文件（包括 tracked 和 untracked 的）：
-1 git ls-files --exclude-standard --cache --others 这个命令也可以简写成：
-1 git ls-files --exclude-standard -c -o 或者：
-1 git ls-files --exclude-standard -co 各项参数的意思（参考 Git 官方文档）：
--c &amp;ndash;cached Show all files cached in Git’s index, i.e. all tracked files. (This is the default if no -c/-s/-d/-o/-u/-k/-m/&amp;ndash;resolve-undo options are specified.)
--o &amp;ndash;others Show other (i.e. untracked) files in the output</description>
+      <description>&lt;p&gt;在执行 &lt;code&gt;git ls-files&lt;/code&gt; 的时候，只会列出被 git 跟踪了 (tracked) 的文件，而不会列出那些新建未跟踪的文件 (untracked) ，这个时候用以下命令就可以列出除了 .gitignore 以外的所有文件（包括 tracked 和 untracked 的）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git ls-files --exclude-standard --cache --others
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这个命令也可以简写成：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git ls-files --exclude-standard -c -o
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或者：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git ls-files --exclude-standard -co
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;各项参数的意思（参考 Git 官方文档）：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;-c&lt;/strong&gt; &lt;/br&gt;
+&lt;strong&gt;&amp;ndash;cached&lt;/strong&gt; &lt;/br&gt;
+Show all files cached in Git’s index, i.e. all tracked files. (This is the default if no -c/-s/-d/-o/-u/-k/-m/&amp;ndash;resolve-undo options are specified.)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;-o&lt;/strong&gt; &lt;/br&gt;
+&lt;strong&gt;&amp;ndash;others&lt;/strong&gt; &lt;/br&gt;
+Show other (i.e. untracked) files in the output&lt;/p&gt;</description>
     </item>
     <item>
       <title>Markdown (HTML) 砌体 (瀑布) 布局</title>

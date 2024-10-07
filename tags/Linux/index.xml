@@ -9,7 +9,7 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.135.0</generator>
     <language>zh</language>
     <lastBuildDate>Wed, 17 May 2023 17:13:58 +0800</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/tags/Linux/index.xml" rel="self" type="application/rss+xml" />
@@ -18,53 +18,230 @@
       <link>https://hcy-asleep.github.io/Linux-%E4%B8%8B%E6%96%87%E4%BB%B6%E5%90%8D%E5%AD%97%E4%B9%B1%E7%A0%81%E6%97%A0%E6%95%88%E7%9A%84%E7%BC%96%E7%A0%81invalid-encodingWindows/</link>
       <pubDate>Wed, 17 May 2023 17:13:58 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/Linux-%E4%B8%8B%E6%96%87%E4%BB%B6%E5%90%8D%E5%AD%97%E4%B9%B1%E7%A0%81%E6%97%A0%E6%95%88%E7%9A%84%E7%BC%96%E7%A0%81invalid-encodingWindows/</guid>
-      <description>文件是在 Windows 下创建的，Windows 的文件名中文编码默认为 GBK ，而 Linux 中默认文件名编码为 UTF8，由于编码不一致所以导致了文件名乱码的问题，解决这个问题需要对文件名进行转码
-安装 convmv ：
-1 sudo apt-get install convmv convmv 使用方法：
-1 convmv -f 源编码 -t 新编码 [选项] 文件名 常用参数：
--r 递归处理子文件夹 &amp;ndash;notest 真正进行操作，默认情况下是不对文件进行真实操作 &amp;ndash;list 显示所有支持的编码 &amp;ndash;unescap 可以做一下转义，比如把%20变成空格 Eg:
-1 convmv -f GBK -t UTF-8 --notest –-unescap *.mp3 参考链接👉 https://www.shuzhiduo.com/A/RnJWmlWvdq/</description>
+      <description>&lt;p&gt;文件是在 Windows 下创建的，Windows 的文件名中文编码默认为 GBK ，而 Linux 中默认文件名编码为 UTF8，由于编码不一致所以导致了文件名乱码的问题，解决这个问题需要对文件名进行转码&lt;/p&gt;
+&lt;p&gt;安装 convmv ：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install convmv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;convmv 使用方法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;convmv -f 源编码 -t 新编码 &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;选项&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 文件名
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;常用参数：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;-r&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;递归处理子文件夹&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;ndash;notest&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;真正进行操作，默认情况下是不对文件进行真实操作&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;ndash;list&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;显示所有支持的编码&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;ndash;unescap&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;可以做一下转义，比如把%20变成空格&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Eg:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;convmv -f GBK -t UTF-8 --notest –-unescap *.mp3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/br&gt;
+&lt;p&gt;参考链接👉 &lt;a href=&#34;https://www.shuzhiduo.com/A/RnJWmlWvdq/&#34;&gt;https://www.shuzhiduo.com/A/RnJWmlWvdq/&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Podman 换源</title>
       <link>https://hcy-asleep.github.io/Podman-%E6%8D%A2%E6%BA%90/</link>
       <pubDate>Sun, 19 Mar 2023 19:50:14 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/Podman-%E6%8D%A2%E6%BA%90/</guid>
-      <description> Podman 默认注册表配置文件在 /etc/containers/registries.conf
-国内的镜像源有:
-docker官方中国区 https://registry.docker-cn.com 网易 http://hub-mirror.c.163.com USTC http://docker.mirrors.ustc.edu.cn 阿里云 http://&amp;lt;你的ID&amp;gt;.mirror.aliyuncs.com 修改为以下内容:
-1 2 3 4 5 6 # 这个是添加 dockerhub 的搜索源 unqualified-search-registries = [&amp;#34;docker.io&amp;#34;] [[registry]] prefix = &amp;#34;docker.io&amp;#34; location = &amp;#34;xxxxxxxx.mirror.aliyuncs.com&amp;#34; </description>
+      <description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Podman 默认注册表配置文件在 /etc/containers/registries.conf&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;国内的镜像源有:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;docker官方中国区 &lt;a href=&#34;https://registry.docker-cn.com&#34;&gt;https://registry.docker-cn.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;网易 &lt;a href=&#34;http://hub-mirror.c.163.com&#34;&gt;http://hub-mirror.c.163.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;USTC &lt;a href=&#34;http://docker.mirrors.ustc.edu.cn&#34;&gt;http://docker.mirrors.ustc.edu.cn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;阿里云 http://&amp;lt;你的ID&amp;gt;.mirror.aliyuncs.com&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改为以下内容:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 这个是添加 dockerhub 的搜索源&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;unqualified-search-registries &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;docker.io&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[[&lt;/span&gt;registry&lt;span class=&#34;o&#34;&gt;]]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;prefix&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;docker.io&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;location&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;xxxxxxxx.mirror.aliyuncs.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     <item>
       <title>Flameshot Arch 无法命令行使用</title>
       <link>https://hcy-asleep.github.io/Flameshot-Arch-%E6%97%A0%E6%B3%95%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sat, 11 Mar 2023 11:33:35 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/Flameshot-Arch-%E6%97%A0%E6%B3%95%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8/</guid>
-      <description>在终端执行 flameshot gui 的时候异常，安装 xdg-desktop-portal 包就行，Gnome 桌面环境的话安装 xdg-desktop-portal-gnome</description>
+      <description>&lt;p&gt;在终端执行 &lt;code&gt;flameshot gui&lt;/code&gt; 的时候异常，安装 &lt;code&gt;xdg-desktop-portal&lt;/code&gt; 包就行，Gnome 桌面环境的话安装 &lt;code&gt;xdg-desktop-portal-gnome&lt;/code&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>SSH连接Docker容器</title>
       <link>https://hcy-asleep.github.io/SSH%E8%BF%9E%E6%8E%A5Docker%E5%AE%B9%E5%99%A8/</link>
       <pubDate>Mon, 06 Mar 2023 15:29:12 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/SSH%E8%BF%9E%E6%8E%A5Docker%E5%AE%B9%E5%99%A8/</guid>
-      <description>创建容器并且端口映射以及后台运行
-1 docker run -it -d -p 9009:22 ubuntu /bin/bash 查看containerId (或者containerAlias)
-1 docker ps -a 进入容器
-1 2 3 # 这里的 containerId 换成 containerAlias 也是可以的 docker start containerId docker exec -it containerId /bin/bash ubuntu 更新源列表
-1 apt-get update 安装ssh-client、ssh-server
-1 2 3 4 apt-get install openssh-client apt-get install openssh-server # 安装 neovim 工具 apt-get install neovim 编辑 sshd_config 文件
-1 vim /etc/ssh/sshd_config 允许 ssh 以 root 用户登录
-1 PermitRootLogin yes 设置 root 密码，同时也是设置 ssh root登录的密码</description>
+      <description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;创建容器并且端口映射以及后台运行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run -it -d -p 9009:22 ubuntu /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看containerId (或者containerAlias)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker ps -a
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;进入容器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 这里的 containerId 换成 containerAlias 也是可以的&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker start containerId
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker &lt;span class=&#34;nb&#34;&gt;exec&lt;/span&gt; -it containerId /bin/bash  
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ubuntu 更新源列表&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装ssh-client、ssh-server&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install openssh-client
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install openssh-server
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 安装 neovim 工具&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install neovim
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;编辑 sshd_config 文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vim /etc/ssh/sshd_config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;允许 ssh 以 root 用户登录&lt;/p&gt;</description>
     </item>
     <item>
       <title>SSH 允许非root用户登录</title>
       <link>https://hcy-asleep.github.io/SSH-%E5%85%81%E8%AE%B8%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/</link>
       <pubDate>Sun, 05 Mar 2023 13:53:48 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/SSH-%E5%85%81%E8%AE%B8%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/</guid>
-      <description>通过配置/etc/ssh/sshd_config文件的AllowUsers，可以添加多个允许登录的用户名，不同用户名之间用空格分开，不在其中的用户则不可以登录
-1 AllowUsers [username] 例如只想允许john和teena两个用户通过ssh登录，其余用户均不允许
-1 AllowUsers john teena 执行下面的命令，重启sshd服务使配置生效
-1 service sshd restart </description>
+      <description>&lt;p&gt;通过配置&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;文件的&lt;code&gt;AllowUsers&lt;/code&gt;，可以添加多个允许登录的用户名，不同用户名之间用空格分开，不在其中的用户则不可以登录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;AllowUsers &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;username&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;例如只想允许john和teena两个用户通过ssh登录，其余用户均不允许&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;AllowUsers john teena
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;执行下面的命令，重启sshd服务使配置生效&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;service sshd restart
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
     </item>
     <item>
       <title>Linux Grub 分辨率</title>
@@ -116,6 +293,13 @@ docker官方中国区 https://registry.docker-cn.com 网易 http://hub-mirror.c.
       <description>最简单的一种方法！</description>
     </item>
     <item>
+      <title>Debian 安装中文环境</title>
+      <link>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Tue, 03 Jan 2023 09:27:15 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E7%8E%AF%E5%A2%83/</guid>
+      <description>容器里面可能要先安装 locale</description>
+    </item>
+    <item>
       <title>Linux Host 与 KVM Windows Guest 共享文件</title>
       <link>https://hcy-asleep.github.io/Linux-Host-%E4%B8%8E-KVM-Windows-Guest-%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
       <pubDate>Fri, 18 Nov 2022 19:24:07 +0000</pubDate>
@@ -127,15 +311,109 @@ docker官方中国区 https://registry.docker-cn.com 网易 http://hub-mirror.c.
       <link>https://hcy-asleep.github.io/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98U%E7%9B%98/</link>
       <pubDate>Thu, 17 Nov 2022 16:27:52 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98U%E7%9B%98/</guid>
-      <description>注意：以下操作都属于高危行为，请谨慎使用!
-在插入 U盘 之前，先查看有哪些磁盘
-可以看到加粗的有两行，第一行开头是 &amp;ldquo;Disk&amp;rdquo; ，第二行开头是 &amp;ldquo;Device&amp;rdquo; 整个输出只有一行加粗的 &amp;ldquo;Disk&amp;rdquo; ，表示目前只有一个硬盘 每一个加粗的 &amp;ldquo;Device&amp;rdquo; 都对应上一行的 &amp;ldquo;Disk&amp;rdquo; &amp;ldquo;Device&amp;rdquo; 里面的内容表示 &amp;ldquo;Disk&amp;rdquo; 里面的分区 在插入 U盘 之后，再查看有哪些磁盘
-发现多了一行加粗的 &amp;ldquo;Disk&amp;rdquo; 这个正是我们插入的 U盘 卸载 U盘
-1 umount /dev/sda /dev/后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！ 格式化 U盘 ，并且建立 vfat 文件系统
-1 mkfs.vfat -I /dev/sda /dev/后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！ 最后再 mount 上 U盘 ，或者把 U盘 拨了再插上，系统可能会自动 mount 上, 就可以使用 U盘 了
-异常处理
-假设 U盘 信息如下
-1 2 3 4 5 6 7 8 9 10 Disk /dev/sdb：7.5 GiB，8004304896 bytes，15633408 sectors Units：sectors of / 1 * 512 = 512 bytes Sector size(logical/physical)：512 bytes / 512 bytes I/O size(mininum/optimal)：512 bytes / 512 bytes Disklabel type：dos Disk identifier：0x663eb4c4 Device boot Start End Sectors Size Id Type /dev/sdb1 * 0 3815135 3815136 1.</description>
+      <description>&lt;p&gt;&lt;strong&gt;注意：以下操作都属于高危行为，请谨慎使用!&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在插入 U盘 之前，先查看有哪些磁盘&lt;/p&gt;
+&lt;p&gt;
+    
+    &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-b9d71&#34; hidden&gt;
+    &lt;label for=&#34;zoomCheck-b9d71&#34;&gt;
+        &lt;img class=&#34;zoomCheck&#34; loading=&#34;lazy&#34; decoding=&#34;async&#34; 
+            src=&#34;https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/2022.11.17.16.36.19.png&#34; alt=&#34;&#34; 
+             /&gt;
+    &lt;/label&gt;
+
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以看到加粗的有两行，第一行开头是 &amp;ldquo;Disk&amp;rdquo; ，第二行开头是 &amp;ldquo;Device&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;整个输出只有一行加粗的 &amp;ldquo;Disk&amp;rdquo; ，表示目前只有一个硬盘&lt;/li&gt;
+&lt;li&gt;每一个加粗的 &amp;ldquo;Device&amp;rdquo; 都对应上一行的 &amp;ldquo;Disk&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Device&amp;rdquo; 里面的内容表示 &amp;ldquo;Disk&amp;rdquo; 里面的分区&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在插入 U盘 之后，再查看有哪些磁盘&lt;/p&gt;
+&lt;p&gt;
+    
+    &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-32a94&#34; hidden&gt;
+    &lt;label for=&#34;zoomCheck-32a94&#34;&gt;
+        &lt;img class=&#34;zoomCheck&#34; loading=&#34;lazy&#34; decoding=&#34;async&#34; 
+            src=&#34;https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/2022.11.17.16.39.41.png&#34; alt=&#34;&#34; 
+             /&gt;
+    &lt;/label&gt;
+
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;发现多了一行加粗的 &amp;ldquo;Disk&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;这个正是我们插入的 U盘&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;卸载 U盘&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;umount /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;/dev/后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;格式化 U盘 ，并且建立 vfat 文件系统&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mkfs.vfat -I /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;/dev/后面的设备要根据你的实际情况而定，否则后面格式化，丢失数据！！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;最后再 mount 上 U盘 ，或者把 U盘 拨了再插上，系统可能会自动 mount 上, 就可以使用 U盘 了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;异常处理&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;假设 U盘 信息如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Disk /dev/sdb：7.5 GiB，8004304896 bytes，15633408 sectors
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Units：sectors of / &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; * &lt;span class=&#34;nv&#34;&gt;512&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Sector size&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;logical/physical&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：512 bytes / &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;I/O size&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;mininum/optimal&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;：512 bytes / &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Disklabel type：dos
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Disk identifier：0x663eb4c4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Device    boot      Start     End Sectors  Size Id Type
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sdb1    *          &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;3815135&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;3815136&lt;/span&gt;  1.8G  &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; Empty
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sdb2         &lt;span class=&#34;m&#34;&gt;3737268&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;3741939&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;4672&lt;/span&gt;  2.3M ef EFI &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;FAT-12/16/32&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果 mkfs.vfat /dev/sdb 出现如下错误&lt;/p&gt;</description>
     </item>
     <item>
       <title>Linux 查看硬盘空间</title>
@@ -231,13 +509,6 @@ docker官方中国区 https://registry.docker-cn.com 网易 http://hub-mirror.c.
       <pubDate>Sun, 23 Oct 2022 13:25:51 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/Linux-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/</guid>
       <description>&lt;p&gt;Linux 环境变量配置出错后，提示command not found&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Debian 安装中文环境</title>
-      <link>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E7%8E%AF%E5%A2%83/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E7%8E%AF%E5%A2%83/</guid>
-      <description>容器里面可能要先安装 locale</description>
     </item>
   </channel>
 </rss>

@@ -9,7 +9,7 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.135.0</generator>
     <language>zh</language>
     <lastBuildDate>Sun, 19 Mar 2023 19:50:14 +0800</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/tags/Podman/index.xml" rel="self" type="application/rss+xml" />
@@ -18,10 +18,41 @@
       <link>https://hcy-asleep.github.io/Podman-%E6%8D%A2%E6%BA%90/</link>
       <pubDate>Sun, 19 Mar 2023 19:50:14 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/Podman-%E6%8D%A2%E6%BA%90/</guid>
-      <description> Podman 默认注册表配置文件在 /etc/containers/registries.conf
-国内的镜像源有:
-docker官方中国区 https://registry.docker-cn.com 网易 http://hub-mirror.c.163.com USTC http://docker.mirrors.ustc.edu.cn 阿里云 http://&amp;lt;你的ID&amp;gt;.mirror.aliyuncs.com 修改为以下内容:
-1 2 3 4 5 6 # 这个是添加 dockerhub 的搜索源 unqualified-search-registries = [&amp;#34;docker.io&amp;#34;] [[registry]] prefix = &amp;#34;docker.io&amp;#34; location = &amp;#34;xxxxxxxx.mirror.aliyuncs.com&amp;#34; </description>
+      <description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Podman 默认注册表配置文件在 /etc/containers/registries.conf&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;国内的镜像源有:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;docker官方中国区 &lt;a href=&#34;https://registry.docker-cn.com&#34;&gt;https://registry.docker-cn.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;网易 &lt;a href=&#34;http://hub-mirror.c.163.com&#34;&gt;http://hub-mirror.c.163.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;USTC &lt;a href=&#34;http://docker.mirrors.ustc.edu.cn&#34;&gt;http://docker.mirrors.ustc.edu.cn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;阿里云 http://&amp;lt;你的ID&amp;gt;.mirror.aliyuncs.com&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改为以下内容:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 这个是添加 dockerhub 的搜索源&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;unqualified-search-registries &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;docker.io&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[[&lt;/span&gt;registry&lt;span class=&#34;o&#34;&gt;]]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;prefix&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;docker.io&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;location&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;xxxxxxxx.mirror.aliyuncs.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     <item>
       <title>Podman 登录脚本</title>
@@ -61,7 +92,7 @@ docker官方中国区 https://registry.docker-cn.com 网易 http://hub-mirror.c.
     <item>
       <title>Podman &#43; X11 环境运行 GUI 程序</title>
       <link>https://hcy-asleep.github.io/Podman--X11-%E7%8E%AF%E5%A2%83%E8%BF%90%E8%A1%8C-GUI-%E7%A8%8B%E5%BA%8F/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 30 Dec 2022 14:27:15 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/Podman--X11-%E7%8E%AF%E5%A2%83%E8%BF%90%E8%A1%8C-GUI-%E7%A8%8B%E5%BA%8F/</guid>
       <description>比较麻烦的一种方法(后面还有一种更加方便的方法)</description>
     </item>

@@ -9,7 +9,7 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.135.0</generator>
     <language>zh</language>
     <lastBuildDate>Sun, 05 Mar 2023 13:39:33 +0800</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/tags/Jupyter/index.xml" rel="self" type="application/rss+xml" />
@@ -18,10 +18,48 @@
       <link>https://hcy-asleep.github.io/Jupyter-Notebook-%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE-%E5%85%8D%E5%AF%86-%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/</link>
       <pubDate>Sun, 05 Mar 2023 13:39:33 +0800</pubDate>
       <guid>https://hcy-asleep.github.io/Jupyter-Notebook-%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE-%E5%85%8D%E5%AF%86-%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/</guid>
-      <description> 免密码登录
-1 jupyter notebook --ip=&amp;#39;*&amp;#39; --NotebookApp.token=&amp;#39;&amp;#39; --NotebookApp.password=&amp;#39;&amp;#39; 其中 &amp;hellip; &amp;ndash;ip=&amp;rsquo;*&amp;rsquo; &amp;hellip; 表示允许所有 ip 访问而不仅是本机的 127.0.0.1 ，从而达到远程连接的效果 远程连接但是加上一点点安全性
-1 jupyter notebook --ip=&amp;#39;*&amp;#39; --NotebookApp.token=&amp;#39;hcy&amp;#39; 设置 token 为 hcy ，远程访问的时候如下访问
-1 2 # {jupyter notebook ip}:8888/?token=hcy http://172.35.40.120:8888/?token=hcy </description>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;免密码登录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;jupyter notebook --ip&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt; --NotebookApp.token&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; --NotebookApp.password&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;其中 &lt;em&gt;&lt;strong&gt;&amp;hellip; &amp;ndash;ip=&amp;rsquo;*&amp;rsquo; &amp;hellip;&lt;/strong&gt;&lt;/em&gt; 表示允许所有 ip 访问而不仅是本机的 127.0.0.1 ，从而达到远程连接的效果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;远程连接但是加上一点点安全性&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;jupyter notebook --ip&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt; --NotebookApp.token&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;hcy&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;设置 token 为 hcy ，远程访问的时候如下访问&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# {jupyter notebook ip}:8888/?token=hcy &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;http://172.35.40.120:8888/?token&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;hcy
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
   </channel>
 </rss>

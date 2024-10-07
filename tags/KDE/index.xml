@@ -9,7 +9,7 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.135.0</generator>
     <language>zh</language>
     <lastBuildDate>Tue, 28 Feb 2023 21:58:38 +0800</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/tags/KDE/index.xml" rel="self" type="application/rss+xml" />
@@ -32,15 +32,76 @@
       <link>https://hcy-asleep.github.io/Arch-KDE-%E6%8A%98%E8%85%BE%E6%97%A5%E5%BF%97/</link>
       <pubDate>Tue, 21 Feb 2023 05:09:57 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/Arch-KDE-%E6%8A%98%E8%85%BE%E6%97%A5%E5%BF%97/</guid>
-      <description>live cd 安装使用 WIFI 先用命令 ip link查看网络接口
-1 ip link 查看到我的机器的无线网络接口是wlan0(不同的机器可能名字不同)，这里 wlan0 为例
-默认是关闭的状态，需要先开启它，而开启它之前还需要先激活它(即取消禁用，我这台机器默认是blockeded，禁用的)
-1 2 rfkill unblock wifi # 取消禁用wifi设备 ip link set wlan0 up # 开启wlan0 输入iwctl进入交互式提示符（interactive prompt），配置并连接到互联网
-1 2 3 4 5 station wlan0 scan station wlan0 get-networks station wlan0 connect &amp;lt;network name&amp;gt; station wlan0 show exit　# 回到命令行 ping百度可以ping通，就说明已经连接上了互联网
-免密 sudo Arch Linux run sudo without passwd
-首先
-1 sudo visudo 然后编辑里面的内容
-1 myname ALL=(ALL) NOPASSWD: ALL 添加中科大源 添加中科大的Arch Linux源</description>
+      <description>&lt;h3 id=&#34;live-cd-安装使用-wifi&#34;&gt;live cd 安装使用 WIFI&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;先用命令 ip link查看网络接口&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ip link
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看到我的机器的无线网络接口是wlan0(不同的机器可能名字不同)，这里 wlan0 为例&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;默认是关闭的状态，需要先开启它，而开启它之前还需要先激活它(即取消禁用，我这台机器默认是blockeded，禁用的)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rfkill unblock wifi    &lt;span class=&#34;c1&#34;&gt;# 取消禁用wifi设备&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ip link &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; wlan0 up   &lt;span class=&#34;c1&#34;&gt;# 开启wlan0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;输入iwctl进入交互式提示符（interactive prompt），配置并连接到互联网&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;station wlan0 scan
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;station wlan0 get-networks
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;station wlan0 connect &amp;lt;network name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;station wlan0 show
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;exit　　# 回到命令行
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ping百度可以ping通，就说明已经连接上了互联网&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;免密-sudo&#34;&gt;免密 sudo&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Arch Linux run sudo without passwd&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;首先&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo visudo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;然后编辑里面的内容&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
