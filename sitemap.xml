@@ -2,16 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://hcy-asleep.github.io/Debian-Gnome-%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E7%9B%AE%E5%BD%95/</loc>
+    <lastmod>2024-01-23T11:40:20+08:00</lastmod>
+  </url><url>
     <loc>https://hcy-asleep.github.io/</loc>
-    <lastmod>2024-10-17T23:37:39+00:00</lastmod>
+    <lastmod>2024-01-23T11:40:20+08:00</lastmod>
   </url><url>
     <loc>https://hcy-asleep.github.io/post/</loc>
-    <lastmod>2024-10-17T23:37:39+00:00</lastmod>
-  </url><url>
-    <loc>https://hcy-asleep.github.io/%E5%B0%9D%E8%AF%95Workflow/</loc>
-    <lastmod>2024-10-17T23:37:39+00:00</lastmod>
-  </url><url>
-    <loc>https://hcy-asleep.github.io/Debian-Gnome-%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E7%9B%AE%E5%BD%95/</loc>
     <lastmod>2024-01-23T11:40:20+08:00</lastmod>
   </url><url>
     <loc>https://hcy-asleep.github.io/Debian-%E5%AE%89%E8%A3%85-Flameshot-%E5%92%8C%E8%BF%85%E9%9B%B7%E4%BB%A5%E5%8F%8A-Neovim-%E5%89%AA%E5%88%87%E6%9D%BF/</loc>
