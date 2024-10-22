@@ -9,7 +9,7 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- 0.135.0</generator>
+    <generator>Hugo -- 0.136.3</generator>
     <language>zh</language>
     <lastBuildDate>Wed, 17 May 2023 17:13:58 +0800</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/tags/Linux/index.xml" rel="self" type="application/rss+xml" />
@@ -41,26 +41,26 @@
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
       &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;-r&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;递归处理子文件夹&lt;/td&gt;
+          &lt;td&gt;-r&lt;/td&gt;
+          &lt;td&gt;递归处理子文件夹&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&amp;ndash;notest&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;真正进行操作，默认情况下是不对文件进行真实操作&lt;/td&gt;
+          &lt;td&gt;&amp;ndash;notest&lt;/td&gt;
+          &lt;td&gt;真正进行操作，默认情况下是不对文件进行真实操作&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&amp;ndash;list&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;显示所有支持的编码&lt;/td&gt;
+          &lt;td&gt;&amp;ndash;list&lt;/td&gt;
+          &lt;td&gt;显示所有支持的编码&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&amp;ndash;unescap&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;可以做一下转义，比如把%20变成空格&lt;/td&gt;
+          &lt;td&gt;&amp;ndash;unescap&lt;/td&gt;
+          &lt;td&gt;可以做一下转义，比如把%20变成空格&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;

@@ -9,7 +9,7 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- 0.135.0</generator>
+    <generator>Hugo -- 0.136.3</generator>
     <language>zh</language>
     <lastBuildDate>Tue, 06 Jun 2023 13:59:46 +0800</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/tags/Xv6/index.xml" rel="self" type="application/rss+xml" />
@@ -29,50 +29,50 @@
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;Head&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;What it does&lt;/th&gt;
+          &lt;th&gt;Head&lt;/th&gt;
+          &lt;th&gt;What it does&lt;/th&gt;
       &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;assert.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;断言的相关宏定义和函数声明，用于断言检查&lt;/td&gt;
+          &lt;td&gt;assert.h&lt;/td&gt;
+          &lt;td&gt;断言的相关宏定义和函数声明，用于断言检查&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;ctype.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;字符处理的函数和宏定义，对字符进行分类和转换&lt;/td&gt;
+          &lt;td&gt;ctype.h&lt;/td&gt;
+          &lt;td&gt;字符处理的函数和宏定义，对字符进行分类和转换&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;limits.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;定义了各种数据类型的取值范围以及其他与整数类型相关的常量&lt;/td&gt;
+          &lt;td&gt;limits.h&lt;/td&gt;
+          &lt;td&gt;定义了各种数据类型的取值范围以及其他与整数类型相关的常量&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;stdarg.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提供了支持可变参数函数的宏和类型定义&lt;/td&gt;
+          &lt;td&gt;stdarg.h&lt;/td&gt;
+          &lt;td&gt;提供了支持可变参数函数的宏和类型定义&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;stdbool.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;定义了布尔类型和相关的常量，没错，xv6-riscv 原本甚至不支持 bool 型变量&lt;/td&gt;
+          &lt;td&gt;stdbool.h&lt;/td&gt;
+          &lt;td&gt;定义了布尔类型和相关的常量，没错，xv6-riscv 原本甚至不支持 bool 型变量&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;stddef.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提供了一些与指针、大小和偏移量相关的常量和类型定义&lt;/td&gt;
+          &lt;td&gt;stddef.h&lt;/td&gt;
+          &lt;td&gt;提供了一些与指针、大小和偏移量相关的常量和类型定义&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;stdio.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;用于处理标准输入输出&lt;/td&gt;
+          &lt;td&gt;stdio.h&lt;/td&gt;
+          &lt;td&gt;用于处理标准输入输出&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;stdlib.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;用于内存管理、字符串转换、伪随机数生成、算术运算和程序终止等&lt;/td&gt;
+          &lt;td&gt;stdlib.h&lt;/td&gt;
+          &lt;td&gt;用于内存管理、字符串转换、伪随机数生成、算术运算和程序终止等&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;termios.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;用于控制和配置终端的行为&lt;/td&gt;
+          &lt;td&gt;termios.h&lt;/td&gt;
+          &lt;td&gt;用于控制和配置终端的行为&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;unistd.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;定义了一些与系统调用、文件操作、进程控制、环境变量和程序终止相关的函数和常量&lt;/td&gt;
+          &lt;td&gt;unistd.h&lt;/td&gt;
+          &lt;td&gt;定义了一些与系统调用、文件操作、进程控制、环境变量和程序终止相关的函数和常量&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;

@@ -9,7 +9,7 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- 0.135.0</generator>
+    <generator>Hugo -- 0.136.3</generator>
     <language>zh</language>
     <lastBuildDate>Wed, 24 May 2023 13:51:22 +0800</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/tags/VIM/index.xml" rel="self" type="application/rss+xml" />
@@ -67,58 +67,58 @@
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
       &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zc&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;关闭当前打开的折叠 (也就是重新折叠起来)&lt;/td&gt;
+          &lt;td&gt;zc&lt;/td&gt;
+          &lt;td&gt;关闭当前打开的折叠 (也就是重新折叠起来)&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zo&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;打开当前的折叠 (也就是展开折叠)&lt;/td&gt;
+          &lt;td&gt;zo&lt;/td&gt;
+          &lt;td&gt;打开当前的折叠 (也就是展开折叠)&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zm&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;关闭所有折叠 (也就是将所有展开的折叠都重新折叠起来)&lt;/td&gt;
+          &lt;td&gt;zm&lt;/td&gt;
+          &lt;td&gt;关闭所有折叠 (也就是将所有展开的折叠都重新折叠起来)&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zM&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;关闭所有折叠及其嵌套的折叠&lt;/td&gt;
+          &lt;td&gt;zM&lt;/td&gt;
+          &lt;td&gt;关闭所有折叠及其嵌套的折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zr&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;打开所有折叠&lt;/td&gt;
+          &lt;td&gt;zr&lt;/td&gt;
+          &lt;td&gt;打开所有折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zR&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;打开所有折叠及其嵌套的折叠&lt;/td&gt;
+          &lt;td&gt;zR&lt;/td&gt;
+          &lt;td&gt;打开所有折叠及其嵌套的折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zd&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;删除当前折叠&lt;/td&gt;
+          &lt;td&gt;zd&lt;/td&gt;
+          &lt;td&gt;删除当前折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zE&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;删除所有折叠&lt;/td&gt;
+          &lt;td&gt;zE&lt;/td&gt;
+          &lt;td&gt;删除所有折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zj&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;移动至下一个折叠&lt;/td&gt;
+          &lt;td&gt;zj&lt;/td&gt;
+          &lt;td&gt;移动至下一个折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zk&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;移动至上一个折叠&lt;/td&gt;
+          &lt;td&gt;zk&lt;/td&gt;
+          &lt;td&gt;移动至上一个折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zn&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;禁用折叠&lt;/td&gt;
+          &lt;td&gt;zn&lt;/td&gt;
+          &lt;td&gt;禁用折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zN&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;启用折叠&lt;/td&gt;
+          &lt;td&gt;zN&lt;/td&gt;
+          &lt;td&gt;启用折叠&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;</description>

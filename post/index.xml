@@ -9,10 +9,149 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- 0.135.0</generator>
+    <generator>Hugo -- 0.136.3</generator>
     <language>zh</language>
-    <lastBuildDate>Wed, 09 Oct 2024 16:22:13 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Oct 2024 16:30:00 +0000</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SoK: Sanitizing for Security 论文结构梳理</title>
+      <link>https://hcy-asleep.github.io/SoK-Sanitizing-for-Security-%E8%AE%BA%E6%96%87%E7%BB%93%E6%9E%84%E6%A2%B3%E7%90%86/</link>
+      <pubDate>Tue, 22 Oct 2024 16:30:00 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/SoK-Sanitizing-for-Security-%E8%AE%BA%E6%96%87%E7%BB%93%E6%9E%84%E6%A2%B3%E7%90%86/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;Abstract&lt;/li&gt;
+&lt;li&gt;I. Inctrodcution&lt;/li&gt;
+&lt;li&gt;II. Exploit Mitigations vs. Sanitizers&lt;/li&gt;
+&lt;li&gt;III. Low-Level Vulnerabilities
+&lt;ul&gt;
+&lt;li&gt;A. Memory Safety Violations
+&lt;ul&gt;
+&lt;li&gt;(1) Spatial Safety Violatoins&lt;/li&gt;
+&lt;li&gt;(2) Temporal Safety Violations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;B. Use of Uninitialized Variables&lt;/li&gt;
+&lt;li&gt;C. Pointer Type Errors&lt;/li&gt;
+&lt;li&gt;D. Variadic Function Misuse&lt;/li&gt;
+&lt;li&gt;E. Other Vulnerabilities&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;IV. Bug Finding Techiques
+&lt;ul&gt;
+&lt;li&gt;A. Memory Safety Violations
+&lt;ul&gt;
+&lt;li&gt;Location-based Access Checkers&lt;/li&gt;
+&lt;li&gt;Identity-based Access Checkers
+&lt;ul&gt;
+&lt;li&gt;(1) Spatial Memory Safety Violations
+&lt;ul&gt;
+&lt;li&gt;Red-zone Insertion&lt;/li&gt;
+&lt;li&gt;Guard Pages&lt;/li&gt;
+&lt;li&gt;Per-pointer Bounds Tracking&lt;/li&gt;
+&lt;li&gt;Per-object Bounds Tracking&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(2) Temporal Memory Safety Violations
+&lt;ul&gt;
+&lt;li&gt;Reuse Delay&lt;/li&gt;
+&lt;li&gt;Lock-and-key&lt;/li&gt;
+&lt;li&gt;Dangling Pointer Tagging&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;B. Use of Uninitailized Variables
+&lt;ul&gt;
+&lt;li&gt;Uninitailized Memory Read Detection&lt;/li&gt;
+&lt;li&gt;Uninitialized Value Use Dectection&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;C. Pointer Type Errors
+&lt;ul&gt;
+&lt;li&gt;Pointer Casting Monitor&lt;/li&gt;
+&lt;li&gt;Pointer Use Monitor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;D. Variadic Function Misuse
+&lt;ul&gt;
+&lt;li&gt;Dangerous Format String Detection&lt;/li&gt;
+&lt;li&gt;Argument Mismatch Detection&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;E. Other Vulnerabilities&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;V. Program Instumentation
+&lt;ul&gt;
+&lt;li&gt;A. Language-level Instrumentation&lt;/li&gt;
+&lt;li&gt;B. IR-level Instrumentation&lt;/li&gt;
+&lt;li&gt;C. Binary Instrumentation&lt;/li&gt;
+&lt;li&gt;D. Library Interposition&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;VI. Metadata Management
+&lt;ul&gt;
+&lt;li&gt;A. Object Metadata
+&lt;ul&gt;
+&lt;li&gt;Embedded Metadata&lt;/li&gt;
+&lt;li&gt;Direct-mapped Shadow&lt;/li&gt;
+&lt;li&gt;Multi-level Shadow&lt;/li&gt;
+&lt;li&gt;Custom Data Structure&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;B. Pointer Metadata
+&lt;ul&gt;
+&lt;li&gt;Fat Pointers&lt;/li&gt;
+&lt;li&gt;Tagged Pointers&lt;/li&gt;
+&lt;li&gt;Disjoint Metadata&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;C. Static Metadata&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;VII. Driving A Sanitizer&lt;/li&gt;
+&lt;li&gt;VIII. Analysis
+&lt;ul&gt;
+&lt;li&gt;A. False Positives&lt;/li&gt;
+&lt;li&gt;B. False Negatives&lt;/li&gt;
+&lt;li&gt;C. Incomplete Instrumentation&lt;/li&gt;
+&lt;li&gt;D. Tread Safety&lt;/li&gt;
+&lt;li&gt;E. Performance Overhead&lt;/li&gt;
+&lt;li&gt;F. Memory Overhead&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;IX. Deployment
+&lt;ul&gt;
+&lt;li&gt;A. Methodology
+&lt;ul&gt;
+&lt;li&gt;Popular Github repositories&lt;/li&gt;
+&lt;li&gt;Sanitizer web pages&lt;/li&gt;
+&lt;li&gt;Search trends&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;B. Findings
+&lt;ul&gt;
+&lt;li&gt;AddressSanitizer is the most widely adopted sanitizer&lt;/li&gt;
+&lt;li&gt;The adoption rate for other LLVM-based sanitizers is lower&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;C. Deployment Directions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;X. Future Research And Development Directions
+&lt;ul&gt;
+&lt;li&gt;A. Type Error Detection&lt;/li&gt;
+&lt;li&gt;B. Improving Compatibility&lt;/li&gt;
+&lt;li&gt;C. Composing Sanitizers&lt;/li&gt;
+&lt;li&gt;D. Hardware Support&lt;/li&gt;
+&lt;li&gt;E. Kernel and Bare-Metal Support&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;XI. Conclusion&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     <item>
       <title>使用 C&#43;&#43; 理解 23 种设计模式</title>
       <link>https://hcy-asleep.github.io/%E4%BD%BF%E7%94%A8-C-%E7%90%86%E8%A7%A3-23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
@@ -715,50 +854,50 @@
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;Head&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;What it does&lt;/th&gt;
+          &lt;th&gt;Head&lt;/th&gt;
+          &lt;th&gt;What it does&lt;/th&gt;
       &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;assert.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;断言的相关宏定义和函数声明，用于断言检查&lt;/td&gt;
+          &lt;td&gt;assert.h&lt;/td&gt;
+          &lt;td&gt;断言的相关宏定义和函数声明，用于断言检查&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;ctype.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;字符处理的函数和宏定义，对字符进行分类和转换&lt;/td&gt;
+          &lt;td&gt;ctype.h&lt;/td&gt;
+          &lt;td&gt;字符处理的函数和宏定义，对字符进行分类和转换&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;limits.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;定义了各种数据类型的取值范围以及其他与整数类型相关的常量&lt;/td&gt;
+          &lt;td&gt;limits.h&lt;/td&gt;
+          &lt;td&gt;定义了各种数据类型的取值范围以及其他与整数类型相关的常量&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;stdarg.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提供了支持可变参数函数的宏和类型定义&lt;/td&gt;
+          &lt;td&gt;stdarg.h&lt;/td&gt;
+          &lt;td&gt;提供了支持可变参数函数的宏和类型定义&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;stdbool.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;定义了布尔类型和相关的常量，没错，xv6-riscv 原本甚至不支持 bool 型变量&lt;/td&gt;
+          &lt;td&gt;stdbool.h&lt;/td&gt;
+          &lt;td&gt;定义了布尔类型和相关的常量，没错，xv6-riscv 原本甚至不支持 bool 型变量&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;stddef.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提供了一些与指针、大小和偏移量相关的常量和类型定义&lt;/td&gt;
+          &lt;td&gt;stddef.h&lt;/td&gt;
+          &lt;td&gt;提供了一些与指针、大小和偏移量相关的常量和类型定义&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;stdio.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;用于处理标准输入输出&lt;/td&gt;
+          &lt;td&gt;stdio.h&lt;/td&gt;
+          &lt;td&gt;用于处理标准输入输出&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;stdlib.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;用于内存管理、字符串转换、伪随机数生成、算术运算和程序终止等&lt;/td&gt;
+          &lt;td&gt;stdlib.h&lt;/td&gt;
+          &lt;td&gt;用于内存管理、字符串转换、伪随机数生成、算术运算和程序终止等&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;termios.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;用于控制和配置终端的行为&lt;/td&gt;
+          &lt;td&gt;termios.h&lt;/td&gt;
+          &lt;td&gt;用于控制和配置终端的行为&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;unistd.h&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;定义了一些与系统调用、文件操作、进程控制、环境变量和程序终止相关的函数和常量&lt;/td&gt;
+          &lt;td&gt;unistd.h&lt;/td&gt;
+          &lt;td&gt;定义了一些与系统调用、文件操作、进程控制、环境变量和程序终止相关的函数和常量&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -880,26 +1019,26 @@ Show other (i.e. untracked) files in the output&lt;/p&gt;</description>
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
       &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;-r&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;递归处理子文件夹&lt;/td&gt;
+          &lt;td&gt;-r&lt;/td&gt;
+          &lt;td&gt;递归处理子文件夹&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&amp;ndash;notest&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;真正进行操作，默认情况下是不对文件进行真实操作&lt;/td&gt;
+          &lt;td&gt;&amp;ndash;notest&lt;/td&gt;
+          &lt;td&gt;真正进行操作，默认情况下是不对文件进行真实操作&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&amp;ndash;list&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;显示所有支持的编码&lt;/td&gt;
+          &lt;td&gt;&amp;ndash;list&lt;/td&gt;
+          &lt;td&gt;显示所有支持的编码&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&amp;ndash;unescap&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;可以做一下转义，比如把%20变成空格&lt;/td&gt;
+          &lt;td&gt;&amp;ndash;unescap&lt;/td&gt;
+          &lt;td&gt;可以做一下转义，比如把%20变成空格&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -995,58 +1134,58 @@ Show other (i.e. untracked) files in the output&lt;/p&gt;</description>
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
       &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zc&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;关闭当前打开的折叠 (也就是重新折叠起来)&lt;/td&gt;
+          &lt;td&gt;zc&lt;/td&gt;
+          &lt;td&gt;关闭当前打开的折叠 (也就是重新折叠起来)&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zo&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;打开当前的折叠 (也就是展开折叠)&lt;/td&gt;
+          &lt;td&gt;zo&lt;/td&gt;
+          &lt;td&gt;打开当前的折叠 (也就是展开折叠)&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zm&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;关闭所有折叠 (也就是将所有展开的折叠都重新折叠起来)&lt;/td&gt;
+          &lt;td&gt;zm&lt;/td&gt;
+          &lt;td&gt;关闭所有折叠 (也就是将所有展开的折叠都重新折叠起来)&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zM&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;关闭所有折叠及其嵌套的折叠&lt;/td&gt;
+          &lt;td&gt;zM&lt;/td&gt;
+          &lt;td&gt;关闭所有折叠及其嵌套的折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zr&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;打开所有折叠&lt;/td&gt;
+          &lt;td&gt;zr&lt;/td&gt;
+          &lt;td&gt;打开所有折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zR&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;打开所有折叠及其嵌套的折叠&lt;/td&gt;
+          &lt;td&gt;zR&lt;/td&gt;
+          &lt;td&gt;打开所有折叠及其嵌套的折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zd&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;删除当前折叠&lt;/td&gt;
+          &lt;td&gt;zd&lt;/td&gt;
+          &lt;td&gt;删除当前折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zE&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;删除所有折叠&lt;/td&gt;
+          &lt;td&gt;zE&lt;/td&gt;
+          &lt;td&gt;删除所有折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zj&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;移动至下一个折叠&lt;/td&gt;
+          &lt;td&gt;zj&lt;/td&gt;
+          &lt;td&gt;移动至下一个折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zk&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;移动至上一个折叠&lt;/td&gt;
+          &lt;td&gt;zk&lt;/td&gt;
+          &lt;td&gt;移动至上一个折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zn&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;禁用折叠&lt;/td&gt;
+          &lt;td&gt;zn&lt;/td&gt;
+          &lt;td&gt;禁用折叠&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;zN&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;启用折叠&lt;/td&gt;
+          &lt;td&gt;zN&lt;/td&gt;
+          &lt;td&gt;启用折叠&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;</description>
