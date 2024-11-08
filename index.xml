@@ -11,8 +11,43 @@
     </image>
     <generator>Hugo -- 0.138.0</generator>
     <language>zh</language>
-    <lastBuildDate>Wed, 06 Nov 2024 17:31:59 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Nov 2024 14:44:13 +0000</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Online Latex2html Converter By Mathjax</title>
+      <link>https://hcy-asleep.github.io/Online-Latex2html-Converter-By-Mathjax/</link>
+      <pubDate>Fri, 08 Nov 2024 14:44:13 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Online-Latex2html-Converter-By-Mathjax/</guid>
+      <description>&lt;h3&gt;Enter LaTeX formula:&lt;/h3&gt;
+&lt;textarea id=&#34;latex-input&#34; placeholder=&#34;e.g. E = mc^2&#34;&gt;&lt;/textarea&gt;
+&lt;div id=&#34;output&#34;&gt;&lt;/div&gt;
+&lt;h3&gt;Generated HTML Code:&lt;/h3&gt;
+&lt;div id=&#34;html-code&#34;&gt;&lt;/div&gt;
+&lt;button id=&#34;copy-button&#34;&gt;🖱️👉 Click Here To Copy HTML Code 👈&lt;/button&gt;
+&lt;script src=&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&#34;&gt;&lt;/script&gt;
+&lt;script&gt;
+  document.getElementById(&#34;latex-input&#34;).addEventListener(&#34;input&#34;, function () {
+    const latex = document.getElementById(&#34;latex-input&#34;).value;
+    const output = document.getElementById(&#34;output&#34;);
+    const htmlCode = document.getElementById(&#34;html-code&#34;);
+
+    output.innerHTML = &#39;\\(&#39; + latex + &#39;\\)&#39;;
+    MathJax.typesetPromise([output]).then(() =&gt; {
+      htmlCode.textContent = output.innerHTML;
+    }).catch((err) =&gt; console.error(err));
+  });
+
+  document.getElementById(&#34;copy-button&#34;).addEventListener(&#34;click&#34;, function () {
+    const htmlCode = document.getElementById(&#34;html-code&#34;).textContent;
+
+    navigator.clipboard.writeText(htmlCode).then(() =&gt; {
+      alert(&#34;HTML code copied to clipboard!&#34;);
+    }).catch((err) =&gt; {
+      console.error(&#34;Failed to copy text: &#34;, err);
+    });
+  });
+&lt;/script&gt;</description>
+    </item>
     <item>
       <title>性能分析备忘录</title>
       <link>https://hcy-asleep.github.io/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%A4%87%E5%BF%98%E5%BD%95/</link>
