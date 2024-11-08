@@ -353,21 +353,13 @@
       <pubDate>Wed, 09 Oct 2024 16:22:13 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/%E4%BD%BF%E7%94%A8-C-%E7%90%86%E8%A7%A3-23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
       <description>&lt;p&gt;开一个坑，使用C++实现23种设计模式&lt;/p&gt;
-&lt;h2 id=&#34;latex-to-html-converter&#34;&gt;LaTeX to HTML Converter&lt;/h2&gt;
-&lt;p&gt;你可以使用下面的工具来将 LaTeX 公式转换成 HTML 代码：&lt;/p&gt;
-&lt;div style=&#34;border: 2px solid #ddd; padding: 10px; margin-bottom: 20px;&#34;&gt;
-  &lt;h3&gt;输入 LaTeX 公式：&lt;/h3&gt;
-  &lt;textarea id=&#34;latex-input&#34; style=&#34;width: 100%; height: 100px; border: 1px solid #ccc; padding: 10px;&#34;&gt;&lt;/textarea&gt;
-&lt;/div&gt;
-&lt;div style=&#34;border: 2px solid #ddd; padding: 10px; margin-bottom: 20px;&#34;&gt;
-  &lt;h3&gt;渲染的公式：&lt;/h3&gt;
-  &lt;div id=&#34;output&#34; style=&#34;border: 1px solid #ccc; padding: 10px;&#34;&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div style=&#34;border: 2px solid #ddd; padding: 10px; margin-bottom: 20px;&#34;&gt;
-  &lt;h3&gt;生成的 HTML 代码：&lt;/h3&gt;
-  &lt;div id=&#34;html-code&#34; style=&#34;border: 1px solid #ccc; padding: 10px; font-family: monospace;&#34;&gt;&lt;/div&gt;
-  &lt;button id=&#34;copy-button&#34; style=&#34;margin-top: 10px; padding: 8px 16px; background-color: #4CAF50; color: white; border: none; cursor: pointer;&#34;&gt;复制 HTML 代码&lt;/button&gt;
-&lt;/div&gt;
+&lt;h2&gt;LaTeX to HTML Converter&lt;/h2&gt;
+&lt;p&gt;Enter LaTeX formula:&lt;/p&gt;
+&lt;textarea id=&#34;latex-input&#34; placeholder=&#34;e.g. E = mc^2&#34;&gt;&lt;/textarea&gt;
+&lt;div id=&#34;output&#34;&gt;&lt;/div&gt;
+&lt;h3&gt;Generated HTML Code:&lt;/h3&gt;
+&lt;div id=&#34;html-code&#34;&gt;&lt;/div&gt;
+&lt;button id=&#34;copy-button&#34;&gt;Copy HTML Code&lt;/button&gt;
 &lt;script src=&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&#34;&gt;&lt;/script&gt;
 &lt;script&gt;
   document.getElementById(&#34;latex-input&#34;).addEventListener(&#34;input&#34;, function () {
@@ -375,10 +367,8 @@
     const output = document.getElementById(&#34;output&#34;);
     const htmlCode = document.getElementById(&#34;html-code&#34;);
 
-    // 渲染 LaTeX 公式
     output.innerHTML = &#39;\\(&#39; + latex + &#39;\\)&#39;;
     MathJax.typesetPromise([output]).then(() =&gt; {
-      // 获取生成的 HTML
       htmlCode.textContent = output.innerHTML;
     }).catch((err) =&gt; console.error(err));
   });
@@ -387,9 +377,9 @@
     const htmlCode = document.getElementById(&#34;html-code&#34;).textContent;
 
     navigator.clipboard.writeText(htmlCode).then(() =&gt; {
-      alert(&#34;HTML 代码已复制到剪贴板！&#34;);
+      alert(&#34;HTML code copied to clipboard!&#34;);
     }).catch((err) =&gt; {
-      console.error(&#34;复制失败: &#34;, err);
+      console.error(&#34;Failed to copy text: &#34;, err);
     });
   });
 &lt;/script&gt;</description>
