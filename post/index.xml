@@ -18,12 +18,14 @@
       <link>https://hcy-asleep.github.io/Online-Latex2html-Converter-By-Mathjax/</link>
       <pubDate>Fri, 08 Nov 2024 14:44:13 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/Online-Latex2html-Converter-By-Mathjax/</guid>
-      <description>&lt;h3&gt;Enter  LaTeX  Formula 👇&lt;/h3&gt;
+      <description>&lt;h3&gt;Enter LaTeX Formula 👇&lt;/h3&gt;
 &lt;textarea id=&#34;latex-input&#34; placeholder=&#34;e.g. E = mc^2&#34;&gt;&lt;/textarea&gt;
 &lt;div id=&#34;output&#34;&gt;&lt;/div&gt;
-&lt;h3&gt;Generated  HTML  Code 👇&lt;/h3&gt;
+&lt;\br&gt;
+&lt;h3&gt;Generated HTML Code 👇&lt;/h3&gt;
+&lt;\br&gt;
 &lt;div id=&#34;html-code&#34;&gt;&lt;/div&gt;
-&lt;button id=&#34;copy-button&#34;&gt;🖱️👉 Click Here To Copy HTML Code 👈&lt;/button&gt;
+&lt;button id=&#34;copy-button&#34;&gt;🖱️👉 just click here to copy html code 👈&lt;/button&gt;
 &lt;script src=&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&#34;&gt;&lt;/script&gt;
 &lt;script&gt;
   document.getElementById(&#34;latex-input&#34;).addEventListener(&#34;input&#34;, function () {
