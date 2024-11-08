@@ -352,7 +352,13 @@
       <link>https://hcy-asleep.github.io/%E4%BD%BF%E7%94%A8-C-%E7%90%86%E8%A7%A3-23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
       <pubDate>Wed, 09 Oct 2024 16:22:13 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/%E4%BD%BF%E7%94%A8-C-%E7%90%86%E8%A7%A3-23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
-      <description>&lt;p&gt;开一个坑，使用C++实现23种设计模式&lt;/p&gt;</description>
+      <description>&lt;p&gt;开一个坑，使用C++实现23种设计模式&lt;/p&gt;
+&lt;p&gt;[
+\begin{aligned}
+KL(\hat{y} || y) &amp;amp;= \sum_{c=1}^{M}\hat{y}_c \log{\frac{\hat{y}_c}{y_c}} \
+JS(\hat{y} || y) &amp;amp;= \frac{1}{2}(KL(y||\frac{y+\hat{y}}{2}) + KL(\hat{y}||\frac{y+\hat{y}}{2}))
+\end{aligned}
+]&lt;/p&gt;</description>
     </item>
     <item>
       <title>Debian Gnome 修改默认目录</title>
