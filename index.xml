@@ -387,37 +387,7 @@
       <link>https://hcy-asleep.github.io/%E4%BD%BF%E7%94%A8-C-%E7%90%86%E8%A7%A3-23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
       <pubDate>Wed, 09 Oct 2024 16:22:13 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/%E4%BD%BF%E7%94%A8-C-%E7%90%86%E8%A7%A3-23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
-      <description>&lt;p&gt;开一个坑，使用C++实现23种设计模式&lt;/p&gt;
-&lt;h2&gt;LaTeX to HTML Converter&lt;/h2&gt;
-&lt;p&gt;Enter LaTeX formula:&lt;/p&gt;
-&lt;textarea id=&#34;latex-input&#34; placeholder=&#34;e.g. E = mc^2&#34;&gt;&lt;/textarea&gt;
-&lt;div id=&#34;output&#34;&gt;&lt;/div&gt;
-&lt;h3&gt;Generated HTML Code:&lt;/h3&gt;
-&lt;div id=&#34;html-code&#34;&gt;&lt;/div&gt;
-&lt;button id=&#34;copy-button&#34;&gt;Copy HTML Code&lt;/button&gt;
-&lt;script src=&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&#34;&gt;&lt;/script&gt;
-&lt;script&gt;
-  document.getElementById(&#34;latex-input&#34;).addEventListener(&#34;input&#34;, function () {
-    const latex = document.getElementById(&#34;latex-input&#34;).value;
-    const output = document.getElementById(&#34;output&#34;);
-    const htmlCode = document.getElementById(&#34;html-code&#34;);
-
-    output.innerHTML = &#39;\\(&#39; + latex + &#39;\\)&#39;;
-    MathJax.typesetPromise([output]).then(() =&gt; {
-      htmlCode.textContent = output.innerHTML;
-    }).catch((err) =&gt; console.error(err));
-  });
-
-  document.getElementById(&#34;copy-button&#34;).addEventListener(&#34;click&#34;, function () {
-    const htmlCode = document.getElementById(&#34;html-code&#34;).textContent;
-
-    navigator.clipboard.writeText(htmlCode).then(() =&gt; {
-      alert(&#34;HTML code copied to clipboard!&#34;);
-    }).catch((err) =&gt; {
-      console.error(&#34;Failed to copy text: &#34;, err);
-    });
-  });
-&lt;/script&gt;</description>
+      <description>&lt;p&gt;开一个坑，使用C++实现23种设计模式&lt;/p&gt;</description>
     </item>
     <item>
       <title>Debian Gnome 修改默认目录</title>
