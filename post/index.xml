@@ -27,7 +27,7 @@
 &lt;div style=&#34;min-height: 50px; border: 1px solid gray; border-radius: 10px&#34;&gt;
   &lt;div id=&#34;html-code&#34; style=&#34;margin: 10px&#34;&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id=&#34;copy-button&#34; style=&#34;border-radius: 10px; background-color: #00cc66; display: inline-block; margin-top: 10px; margin-bottom: 10px&#34;&gt;🖱️👉 just click here to copy html code 👈&lt;/div&gt;
+&lt;div id=&#34;copy-button&#34; style=&#34;border-radius: 10px; background-color: #00cc66; display: inline-block; margin-top: 10px; margin-bottom: 10px&#34;&gt; 🖱️👉 just click here to copy html code 👈 &lt;/div&gt;
 &lt;script src=&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&#34;&gt;&lt;/script&gt;
 &lt;script&gt;
   document.getElementById(&#34;latex-input&#34;).addEventListener(&#34;input&#34;, function () {
