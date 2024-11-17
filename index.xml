@@ -69,7 +69,7 @@
 &lt;li&gt;由于某些项目是有部分使用 fortran 来实现的，所以如果没有安装 gfortran 的时候可能会导致其编译不了，解决方法有二
 &lt;ol&gt;
 &lt;li&gt;安装 gfortran&lt;/li&gt;
-&lt;li&gt;让 FC=echo ，相当于直接告诉它不要编译这部分了，浪费时间的&lt;/li&gt;
+&lt;li&gt;让 &lt;code&gt;FC=echo&lt;/code&gt; ，相当于直接告诉它不要编译这部分了，浪费时间的&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -85,8 +85,8 @@
 &lt;/li&gt;
 &lt;li&gt;看开头
 &lt;ul&gt;
-&lt;li&gt;CINT 表示使用 C/C++ 编写的 int benchmark&lt;/li&gt;
-&lt;li&gt;CFP 表示使用 C/C++ 编写的 float benchmark&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CINT&lt;/code&gt; 表示使用 C/C++ 编写的 &lt;code&gt;int benchmark&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CFP&lt;/code&gt; 表示使用 C/C++ 编写的 &lt;code&gt;float benchmark&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;看中间
