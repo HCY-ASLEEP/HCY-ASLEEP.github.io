@@ -11,8 +11,107 @@
     </image>
     <generator>Hugo -- 0.138.0</generator>
     <language>zh</language>
-    <lastBuildDate>Fri, 08 Nov 2024 14:44:13 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 17 Nov 2024 21:34:26 +0000</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SPEC CPU2006安装使用避坑</title>
+      <link>https://hcy-asleep.github.io/SPEC-CPU2006%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E9%81%BF%E5%9D%91/</link>
+      <pubDate>Sun, 17 Nov 2024 21:34:26 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/SPEC-CPU2006%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E9%81%BF%E5%9D%91/</guid>
+      <description>&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;网上找到的版本应该是这个&lt;code&gt;speccpu2006-v1.0.1-newest.tar&lt;/code&gt;，在想要安装的目录下执行&lt;code&gt;tar -xvf speccpu2006-v1.0.1-newest.tar&lt;/code&gt;就可以解压安装&lt;/li&gt;
+&lt;li&gt;进入到目录里面&lt;code&gt;cd speccpu2006-v1.0.1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;安装 spec ，&lt;code&gt;./install.sh&lt;/code&gt;，如果安装出现错误，极有可能是有一些文件没有可执行文件，递归赋予可执行文件就行&lt;code&gt;chmod -R a+x .&lt;/code&gt;，不会有问题的&lt;/li&gt;
+&lt;li&gt;安装完成之后执行&lt;code&gt;./shrc&lt;/code&gt;激活spec环境（以后每次重新打开一个 shell 会话的时候都需要激活一下）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;spec-基本概念&#34;&gt;SPEC 基本概念&lt;/h2&gt;
+&lt;h3 id=&#34;构成&#34;&gt;构成&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;SPEC有两个部分组成，一个是数据，一个是代码（代码以项目的方式组织），运行需要指定数据以及项目&lt;/li&gt;
+&lt;li&gt;数据有三个规格
+&lt;ol&gt;
+&lt;li&gt;test（小型）&lt;/li&gt;
+&lt;li&gt;train（中型）&lt;/li&gt;
+&lt;li&gt;ref（大型）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;代码有以下选项
+&lt;ol&gt;
+&lt;li&gt;int（整型运算性能）&lt;/li&gt;
+&lt;li&gt;float，也叫 fp（浮点运算性能）&lt;/li&gt;
+&lt;li&gt;all_c（全部 c 项目）&lt;/li&gt;
+&lt;li&gt;all_cpp（全部 cpp 项目）&lt;/li&gt;
+&lt;li&gt;all（全部项目）&lt;/li&gt;
+&lt;li&gt;特定项目，比如 &lt;code&gt;453.povray&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;编译标准&#34;&gt;编译标准&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;C 语言要使用 &lt;code&gt;-std=gnu89&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;CPP 要使用 &lt;code&gt;-std=c++98&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果要启用 address sanitizer，要注意防止 sanitizer 检测到错误的时候 abort 程序而导致 benchmark 提前终止，需要使用以下编译选项
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-fsanitize&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;address -fsanitize-recover&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;address
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;并且要注入环境变量&lt;code&gt;ASAN_OPTIONS=halt_on_error=0:detect_leaks=0&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;运行模式&#34;&gt;运行模式&lt;/h3&gt;
+&lt;p&gt;spec 有两种运行模式，一个是 base ，基本模式，一般使用这个，一个是 peak ，性能模式，测试峰值性能极限&lt;/p&gt;
+&lt;h3 id=&#34;fortran-错误&#34;&gt;Fortran 错误&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;由于某些项目是有部分使用 fortran 来实现的，所以如果没有安装 gfortran 的时候可能会导致其编译不了，解决方法有二
+&lt;ol&gt;
+&lt;li&gt;安装 gfortran&lt;/li&gt;
+&lt;li&gt;让 FC=echo ，相当于直接告诉它不要编译这部分了，浪费时间的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;日志位置&#34;&gt;日志位置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;运行完成之后在安装底层目录的 result 文件夹下可以看到运行日志以及结果
+&lt;ol&gt;
+&lt;li&gt;看结尾
+&lt;ul&gt;
+&lt;li&gt;以 log 结尾的文件是一个完整运行日志，包括编译输出，运行输出，以及结果归纳&lt;/li&gt;
+&lt;li&gt;以其他文件类型后缀结尾的都是测试结果归纳，只不过文件格式不一样，内容一样的，一般看txt就行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;看开头
+&lt;ul&gt;
+&lt;li&gt;CINT 表示使用 C/C++ 编写的 int benchmark&lt;/li&gt;
+&lt;li&gt;CFP 表示使用 C/C++ 编写的 float benchmark&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;看中间
+&lt;ul&gt;
+&lt;li&gt;中间是一个编号，遵循以时间为递增的规律&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;另外在每个项目的文件下也会有单独的编译日志以及运行日志，例如
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls ./benchspec/CPU2006/400.perlbench/run/build_base_1.0000/&lt;/code&gt;这个目录下可以看到编译日志
+&lt;ul&gt;
+&lt;li&gt;如果这个项目编译出错了，可以在这个目录下找到&lt;code&gt;make.err&lt;/code&gt;日志&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ls ./benchspec/CPU2006/400.perlbench/run/run_base_test_1.0000/&lt;/code&gt;这个目录下可以看到运行日志&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;看日志&#34;&gt;看日志&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;有时候 spec 自带的结果汇总会不完整，因为有些程序有可能被 asan 终止之后在拉起就不被计分了，所有有时候得去日志里面翻找成功运行项目案例的运行时间，在上面提到的那个完整日志里面全局搜索关键字 &lt;code&gt;success&lt;/code&gt; 就可以了&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Online LaTex2HTML Converter By Mathjax</title>
       <link>https://hcy-asleep.github.io/Online-LaTex2HTML-Converter-By-Mathjax/</link>
