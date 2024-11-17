@@ -110,7 +110,7 @@
 &lt;h3 id=&#34;看日志&#34;&gt;看日志&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;有时候 spec 自带的结果汇总会不完整，因为有些程序有可能被 asan 终止之后在拉起就不被计分了，所有有时候得去日志里面翻找成功运行项目案例的运行时间，在上面提到的那个完整日志里面全局搜索关键字 &lt;code&gt;success&lt;/code&gt; 就可以了&lt;/p&gt;</description>
+&lt;p&gt;有时候 spec 自带的结果汇总会不完整，因为有些程序有可能被 asan 终止之后在拉起就不被计分了，所有有时候得去日志里面翻找成功运行项目案例的运行时间，在上面提到的那个完整日志里面全局搜索关键字 &lt;code&gt;success&lt;/code&gt; 就可以了（忽略大小写）&lt;/p&gt;</description>
     </item>
     <item>
       <title>Online LaTex2HTML Converter By Mathjax</title>
