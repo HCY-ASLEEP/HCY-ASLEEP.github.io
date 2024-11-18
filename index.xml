@@ -31,18 +31,18 @@
 &lt;li&gt;SPEC有两个部分组成，一个是数据，一个是代码（代码以项目的方式组织），运行需要指定数据以及项目&lt;/li&gt;
 &lt;li&gt;数据有三个规格
 &lt;ol&gt;
-&lt;li&gt;test（小型）&lt;/li&gt;
-&lt;li&gt;train（中型）&lt;/li&gt;
-&lt;li&gt;ref（大型）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;test&lt;/code&gt;（小型）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;train&lt;/code&gt;（中型）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ref&lt;/code&gt;（大型）&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;代码有以下选项
 &lt;ol&gt;
-&lt;li&gt;int（整型运算性能）&lt;/li&gt;
-&lt;li&gt;float，也叫 fp（浮点运算性能）&lt;/li&gt;
-&lt;li&gt;all_c（全部 c 项目）&lt;/li&gt;
-&lt;li&gt;all_cpp（全部 cpp 项目）&lt;/li&gt;
-&lt;li&gt;all（全部项目）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;int&lt;/code&gt;（整型运算性能）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;float&lt;/code&gt;，也叫 fp（浮点运算性能）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;all_c&lt;/code&gt;（全部 c 项目）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;all_cpp&lt;/code&gt;（全部 cpp 项目）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;all&lt;/code&gt;（全部项目）&lt;/li&gt;
 &lt;li&gt;特定项目，比如 &lt;code&gt;453.povray&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
