@@ -18,14 +18,13 @@
       <link>https://hcy-asleep.github.io/SPEC-CPU2006%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E9%81%BF%E5%9D%91/</link>
       <pubDate>Sun, 17 Nov 2024 21:34:26 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/SPEC-CPU2006%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E9%81%BF%E5%9D%91/</guid>
-      <description>&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+      <description>&lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;网上找到的版本应该是这个&lt;code&gt;speccpu2006-v1.0.1-newest.tar&lt;/code&gt;，在想要安装的目录下执行&lt;code&gt;tar -xvf speccpu2006-v1.0.1-newest.tar&lt;/code&gt;就可以解压安装&lt;/li&gt;
 &lt;li&gt;进入到目录里面&lt;code&gt;cd speccpu2006-v1.0.1&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;安装 spec ，&lt;code&gt;./install.sh&lt;/code&gt;，如果安装出现错误，极有可能是有一些文件没有可执行文件，递归赋予可执行文件就行&lt;code&gt;chmod -R a+x .&lt;/code&gt;，不会有问题的&lt;/li&gt;
 &lt;li&gt;安装完成之后执行&lt;code&gt;./shrc&lt;/code&gt;激活spec环境（以后每次重新打开一个 shell 会话的时候都需要激活一下）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;spec-基本概念&#34;&gt;SPEC 基本概念&lt;/h2&gt;
 &lt;h3 id=&#34;构成&#34;&gt;构成&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;SPEC有两个部分组成，一个是数据，一个是代码（代码以项目的方式组织），运行需要指定数据以及项目&lt;/li&gt;
