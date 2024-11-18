@@ -63,7 +63,7 @@
 &lt;/div&gt;并且要注入环境变量&lt;code&gt;ASAN_OPTIONS=halt_on_error=0:detect_leaks=0&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;运行模式&#34;&gt;运行模式&lt;/h3&gt;
-&lt;p&gt;spec 有两种运行模式，一个是 base ，基本模式，一般使用这个，一个是 peak ，性能模式，测试峰值性能极限&lt;/p&gt;
+&lt;p&gt;spec 有两种运行模式，一个是 &lt;code&gt;base&lt;/code&gt; ，基本模式，一般使用这个，一个是 &lt;code&gt;peak&lt;/code&gt; ，性能模式，测试峰值性能极限&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;关于这两个关键字的解释，要看下文如何&lt;code&gt;看结果报告&lt;/code&gt;那一章节&lt;/li&gt;
 &lt;/ul&gt;
