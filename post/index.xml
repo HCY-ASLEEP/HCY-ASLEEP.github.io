@@ -1472,8 +1472,8 @@ Show other (i.e. untracked) files in the output&lt;/p&gt;</description>
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
-          &lt;th&gt;&lt;/th&gt;
-          &lt;th&gt;&lt;/th&gt;
+          &lt;th&gt;Keymap in Normal Mode&lt;/th&gt;
+          &lt;th&gt;Describe&lt;/th&gt;
       &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
