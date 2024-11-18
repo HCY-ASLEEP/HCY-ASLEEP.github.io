@@ -61,58 +61,10 @@
 &lt;/div&gt;
 &lt;/div&gt;并且要注入环境变量&lt;code&gt;ASAN_OPTIONS=halt_on_error=0:detect_leaks=0&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;配制&#34;&gt;配制&lt;/h3&gt;
+&lt;p&gt;运行 spec 需要指定配制，在配制文件里面要声明 &lt;code&gt;reportable = 1&lt;/code&gt; 才可以有结果输出&lt;/p&gt;
 &lt;h3 id=&#34;运行模式&#34;&gt;运行模式&lt;/h3&gt;
-&lt;p&gt;spec 有两种运行模式，一个是 &lt;code&gt;base&lt;/code&gt; ，基本模式，一般使用这个，一个是 &lt;code&gt;peak&lt;/code&gt; ，性能模式，测试峰值性能极限&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;关于这两个关键字的解释，要看下文如何&lt;code&gt;看结果报告&lt;/code&gt;那一章节&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;fortran-错误&#34;&gt;Fortran 错误&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;由于某些项目是有部分使用 fortran 来实现的，所以如果没有安装 gfortran 的时候可能会导致其编译不了，解决方法有二
-&lt;ol&gt;
-&lt;li&gt;安装 gfortran&lt;/li&gt;
-&lt;li&gt;让 &lt;code&gt;FC=echo&lt;/code&gt; ，相当于直接告诉它不要编译这部分了，浪费时间的&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;日志位置&#34;&gt;日志位置&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;运行完成之后在安装底层目录的 result 文件夹下可以看到运行日志以及结果
-&lt;ol&gt;
-&lt;li&gt;看结尾
-&lt;ul&gt;
-&lt;li&gt;以 log 结尾的文件是一个完整运行日志，包括编译输出，运行输出，以及结果归纳&lt;/li&gt;
-&lt;li&gt;以其他文件类型后缀结尾的都是测试结果归纳，只不过文件格式不一样，内容一样的，一般看txt就行&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;看开头
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;CINT&lt;/code&gt; 表示使用 C/C++ 编写的 &lt;code&gt;int benchmark&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;CFP&lt;/code&gt; 表示使用 C/C++ 编写的 &lt;code&gt;float benchmark&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;看中间
-&lt;ul&gt;
-&lt;li&gt;中间是一个编号，遵循以时间为递增的规律&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;另外在每个项目的文件下也会有单独的编译日志以及运行日志，例如
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;ls ./benchspec/CPU2006/400.perlbench/run/build_base_1.0000/&lt;/code&gt;这个目录下可以看到编译日志
-&lt;ul&gt;
-&lt;li&gt;如果这个项目编译出错了，可以在这个目录下找到&lt;code&gt;make.err&lt;/code&gt;日志&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ls ./benchspec/CPU2006/400.perlbench/run/run_base_test_1.0000/&lt;/code&gt;这个目录下可以看到运行日志&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;看日志&#34;&gt;看日志&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;有时候 spec 自带的结果汇总会不完整，因为有些程序有可能被 asan 终止之后在拉起就不被计分了，所有有时候得去日志里面翻找成功运行项目案例的运行时间，在上面提到的那个完整日志里面全局搜索关键字 &lt;code&gt;success&lt;/code&gt; 就可以了（忽略大小写）&lt;/p&gt;</description>
+&lt;p&gt;spec 有两种运行模式，一个是 &lt;code&gt;base&lt;/code&gt; ，基本模式，一般使用这个，一个是 &lt;code&gt;peak&lt;/code&gt; ，性能模式，测试峰值性能极限&lt;/p&gt;</description>
     </item>
     <item>
       <title>Online LaTex2HTML Converter By Mathjax</title>
