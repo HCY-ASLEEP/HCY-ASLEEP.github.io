@@ -9,10 +9,49 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.139.2</generator>
     <language>zh</language>
-    <lastBuildDate>Sun, 17 Nov 2024 21:34:26 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Nov 2024 19:27:02 +0000</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux磁盘占用分析</title>
+      <link>https://hcy-asleep.github.io/Linux%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 25 Nov 2024 19:27:02 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/Linux%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;p&gt;前几天服务器又宕机了，仔细排查原来是磁盘的占用满了，在这里记录一下使用到的命令以及相关小知识
+在 linux shell 里面查看磁盘占用信息主要有两个命令，一个是 ｀du｀ ，另外一个是 ｀df｀&lt;/p&gt;
+&lt;h3 id=&#34;du-和-df-的区别&#34;&gt;&lt;code&gt;du&lt;/code&gt; 和 &lt;code&gt;df&lt;/code&gt; 的区别&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;du : disk usage&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;主要用于递归计算指定文件夹的大小&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;它通过搜索文件来计算每个文件的大小然后累加，只能看到当前存在的，没有被删除的文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用 ｀du - sh｀ 可以显示当前目录的总磁盘使用量，并且以易读的格式（如 K、M、G）显示&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-s&lt;/code&gt; 或 &lt;code&gt;--summarize&lt;/code&gt;：只显示总计的磁盘使用量，而不是列出每个子目录的详细使用量，也就是说，它会显示当前目录（或指定目录）的总大小，而不是列出每个子目录的大小&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-h&lt;/code&gt; 或 &lt;code&gt;--human-readable&lt;/code&gt;：以更易读的格式显示磁盘使用量，例如以 K（千字节）、M（兆字节）、G（吉字节）等单位显示，而不是以字节为单位&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h2 id=&#34;而du--h可以查看当前目录下所有文件和子目录的大小&#34;&gt;而du -h可以查看当前目录下所有文件和子目录的大小&lt;/h2&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;df : disk free&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;df命令则是通过文件系统来快速获取空间大小的信息（如硬盘、分区、挂载点等），用于检查整个文件系统或分区的大小，而不可以做到像 ｀du｀ 那样子针对某一个目录的大小进行分析&lt;/li&gt;
+&lt;li&gt;当删除一个文件时，该文件并不会立即在文件系统中消失，而是暂时消失，直到所有程序都不再使用它时，才会根据操作系统的规则释放掉。df命令记录的是通过文件系统获取到的文件大小，包括已经删除但尚未释放的文件，因此在某些情况下比du命令显示的空间要大。当文件系统也确定删除了该文件后，du和df显示的空间大小会一致。使用df -h 可以以易读的格式显示磁盘空间和使用情况。使用示例:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     <item>
       <title>SPEC CPU2006安装使用避坑</title>
       <link>https://hcy-asleep.github.io/SPEC-CPU2006%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E9%81%BF%E5%9D%91/</link>
