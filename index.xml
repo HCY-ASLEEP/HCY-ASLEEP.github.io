@@ -11,8 +11,17 @@
     </image>
     <generator>Hugo -- 0.139.2</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 25 Nov 2024 19:27:02 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 Nov 2024 00:20:22 +0000</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TODO</title>
+      <link>https://hcy-asleep.github.io/todo/</link>
+      <pubDate>Thu, 28 Nov 2024 00:20:22 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/todo/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;想看看银河和北斗七星&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
     <item>
       <title>Linux磁盘占用分析</title>
       <link>https://hcy-asleep.github.io/Linux%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E5%88%86%E6%9E%90/</link>
