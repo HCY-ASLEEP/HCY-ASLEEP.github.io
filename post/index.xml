@@ -19,16 +19,19 @@
       <pubDate>Sat, 30 Nov 2024 19:35:39 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/Linux-%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%BB%A5%E5%8F%8A%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E5%8E%9F%E7%90%86/</guid>
       <description>&lt;p&gt;最近看了&lt;a href=&#34;https://pdos.csail.mit.edu/~sbw/links/gorman_book.pdf&#34;&gt;《Understanding the Linux® Virtual Memory Manager》&lt;/a&gt;里面的第十二章 &lt;strong&gt;SHARED MEMORY VIRTUAL FILESYSTEM&lt;/strong&gt; ，对文件系统以及内存文件管理有了更加深入的了解，下面是看了这一章节之后对其中一些概念的理解以及拓展，要是想了解这一章，建议读原文，配合这篇博客辅助理解&lt;/p&gt;
-&lt;h3 id=&#34;linux-哲学&#34;&gt;Linux 哲学&lt;/h3&gt;
+&lt;h2 id=&#34;linux-哲学&#34;&gt;Linux 哲学&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;在 Linux 里面，一切皆文件，所有的东西都可以看作一个文件，而凡是文件，都应该支持&lt;code&gt;POSIX&lt;/code&gt;文件操作（比如 &lt;code&gt;read()&lt;/code&gt; ，&lt;code&gt;write()&lt;/code&gt; ，&lt;code&gt;open()&lt;/code&gt;）&lt;/li&gt;
 &lt;li&gt;每一块内存对象，都可以被看作一个文件，一旦赋予这块内存对象相对应的文件描述，就可以使用像使用普通文件那样子操作内存对象&lt;/li&gt;
 &lt;li&gt;而这也正是 &lt;code&gt;VFS&lt;/code&gt;（虚拟文件系统 &lt;code&gt;virtual file system&lt;/code&gt; ，包括内存文件系统以及共享内存管理系统）的设计理念以及实现方向&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;vmavirtual-memory-area&#34;&gt;VMA（virtual memory area）&lt;/h3&gt;
+&lt;h2 id=&#34;vmavirtual-memory-area&#34;&gt;VMA（virtual memory area）&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Linux 内核用&lt;code&gt;vm_area_struct&lt;/code&gt;结构体描述某一段连续的虚拟内存区域VMA（virtual memory area），每个虚拟内存区域 &lt;code&gt;VMA&lt;/code&gt; 都有自己的&lt;code&gt;vm_area_struct&lt;/code&gt; 结构体&lt;/li&gt;
-&lt;li&gt;内存描述符 &lt;code&gt;mm_struct&lt;/code&gt; 指向进程的整个地址空间，&lt;code&gt;vm_area_struct&lt;/code&gt; 只是指向了虚拟空间的一段
+&lt;li&gt;
+&lt;p&gt;Linux 内核用&lt;code&gt;vm_area_struct&lt;/code&gt;结构体描述某一段连续的虚拟内存区域VMA（virtual memory area），每个虚拟内存区域 &lt;code&gt;VMA&lt;/code&gt; 都有自己的&lt;code&gt;vm_area_struct&lt;/code&gt; 结构体&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;内存描述符 &lt;code&gt;mm_struct&lt;/code&gt; 指向进程的整个地址空间，&lt;code&gt;vm_area_struct&lt;/code&gt; 只是指向了虚拟空间的一段，这块虚拟内存区域VMA的地址范围为 &lt;code&gt;[vm_start, vm_end)&lt;/code&gt; ，左开右闭
 
     
     &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-009f0&#34; hidden&gt;
@@ -38,9 +41,13 @@
              /&gt;
     &lt;/label&gt;
 
+&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;vm_area_struct&lt;/code&gt; 是由双向链表链接起来的，它们是按照虚拟地址降序排序的，每个这样的结构都对应描述一个地址空间范围&lt;/li&gt;
-&lt;li&gt;为了快速根据地址找到对应的 &lt;code&gt;VMA&lt;/code&gt;，内核对其建立了红黑树索引，红黑树的每个叶子结点就是一个VMA区域，引入红黑树的好处是可以提高查找VMA的效率（即便VMA的数量翻倍，VMA的查找次数也只增加一次）
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;vm_area_struct&lt;/code&gt; 是由双向链表链接起来的，它们是按照虚拟地址降序排序的，每个这样的结构都对应描述一个地址空间范围&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为了快速根据地址找到对应的 &lt;code&gt;VMA&lt;/code&gt;，内核对其建立了红黑树索引，红黑树的每个叶子结点就是一个VMA区域，引入红黑树的好处是可以提高查找VMA的效率（即便VMA的数量翻倍，VMA的查找次数也只增加一次）
 
     
     &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-b4749&#34; hidden&gt;
@@ -50,9 +57,13 @@
              /&gt;
     &lt;/label&gt;
 
+&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;之所以这样分隔是因为每个虚拟区间可能来源不同，有的可能来自可执行映像，有的可能来自共享库，而有的可能是动态内存分配的内存区，所以对于每个由 &lt;code&gt;vm_area_struct&lt;/code&gt; 结构所描述的区间的处理操作和它前后范围的处理操作不同，因此 linux 把虚拟内存分割管理，并利用了虚拟内存处理例程 &lt;code&gt;vm_ops&lt;/code&gt; 来抽象对不同来源虚拟内存的处理方法&lt;/li&gt;
-&lt;li&gt;不同的虚拟区间其处理操作可能不同，&lt;code&gt;linux&lt;/code&gt; 在这里利用了面向对象的思想，即把一个虚拟区间看成是一个对象，用 &lt;code&gt;vm_area_struct&lt;/code&gt; 描述这个对象的属性，其中的 &lt;code&gt;vm_operation&lt;/code&gt; 结构描述了在这个对象上的操作
+&lt;li&gt;
+&lt;p&gt;之所以这样分隔是因为每个虚拟区间可能来源不同，有的可能来自可执行映像，有的可能来自共享库，而有的可能是动态内存分配的内存区，所以对于每个由 &lt;code&gt;vm_area_struct&lt;/code&gt; 结构所描述的区间的处理操作和它前后范围的处理操作不同，因此 linux 把虚拟内存分割管理，并利用了虚拟内存处理例程 &lt;code&gt;vm_ops&lt;/code&gt; 来抽象对不同来源虚拟内存的处理方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不同的虚拟区间其处理操作可能不同，&lt;code&gt;linux&lt;/code&gt; 在这里利用了面向对象的思想，即把一个虚拟区间看成是一个对象，用 &lt;code&gt;vm_area_struct&lt;/code&gt; 描述这个对象的属性，其中的 &lt;code&gt;vm_operation&lt;/code&gt; 结构描述了在这个对象上的操作
 
     
     &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-53ba1&#34; hidden&gt;
@@ -62,14 +73,166 @@
              /&gt;
     &lt;/label&gt;
 
+&lt;/p&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚拟内存空间管理概括图
+
+    
+    &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-a1d4d&#34; hidden&gt;
+    &lt;label for=&#34;zoomCheck-a1d4d&#34;&gt;
+        &lt;img class=&#34;zoomCheck&#34; loading=&#34;lazy&#34; decoding=&#34;async&#34; 
+            src=&#34;https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/v2-410e447557fe925077f0580463875666_r.jpg&#34; alt=&#34;&#34; 
+             /&gt;
+    &lt;/label&gt;
+
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;# https:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//elixir.bootlin.com/linux/v2.6.0/source/include/linux/mm.h#L51
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;vm_area_struct&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;mm_struct&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_mm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* The address space we belong to. */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;		&lt;span class=&#34;cm&#34;&gt;/* Our start address within vm_mm. */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_end&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;		&lt;span class=&#34;cm&#34;&gt;/* The first byte after our end address
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;					   within vm_mm. */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;cm&#34;&gt;/* linked list of VM areas per task, sorted by address */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;vm_area_struct&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vm_next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;pgprot_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_page_prot&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;		&lt;span class=&#34;cm&#34;&gt;/* Access permissions of this VMA. */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_flags&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;		&lt;span class=&#34;cm&#34;&gt;/* Flags, listed below. */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;rb_node&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_rb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;cm&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;	 * For areas with an address space and backing store,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;	 * one of the address_space-&amp;gt;i_mmap{,shared} lists,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;	 * for shm areas, the list of attaches, otherwise unused.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;	 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;list_head&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;shared&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;cm&#34;&gt;/* Function pointers to deal with this struct. */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;vm_operations_struct&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_ops&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;cm&#34;&gt;/* Information about our backing store: */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_pgoff&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;		&lt;span class=&#34;cm&#34;&gt;/* Offset (within vm_file) in PAGE_SIZE
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;					   units, *not* PAGE_CACHE_SIZE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;file&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;		&lt;span class=&#34;cm&#34;&gt;/* File we map to (can be NULL). */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_private_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;		&lt;span class=&#34;cm&#34;&gt;/* was vm_pte (shared mem) */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;文件系统文件类型page-的划分&#34;&gt;文件系统、文件类型、&lt;code&gt;page&lt;/code&gt; 的划分&lt;/h3&gt;
+&lt;h2 id=&#34;struct-address_space&#34;&gt;&lt;code&gt;struct address_space&lt;/code&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;看 &lt;code&gt;linux&lt;/code&gt; 内核很容易被 &lt;code&gt;struct address_space&lt;/code&gt; 这个结构迷惑，它是代表某个地址空间吗？实际上不是的，它是用于管理文件 &lt;code&gt;struct inode&lt;/code&gt; 映射到内存的页面 &lt;code&gt;struct page&lt;/code&gt; 的，其实就是每个 &lt;code&gt;file&lt;/code&gt; 都有这么一个结构，将文件系统中这个 &lt;code&gt;file&lt;/code&gt; 对应的数据与这个 &lt;code&gt;file&lt;/code&gt; 对应的内存绑定到一起&lt;/li&gt;
+&lt;li&gt;与之对应，&lt;code&gt;address_space_operations&lt;/code&gt; 就是用来操作该文件映射到内存的页面，比如把内存中的修改写回文件、从文件中读入数据到页面缓冲等&lt;/li&gt;
+&lt;li&gt;一个具体的文件在打开后，内核会在内存中为之建立一个 &lt;code&gt;struct inode&lt;/code&gt; 结构（该 &lt;code&gt;inode&lt;/code&gt; 结构也会在对应的 &lt;code&gt;file&lt;/code&gt; 结构体中引用），其中的 &lt;code&gt;i_mapping&lt;/code&gt; 域指向一个 &lt;code&gt;address_space&lt;/code&gt; 结构&lt;/li&gt;
+&lt;li&gt;一个文件就对应一个 &lt;code&gt;address_space&lt;/code&gt; 结构，一个 &lt;code&gt;address_space&lt;/code&gt; 与一个偏移量能够确定一个 &lt;code&gt;page cache&lt;/code&gt; 或 &lt;code&gt;swap cache&lt;/code&gt; 中的一个页面，当要寻址某个数据时，很容易根据给定的文件及数据在文件内的偏移量而找到相应的页面&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;struct file&lt;/code&gt; 和 &lt;code&gt;struct inode&lt;/code&gt; 结构体中都有一个 &lt;code&gt;struct address_space&lt;/code&gt; 指针，实际上，&lt;code&gt;file -&amp;gt; f_mapping&lt;/code&gt; 是从对应 &lt;code&gt;inode -&amp;gt; i_mapping&lt;/code&gt; 而来, &lt;code&gt;inode -&amp;gt; i_mapping -&amp;gt; a_ops&lt;/code&gt; 是由对应的文件系统类型在生成这个 &lt;code&gt;inode&lt;/code&gt; 时赋予的
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;# https:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//elixir.bootlin.com/linux/v2.6.0/source/include/linux/fs.h#L319
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;address_space&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;inode&lt;/span&gt;		&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;host&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;		&lt;span class=&#34;cm&#34;&gt;/* owner: inode, block_device */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;radix_tree_root&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;page_tree&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* radix tree of all pages */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;spinlock_t&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;page_lock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* and spinlock protecting it */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;list_head&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;clean_pages&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* list of clean pages */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;list_head&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;dirty_pages&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* list of dirty pages */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;list_head&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;locked_pages&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* list of locked pages */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;list_head&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;io_pages&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* being prepared for I/O */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;nrpages&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* number of total pages */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;address_space_operations&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a_ops&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* methods */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;list_head&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;i_mmap&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;		&lt;span class=&#34;cm&#34;&gt;/* list of private mappings */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;list_head&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;i_mmap_shared&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* list of shared mappings */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;semaphore&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;i_shared_sem&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* protect both above lists */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;atomic_t&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;truncate_count&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* Cover race condition with truncate */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;dirtied_when&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* jiffies of first page dirtying */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;flags&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;		&lt;span class=&#34;cm&#34;&gt;/* error bits/gfp mask */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;backing_dev_info&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;backing_dev_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;cm&#34;&gt;/* device readahead, etc */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;spinlock_t&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;private_lock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* for use by the address_space */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;list_head&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;private_list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* ditto */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;address_space&lt;/span&gt;	&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assoc_mapping&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;	&lt;span class=&#34;cm&#34;&gt;/* ditto */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;文件系统文件类型page-的划分&#34;&gt;文件系统、文件类型、&lt;code&gt;page&lt;/code&gt; 的划分&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;为了方便理解，在此将文件系统划分为内存文件系统（虚拟文件系统）与硬盘文件系统（物理文件系统），在书的这一章节里面，也将广义上的文件分为 &lt;code&gt;virtual file&lt;/code&gt; 和 &lt;code&gt;physics file&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;在书的这一章节里面，将内存页面 &lt;code&gt;page&lt;/code&gt; 划分为 &lt;code&gt;anonymous pages&lt;/code&gt; （没有物理文件支持的内存页面）与 &lt;code&gt;pages backed by a file&lt;/code&gt;（由物理文件映射到内存的某些 &lt;code&gt;pages&lt;/code&gt;）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;硬盘文件系统&#34;&gt;硬盘文件系统&lt;/h3&gt;</description>
+&lt;h2 id=&#34;page-cache-与-swap-cache&#34;&gt;&lt;code&gt;page cache&lt;/code&gt; 与 &lt;code&gt;swap cache&lt;/code&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;page cache&lt;/code&gt; 是与文件映射对应的，而 &lt;code&gt;swap cache&lt;/code&gt; 是与匿名页对应的&lt;/li&gt;
+&lt;li&gt;如果一个内存页面不是文件映射，则在换入换出的时候加入到 &lt;code&gt;swap cache&lt;/code&gt; ，如果是文件映射，则不需要交换缓冲&lt;/li&gt;
+&lt;li&gt;这两个的相同点就是它们都是 &lt;code&gt;address_space&lt;/code&gt; ，都有相对应的文件操作：一个被访问的文件的物理页面都驻留在 &lt;code&gt;page cache&lt;/code&gt; 或 &lt;code&gt;swap cache&lt;/code&gt; 中，一个页面的所有信息由 &lt;code&gt;struct page&lt;/code&gt; 来描述&lt;/li&gt;
+&lt;li&gt;一般情况下用户进程调用 &lt;code&gt;mmap()&lt;/code&gt; 时，只是在进程空间内新增了一块相应大小的缓冲区，并设置了相应的访问标识，但并没有建立进程空间到物理页面的映射&lt;/li&gt;
+&lt;li&gt;因此，第一次访问该空间时，会引发一个缺页异常。对于共享内存映射情况，缺页异常处理程序首先在 &lt;code&gt;swap cache&lt;/code&gt; 中寻找目标页（符合 &lt;code&gt;address_space&lt;/code&gt; 以及偏移量的物理页），如果找到，则直接返回地址；如果没有找到，则判断该页是否在交换区 (&lt;code&gt;swap area&lt;/code&gt;)，如果在，则执行一个换入操作；如果上述两种情况都不满足，处理程序将分配新的物理页面，并把它插入到 &lt;code&gt;page cache&lt;/code&gt; 中，程最终将更新进程页表&lt;/li&gt;
+&lt;li&gt;对于映射普通文件情况（非共享映射），缺页异常处理程序首先会在 &lt;code&gt;page cache&lt;/code&gt; 中根据 &lt;code&gt;address_space&lt;/code&gt; 以及数据偏移量寻找相应的页面，如果没有找到，则说明文件数据还没有读入内存，处理程序会从磁盘读入相应的页面，并返回相应地址，同时，进程页表也会更新&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;硬盘文件系统&#34;&gt;硬盘文件系统&lt;/h2&gt;
+&lt;h2 id=&#34;tmpfs-和-shm-共性与区别&#34;&gt;&lt;code&gt;tmpfs&lt;/code&gt; 和 &lt;code&gt;shm&lt;/code&gt; 共性与区别&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;tmpfs&lt;/code&gt; 和 &lt;code&gt;shm&lt;/code&gt; 都是基于内存的文件系统，它们将文件存储在内存中，而不是磁盘上，尽管它们有一些相似之处，但它们的用途、配置方法以及操作上也有一些关键的区别&lt;/p&gt;</description>
     </item>
     <item>
       <title>Linux磁盘占用分析</title>
