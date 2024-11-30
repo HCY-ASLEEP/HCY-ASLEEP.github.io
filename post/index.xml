@@ -31,10 +31,10 @@
 &lt;li&gt;内存描述符 &lt;code&gt;mm_struct&lt;/code&gt; 指向进程的整个地址空间，&lt;code&gt;vm_area_struct&lt;/code&gt; 只是指向了虚拟空间的一段
 
     
-    &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-bb5be&#34; hidden&gt;
-    &lt;label for=&#34;zoomCheck-bb5be&#34;&gt;
+    &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-009f0&#34; hidden&gt;
+    &lt;label for=&#34;zoomCheck-009f0&#34;&gt;
         &lt;img class=&#34;zoomCheck&#34; loading=&#34;lazy&#34; decoding=&#34;async&#34; 
-            src=&#34;https://github.com/HCY-ASLEEP/picture-bed/blob/main/picture-bed/v2-426557bb4eb1e7044bd649483942c2ad_r.jpg&#34; alt=&#34;&#34; 
+            src=&#34;https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/v2-426557bb4eb1e7044bd649483942c2ad_r.jpg&#34; alt=&#34;&#34; 
              /&gt;
     &lt;/label&gt;
 
@@ -43,10 +43,10 @@
 &lt;li&gt;为了快速根据地址找到对应的 &lt;code&gt;VMA&lt;/code&gt;，内核对其建立了红黑树索引，红黑树的每个叶子结点就是一个VMA区域，引入红黑树的好处是可以提高查找VMA的效率（即便VMA的数量翻倍，VMA的查找次数也只增加一次）
 
     
-    &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-010f3&#34; hidden&gt;
-    &lt;label for=&#34;zoomCheck-010f3&#34;&gt;
+    &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-b4749&#34; hidden&gt;
+    &lt;label for=&#34;zoomCheck-b4749&#34;&gt;
         &lt;img class=&#34;zoomCheck&#34; loading=&#34;lazy&#34; decoding=&#34;async&#34; 
-            src=&#34;https://github.com/HCY-ASLEEP/picture-bed/blob/main/picture-bed/v2-82dec5bde95009f934d3978c15412626_1440w.jpg&#34; alt=&#34;&#34; 
+            src=&#34;https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/v2-82dec5bde95009f934d3978c15412626_1440w.jpg&#34; alt=&#34;&#34; 
              /&gt;
     &lt;/label&gt;
 
@@ -55,10 +55,10 @@
 &lt;li&gt;不同的虚拟区间其处理操作可能不同，&lt;code&gt;linux&lt;/code&gt; 在这里利用了面向对象的思想，即把一个虚拟区间看成是一个对象，用 &lt;code&gt;vm_area_struct&lt;/code&gt; 描述这个对象的属性，其中的 &lt;code&gt;vm_operation&lt;/code&gt; 结构描述了在这个对象上的操作
 
     
-    &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-0c971&#34; hidden&gt;
-    &lt;label for=&#34;zoomCheck-0c971&#34;&gt;
+    &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-53ba1&#34; hidden&gt;
+    &lt;label for=&#34;zoomCheck-53ba1&#34;&gt;
         &lt;img class=&#34;zoomCheck&#34; loading=&#34;lazy&#34; decoding=&#34;async&#34; 
-            src=&#34;https://github.com/HCY-ASLEEP/picture-bed/blob/main/picture-bed/v2-ce0aa70282615def188d51d5ee745e14_1440w.jpg&#34; alt=&#34;&#34; 
+            src=&#34;https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/v2-ce0aa70282615def188d51d5ee745e14_1440w.jpg&#34; alt=&#34;&#34; 
              /&gt;
     &lt;/label&gt;
 
