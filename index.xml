@@ -32,16 +32,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;内存描述符 &lt;code&gt;mm_struct&lt;/code&gt; 指向进程的整个地址空间，&lt;code&gt;vm_area_struct&lt;/code&gt; 只是指向了虚拟空间的一段，这块虚拟内存区域VMA的地址范围为 &lt;code&gt;[vm_start, vm_end)&lt;/code&gt; ，左开右闭
-
-    
-    &lt;input type=&#34;checkbox&#34; id=&#34;zoomCheck-009f0&#34; hidden&gt;
-    &lt;label for=&#34;zoomCheck-009f0&#34;&gt;
-        &lt;img class=&#34;zoomCheck&#34; loading=&#34;lazy&#34; decoding=&#34;async&#34; 
-            src=&#34;https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/v2-426557bb4eb1e7044bd649483942c2ad_r.jpg&#34; alt=&#34;&#34; 
-             /&gt;
-    &lt;/label&gt;
-
-&lt;/p&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/v2-426557bb4eb1e7044bd649483942c2ad_r.jpg&#34; width=60%&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;vm_area_struct&lt;/code&gt; 是由双向链表链接起来的，它们是按照虚拟地址降序排序的，每个这样的结构都对应描述一个地址空间范围&lt;/p&gt;
