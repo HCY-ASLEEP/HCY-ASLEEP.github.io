@@ -223,7 +223,7 @@
 &lt;li&gt;因此，第一次访问该空间时，会引发一个缺页异常。对于共享内存映射情况，缺页异常处理程序首先在 &lt;code&gt;swap cache&lt;/code&gt; 中寻找目标页（符合 &lt;code&gt;address_space&lt;/code&gt; 以及偏移量的物理页），如果找到，则直接返回地址；如果没有找到，则判断该页是否在交换区 (&lt;code&gt;swap area&lt;/code&gt;)，如果在，则执行一个换入操作；如果上述两种情况都不满足，处理程序将分配新的物理页面，并把它插入到 &lt;code&gt;page cache&lt;/code&gt; 中，程最终将更新进程页表&lt;/li&gt;
 &lt;li&gt;对于映射普通文件情况（非共享映射），缺页异常处理程序首先会在 &lt;code&gt;page cache&lt;/code&gt; 中根据 &lt;code&gt;address_space&lt;/code&gt; 以及数据偏移量寻找相应的页面，如果没有找到，则说明文件数据还没有读入内存，处理程序会从磁盘读入相应的页面，并返回相应地址，同时，进程页表也会更新&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;硬盘文件系统&#34;&gt;硬盘文件系统&lt;/h2&gt;
+&lt;h2 id=&#34;硬盘物理文件系统&#34;&gt;硬盘（物理）文件系统&lt;/h2&gt;
 &lt;h2 id=&#34;tmpfs-和-shm-共性与区别&#34;&gt;&lt;code&gt;tmpfs&lt;/code&gt; 和 &lt;code&gt;shm&lt;/code&gt; 共性与区别&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;tmpfs&lt;/code&gt; 和 &lt;code&gt;shm&lt;/code&gt; 都是基于内存的文件系统，它们将文件存储在内存中，而不是磁盘上，尽管它们有一些相似之处，但它们的用途、配置方法以及操作上也有一些关键的区别&lt;/p&gt;</description>
     </item>
