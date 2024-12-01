@@ -28,7 +28,7 @@
 &lt;h2 id=&#34;vmavirtual-memory-area&#34;&gt;VMA（virtual memory area）&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Linux 内核用&lt;code&gt;vm_area_struct&lt;/code&gt;结构体描述某一段连续的虚拟内存区域VMA（virtual memory area），每个虚拟内存区域 &lt;code&gt;VMA&lt;/code&gt; 都有自己的&lt;code&gt;vm_area_struct&lt;/code&gt; 结构体&lt;/p&gt;
+&lt;p&gt;Linux 内核用&lt;code&gt;vm_area_struct&lt;/code&gt;结构体描述某一段连续的虚拟内存区域 &lt;code&gt;VMA（virtual memory area）&lt;/code&gt;，每个虚拟内存区域 &lt;code&gt;VMA&lt;/code&gt; 都有自己的&lt;code&gt;vm_area_struct&lt;/code&gt; 结构体&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;内存描述符 &lt;code&gt;mm_struct&lt;/code&gt; 指向进程的整个地址空间，&lt;code&gt;vm_area_struct&lt;/code&gt; 只是指向了虚拟空间的一段，这块虚拟内存区域VMA的地址范围为 &lt;code&gt;[vm_start, vm_end)&lt;/code&gt; ，左开右闭
