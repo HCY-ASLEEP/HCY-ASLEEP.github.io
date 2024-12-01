@@ -217,6 +217,8 @@
 &lt;li&gt;&lt;code&gt;page cache&lt;/code&gt; 是与文件映射对应的，而 &lt;code&gt;swap cache&lt;/code&gt; 是与匿名页对应的&lt;/li&gt;
 &lt;li&gt;如果一个内存页面不是文件映射，则在换入换出的时候加入到 &lt;code&gt;swap cache&lt;/code&gt; ，如果是文件映射，则不需要交换缓冲&lt;/li&gt;
 &lt;li&gt;这两个的相同点就是它们都是 &lt;code&gt;address_space&lt;/code&gt; ，都有相对应的文件操作：一个被访问的文件的物理页面都驻留在 &lt;code&gt;page cache&lt;/code&gt; 或 &lt;code&gt;swap cache&lt;/code&gt; 中，一个页面的所有信息由 &lt;code&gt;struct page&lt;/code&gt; 来描述&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;page cache&lt;/code&gt; 作用：当文件被读取时，操作系统会把文件内容加载到内存的 &lt;code&gt;page cache&lt;/code&gt; 中。如果同一个文件被再次访问，操作系统会直接从 &lt;code&gt;page cache&lt;/code&gt; 中读取，而不是再次从磁盘读取，从而减少磁盘访问次数，提高性能&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;swap cache&lt;/code&gt; 作用：&lt;code&gt;swap cache&lt;/code&gt; 缓存的是已经交换到磁盘的数据，它是为了提高交换操作的效率，优化虚拟内存的交换操作，如果内存中再次需要使用这些页面，操作系统会从 &lt;code&gt;swap cache&lt;/code&gt; 里面寻找，然后再从 &lt;code&gt;swap&lt;/code&gt; 里面查找，同时对于那些刚刚从物理内存里面换出来的 &lt;code&gt;page&lt;/code&gt; 以及从 &lt;code&gt;swap&lt;/code&gt; 空间读取的 &lt;code&gt;page&lt;/code&gt; 也会放在 &lt;code&gt;swap cache&lt;/code&gt; 里面&lt;/li&gt;
 &lt;li&gt;一般情况下用户进程调用 &lt;code&gt;mmap()&lt;/code&gt; 时，只是在进程空间内新增了一块相应大小的缓冲区，并设置了相应的访问标识，但并没有建立进程空间到物理页面的映射&lt;/li&gt;
 &lt;li&gt;因此，第一次访问该空间时，会引发一个缺页异常。对于共享内存映射情况，缺页异常处理程序首先在 &lt;code&gt;swap cache&lt;/code&gt; 中寻找目标页（符合 &lt;code&gt;address_space&lt;/code&gt; 以及偏移量的物理页），如果找到，则直接返回地址；如果没有找到，则判断该页是否在交换区 (&lt;code&gt;swap area&lt;/code&gt;)，如果在，则执行一个换入操作；如果上述两种情况都不满足，处理程序将分配新的物理页面，并把它插入到 &lt;code&gt;page cache&lt;/code&gt; 中，程最终将更新进程页表&lt;/li&gt;
 &lt;li&gt;对于映射普通文件情况（非共享映射），缺页异常处理程序首先会在 &lt;code&gt;page cache&lt;/code&gt; 中根据 &lt;code&gt;address_space&lt;/code&gt; 以及数据偏移量寻找相应的页面，如果没有找到，则说明文件数据还没有读入内存，处理程序会从磁盘读入相应的页面，并返回相应地址，同时，进程页表也会更新&lt;/li&gt;
