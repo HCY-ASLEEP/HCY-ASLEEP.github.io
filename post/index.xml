@@ -18,7 +18,7 @@
       <link>https://hcy-asleep.github.io/Linux-%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%BB%A5%E5%8F%8A%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E5%8E%9F%E7%90%86/</link>
       <pubDate>Sat, 30 Nov 2024 19:35:39 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/Linux-%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%BB%A5%E5%8F%8A%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E5%8E%9F%E7%90%86/</guid>
-      <description>&lt;p&gt;最近看了&lt;a href=&#34;https://pdos.csail.mit.edu/~sbw/links/gorman_book.pdf&#34;&gt;《Understanding the Linux® Virtual Memory Manager》&lt;/a&gt;里面的第十二章 &lt;strong&gt;SHARED MEMORY VIRTUAL FILESYSTEM&lt;/strong&gt; ，对文件系统以及内存文件管理有了更加深入的了解，下面是看了这一章节之后对其中一些概念的理解以及拓展，要是想了解这一章，建议读原文，配合这篇博客辅助理解&lt;/p&gt;
+      <description>&lt;p&gt;最近看了&lt;a href=&#34;https://pdos.csail.mit.edu/~sbw/links/gorman_book.pdf&#34;&gt;《Understanding the Linux® Virtual Memory Manager》&lt;/a&gt;里面的第十二章 &lt;strong&gt;SHARED MEMORY VIRTUAL FILESYSTEM&lt;/strong&gt; ，对文件系统以及内存文件管理有了更加深入的了解，下面是看了这一章节之后对其中一些概念的理解以及拓展，要是想了解这一章，&lt;a href=&#34;https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/gordan-book-linux-vmm12-chap.pdf&#34;&gt;建议读原文&lt;/a&gt;，配合这篇博客辅助理解&lt;/p&gt;
 &lt;h2 id=&#34;linux-哲学&#34;&gt;Linux 哲学&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;在 Linux 里面，一切皆文件，所有的东西都可以看作一个文件，而凡是文件，都应该支持&lt;code&gt;POSIX&lt;/code&gt;文件操作（比如 &lt;code&gt;read()&lt;/code&gt; ，&lt;code&gt;write()&lt;/code&gt; ，&lt;code&gt;open()&lt;/code&gt;）&lt;/li&gt;
