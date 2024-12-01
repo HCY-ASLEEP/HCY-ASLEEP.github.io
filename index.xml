@@ -217,96 +217,38 @@
 &lt;li&gt;&lt;code&gt;page cache&lt;/code&gt; 是与文件映射对应的，而 &lt;code&gt;swap cache&lt;/code&gt; 是与匿名页对应的&lt;/li&gt;
 &lt;li&gt;如果一个内存页面不是文件映射，则在换入换出的时候加入到 &lt;code&gt;swap cache&lt;/code&gt; ，如果是文件映射，则不需要交换缓冲&lt;/li&gt;
 &lt;li&gt;这两个的相同点就是它们都是 &lt;code&gt;address_space&lt;/code&gt; ，都有相对应的文件操作：一个被访问的文件的物理页面都驻留在 &lt;code&gt;page cache&lt;/code&gt; 或 &lt;code&gt;swap cache&lt;/code&gt; 中，一个页面的所有信息由 &lt;code&gt;struct page&lt;/code&gt; 来描述&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;page cache&lt;/code&gt; 作用：当文件被读取时，操作系统会把文件内容加载到内存的 &lt;code&gt;page cache&lt;/code&gt; 中。如果同一个文件被再次访问，操作系统会直接从 &lt;code&gt;page cache&lt;/code&gt; 中读取，而不是再次从磁盘读取，从而减少磁盘访问次数，提高性能&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;swap cache&lt;/code&gt; 作用：&lt;code&gt;swap cache&lt;/code&gt; 缓存的是已经交换到磁盘的数据，它是为了提高交换操作的效率，优化虚拟内存的交换操作，如果内存中再次需要使用这些页面，操作系统会从 &lt;code&gt;swap cache&lt;/code&gt; 里面寻找，然后再从 &lt;code&gt;swap&lt;/code&gt; 里面查找，同时对于那些刚刚从物理内存里面换出来的 &lt;code&gt;page&lt;/code&gt; 以及从 &lt;code&gt;swap&lt;/code&gt; 空间读取的 &lt;code&gt;page&lt;/code&gt; 也会放在 &lt;code&gt;swap cache&lt;/code&gt; 里面&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;page cache&lt;/code&gt; 作用
+&lt;ul&gt;
+&lt;li&gt;当文件被读取时，操作系统会把文件内容加载到内存的 &lt;code&gt;page cache&lt;/code&gt; 中&lt;/li&gt;
+&lt;li&gt;如果同一个文件被再次访问，操作系统会直接从 &lt;code&gt;page cache&lt;/code&gt; 中读取，而不是再次从磁盘读取，从而减少磁盘访问次数，提高性能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;swap cache&lt;/code&gt; 作用
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;swap cache&lt;/code&gt; 缓存的是已经交换到磁盘的数据，它是为了提高交换操作的效率，优化虚拟内存的交换操作&lt;/li&gt;
+&lt;li&gt;如果内存中再次需要使用这些页面，操作系统会从 &lt;code&gt;swap cache&lt;/code&gt; 里面寻找，然后再从 &lt;code&gt;swap&lt;/code&gt; 里面查找&lt;/li&gt;
+&lt;li&gt;同时对于那些刚刚从物理内存里面换出来的 &lt;code&gt;page&lt;/code&gt; 以及从 &lt;code&gt;swap&lt;/code&gt; 空间读取的 &lt;code&gt;page&lt;/code&gt; 也会放在 &lt;code&gt;swap cache&lt;/code&gt; 里面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;一般情况下用户进程调用 &lt;code&gt;mmap()&lt;/code&gt; 时，只是在进程空间内新增了一块相应大小的缓冲区，并设置了相应的访问标识，但并没有建立进程空间到物理页面的映射&lt;/li&gt;
 &lt;li&gt;因此，第一次访问该空间时，会引发一个缺页异常&lt;/li&gt;
-&lt;li&gt;对于共享内存映射情况，缺页异常处理程序首先在 &lt;code&gt;swap cache&lt;/code&gt; 中寻找目标页（符合 &lt;code&gt;address_space&lt;/code&gt; 以及偏移量的物理页），如果找到，则直接返回地址；如果没有找到，则判断该页是否在交换区 (&lt;code&gt;swap area&lt;/code&gt;)，如果在，则执行一个换入操作；如果上述两种情况都不满足，处理程序将分配新的物理页面，并把它插入到 &lt;code&gt;page cache&lt;/code&gt; 中，最终将更新进程页表&lt;/li&gt;
-&lt;li&gt;对于映射普通文件情况（非共享映射），缺页异常处理程序首先会在 &lt;code&gt;page cache&lt;/code&gt; 中根据 &lt;code&gt;address_space&lt;/code&gt; 以及数据偏移量寻找相应的页面，如果没有找到，则说明文件数据还没有读入内存，处理程序会从磁盘读入相应的页面，并返回相应地址，同时，进程页表也会更新&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;硬盘物理文件系统&#34;&gt;硬盘（物理）文件系统&lt;/h2&gt;
-&lt;h3 id=&#34;dentry&#34;&gt;dentry&lt;/h3&gt;
-&lt;h2 id=&#34;tmpfs-与-shm-联系&#34;&gt;&lt;code&gt;tmpfs&lt;/code&gt; 与 &lt;code&gt;shm&lt;/code&gt; 联系&lt;/h2&gt;
+&lt;li&gt;对于共享内存映射情况
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;tmpfs&lt;/code&gt; 是面向用户的、通用的基于内存的文件系统，使用 RAM 作为存储媒介，用于提供临时存储和共享内存功能，能够通过挂载点提供更多功能&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;shm&lt;/code&gt; 是 Linux 内核内部实现匿名内存共享的机制，主要为内核服务，不对用户直接可见&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;shm&lt;/code&gt; 是 &lt;code&gt;tmpfs&lt;/code&gt; 的一种特殊用途变体，它对 &lt;code&gt;tmpfs&lt;/code&gt; 的核心功能进行再次针对性封装和改进，为匿名页面提供统一的文件支持接口，使内核可以用文件操作函数（如 &lt;code&gt;readpage&lt;/code&gt; 或 &lt;code&gt;writepage&lt;/code&gt;）管理这些页面，实现匿名共享内存（如通过 &lt;code&gt;mmap&lt;/code&gt; 创建的 &lt;code&gt;MAP_ANONYMOUS | MAP_SHARED&lt;/code&gt; 区域）和 System V 共享内存（&lt;code&gt;shmget&lt;/code&gt;）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;shm&lt;/code&gt; 对虚拟文件的描述都是使用 &lt;code&gt;shmem_inode_info&lt;/code&gt; （ &lt;code&gt;shmem_inode_info&lt;/code&gt; 可以看作 &lt;code&gt;inode&lt;/code&gt; 的继承，在内存文件系统里面如果要创建一个文件，要先向系统申请一个 &lt;code&gt;inode&lt;/code&gt; ，然后才是将这个 &lt;code&gt;inode&lt;/code&gt; 传给 &lt;code&gt;shmem_inode_info&lt;/code&gt; ，有点类似 C++ 里面的当一个子类要实例化的时候需要先实例化父类）
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;shmem_inode_info&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;spinlock_t&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;lock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;next_index&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;swp_entry_t&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;i_direct&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SHMEM_NR_DIRECT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt; &lt;span class=&#34;cm&#34;&gt;/* for the first blocks */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;page&lt;/span&gt;	       &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i_indirect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;cm&#34;&gt;/* indirect blocks */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;alloced&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;    &lt;span class=&#34;cm&#34;&gt;/* data pages allocated to file */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;swapped&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;    &lt;span class=&#34;cm&#34;&gt;/* subtotal assigned to swap */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;flags&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;list_head&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;inode&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;vfs_inode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;特性&lt;/th&gt;
-          &lt;th&gt;&lt;code&gt;shm&lt;/code&gt;&lt;/th&gt;
-          &lt;th&gt;&lt;code&gt;tmpfs&lt;/code&gt;&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;&lt;strong&gt;主要用途&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;为匿名内存页面或共享内存区域提供支持&lt;/td&gt;
-          &lt;td&gt;用户挂载点，用于存储临时文件或共享内存&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;&lt;strong&gt;访问方式&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;通过 &lt;code&gt;mmap&lt;/code&gt; 或 &lt;code&gt;shmget/shmat&lt;/code&gt; 接口访问&lt;/td&gt;
-          &lt;td&gt;挂载为文件系统后，通过文件操作访问&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;&lt;strong&gt;是否对用户可见&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;不对用户直接可见（由内核管理）&lt;/td&gt;
-          &lt;td&gt;可由用户挂载到目录，如 &lt;code&gt;/tmp&lt;/code&gt; 或 &lt;code&gt;/dev/shm&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;&lt;strong&gt;挂载方式&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;通过 &lt;code&gt;kern_mount()&lt;/code&gt; 自动挂载（内核专用）&lt;/td&gt;
-          &lt;td&gt;需要显式挂载，系统管理员决定挂载点&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;&lt;strong&gt;创建对象&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;由内核为匿名页面或 &lt;code&gt;shmget&lt;/code&gt; 区域创建&lt;/td&gt;
-          &lt;td&gt;用户可以手动创建文件或目录&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;&lt;strong&gt;主要接口&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;内核内部的 &lt;code&gt;shmem&lt;/code&gt; 操作&lt;/td&gt;
-          &lt;td&gt;文件系统接口（如 &lt;code&gt;open&lt;/code&gt;、&lt;code&gt;write&lt;/code&gt;）&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;li&gt;缺页异常处理程序首先在 &lt;code&gt;swap cache&lt;/code&gt; 中寻找目标页（符合 &lt;code&gt;address_space&lt;/code&gt; 以及偏移量的物理页）&lt;/li&gt;
+&lt;li&gt;如果找到，则直接返回地址&lt;/li&gt;
+&lt;li&gt;如果没有找到，则判断该页是否在交换区 (&lt;code&gt;swap area&lt;/code&gt;)，如果在，则执行一个换入操作&lt;/li&gt;
+&lt;li&gt;如果上述两种情况都不满足，处理程序将分配新的物理页面，并把它插入到 &lt;code&gt;page cache&lt;/code&gt; 中，最终将更新进程页表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;对于映射普通文件情况（非共享映射）
+&lt;ul&gt;
+&lt;li&gt;缺页异常处理程序首先会在 &lt;code&gt;page cache&lt;/code&gt; 中根据 &lt;code&gt;address_space&lt;/code&gt; 以及数据偏移量寻找相应的页面&lt;/li&gt;
+&lt;li&gt;如果没有找到，则说明文件数据还没有读入内存，处理程序会从磁盘读入相应的页面，并返回相应地址，同时进程页表也会更新&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;shm-使用&#34;&gt;&lt;strong&gt;&lt;code&gt;shm&lt;/code&gt; 使用&lt;/strong&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;System V 共享内存&lt;/p&gt;</description>
+&lt;h2 id=&#34;硬盘物理文件系统&#34;&gt;硬盘（物理）文件系统&lt;/h2&gt;
+&lt;p&gt;在 Linux 文件系统中，&lt;code&gt;dentry&lt;/code&gt;（目录项）和 &lt;code&gt;inode&lt;/code&gt;（索引节点）是两个核心概念，它们是文件系统内部用于表示和管理文件、目录及其属性的数据结构&lt;/p&gt;</description>
     </item>
     <item>
       <title>TODO</title>
