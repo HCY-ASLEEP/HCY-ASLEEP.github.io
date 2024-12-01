@@ -154,7 +154,7 @@
 &lt;li&gt;与之对应，&lt;code&gt;address_space_operations&lt;/code&gt; 就是用来操作该文件映射到内存的页面，比如把内存中的修改写回文件、从文件中读入数据到页面缓冲等&lt;/li&gt;
 &lt;li&gt;一个具体的文件在打开后，内核会在内存中为之建立一个 &lt;code&gt;struct inode&lt;/code&gt; 结构（该 &lt;code&gt;inode&lt;/code&gt; 结构也会在对应的 &lt;code&gt;file&lt;/code&gt; 结构体中引用），其中的 &lt;code&gt;i_mapping&lt;/code&gt; 域指向一个 &lt;code&gt;address_space&lt;/code&gt; 结构&lt;/li&gt;
 &lt;li&gt;一个文件就对应一个 &lt;code&gt;address_space&lt;/code&gt; 结构，一个 &lt;code&gt;address_space&lt;/code&gt; 与一个偏移量能够确定一个 &lt;code&gt;page cache&lt;/code&gt; 或 &lt;code&gt;swap cache&lt;/code&gt; 中的一个页面，当要寻址某个数据时，很容易根据给定的文件及数据在文件内的偏移量而找到相应的页面&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;struct file&lt;/code&gt; 和 &lt;code&gt;struct inode&lt;/code&gt; 结构体中都有一个 &lt;code&gt;struct address_space&lt;/code&gt; 指针，实际上，&lt;code&gt;file -&amp;gt; f_mapping&lt;/code&gt; 是从对应 &lt;code&gt;inode -&amp;gt; i_mapping&lt;/code&gt; 而来, &lt;code&gt;inode -&amp;gt; i_mapping -&amp;gt; a_ops&lt;/code&gt; 是由对应的文件系统类型在生成这个 &lt;code&gt;inode&lt;/code&gt; 时赋予的
+&lt;li&gt;&lt;code&gt;struct file&lt;/code&gt; 和 &lt;code&gt;struct inode&lt;/code&gt; 结构体中都有一个 &lt;code&gt;struct address_space&lt;/code&gt; 指针
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
