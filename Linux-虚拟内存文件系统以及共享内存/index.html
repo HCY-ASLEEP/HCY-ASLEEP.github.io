@@ -846,13 +846,13 @@ swap cache 缓存的是已经交换到磁盘的数据，它是为了提高交换
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=l>/</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>├── home/</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>│   ├── user/</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>│   │   ├── file1</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>│   │   └── documents/</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>└── etc/</span><span class=w>
-</span></span></span></code></pre></td></tr></table></div></div></li><li><p>那么它们之间的链表关系图应该是这样子的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-txt data-lang=txt><span class=line><span class=cl>/
+</span></span><span class=line><span class=cl>├── home/
+</span></span><span class=line><span class=cl>│   ├── user/
+</span></span><span class=line><span class=cl>│   │   ├── file1
+</span></span><span class=line><span class=cl>│   │   └── documents/
+</span></span><span class=line><span class=cl>└── etc/
+</span></span></code></pre></td></tr></table></div></div></li><li><p>那么它们之间的链表关系图应该是这样子的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -869,24 +869,24 @@ swap cache 缓存的是已经交换到磁盘的数据，它是为了提高交换
 </span><span class=lnt>15
 </span><span class=lnt>16
 </span><span class=lnt>17
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=l>(root /) d_child</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>         </span><span class=l>d_subdirs</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=l>+</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=p>|</span><span class=sd>
-</span></span></span><span class=line><span class=cl><span class=sd>              +--&gt; (home) d_child
-</span></span></span><span class=line><span class=cl><span class=sd>              |           d_subdirs
-</span></span></span><span class=line><span class=cl><span class=sd>              |                +
-</span></span></span><span class=line><span class=cl><span class=sd>              |                |
-</span></span></span><span class=line><span class=cl><span class=sd>              |                +--&gt; (user) d_child
-</span></span></span><span class=line><span class=cl><span class=sd>              |                            d_subdirs
-</span></span></span><span class=line><span class=cl><span class=sd>              |                                 +
-</span></span></span><span class=line><span class=cl><span class=sd>              |                                 |
-</span></span></span><span class=line><span class=cl><span class=sd>              |                                 +--&gt; (file1) d_child
-</span></span></span><span class=line><span class=cl><span class=sd>              |                                 |
-</span></span></span><span class=line><span class=cl><span class=sd>              |                                 +--&gt; (documents) d_child
-</span></span></span><span class=line><span class=cl><span class=sd>              |
-</span></span></span><span class=line><span class=cl><span class=sd>              +--&gt; (etc) d_child</span><span class=w>              
-</span></span></span></code></pre></td></tr></table></div></div></li><li><p>现在还剩下最后一个问题，<code>d_subdirs</code> 是 <code>list_head</code> 类型的数据结构，它本身只包含两个指针：<code>next</code> 和 <code>prev</code>，应该如何通过 <code>list_head</code> 找到包含它的 <code>struct dentry</code> 呢？</p></li><li><p>在内核里面，实现这个目标需要依赖嵌套结构和偏移量计算</p></li><li><p>而这一步的关键函数是 <code>contianer_of</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-txt data-lang=txt><span class=line><span class=cl>(root /) d_child
+</span></span><span class=line><span class=cl>         d_subdirs
+</span></span><span class=line><span class=cl>              +
+</span></span><span class=line><span class=cl>              |
+</span></span><span class=line><span class=cl>              +--&gt; (home) d_child
+</span></span><span class=line><span class=cl>              |           d_subdirs
+</span></span><span class=line><span class=cl>              |                +
+</span></span><span class=line><span class=cl>              |                |
+</span></span><span class=line><span class=cl>              |                +--&gt; (user) d_child
+</span></span><span class=line><span class=cl>              |                            d_subdirs
+</span></span><span class=line><span class=cl>              |                                 +
+</span></span><span class=line><span class=cl>              |                                 |
+</span></span><span class=line><span class=cl>              |                                 +--&gt; (file1) d_child
+</span></span><span class=line><span class=cl>              |                                 |
+</span></span><span class=line><span class=cl>              |                                 +--&gt; (documents) d_child
+</span></span><span class=line><span class=cl>              |
+</span></span><span class=line><span class=cl>              +--&gt; (etc) d_child
+</span></span></code></pre></td></tr></table></div></div></li><li><p>现在还剩下最后一个问题，<code>d_subdirs</code> 是 <code>list_head</code> 类型的数据结构，它本身只包含两个指针：<code>next</code> 和 <code>prev</code>，应该如何通过 <code>list_head</code> 找到包含它的 <code>struct dentry</code> 呢？</p></li><li><p>在内核里面，实现这个目标需要依赖嵌套结构和偏移量计算</p></li><li><p>而这一步的关键函数是 <code>contianer_of</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#define container_of(ptr, type, member) \
 </span></span></span><span class=line><span class=cl><span class=cp>  ((type *)((char *)(ptr) - offsetof(type, member)))
