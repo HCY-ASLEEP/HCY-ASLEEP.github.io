@@ -231,8 +231,36 @@
 &lt;li&gt;&lt;code&gt;tmpfs&lt;/code&gt; 是面向用户的、通用的基于内存的文件系统，使用 RAM 作为存储媒介，用于提供临时存储和共享内存功能，能够通过挂载点提供更多功能&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;shm&lt;/code&gt; 是 Linux 内核内部实现匿名内存共享的机制，主要为内核服务，不对用户直接可见&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;shm&lt;/code&gt; 是 &lt;code&gt;tmpfs&lt;/code&gt; 的一种特殊用途变体，它对 &lt;code&gt;tmpfs&lt;/code&gt; 的核心功能进行再次针对性封装和改进，为匿名页面提供统一的文件支持接口，使内核可以用文件操作函数（如 &lt;code&gt;readpage&lt;/code&gt; 或 &lt;code&gt;writepage&lt;/code&gt;）管理这些页面，实现匿名共享内存（如通过 &lt;code&gt;mmap&lt;/code&gt; 创建的 &lt;code&gt;MAP_ANONYMOUS | MAP_SHARED&lt;/code&gt; 区域）和 System V 共享内存（&lt;code&gt;shmget&lt;/code&gt;）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;table&gt;
+&lt;li&gt;&lt;code&gt;shm&lt;/code&gt; 对虚拟文件的描述都是使用 &lt;code&gt;shmem_inode_info&lt;/code&gt; （ &lt;code&gt;shmem_inode_info&lt;/code&gt; 可以看作 &lt;code&gt;inode&lt;/code&gt; 的继承，在内存文件系统里面如果要创建一个文件，要先向系统申请一个 &lt;code&gt;inode&lt;/code&gt; ，然后才是将这个 &lt;code&gt;inode&lt;/code&gt; 传给 &lt;code&gt;shmem_inode_info&lt;/code&gt; ，有点类似 C++ 里面的当一个子类要实例化的时候需要先实例化父类）
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;shmem_inode_info&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;spinlock_t&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;lock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;next_index&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;swp_entry_t&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;i_direct&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SHMEM_NR_DIRECT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt; &lt;span class=&#34;cm&#34;&gt;/* for the first blocks */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;page&lt;/span&gt;	       &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i_indirect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;cm&#34;&gt;/* indirect blocks */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;alloced&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;    &lt;span class=&#34;cm&#34;&gt;/* data pages allocated to file */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;swapped&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;    &lt;span class=&#34;cm&#34;&gt;/* subtotal assigned to swap */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;flags&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;list_head&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;inode&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;vfs_inode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th&gt;特性&lt;/th&gt;
@@ -243,36 +271,38 @@
   &lt;tbody&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;strong&gt;主要用途&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;为匿名内存页面或共享内存区域提供支持。&lt;/td&gt;
-          &lt;td&gt;用户挂载点，用于存储临时文件或共享内存。&lt;/td&gt;
+          &lt;td&gt;为匿名内存页面或共享内存区域提供支持&lt;/td&gt;
+          &lt;td&gt;用户挂载点，用于存储临时文件或共享内存&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;strong&gt;访问方式&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;通过 &lt;code&gt;mmap&lt;/code&gt; 或 &lt;code&gt;shmget/shmat&lt;/code&gt; 接口访问。&lt;/td&gt;
-          &lt;td&gt;挂载为文件系统后，通过文件操作访问。&lt;/td&gt;
+          &lt;td&gt;通过 &lt;code&gt;mmap&lt;/code&gt; 或 &lt;code&gt;shmget/shmat&lt;/code&gt; 接口访问&lt;/td&gt;
+          &lt;td&gt;挂载为文件系统后，通过文件操作访问&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;strong&gt;是否对用户可见&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;不对用户直接可见（由内核管理）。&lt;/td&gt;
-          &lt;td&gt;可由用户挂载到目录，如 &lt;code&gt;/tmp&lt;/code&gt; 或 &lt;code&gt;/dev/shm&lt;/code&gt;。&lt;/td&gt;
+          &lt;td&gt;不对用户直接可见（由内核管理）&lt;/td&gt;
+          &lt;td&gt;可由用户挂载到目录，如 &lt;code&gt;/tmp&lt;/code&gt; 或 &lt;code&gt;/dev/shm&lt;/code&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;strong&gt;挂载方式&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;通过 &lt;code&gt;kern_mount()&lt;/code&gt; 自动挂载（内核专用）。&lt;/td&gt;
-          &lt;td&gt;需要显式挂载，系统管理员决定挂载点。&lt;/td&gt;
+          &lt;td&gt;通过 &lt;code&gt;kern_mount()&lt;/code&gt; 自动挂载（内核专用）&lt;/td&gt;
+          &lt;td&gt;需要显式挂载，系统管理员决定挂载点&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;strong&gt;创建对象&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;由内核为匿名页面或 &lt;code&gt;shmget&lt;/code&gt; 区域创建。&lt;/td&gt;
-          &lt;td&gt;用户可以手动创建文件或目录。&lt;/td&gt;
+          &lt;td&gt;由内核为匿名页面或 &lt;code&gt;shmget&lt;/code&gt; 区域创建&lt;/td&gt;
+          &lt;td&gt;用户可以手动创建文件或目录&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;strong&gt;主要接口&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;内核内部的 &lt;code&gt;shmem&lt;/code&gt; 操作。&lt;/td&gt;
-          &lt;td&gt;文件系统接口（如 &lt;code&gt;open&lt;/code&gt;、&lt;code&gt;write&lt;/code&gt;）。&lt;/td&gt;
+          &lt;td&gt;内核内部的 &lt;code&gt;shmem&lt;/code&gt; 操作&lt;/td&gt;
+          &lt;td&gt;文件系统接口（如 &lt;code&gt;open&lt;/code&gt;、&lt;code&gt;write&lt;/code&gt;）&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;shm-使用&#34;&gt;&lt;strong&gt;&lt;code&gt;shm&lt;/code&gt; 使用&lt;/strong&gt;&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
