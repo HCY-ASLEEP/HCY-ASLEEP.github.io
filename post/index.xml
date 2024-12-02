@@ -86,10 +86,7 @@
       <guid>https://hcy-asleep.github.io/Linux%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E5%88%86%E6%9E%90/</guid>
       <description>&lt;p&gt;前几天服务器又宕机了，仔细排查原来是磁盘的占用满了，在这里记录一下使用到的命令以及相关小知识
 在 linux shell 里面查看磁盘占用信息主要有两个命令，一个是 &lt;code&gt;du&lt;/code&gt; ，另外一个是 &lt;code&gt;df&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&#34;du-和-df-的区别&#34;&gt;&lt;code&gt;du&lt;/code&gt; 和 &lt;code&gt;df&lt;/code&gt; 的区别&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;du : disk usage&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;du--disk-usage&#34;&gt;du : disk usage&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;主要用于递归计算指定文件夹的大小&lt;/li&gt;
 &lt;li&gt;它通过搜索文件来计算每个文件的大小然后累加，只能看到当前存在的，没有被删除的文件&lt;/li&gt;
@@ -197,9 +194,106 @@
 &lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;其中 &lt;code&gt;sort&lt;/code&gt; 目录的选项 &lt;code&gt;-r&lt;/code&gt; 表示逆序，不加 &lt;code&gt;-r&lt;/code&gt; 就是顺序；由于前面的 &lt;code&gt;du&lt;/code&gt; 使用了 &lt;code&gt;-h&lt;/code&gt; 选项，所以 &lt;code&gt;sort&lt;/code&gt; 也要启用 &lt;code&gt;-h&lt;/code&gt; 选项才可以和 &lt;code&gt;du&lt;/code&gt; 结果匹配起来进行排序&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;df--disk-free&#34;&gt;df : disk free&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;df&lt;/code&gt; 命令则是通过文件系统来快速获取空间大小的信息（如硬盘、分区、挂载点等），用于检查整个文件系统或分区的大小，而不可以做到像 &lt;code&gt;du&lt;/code&gt; 那样子针对某一个目录的大小进行分析&lt;/li&gt;
+&lt;li&gt;当删除一个文件时，该文件并不会立即在文件系统中消失，而是暂时消失，直到所有程序都不再使用它时，才会根据操作系统的规则释放掉&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;df&lt;/code&gt; 命令记录的是通过文件系统获取到的文件大小，包括已经删除但尚未释放的文件，因此在某些情况下比du命令显示的空间要大&lt;/li&gt;
+&lt;li&gt;至于如何查找删除这些“僵尸文件”，&lt;a href=&#34;https://www.cnblogs.com/zhangmingcheng/p/11676438.html&#34;&gt;参考这篇博客&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;当文件系统也确定删除了该文件后，&lt;code&gt;du&lt;/code&gt; 和 &lt;code&gt;df&lt;/code&gt; 显示的空间大小会一致。使用 &lt;code&gt;df -h&lt;/code&gt; 可以以易读的格式显示磁盘空间和使用情况，无论在什么目录下使用 &lt;code&gt;df&lt;/code&gt; 得到的结果都是一样的
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;root@xtz:~/asanopt/llvm-4.0.0-project/ASanBuild# df -h
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Filesystem      Size  Used Avail Use% Mounted on
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;overlay         439G  208G  210G  50% /
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tmpfs            64M     &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;   64M   0% /dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;shm              64M     &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;   64M   0% /dev/shm
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1       439G  208G  210G  50% /etc/hosts
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tmpfs            32G     &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;   32G   0% /proc/acpi
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tmpfs            32G     &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;   32G   0% /sys/firmware
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ls -alh&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;如果想知道某一个文件（而非目录！）的大小，可以使用 &lt;code&gt;ls -alh&lt;/code&gt; 命令
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-a&lt;/code&gt; 表示展示所有信息&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-l&lt;/code&gt; 表示以一个 list 呈现结果&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-h&lt;/code&gt; 如上所说，让结果更加符合阅读习惯
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;root@xtz:~/asanopt/llvm-4.0.0-project/ASanBuild# ls -alh Makefile 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-rw-r--r-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root 919K Nov &lt;span class=&#34;m&#34;&gt;23&lt;/span&gt; 14:54 Makefile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;df : disk free&lt;/strong&gt;&lt;/p&gt;</description>
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;docker-查看磁盘占用&#34;&gt;Docker 查看磁盘占用&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;现在大部分机器都装有容器环境了，有时候查看容器的磁盘占用还是挺重要的，使用 &lt;code&gt;docker system df -v&lt;/code&gt; 就可以做到
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hcy@debian:~/Documents/Windows$ sudo docker system df -v
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Images space usage:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;REPOSITORY        TAG       IMAGE ID       CREATED       SIZE      SHARED SIZE   UNIQUE SIZE   CONTAINERS
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;dockurr/windows   latest    6dbf20d6f5b1   &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; weeks ago   380.4MB   0B            380.4MB       &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Containers space usage:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CONTAINER ID   IMAGE             COMMAND                  LOCAL VOLUMES   SIZE      CREATED       STATUS         NAMES
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;6270029b27e1   dockurr/windows   &lt;span class=&#34;s2&#34;&gt;&amp;#34;/usr/bin/tini -s /r…&amp;#34;&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;               5.29MB    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;     weeks ago   Up &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt; seconds   windows
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Local Volumes space usage:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;VOLUME NAME   LINKS     SIZE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Build cache usage: 0B
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CACHE ID   CACHE TYPE   SIZE      CREATED   LAST USED   USAGE     SHARED
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     <item>
       <title>SPEC CPU2006安装使用避坑</title>
