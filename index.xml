@@ -233,7 +233,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ls -alh&lt;/strong&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ls--alh&#34;&gt;ls -alh&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;如果想知道某一个文件（而非目录！）的大小，可以使用 &lt;code&gt;ls -alh&lt;/code&gt; 命令
 &lt;ul&gt;
@@ -251,8 +252,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
