@@ -1,0 +1,181 @@
+<!doctype html><html lang=zh dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>JTS 使用文档翻译 C/C++ V1.2 | Memos</title>
+<meta name=keywords content><meta name=description content="第四章：测试用例设计
+4.1 非类基缺陷测试用例
+大多数测试用例覆盖的缺陷可以包含在任意函数中（非类基缺陷）。然而，一些缺陷，称为类基缺陷，是C++类定义固有的，必须在测试用例设计中以不同的方式处理。例如：
+C++测试用例 CWE416_Use_After_Free__operator_equals_01
+（在这个测试用例中，未能定义operator=可能导致程序崩溃，因为可能会使用已经释放的内存。）
+虚函数、构造函数/析构函数和仅坏测试用例是独特的。虚拟函数和构造函数/析构函数测试用例需要多个文件，而仅坏测试用例只用于测试缺陷，而不是像其他所有测试用例那样测试缺陷和非缺陷。
+所有C/C++测试用例还在主文件中定义了一个“main”函数。当一次编译多个测试用例时，不使用这个主函数。但是，它可以在构建单个测试用例时使用，例如，用于开发人员测试或用于创建用于测试二进制分析工具的二进制文件。
+在C/C++测试用例中，预处理器宏INCLUDEMAIN必须在编译时定义，以便在编译中包含这个主函数。
+4.1.1 必需函数
+针对不是C++类固有的缺陷的测试用例必须定义坏函数和好函数。（注意：一些测试用例被认为是仅坏的，不包含好函数的实现。见第4.3节以了解更多关于这些测试用例的详细信息。）
+对于使用多个文件的测试用例，以下函数在“a”子文件中定义（例如，CWE78_OS_Command_Injection__wchar_t_connect_socket_execl_51a.c）。测试用例的“主文件”是多文件测试用例中的“a”子文件的通用术语，或者是单文件测试用例中的唯一文件。
+4.1.1.1 主要坏函数
+每个测试用例在主文件中包含一个主要坏函数。在许多较简单的测试用例中，这个函数包含有缺陷的构造，但在其他测试用例中，这个函数调用其他包含缺陷的“汇”或“辅助”函数（“汇”和“辅助”函数在后面的部分中描述）。
+主要坏函数：
+
+对于C，是以测试用例名称后跟字符串“_bad”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_bad()”。
+对于C++，是以bad()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。
+不接受任何参数，也没有返回值。
+
+主要坏函数的名称匹配以下正则表达式：
+^(CWE.*_)?bad$
+4.1.1.2 主要好函数
+每个测试用例在主文件中（与主要坏函数相同的文件）包含一个主要好函数。这个好函数中唯一的代码是对每个次要好函数（在下一节中描述）的调用。然而，一些仅坏测试用例包含空的好函数。这个函数不包含任何无缺陷的构造。
+主要好函数：
+
+对于C，这个函数是以测试用例名称后跟字符串“_good”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_good()”。
+对于C++，这个函数是以good()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。
+不接受任何参数，也没有返回值。
+
+主要好函数的名称匹配以下正则表达式：
+^(CWE.*_)?good$
+4.1.1.3 次要好函数(们)
+非类基测试用例还在主文件中包含一个或多个次要好函数。然而，一些仅坏测试用例不包括任何次要好函数。在许多较简单的测试用例中，这些次要好函数包含实际的无缺陷构造。在其他测试用例中，这些函数将调用包含无缺陷构造的“汇”或“辅助”函数。次要好函数的数量取决于测试用例的缺陷类型以及存在多少类似于该缺陷的无缺陷构造。许多测试用例只有一个次要好函数，但其他测试用例可能有更多。
+有三种命名约定用于次要好函数：
+
+goodG2B, goodG2B1, goodG2B2, goodG2B3, 等。 - 这些名称在数据流测试用例中使用，当一个好的源传递安全数据给潜在的坏汇。
+goodB2G, goodB2G1, goodB2G2, goodB2G3, 等。 - 这些名称在数据流测试用例中使用，当一个坏源传递不安全或潜在不安全数据给好汇。
+good1, good2, good3, 等。 - 这是这些函数的“默认”或“通用”名称，当上述条件不适用时使用。
+
+次要好函数的名称匹配以下正则表达式：
+^good(\d+|G2B\d*|B2G\d*)$
+注意：重要的是这个正则表达式不与之前定义的好函数正则表达式重叠，以便不匹配主要好函数。
+次要好函数具有与主要坏函数和主要好函数相同的参数和返回类型。此外，次要好函数具有以下特点：
+
+在C和C++测试用例中，次要好函数是静态作用域的。因此，它们只在该源代码文件中可访问，这防止了名称冲突。
+在C++测试用例中，次要好函数位于测试用例独有的命名空间中。这些函数不是C++类的一部分。
+
+4.1.2 可选函数
+除了必需函数外，测试用例可能还会定义“辅助”、“源”和/或“汇”函数，如下所述。
+4.1.2.1 辅助函数
+当即使最简单的缺陷形式也不能包含在单个函数中时（在测试用例设计的约束内），测试用例中会使用辅助函数。用于创建数据流模式的函数（“源”和“汇”函数）在更复杂的测试用例中不被视为“辅助”函数，因为它们不是缺陷构造的一部分。
+需要辅助函数的测试用例示例包括：
+
+涉及可变参数函数的测试用例，例如C测试用例CWE134_Uncontrolled_Format_String__char_console_vprintf_01。
+未使用参数的测试用例，例如C测试用例CWE563_Unused_Variable__unused_parameter_variable_01。
+
+以下是对辅助函数的进一步描述："><meta name=author content="HCY"><link rel=canonical href=https://hcy-asleep.github.io/JTS-%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-C/C-V1.2/><meta name=google-site-verification content="XYZabc"><meta name=yandex-verification content="XYZabc"><meta name=msvalidate.01 content="XYZabc"><link crossorigin=anonymous href=/assets/css/stylesheet.bf546705000388ff8f0176e72d11be7c3d4efd591a0430f9c62915164a160ae2.css integrity="sha256-v1RnBQADiP+PAXbnLRG+fD1O/VkaBDD5xikVFkoWCuI=" rel="preload stylesheet" as=style><link rel=icon href=https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/hcy_site_favicon.png><link rel=icon type=image/png sizes=16x16 href=https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/hcy_site_favicon.png><link rel=icon type=image/png sizes=32x32 href=https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/hcy_site_favicon.png><link rel=apple-touch-icon href=https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/hcy_site_favicon.png><link rel=mask-icon href=https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/hcy_site_favicon.png><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh href=https://hcy-asleep.github.io/JTS-%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-C/C-V1.2/><noscript><style>#theme-toggle,.top-link{display:none}</style></noscript><style>@media screen and (min-width:1px){.post-content input[type=checkbox]:checked~label>img{transform:scale(1.6);cursor:zoom-out;position:relative;z-index:999}.post-content img.zoomCheck{transition:transform .15s ease;z-index:999;cursor:zoom-in}}</style><meta property="og:title" content="JTS 使用文档翻译 C/C++ V1.2"><meta property="og:description" content="第四章：测试用例设计
+4.1 非类基缺陷测试用例
+大多数测试用例覆盖的缺陷可以包含在任意函数中（非类基缺陷）。然而，一些缺陷，称为类基缺陷，是C++类定义固有的，必须在测试用例设计中以不同的方式处理。例如：
+C++测试用例 CWE416_Use_After_Free__operator_equals_01
+（在这个测试用例中，未能定义operator=可能导致程序崩溃，因为可能会使用已经释放的内存。）
+虚函数、构造函数/析构函数和仅坏测试用例是独特的。虚拟函数和构造函数/析构函数测试用例需要多个文件，而仅坏测试用例只用于测试缺陷，而不是像其他所有测试用例那样测试缺陷和非缺陷。
+所有C/C++测试用例还在主文件中定义了一个“main”函数。当一次编译多个测试用例时，不使用这个主函数。但是，它可以在构建单个测试用例时使用，例如，用于开发人员测试或用于创建用于测试二进制分析工具的二进制文件。
+在C/C++测试用例中，预处理器宏INCLUDEMAIN必须在编译时定义，以便在编译中包含这个主函数。
+4.1.1 必需函数
+针对不是C++类固有的缺陷的测试用例必须定义坏函数和好函数。（注意：一些测试用例被认为是仅坏的，不包含好函数的实现。见第4.3节以了解更多关于这些测试用例的详细信息。）
+对于使用多个文件的测试用例，以下函数在“a”子文件中定义（例如，CWE78_OS_Command_Injection__wchar_t_connect_socket_execl_51a.c）。测试用例的“主文件”是多文件测试用例中的“a”子文件的通用术语，或者是单文件测试用例中的唯一文件。
+4.1.1.1 主要坏函数
+每个测试用例在主文件中包含一个主要坏函数。在许多较简单的测试用例中，这个函数包含有缺陷的构造，但在其他测试用例中，这个函数调用其他包含缺陷的“汇”或“辅助”函数（“汇”和“辅助”函数在后面的部分中描述）。
+主要坏函数：
+
+对于C，是以测试用例名称后跟字符串“_bad”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_bad()”。
+对于C++，是以bad()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。
+不接受任何参数，也没有返回值。
+
+主要坏函数的名称匹配以下正则表达式：
+^(CWE.*_)?bad$
+4.1.1.2 主要好函数
+每个测试用例在主文件中（与主要坏函数相同的文件）包含一个主要好函数。这个好函数中唯一的代码是对每个次要好函数（在下一节中描述）的调用。然而，一些仅坏测试用例包含空的好函数。这个函数不包含任何无缺陷的构造。
+主要好函数：
+
+对于C，这个函数是以测试用例名称后跟字符串“_good”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_good()”。
+对于C++，这个函数是以good()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。
+不接受任何参数，也没有返回值。
+
+主要好函数的名称匹配以下正则表达式：
+^(CWE.*_)?good$
+4.1.1.3 次要好函数(们)
+非类基测试用例还在主文件中包含一个或多个次要好函数。然而，一些仅坏测试用例不包括任何次要好函数。在许多较简单的测试用例中，这些次要好函数包含实际的无缺陷构造。在其他测试用例中，这些函数将调用包含无缺陷构造的“汇”或“辅助”函数。次要好函数的数量取决于测试用例的缺陷类型以及存在多少类似于该缺陷的无缺陷构造。许多测试用例只有一个次要好函数，但其他测试用例可能有更多。
+有三种命名约定用于次要好函数：
+
+goodG2B, goodG2B1, goodG2B2, goodG2B3, 等。 - 这些名称在数据流测试用例中使用，当一个好的源传递安全数据给潜在的坏汇。
+goodB2G, goodB2G1, goodB2G2, goodB2G3, 等。 - 这些名称在数据流测试用例中使用，当一个坏源传递不安全或潜在不安全数据给好汇。
+good1, good2, good3, 等。 - 这是这些函数的“默认”或“通用”名称，当上述条件不适用时使用。
+
+次要好函数的名称匹配以下正则表达式：
+^good(\d+|G2B\d*|B2G\d*)$
+注意：重要的是这个正则表达式不与之前定义的好函数正则表达式重叠，以便不匹配主要好函数。
+次要好函数具有与主要坏函数和主要好函数相同的参数和返回类型。此外，次要好函数具有以下特点：
+
+在C和C++测试用例中，次要好函数是静态作用域的。因此，它们只在该源代码文件中可访问，这防止了名称冲突。
+在C++测试用例中，次要好函数位于测试用例独有的命名空间中。这些函数不是C++类的一部分。
+
+4.1.2 可选函数
+除了必需函数外，测试用例可能还会定义“辅助”、“源”和/或“汇”函数，如下所述。
+4.1.2.1 辅助函数
+当即使最简单的缺陷形式也不能包含在单个函数中时（在测试用例设计的约束内），测试用例中会使用辅助函数。用于创建数据流模式的函数（“源”和“汇”函数）在更复杂的测试用例中不被视为“辅助”函数，因为它们不是缺陷构造的一部分。
+需要辅助函数的测试用例示例包括：
+
+涉及可变参数函数的测试用例，例如C测试用例CWE134_Uncontrolled_Format_String__char_console_vprintf_01。
+未使用参数的测试用例，例如C测试用例CWE563_Unused_Variable__unused_parameter_variable_01。
+
+以下是对辅助函数的进一步描述："><meta property="og:type" content="article"><meta property="og:url" content="https://hcy-asleep.github.io/JTS-%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-C/C-V1.2/"><meta property="og:image" content="https://hcy-asleep.github.io/"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-12-26T14:37:39+00:00"><meta property="article:modified_time" content="2023-12-26T14:37:39+00:00"><meta property="og:site_name" content="HCY-BLOGS"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://hcy-asleep.github.io/"><meta name=twitter:title content="JTS 使用文档翻译 C/C++ V1.2"><meta name=twitter:description content="第四章：测试用例设计
+4.1 非类基缺陷测试用例
+大多数测试用例覆盖的缺陷可以包含在任意函数中（非类基缺陷）。然而，一些缺陷，称为类基缺陷，是C++类定义固有的，必须在测试用例设计中以不同的方式处理。例如：
+C++测试用例 CWE416_Use_After_Free__operator_equals_01
+（在这个测试用例中，未能定义operator=可能导致程序崩溃，因为可能会使用已经释放的内存。）
+虚函数、构造函数/析构函数和仅坏测试用例是独特的。虚拟函数和构造函数/析构函数测试用例需要多个文件，而仅坏测试用例只用于测试缺陷，而不是像其他所有测试用例那样测试缺陷和非缺陷。
+所有C/C++测试用例还在主文件中定义了一个“main”函数。当一次编译多个测试用例时，不使用这个主函数。但是，它可以在构建单个测试用例时使用，例如，用于开发人员测试或用于创建用于测试二进制分析工具的二进制文件。
+在C/C++测试用例中，预处理器宏INCLUDEMAIN必须在编译时定义，以便在编译中包含这个主函数。
+4.1.1 必需函数
+针对不是C++类固有的缺陷的测试用例必须定义坏函数和好函数。（注意：一些测试用例被认为是仅坏的，不包含好函数的实现。见第4.3节以了解更多关于这些测试用例的详细信息。）
+对于使用多个文件的测试用例，以下函数在“a”子文件中定义（例如，CWE78_OS_Command_Injection__wchar_t_connect_socket_execl_51a.c）。测试用例的“主文件”是多文件测试用例中的“a”子文件的通用术语，或者是单文件测试用例中的唯一文件。
+4.1.1.1 主要坏函数
+每个测试用例在主文件中包含一个主要坏函数。在许多较简单的测试用例中，这个函数包含有缺陷的构造，但在其他测试用例中，这个函数调用其他包含缺陷的“汇”或“辅助”函数（“汇”和“辅助”函数在后面的部分中描述）。
+主要坏函数：
+
+对于C，是以测试用例名称后跟字符串“_bad”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_bad()”。
+对于C++，是以bad()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。
+不接受任何参数，也没有返回值。
+
+主要坏函数的名称匹配以下正则表达式：
+^(CWE.*_)?bad$
+4.1.1.2 主要好函数
+每个测试用例在主文件中（与主要坏函数相同的文件）包含一个主要好函数。这个好函数中唯一的代码是对每个次要好函数（在下一节中描述）的调用。然而，一些仅坏测试用例包含空的好函数。这个函数不包含任何无缺陷的构造。
+主要好函数：
+
+对于C，这个函数是以测试用例名称后跟字符串“_good”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_good()”。
+对于C++，这个函数是以good()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。
+不接受任何参数，也没有返回值。
+
+主要好函数的名称匹配以下正则表达式：
+^(CWE.*_)?good$
+4.1.1.3 次要好函数(们)
+非类基测试用例还在主文件中包含一个或多个次要好函数。然而，一些仅坏测试用例不包括任何次要好函数。在许多较简单的测试用例中，这些次要好函数包含实际的无缺陷构造。在其他测试用例中，这些函数将调用包含无缺陷构造的“汇”或“辅助”函数。次要好函数的数量取决于测试用例的缺陷类型以及存在多少类似于该缺陷的无缺陷构造。许多测试用例只有一个次要好函数，但其他测试用例可能有更多。
+有三种命名约定用于次要好函数：
+
+goodG2B, goodG2B1, goodG2B2, goodG2B3, 等。 - 这些名称在数据流测试用例中使用，当一个好的源传递安全数据给潜在的坏汇。
+goodB2G, goodB2G1, goodB2G2, goodB2G3, 等。 - 这些名称在数据流测试用例中使用，当一个坏源传递不安全或潜在不安全数据给好汇。
+good1, good2, good3, 等。 - 这是这些函数的“默认”或“通用”名称，当上述条件不适用时使用。
+
+次要好函数的名称匹配以下正则表达式：
+^good(\d+|G2B\d*|B2G\d*)$
+注意：重要的是这个正则表达式不与之前定义的好函数正则表达式重叠，以便不匹配主要好函数。
+次要好函数具有与主要坏函数和主要好函数相同的参数和返回类型。此外，次要好函数具有以下特点：
+
+在C和C++测试用例中，次要好函数是静态作用域的。因此，它们只在该源代码文件中可访问，这防止了名称冲突。
+在C++测试用例中，次要好函数位于测试用例独有的命名空间中。这些函数不是C++类的一部分。
+
+4.1.2 可选函数
+除了必需函数外，测试用例可能还会定义“辅助”、“源”和/或“汇”函数，如下所述。
+4.1.2.1 辅助函数
+当即使最简单的缺陷形式也不能包含在单个函数中时（在测试用例设计的约束内），测试用例中会使用辅助函数。用于创建数据流模式的函数（“源”和“汇”函数）在更复杂的测试用例中不被视为“辅助”函数，因为它们不是缺陷构造的一部分。
+需要辅助函数的测试用例示例包括：
+
+涉及可变参数函数的测试用例，例如C测试用例CWE134_Uncontrolled_Format_String__char_console_vprintf_01。
+未使用参数的测试用例，例如C测试用例CWE563_Unused_Variable__unused_parameter_variable_01。
+
+以下是对辅助函数的进一步描述："><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://hcy-asleep.github.io/post/"},{"@type":"ListItem","position":2,"name":"JTS 使用文档翻译 C/C++ V1.2","item":"https://hcy-asleep.github.io/JTS-%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-C/C-V1.2/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"JTS 使用文档翻译 C/C++ V1.2","name":"JTS 使用文档翻译 C\/C\u002b\u002b V1.2","description":"第四章：测试用例设计 4.1 非类基缺陷测试用例 大多数测试用例覆盖的缺陷可以包含在任意函数中（非类基缺陷）。然而，一些缺陷，称为类基缺陷，是C++类定义固有的，必须在测试用例设计中以不同的方式处理。例如：\nC++测试用例 CWE416_Use_After_Free__operator_equals_01 （在这个测试用例中，未能定义operator=可能导致程序崩溃，因为可能会使用已经释放的内存。）\n虚函数、构造函数/析构函数和仅坏测试用例是独特的。虚拟函数和构造函数/析构函数测试用例需要多个文件，而仅坏测试用例只用于测试缺陷，而不是像其他所有测试用例那样测试缺陷和非缺陷。\n所有C/C++测试用例还在主文件中定义了一个“main”函数。当一次编译多个测试用例时，不使用这个主函数。但是，它可以在构建单个测试用例时使用，例如，用于开发人员测试或用于创建用于测试二进制分析工具的二进制文件。\n在C/C++测试用例中，预处理器宏INCLUDEMAIN必须在编译时定义，以便在编译中包含这个主函数。\n4.1.1 必需函数 针对不是C++类固有的缺陷的测试用例必须定义坏函数和好函数。（注意：一些测试用例被认为是仅坏的，不包含好函数的实现。见第4.3节以了解更多关于这些测试用例的详细信息。）\n对于使用多个文件的测试用例，以下函数在“a”子文件中定义（例如，CWE78_OS_Command_Injection__wchar_t_connect_socket_execl_51a.c）。测试用例的“主文件”是多文件测试用例中的“a”子文件的通用术语，或者是单文件测试用例中的唯一文件。\n4.1.1.1 主要坏函数 每个测试用例在主文件中包含一个主要坏函数。在许多较简单的测试用例中，这个函数包含有缺陷的构造，但在其他测试用例中，这个函数调用其他包含缺陷的“汇”或“辅助”函数（“汇”和“辅助”函数在后面的部分中描述）。\n主要坏函数：\n对于C，是以测试用例名称后跟字符串“_bad”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_bad()”。 对于C++，是以bad()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。 不接受任何参数，也没有返回值。 主要坏函数的名称匹配以下正则表达式： ^(CWE.*_)?bad$\n4.1.1.2 主要好函数 每个测试用例在主文件中（与主要坏函数相同的文件）包含一个主要好函数。这个好函数中唯一的代码是对每个次要好函数（在下一节中描述）的调用。然而，一些仅坏测试用例包含空的好函数。这个函数不包含任何无缺陷的构造。\n主要好函数：\n对于C，这个函数是以测试用例名称后跟字符串“_good”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_good()”。 对于C++，这个函数是以good()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。 不接受任何参数，也没有返回值。 主要好函数的名称匹配以下正则表达式： ^(CWE.*_)?good$\n4.1.1.3 次要好函数(们) 非类基测试用例还在主文件中包含一个或多个次要好函数。然而，一些仅坏测试用例不包括任何次要好函数。在许多较简单的测试用例中，这些次要好函数包含实际的无缺陷构造。在其他测试用例中，这些函数将调用包含无缺陷构造的“汇”或“辅助”函数。次要好函数的数量取决于测试用例的缺陷类型以及存在多少类似于该缺陷的无缺陷构造。许多测试用例只有一个次要好函数，但其他测试用例可能有更多。\n有三种命名约定用于次要好函数：\ngoodG2B, goodG2B1, goodG2B2, goodG2B3, 等。 - 这些名称在数据流测试用例中使用，当一个好的源传递安全数据给潜在的坏汇。 goodB2G, goodB2G1, goodB2G2, goodB2G3, 等。 - 这些名称在数据流测试用例中使用，当一个坏源传递不安全或潜在不安全数据给好汇。 good1, good2, good3, 等。 - 这是这些函数的“默认”或“通用”名称，当上述条件不适用时使用。 次要好函数的名称匹配以下正则表达式： ^good(\\d+|G2B\\d*|B2G\\d*)$\n注意：重要的是这个正则表达式不与之前定义的好函数正则表达式重叠，以便不匹配主要好函数。\n次要好函数具有与主要坏函数和主要好函数相同的参数和返回类型。此外，次要好函数具有以下特点：\n在C和C++测试用例中，次要好函数是静态作用域的。因此，它们只在该源代码文件中可访问，这防止了名称冲突。 在C++测试用例中，次要好函数位于测试用例独有的命名空间中。这些函数不是C++类的一部分。 4.1.2 可选函数 除了必需函数外，测试用例可能还会定义“辅助”、“源”和/或“汇”函数，如下所述。\n4.1.2.1 辅助函数 当即使最简单的缺陷形式也不能包含在单个函数中时（在测试用例设计的约束内），测试用例中会使用辅助函数。用于创建数据流模式的函数（“源”和“汇”函数）在更复杂的测试用例中不被视为“辅助”函数，因为它们不是缺陷构造的一部分。\n需要辅助函数的测试用例示例包括：\n涉及可变参数函数的测试用例，例如C测试用例CWE134_Uncontrolled_Format_String__char_console_vprintf_01。 未使用参数的测试用例，例如C测试用例CWE563_Unused_Variable__unused_parameter_variable_01。 以下是对辅助函数的进一步描述：\n","keywords":[],"articleBody":"第四章：测试用例设计 4.1 非类基缺陷测试用例 大多数测试用例覆盖的缺陷可以包含在任意函数中（非类基缺陷）。然而，一些缺陷，称为类基缺陷，是C++类定义固有的，必须在测试用例设计中以不同的方式处理。例如：\nC++测试用例 CWE416_Use_After_Free__operator_equals_01 （在这个测试用例中，未能定义operator=可能导致程序崩溃，因为可能会使用已经释放的内存。）\n虚函数、构造函数/析构函数和仅坏测试用例是独特的。虚拟函数和构造函数/析构函数测试用例需要多个文件，而仅坏测试用例只用于测试缺陷，而不是像其他所有测试用例那样测试缺陷和非缺陷。\n所有C/C++测试用例还在主文件中定义了一个“main”函数。当一次编译多个测试用例时，不使用这个主函数。但是，它可以在构建单个测试用例时使用，例如，用于开发人员测试或用于创建用于测试二进制分析工具的二进制文件。\n在C/C++测试用例中，预处理器宏INCLUDEMAIN必须在编译时定义，以便在编译中包含这个主函数。\n4.1.1 必需函数 针对不是C++类固有的缺陷的测试用例必须定义坏函数和好函数。（注意：一些测试用例被认为是仅坏的，不包含好函数的实现。见第4.3节以了解更多关于这些测试用例的详细信息。）\n对于使用多个文件的测试用例，以下函数在“a”子文件中定义（例如，CWE78_OS_Command_Injection__wchar_t_connect_socket_execl_51a.c）。测试用例的“主文件”是多文件测试用例中的“a”子文件的通用术语，或者是单文件测试用例中的唯一文件。\n4.1.1.1 主要坏函数 每个测试用例在主文件中包含一个主要坏函数。在许多较简单的测试用例中，这个函数包含有缺陷的构造，但在其他测试用例中，这个函数调用其他包含缺陷的“汇”或“辅助”函数（“汇”和“辅助”函数在后面的部分中描述）。\n主要坏函数：\n对于C，是以测试用例名称后跟字符串“_bad”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_bad()”。 对于C++，是以bad()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。 不接受任何参数，也没有返回值。 主要坏函数的名称匹配以下正则表达式： ^(CWE.*_)?bad$\n4.1.1.2 主要好函数 每个测试用例在主文件中（与主要坏函数相同的文件）包含一个主要好函数。这个好函数中唯一的代码是对每个次要好函数（在下一节中描述）的调用。然而，一些仅坏测试用例包含空的好函数。这个函数不包含任何无缺陷的构造。\n主要好函数：\n对于C，这个函数是以测试用例名称后跟字符串“_good”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_good()”。 对于C++，这个函数是以good()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。 不接受任何参数，也没有返回值。 主要好函数的名称匹配以下正则表达式： ^(CWE.*_)?good$\n4.1.1.3 次要好函数(们) 非类基测试用例还在主文件中包含一个或多个次要好函数。然而，一些仅坏测试用例不包括任何次要好函数。在许多较简单的测试用例中，这些次要好函数包含实际的无缺陷构造。在其他测试用例中，这些函数将调用包含无缺陷构造的“汇”或“辅助”函数。次要好函数的数量取决于测试用例的缺陷类型以及存在多少类似于该缺陷的无缺陷构造。许多测试用例只有一个次要好函数，但其他测试用例可能有更多。\n有三种命名约定用于次要好函数：\ngoodG2B, goodG2B1, goodG2B2, goodG2B3, 等。 - 这些名称在数据流测试用例中使用，当一个好的源传递安全数据给潜在的坏汇。 goodB2G, goodB2G1, goodB2G2, goodB2G3, 等。 - 这些名称在数据流测试用例中使用，当一个坏源传递不安全或潜在不安全数据给好汇。 good1, good2, good3, 等。 - 这是这些函数的“默认”或“通用”名称，当上述条件不适用时使用。 次要好函数的名称匹配以下正则表达式： ^good(\\d+|G2B\\d*|B2G\\d*)$\n注意：重要的是这个正则表达式不与之前定义的好函数正则表达式重叠，以便不匹配主要好函数。\n次要好函数具有与主要坏函数和主要好函数相同的参数和返回类型。此外，次要好函数具有以下特点：\n在C和C++测试用例中，次要好函数是静态作用域的。因此，它们只在该源代码文件中可访问，这防止了名称冲突。 在C++测试用例中，次要好函数位于测试用例独有的命名空间中。这些函数不是C++类的一部分。 4.1.2 可选函数 除了必需函数外，测试用例可能还会定义“辅助”、“源”和/或“汇”函数，如下所述。\n4.1.2.1 辅助函数 当即使最简单的缺陷形式也不能包含在单个函数中时（在测试用例设计的约束内），测试用例中会使用辅助函数。用于创建数据流模式的函数（“源”和“汇”函数）在更复杂的测试用例中不被视为“辅助”函数，因为它们不是缺陷构造的一部分。\n需要辅助函数的测试用例示例包括：\n涉及可变参数函数的测试用例，例如C测试用例CWE134_Uncontrolled_Format_String__char_console_vprintf_01。 未使用参数的测试用例，例如C测试用例CWE563_Unused_Variable__unused_parameter_variable_01。 以下是对辅助函数的进一步描述：\n辅助函数始终特定于坏函数或好函数。坏辅助和好辅助函数可能包含不同的代码或完全相同的代码（使用单独的函数可以轻松地将工具结果评估为“真阳性”或“假阳性”）。 坏代码的辅助函数命名为“helperBad”。 理想情况下，辅助函数应该特定于单个次要好函数，并命名为“helperGood1”或“helperGoodG2B”。这种命名在手动创建的测试用例中使用，但不幸的是，当前的测试用例模板引擎不支持。在生成的测试用例中，使用了一个名为“helperGood”的通用函数。 在C测试用例中，辅助函数尽可能是静态作用域的。 在C++测试用例中，辅助函数位于测试用例的命名空间中，并且尽可能是静态作用域的。 在多文件测试用例中，辅助函数可能在主文件或其他非主文件中。 在使用可变参数函数的测试用例中，例如CWE134_Uncontrolled_Format_String__char_console_vprintf_01，辅助函数命名为“badVaSink”、“goodG2BVaSink”和“goodB2GVaSink”。在控制流测试用例中，例如CWE134_Uncontrolled_Format_String__char_console_vprintf_02，辅助函数命名为“badVaSinkB”、“goodB2G1VaSinkG”、“goodB2G2VaSinkG”、“goodG2B1VaSinkB”等。尽管它们的名字，这些“VaSink”函数被认为是“辅助”函数而不是“汇”函数，因为它们即使在最简单的缺陷形式中也是需要的。 辅助函数的名称将匹配以下正则表达式： ^(CWE.+)?(helperBad|badVaSink[BG]?)$ ^(CWE.+)?((helperGood(G2B|B2G)?\\d*)|(good(G2B|B2G)?\\d*VaSink[BG]?))$\n4.1.2.2 源和汇函数 包含数据流的测试用例使用“源”和“汇”函数，这些函数彼此调用或从主要坏或好函数调用。每个源或汇函数特定于测试用例的坏\n","wordCount":"85","inLanguage":"zh","image":"https://hcy-asleep.github.io/","datePublished":"2023-12-26T14:37:39Z","dateModified":"2023-12-26T14:37:39Z","author":{"@type":"Person","name":"HCY"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://hcy-asleep.github.io/JTS-%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-C/C-V1.2/"},"publisher":{"@type":"Organization","name":"Memos","logo":{"@type":"ImageObject","url":"https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/hcy_site_favicon.png"}}}</script></head><body id=top><header class=header><nav class=nav><div class=logo><a href=https://hcy-asleep.github.io/ accesskey=h title="主页 (Alt + H)">主页</a><div class=logo-switches></div></div><ul id=menu><li><a href=https://hcy-asleep.github.io/archives/ title=归档><span>归档</span></a></li><li><a href=https://hcy-asleep.github.io/tags/ title=标签><span>标签</span></a></li><li><a href=https://hcy-asleep.github.io/categories/ title=目录><span>目录</span></a></li><li><a href=https://hcy-asleep.github.io/friends/ title=友链><span>友链</span></a></li><li><a href=https://hcy-asleep.github.io/todo/ title=TODO><span>TODO</span></a></li><li><a href=https://hcy-asleep.github.io/about/ title=关于><span>关于</span></a></li><li><a href=https://hcy-asleep.github.io/search/ title="🔍 (Alt + /)" accesskey=/><span>🔍</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://hcy-asleep.github.io/>主页</a>&nbsp;»&nbsp;<a href=https://hcy-asleep.github.io/post/>Posts</a></div><h1 class="post-title entry-hint-parent">JTS 使用文档翻译 C/C++ V1.2</h1><div class=post-meta><span title='2023-12-26 14:37:39 +0000 UTC'>十二月 26, 2023</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;85 字&nbsp;·&nbsp;HCY&nbsp;|&nbsp;<a href=https://github.com/HCY-ASLEEP rel="noopener noreferrer" target=_blank> Follow me</a></div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>目录</span></summary><div class=inner><nav id=TableOfContents><ul><li><ul><li><ul><li><a href=#第四章测试用例设计>第四章：测试用例设计</a><ul><li><a href=#41-非类基缺陷测试用例>4.1 非类基缺陷测试用例</a></li><li><a href=#411-必需函数>4.1.1 必需函数</a><ul><li><a href=#4111-主要坏函数>4.1.1.1 主要坏函数</a></li><li><a href=#4112-主要好函数>4.1.1.2 主要好函数</a></li><li><a href=#4113-次要好函数们>4.1.1.3 次要好函数(们)</a></li></ul></li><li><a href=#412-可选函数>4.1.2 可选函数</a><ul><li><a href=#4121-辅助函数>4.1.2.1 辅助函数</a></li><li><a href=#4122-源和汇函数>4.1.2.2 源和汇函数</a></li></ul></li></ul></li></ul></li></ul></li></ul></nav></div></details></div><div class=post-content><h3 id=第四章测试用例设计>第四章：测试用例设计<a hidden class=anchor aria-hidden=true href=#第四章测试用例设计>#</a></h3><h4 id=41-非类基缺陷测试用例>4.1 非类基缺陷测试用例<a hidden class=anchor aria-hidden=true href=#41-非类基缺陷测试用例>#</a></h4><p>大多数测试用例覆盖的缺陷可以包含在任意函数中（非类基缺陷）。然而，一些缺陷，称为类基缺陷，是C++类定义固有的，必须在测试用例设计中以不同的方式处理。例如：</p><p>C++测试用例 CWE416_Use_After_Free__operator_equals_01
+（在这个测试用例中，未能定义operator=可能导致程序崩溃，因为可能会使用已经释放的内存。）</p><p>虚函数、构造函数/析构函数和仅坏测试用例是独特的。虚拟函数和构造函数/析构函数测试用例需要多个文件，而仅坏测试用例只用于测试缺陷，而不是像其他所有测试用例那样测试缺陷和非缺陷。</p><p>所有C/C++测试用例还在主文件中定义了一个“main”函数。当一次编译多个测试用例时，不使用这个主函数。但是，它可以在构建单个测试用例时使用，例如，用于开发人员测试或用于创建用于测试二进制分析工具的二进制文件。</p><p>在C/C++测试用例中，预处理器宏INCLUDEMAIN必须在编译时定义，以便在编译中包含这个主函数。</p><h4 id=411-必需函数>4.1.1 必需函数<a hidden class=anchor aria-hidden=true href=#411-必需函数>#</a></h4><p>针对不是C++类固有的缺陷的测试用例必须定义坏函数和好函数。（注意：一些测试用例被认为是仅坏的，不包含好函数的实现。见第4.3节以了解更多关于这些测试用例的详细信息。）</p><p>对于使用多个文件的测试用例，以下函数在“a”子文件中定义（例如，CWE78_OS_Command_Injection__wchar_t_connect_socket_execl_51a.c）。测试用例的“主文件”是多文件测试用例中的“a”子文件的通用术语，或者是单文件测试用例中的唯一文件。</p><h5 id=4111-主要坏函数>4.1.1.1 主要坏函数<a hidden class=anchor aria-hidden=true href=#4111-主要坏函数>#</a></h5><p>每个测试用例在主文件中包含一个主要坏函数。在许多较简单的测试用例中，这个函数包含有缺陷的构造，但在其他测试用例中，这个函数调用其他包含缺陷的“汇”或“辅助”函数（“汇”和“辅助”函数在后面的部分中描述）。</p><p>主要坏函数：</p><ul><li>对于C，是以测试用例名称后跟字符串“_bad”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_bad()”。</li><li>对于C++，是以bad()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。</li><li>不接受任何参数，也没有返回值。</li></ul><p>主要坏函数的名称匹配以下正则表达式：
+^(CWE.*_)?bad$</p><h5 id=4112-主要好函数>4.1.1.2 主要好函数<a hidden class=anchor aria-hidden=true href=#4112-主要好函数>#</a></h5><p>每个测试用例在主文件中（与主要坏函数相同的文件）包含一个主要好函数。这个好函数中唯一的代码是对每个次要好函数（在下一节中描述）的调用。然而，一些仅坏测试用例包含空的好函数。这个函数不包含任何无缺陷的构造。</p><p>主要好函数：</p><ul><li>对于C，这个函数是以测试用例名称后跟字符串“_good”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_good()”。</li><li>对于C++，这个函数是以good()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。</li><li>不接受任何参数，也没有返回值。</li></ul><p>主要好函数的名称匹配以下正则表达式：
+^(CWE.*_)?good$</p><h5 id=4113-次要好函数们>4.1.1.3 次要好函数(们)<a hidden class=anchor aria-hidden=true href=#4113-次要好函数们>#</a></h5><p>非类基测试用例还在主文件中包含一个或多个次要好函数。然而，一些仅坏测试用例不包括任何次要好函数。在许多较简单的测试用例中，这些次要好函数包含实际的无缺陷构造。在其他测试用例中，这些函数将调用包含无缺陷构造的“汇”或“辅助”函数。次要好函数的数量取决于测试用例的缺陷类型以及存在多少类似于该缺陷的无缺陷构造。许多测试用例只有一个次要好函数，但其他测试用例可能有更多。</p><p>有三种命名约定用于次要好函数：</p><ul><li>goodG2B, goodG2B1, goodG2B2, goodG2B3, 等。 - 这些名称在数据流测试用例中使用，当一个好的源传递安全数据给潜在的坏汇。</li><li>goodB2G, goodB2G1, goodB2G2, goodB2G3, 等。 - 这些名称在数据流测试用例中使用，当一个坏源传递不安全或潜在不安全数据给好汇。</li><li>good1, good2, good3, 等。 - 这是这些函数的“默认”或“通用”名称，当上述条件不适用时使用。</li></ul><p>次要好函数的名称匹配以下正则表达式：
+^good(\d+|G2B\d*|B2G\d*)$</p><p>注意：重要的是这个正则表达式不与之前定义的好函数正则表达式重叠，以便不匹配主要好函数。</p><p>次要好函数具有与主要坏函数和主要好函数相同的参数和返回类型。此外，次要好函数具有以下特点：</p><ul><li>在C和C++测试用例中，次要好函数是静态作用域的。因此，它们只在该源代码文件中可访问，这防止了名称冲突。</li><li>在C++测试用例中，次要好函数位于测试用例独有的命名空间中。这些函数不是C++类的一部分。</li></ul><h4 id=412-可选函数>4.1.2 可选函数<a hidden class=anchor aria-hidden=true href=#412-可选函数>#</a></h4><p>除了必需函数外，测试用例可能还会定义“辅助”、“源”和/或“汇”函数，如下所述。</p><h5 id=4121-辅助函数>4.1.2.1 辅助函数<a hidden class=anchor aria-hidden=true href=#4121-辅助函数>#</a></h5><p>当即使最简单的缺陷形式也不能包含在单个函数中时（在测试用例设计的约束内），测试用例中会使用辅助函数。用于创建数据流模式的函数（“源”和“汇”函数）在更复杂的测试用例中不被视为“辅助”函数，因为它们不是缺陷构造的一部分。</p><p>需要辅助函数的测试用例示例包括：</p><ul><li>涉及可变参数函数的测试用例，例如C测试用例CWE134_Uncontrolled_Format_String__char_console_vprintf_01。</li><li>未使用参数的测试用例，例如C测试用例CWE563_Unused_Variable__unused_parameter_variable_01。</li></ul><p>以下是对辅助函数的进一步描述：</p><ul><li>辅助函数始终特定于坏函数或好函数。坏辅助和好辅助函数可能包含不同的代码或完全相同的代码（使用单独的函数可以轻松地将工具结果评估为“真阳性”或“假阳性”）。</li><li>坏代码的辅助函数命名为“helperBad”。</li><li>理想情况下，辅助函数应该特定于单个次要好函数，并命名为“helperGood1”或“helperGoodG2B”。这种命名在手动创建的测试用例中使用，但不幸的是，当前的测试用例模板引擎不支持。在生成的测试用例中，使用了一个名为“helperGood”的通用函数。</li><li>在C测试用例中，辅助函数尽可能是静态作用域的。</li><li>在C++测试用例中，辅助函数位于测试用例的命名空间中，并且尽可能是静态作用域的。</li><li>在多文件测试用例中，辅助函数可能在主文件或其他非主文件中。</li><li>在使用可变参数函数的测试用例中，例如CWE134_Uncontrolled_Format_String__char_console_vprintf_01，辅助函数命名为“badVaSink”、“goodG2BVaSink”和“goodB2GVaSink”。在控制流测试用例中，例如CWE134_Uncontrolled_Format_String__char_console_vprintf_02，辅助函数命名为“badVaSinkB”、“goodB2G1VaSinkG”、“goodB2G2VaSinkG”、“goodG2B1VaSinkB”等。尽管它们的名字，这些“VaSink”函数被认为是“辅助”函数而不是“汇”函数，因为它们即使在最简单的缺陷形式中也是需要的。</li></ul><p>辅助函数的名称将匹配以下正则表达式：
+^(CWE.+<em>)?(helperBad|badVaSink[BG]?)$
+^(CWE.+</em>)?((helperGood(G2B|B2G)?\d*)|(good(G2B|B2G)?\d*VaSink[BG]?))$</p><h5 id=4122-源和汇函数>4.1.2.2 源和汇函数<a hidden class=anchor aria-hidden=true href=#4122-源和汇函数>#</a></h5><p>包含数据流的测试用例使用“源”和“汇”函数，这些函数彼此调用或从主要坏或好函数调用。每个源或汇函数特定于测试用例的坏</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://hcy-asleep.github.io/Alacritty-%E9%85%8D%E7%BD%AE-JetBrains-Mono-%E5%AD%97%E4%BD%93/><span class=title>« 上一页</span><br><span>Alacritty 配置 JetBrains Mono 字体</span>
+</a><a class=next href=https://hcy-asleep.github.io/%E4%B8%BA-xv6-riscv-%E7%A7%BB%E6%A4%8D%E6%89%AB%E9%9B%B7minesweeper-2048-%E4%BB%A5%E5%8F%8A%E9%9D%9E%E5%B8%B8%E7%AE%80%E5%8D%95%E7%9A%84-sl/><span class=title>下一页 »</span><br><span>为 xv6-riscv 移植扫雷(minesweeper) 2048 以及非常简单的 sl</span></a></nav></footer></br></br><script src=https://giscus.app/client.js data-repo=HCY-ASLEEP/HCY-ASLEEP.github.io data-repo-id=R_kgDOISFjNg data-category=Announcements data-category-id=DIC_kwDOISFjNs4CUJyb data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=zh-CN crossorigin=anonymous async></script></article></main><footer class=footer><span>&copy; 2024 <a href=https://hcy-asleep.github.io/>Memos</a></span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

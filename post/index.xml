@@ -1409,6 +1409,69 @@
 &lt;/div&gt;</description>
     </item>
     <item>
+      <title>JTS 使用文档翻译 C/C&#43;&#43; V1.2</title>
+      <link>https://hcy-asleep.github.io/JTS-%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-C/C-V1.2/</link>
+      <pubDate>Tue, 26 Dec 2023 14:37:39 +0000</pubDate>
+      <guid>https://hcy-asleep.github.io/JTS-%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-C/C-V1.2/</guid>
+      <description>&lt;h3 id=&#34;第四章测试用例设计&#34;&gt;第四章：测试用例设计&lt;/h3&gt;
+&lt;h4 id=&#34;41-非类基缺陷测试用例&#34;&gt;4.1 非类基缺陷测试用例&lt;/h4&gt;
+&lt;p&gt;大多数测试用例覆盖的缺陷可以包含在任意函数中（非类基缺陷）。然而，一些缺陷，称为类基缺陷，是C++类定义固有的，必须在测试用例设计中以不同的方式处理。例如：&lt;/p&gt;
+&lt;p&gt;C++测试用例 CWE416_Use_After_Free__operator_equals_01
+（在这个测试用例中，未能定义operator=可能导致程序崩溃，因为可能会使用已经释放的内存。）&lt;/p&gt;
+&lt;p&gt;虚函数、构造函数/析构函数和仅坏测试用例是独特的。虚拟函数和构造函数/析构函数测试用例需要多个文件，而仅坏测试用例只用于测试缺陷，而不是像其他所有测试用例那样测试缺陷和非缺陷。&lt;/p&gt;
+&lt;p&gt;所有C/C++测试用例还在主文件中定义了一个“main”函数。当一次编译多个测试用例时，不使用这个主函数。但是，它可以在构建单个测试用例时使用，例如，用于开发人员测试或用于创建用于测试二进制分析工具的二进制文件。&lt;/p&gt;
+&lt;p&gt;在C/C++测试用例中，预处理器宏INCLUDEMAIN必须在编译时定义，以便在编译中包含这个主函数。&lt;/p&gt;
+&lt;h4 id=&#34;411-必需函数&#34;&gt;4.1.1 必需函数&lt;/h4&gt;
+&lt;p&gt;针对不是C++类固有的缺陷的测试用例必须定义坏函数和好函数。（注意：一些测试用例被认为是仅坏的，不包含好函数的实现。见第4.3节以了解更多关于这些测试用例的详细信息。）&lt;/p&gt;
+&lt;p&gt;对于使用多个文件的测试用例，以下函数在“a”子文件中定义（例如，CWE78_OS_Command_Injection__wchar_t_connect_socket_execl_51a.c）。测试用例的“主文件”是多文件测试用例中的“a”子文件的通用术语，或者是单文件测试用例中的唯一文件。&lt;/p&gt;
+&lt;h5 id=&#34;4111-主要坏函数&#34;&gt;4.1.1.1 主要坏函数&lt;/h5&gt;
+&lt;p&gt;每个测试用例在主文件中包含一个主要坏函数。在许多较简单的测试用例中，这个函数包含有缺陷的构造，但在其他测试用例中，这个函数调用其他包含缺陷的“汇”或“辅助”函数（“汇”和“辅助”函数在后面的部分中描述）。&lt;/p&gt;
+&lt;p&gt;主要坏函数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于C，是以测试用例名称后跟字符串“_bad”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_bad()”。&lt;/li&gt;
+&lt;li&gt;对于C++，是以bad()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。&lt;/li&gt;
+&lt;li&gt;不接受任何参数，也没有返回值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;主要坏函数的名称匹配以下正则表达式：
+^(CWE.*_)?bad$&lt;/p&gt;
+&lt;h5 id=&#34;4112-主要好函数&#34;&gt;4.1.1.2 主要好函数&lt;/h5&gt;
+&lt;p&gt;每个测试用例在主文件中（与主要坏函数相同的文件）包含一个主要好函数。这个好函数中唯一的代码是对每个次要好函数（在下一节中描述）的调用。然而，一些仅坏测试用例包含空的好函数。这个函数不包含任何无缺陷的构造。&lt;/p&gt;
+&lt;p&gt;主要好函数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于C，这个函数是以测试用例名称后跟字符串“_good”命名的，例如“CWE78_OS_Command_Injection__char_connect_socket_execl_01_good()”。&lt;/li&gt;
+&lt;li&gt;对于C++，这个函数是以good()命名的，并位于测试用例独有的命名空间中。该函数不是C++类的一部分。&lt;/li&gt;
+&lt;li&gt;不接受任何参数，也没有返回值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;主要好函数的名称匹配以下正则表达式：
+^(CWE.*_)?good$&lt;/p&gt;
+&lt;h5 id=&#34;4113-次要好函数们&#34;&gt;4.1.1.3 次要好函数(们)&lt;/h5&gt;
+&lt;p&gt;非类基测试用例还在主文件中包含一个或多个次要好函数。然而，一些仅坏测试用例不包括任何次要好函数。在许多较简单的测试用例中，这些次要好函数包含实际的无缺陷构造。在其他测试用例中，这些函数将调用包含无缺陷构造的“汇”或“辅助”函数。次要好函数的数量取决于测试用例的缺陷类型以及存在多少类似于该缺陷的无缺陷构造。许多测试用例只有一个次要好函数，但其他测试用例可能有更多。&lt;/p&gt;
+&lt;p&gt;有三种命名约定用于次要好函数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;goodG2B, goodG2B1, goodG2B2, goodG2B3, 等。 - 这些名称在数据流测试用例中使用，当一个好的源传递安全数据给潜在的坏汇。&lt;/li&gt;
+&lt;li&gt;goodB2G, goodB2G1, goodB2G2, goodB2G3, 等。 - 这些名称在数据流测试用例中使用，当一个坏源传递不安全或潜在不安全数据给好汇。&lt;/li&gt;
+&lt;li&gt;good1, good2, good3, 等。 - 这是这些函数的“默认”或“通用”名称，当上述条件不适用时使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;次要好函数的名称匹配以下正则表达式：
+^good(\d+|G2B\d*|B2G\d*)$&lt;/p&gt;
+&lt;p&gt;注意：重要的是这个正则表达式不与之前定义的好函数正则表达式重叠，以便不匹配主要好函数。&lt;/p&gt;
+&lt;p&gt;次要好函数具有与主要坏函数和主要好函数相同的参数和返回类型。此外，次要好函数具有以下特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在C和C++测试用例中，次要好函数是静态作用域的。因此，它们只在该源代码文件中可访问，这防止了名称冲突。&lt;/li&gt;
+&lt;li&gt;在C++测试用例中，次要好函数位于测试用例独有的命名空间中。这些函数不是C++类的一部分。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;412-可选函数&#34;&gt;4.1.2 可选函数&lt;/h4&gt;
+&lt;p&gt;除了必需函数外，测试用例可能还会定义“辅助”、“源”和/或“汇”函数，如下所述。&lt;/p&gt;
+&lt;h5 id=&#34;4121-辅助函数&#34;&gt;4.1.2.1 辅助函数&lt;/h5&gt;
+&lt;p&gt;当即使最简单的缺陷形式也不能包含在单个函数中时（在测试用例设计的约束内），测试用例中会使用辅助函数。用于创建数据流模式的函数（“源”和“汇”函数）在更复杂的测试用例中不被视为“辅助”函数，因为它们不是缺陷构造的一部分。&lt;/p&gt;
+&lt;p&gt;需要辅助函数的测试用例示例包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;涉及可变参数函数的测试用例，例如C测试用例CWE134_Uncontrolled_Format_String__char_console_vprintf_01。&lt;/li&gt;
+&lt;li&gt;未使用参数的测试用例，例如C测试用例CWE563_Unused_Variable__unused_parameter_variable_01。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以下是对辅助函数的进一步描述：&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>为 xv6-riscv 移植扫雷(minesweeper) 2048 以及非常简单的 sl</title>
       <link>https://hcy-asleep.github.io/%E4%B8%BA-xv6-riscv-%E7%A7%BB%E6%A4%8D%E6%89%AB%E9%9B%B7minesweeper-2048-%E4%BB%A5%E5%8F%8A%E9%9D%9E%E5%B8%B8%E7%AE%80%E5%8D%95%E7%9A%84-sl/</link>
       <pubDate>Tue, 06 Jun 2023 13:59:46 +0800</pubDate>
