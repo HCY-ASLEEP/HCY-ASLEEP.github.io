@@ -9,7 +9,7 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.139.4</generator>
     <language>zh</language>
     <lastBuildDate>Tue, 03 Dec 2024 17:33:59 +0000</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/post/index.xml" rel="self" type="application/rss+xml" />
@@ -21,7 +21,7 @@
       <description>&lt;p&gt;本文是 &lt;a href=&#34;https://raw.githubusercontent.com/HCY-ASLEEP/picture-bed/main/picture-bed/Juliet_Test_Suite_v1.2_for_C_Cpp_-_User_Guide.pdf&#34;&gt;Juliet Test Suite v1.2 for C_Cpp - User Guide.pdf&lt;/a&gt; 的中文翻译，官方网站位于 &lt;a href=&#34;https://samate.nist.gov/SARD/documentation#juliet&#34;&gt;https://samate.nist.gov/SARD/documentation#juliet&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;第一章介绍&#34;&gt;第一章：介绍&lt;/h1&gt;
 &lt;h2 id=&#34;11-文件目的&#34;&gt;1.1 文件目的&lt;/h2&gt;
-&lt;p&gt;本文档描述了为C/C++开发的Juliet测试套件v1.2。该测试套件由国家安全局（NSA）的放心软件中心（CAS）创建并开发，专门用于评估静态分析工具的能力。它适用于任何希望将测试用例用于自己的测试目的，或希望更深入了解测试用例创建方式的人员。&lt;/p&gt;
+&lt;p&gt;本文档描述了为C/C++开发的Juliet测试套件v1.2。该测试套件由国家安全局（NSA）的安全软件中心（CAS）创建并开发，专门用于评估静态分析工具的能力。它适用于任何希望将测试用例用于自己的测试目的，或希望更深入了解测试用例创建方式的人员。&lt;/p&gt;
 &lt;p&gt;本文档解释了测试用例命名和设计背后的理念，并提供了如何使用命令行界面（CLI）编译和运行它们的指导。第8节还提供了如何评估工具结果的详细信息。&lt;/p&gt;
 &lt;p&gt;测试用例可公开下载于 &lt;a href=&#34;http://samate.nist.gov/SRD/testsuite.php&#34;&gt;http://samate.nist.gov/SRD/testsuite.php&lt;/a&gt;。&lt;/p&gt;
 &lt;h2 id=&#34;12-测试用例是什么&#34;&gt;1.2 测试用例是什么？&lt;/h2&gt;
