@@ -9,7 +9,7 @@
       <url>https://hcy-asleep.github.io/</url>
       <link>https://hcy-asleep.github.io/</link>
     </image>
-    <generator>Hugo -- 0.140.0</generator>
+    <generator>Hugo -- 0.141.0</generator>
     <language>zh</language>
     <lastBuildDate>Tue, 03 Dec 2024 17:33:59 +0000</lastBuildDate>
     <atom:link href="https://hcy-asleep.github.io/index.xml" rel="self" type="application/rss+xml" />
@@ -806,6 +806,59 @@
       <pubDate>Wed, 09 Oct 2024 16:22:13 +0000</pubDate>
       <guid>https://hcy-asleep.github.io/%E4%BD%BF%E7%94%A8-C-%E7%90%86%E8%A7%A3-23-%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
       <description>&lt;p&gt;开一个坑，使用C++实现23种设计模式&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Tmux 使用</title>
+      <link>https://hcy-asleep.github.io/Tmux-%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Wed, 24 Jan 2024 11:40:20 +0800</pubDate>
+      <guid>https://hcy-asleep.github.io/Tmux-%E4%BD%BF%E7%94%A8/</guid>
+      <description>&lt;h3 id=&#34;neovim-在-tmux-里面配色不对&#34;&gt;(Neo)VIM 在 tmux 里面配色不对&lt;/h3&gt;
+&lt;p&gt;在 &lt;code&gt;.bashrc&lt;/code&gt; 里面加上一句&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;alias&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;tmux&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;tmux -2&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;最后 &lt;code&gt;source .bashrc&lt;/code&gt; 立即生效&lt;/p&gt;
+&lt;h3 id=&#34;neovim-在-tmux-里面特殊字符以及中文显示不正常&#34;&gt;(Neo)VIM 在 tmux 里面特殊字符以及中文显示不正常&lt;/h3&gt;
+&lt;p&gt;在 &lt;code&gt;.bashrc&lt;/code&gt; 里面加上一句&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;LANG&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;en_US.UTF-8
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;最后 &lt;code&gt;source .bashrc&lt;/code&gt; 立即生效&lt;/p&gt;
+&lt;h3 id=&#34;neovim-在配饰-oscyank-之后在-tmux-中依旧无法剪切到系统剪切板&#34;&gt;(Neo)VIM 在配饰 OSCYank 之后，在 tmux 中依旧无法剪切到系统剪切板&lt;/h3&gt;
+&lt;p&gt;首先创建 tmux 配置文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;touch ~/.tmux.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在 tmux 配置文件里面写入&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;set-option -g set-clipboard on
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;重启 tmux 生效&lt;/p&gt;
+&lt;h3 id=&#34;在-tmux-session-里面切换-session&#34;&gt;在 tmux session 里面切换 session&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;Ctrl+b&lt;/code&gt; &lt;code&gt;s&lt;/code&gt;    (means [s]ession)&lt;/p&gt;
+&lt;h4 id=&#34;在-tmux-里面进入滚动模式&#34;&gt;在 tmux 里面进入滚动模式&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;Ctrl+b&lt;/code&gt; &lt;code&gt;[&lt;/code&gt;
+&lt;code&gt;q&lt;/code&gt; 退出&lt;/p&gt;</description>
     </item>
     <item>
       <title>Debian Gnome 修改默认目录</title>
