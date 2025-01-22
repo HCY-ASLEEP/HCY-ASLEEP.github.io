@@ -847,7 +847,7 @@
 &lt;/div&gt;&lt;p&gt;重启 tmux 生效&lt;/p&gt;
 &lt;h3 id=&#34;在-tmux-session-里面切换-session&#34;&gt;在 tmux session 里面切换 session&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;Ctrl+b&lt;/code&gt; &lt;code&gt;s&lt;/code&gt;    (means [s]ession)&lt;/p&gt;
-&lt;h4 id=&#34;在-tmux-里面进入滚动模式&#34;&gt;在 tmux 里面进入滚动模式&lt;/h4&gt;
+&lt;h3 id=&#34;在-tmux-里面进入滚动模式&#34;&gt;在 tmux 里面进入滚动模式&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;Ctrl+b&lt;/code&gt; &lt;code&gt;[&lt;/code&gt;
 &lt;code&gt;q&lt;/code&gt; 退出&lt;/p&gt;</description>
     </item>
